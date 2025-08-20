@@ -16,8 +16,8 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #2c3e50;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            margin: 0
         }
 
         .container {
@@ -69,9 +69,14 @@
             color: white;
         }
 
-        .callout.red {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        .callout.lightblue {
+            background: linear-gradient(135deg, #74b9ff 0%, #f8f9ff 150%);
             color: white;
+        }
+
+        .callout.red {
+            background: linear-gradient(135deg, #ff9f9b 0%, #ff7675 100%);
+            color: #2d3436;
         }
 
         .callout.blue {
@@ -183,6 +188,49 @@
             margin: 30px 0;
         }
 
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            justify-content: space-between;
+        }
+
+        .btn {
+            flex: 1;
+            display: inline-block;
+            padding: 15px 25px;
+            text-decoration: none;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+
+        .btn-outline {
+            background-color: #ffffff;
+            color: #764ba2;
+            border-color: #764ba2;
+        }
+
+        .btn-outline:hover {
+            background-color: #1e3d6f;
+            border-color: #1e3d6f;
+            color: #ffffff;
+        }
+
+        .btn-filled {
+            background-color: #667eea;
+            color: #ffffff;
+            border-color: #2c5aa0;
+        }
+
+        .btn-filled:hover {
+            background-color: #1e3d6f;
+            border-color: #1e3d6f;
+        }
+
         .footer {
             text-align: center;
             padding: 30px;
@@ -191,77 +239,148 @@
             border-radius: 12px;
             margin-top: 30px;
         }
+      
+/* Bandeau avec animation au scroll */
+        .banner {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 30%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            
+            /* Animation basée sur le scroll */
+            animation: bannerLifecycle linear both;
+            animation-timeline: scroll(root);
+            /* 0-300px : réduction, 300px-50% : visible, 50%-100% : disparition */
+            animation-range: 0px 100%;
+        }
 
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                padding: 15px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .columns {
-                grid-template-columns: 1fr;
+ @supports (animation-timeline: scroll(root)) {
+            @keyframes bannerLifecycle {
+                /* Phase 1 : 0-20% du scroll (réduction) */
+                0% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    padding: 1.5rem 2rem;
+                    background: rgba(255, 255, 255, 0.95);
+                }
+                20% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                }
+                /* Phase 2 : 20-50% du scroll (stable) */
+                50% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                }
+                /* Phase 3 : 50-70% du scroll (disparition progressive) */
+                70% {
+                    opacity: 0;
+                    transform: translateY(-100%);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                }
+                /* Phase 4 : 70-100% du scroll (complètement caché) */
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100%);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                }
             }
         }
+
+        .logo {
+            font-size: 1.0rem;
+            color: #333;
+            animation: logoShrink linear both;
+            animation-timeline: scroll(root);
+            animation-range: 100px 300px;
+        }
+
+        @supports (animation-timeline: scroll(root)) {
+            @keyframes logoShrink {
+                from { font-size: 1.4rem; }
+                to { font-size: 1.2rem; }
+            }
+        }
+
     </style>
 </head>
 
 <body>
+  	<div class="banner">
+      <div class="logo"><span class="emoji">📔</span><a href="https://noteforms.com/forms/recevoir-le-programme-khypnos-wvfzli" target="_blank" rel="noopener noreferrer"><strong>Recevoir le programme</strong></a></div>
+      </div>
     <div class="container">
         <header class="header">
             <h1>🩺 Khypnos</h1>
             <h2>Pr&eacute;parer les EVC en Anesth&eacute;sie R&eacute;animation</h2>
             <div class="subtitle">M&eacute;thodologie &bull; Annales &bull; Recommandations</div>
         </header>
-        <div class="callout orange">
-            <h3>💡 Entra&icirc;nez-vous avec un concours blanc sur demande !</h3>
-            <p>Inscription possible en format Voie interne (QCM)</p>
-            <h2>🔥 Nouveau !! Formules BOOST - SEULEMENT 10 places !</h2>
-            <div class="boost-section">
-                <h4>🔄 BOOST Voie interne :</h4>
-                <ul>
-                    <li>✅ Acc&egrave;s aux corrig&eacute;s d&apos;annales</li>
-                    <li>✅ Acc&egrave;s aux vid&eacute;os de formation Khypnos : <strong>toute l&apos;anesth&eacute;sie-r&eacute;animation en 60 heures</strong></li>
-                    <li>✅ Concours Blanc format QCM de l&apos;&eacute;preuve des EVC</li>
-                    <li>✅ 4 sessions de 2h de QCM corrig&eacute;s en s&eacute;ance visio en Octobre - Novembre 2025</li>
+        <h2 class="section-title">Formation intensive Session D&eacute;cembre 2025</h2>
+        <p style="text-align: justify; font-size: 1.2rem; margin-bottom: 30px;">L&apos;entra&icirc;nement est la cl&eacute; de la r&eacute;ussite, nous vous proposons donc d&egrave;s septembre des QCM corrig&eacute;s au format du concours. Pour <strong>r&eacute;ussir les EVC voie interne</strong> d&egrave;s cette ann&eacute;e, nous vous proposons des <strong>programmes intensifs</strong> &agrave; l&apos;automne 2025.</p>
+        <div class="columns">
+            <div class="column">
+                <div class="buttons-container"><a href="https://noteforms.com/forms/concours-blanc-khypnos-3qglrr" class="btn btn-outline" target="_blank">&nbsp;📝 Concours Blanc QCM&nbsp;</a></div>
+                <ul class="feature-list">
+                    <li style="text-align: justify;">Le concours blanc fera plus d&apos;une centaine de QCM, et b&eacute;n&eacute;ficiera d&apos;une correction d&eacute;taill&eacute;e. V&eacute;rifiez que vous &ecirc;tes pr&ecirc;t.</li>
+                    <li>✅ <strong>Concours Blanc format QCM</strong> de l&apos;&eacute;preuve des EVC voie interne</li>
+                    <li>✅ <strong>Concours Blanc format r&eacute;dactionnel&nbsp;</strong>pour les inscriptions voie externe</li>
                 </ul>
-                <div class="price">💳 950 Euros HT (1140 Euros TTC)</div>
             </div>
-            <div class="boost-section">
-                <h4>🔀 BOOST Voie externe :</h4>
-                <p>R&eacute;cup&eacute;ration des corrig&eacute;s d&apos;annales, des vid&eacute;os de formations, participation programme classique en visio &agrave; partir de juillet, Concours Blanc Septembre 2025 format r&eacute;dactionnel</p>
-                <div class="price">💳 1400 Euros HT (1680 Euros TTC)</div>
+            <div class="column">
+                <div class="buttons-container"><a href="https://noteforms.com/forms/nouveau-formulaire-v6wjsq" class="btn btn-filled" target="_blank">&nbsp;🔥 Formule BOOST&nbsp;</a></div>
+                <ul class="feature-list">
+                    <li style="font-size: 17px;">Avec la formule BOOST, pour &ecirc;tre s&ucirc;r.e d&apos;int&eacute;grer plus de <strong>1000 QCM</strong> pour <strong>int&eacute;grer les 309 places disponibles</strong> aux EVC Anesth&eacute;sie-R&eacute;animation!</li>
+                    <li>✅ Acc&egrave;s aux <strong>corrig&eacute;s d&apos;annales</strong></li>
+                    <li>✅ Acc&egrave;s aux vid&eacute;os de formation Khypnos : <strong>toute l&apos;anesth&eacute;sie-r&eacute;animation en 60 heures</strong></li>
+                    <li>✅ <strong>Concours Blanc</strong> format QCM de l&apos;&eacute;preuve des EVC</li>
+                    <li>✅ 4 sessions de 2h de <strong>QCM corrig&eacute;s</strong> en s&eacute;ance visio en Octobre - Novembre 2025</li>
+                </ul>
+            </div>
+        </div>
+        <h2 class="section-title">🎯 Notre offre compl&egrave;te</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">Vous souhaitez vous inscrire au <strong>concours des EVC en Anesth&eacute;sie-R&eacute;animation</strong> mais ne savez pas par o&ugrave; commencer ? Khypnos vous propose du contenu pour <strong>r&eacute;viser</strong>, <strong>apprendre&nbsp;</strong>et <strong>r&eacute;ussir</strong> que vous soyez inscrit &agrave; la voie interne ou &agrave; la voie externe.</p>
+        <div class="columns">
+            <div class="column">
+                <h3>Ressources Khypnos</h3>
+                <ul class="feature-list">
+                    <li><span class="emoji">📂</span><a href="https://khypnos.notion.site/Annales-des-EVC-171f71268efe81b38ff5c17fb46c4458" target="_blank" rel="noopener noreferrer"><strong>Annales des EVC</strong></a></li>
+                    <li><span class="emoji">📺</span><a href="https://khypnos.notion.site/Webinaires-Khypnos-1d7f71268efe80b3ac37ffd435f614b7" target="_blank" rel="noopener noreferrer">Webinaires Khypnos</a></li>
+                    <li><span class="emoji">🎓</span><a href="https://www.youtube.com/playlist?list=PLsksUSBK_61ed49apz-ZnMHfmy3immCTi" target="_blank" rel="noopener noreferrer">Cours Anesth&eacute;sie-R&eacute;animation</a></li>
+                    <li><br></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Offre de Formation</h3>
+                <ul class="feature-list">
+                    <li><span class="emoji">📅</span>Inscriptions de Janvier 2025 &agrave; Juin 2025</li>
+                    <li><span class="emoji">📝</span><a href="https://khypnos.notion.site/Concours-Blanc-Khypnos-17af71268efe808eb0cbc97aaf5d59e6" target="_blank" rel="noopener noreferrer">Concours Blanc Khypnos</a></li>
+                    <li><span class="emoji">💻</span>Formation en <strong>distanciel</strong><br>Enseignements les <strong>Mercredi soir</strong> et <strong>Samedi apr&egrave;s-midi</strong></li>
+                    <li><span class="emoji">📆</span>P&eacute;riode : Juin &agrave; novembre 2025</li>
+                </ul>
             </div>
         </div>
         <div class="callout red">
             <h3>⚖️ Nouveaut&eacute; EVC 2025 - Voie interne</h3>
-            <p>📃 Informations sur les d&eacute;crets du 28 mai 2025</p>
-            <p>📋 D&eacute;cret d&apos;organisation des EVC 2025 - Voies interne et externe</p>
-        </div>
-        <h2 class="section-title">🎯 Notre offre compl&egrave;te</h2>
-        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">Vous souhaitez vous inscrire au concours des EVC mais ne savez pas par o&ugrave; commencer ? Khypnos vous propose :</p>
-        <div class="columns">
-            <div class="column">
-                <h3>📺 Vid&eacute;os Khypnos</h3>
-                <ul class="feature-list">
-                    <li><span class="emoji">📺</span>Webinaires Khypnos</li>
-                    <li><span class="emoji">📼</span>Cours Anesth&eacute;sie-R&eacute;animation</li>
-                    <li><span class="emoji">🔐</span>Espace Priv&eacute;</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>🗓️ Calendrier</h3>
-                <ul class="feature-list">
-                    <li><span class="emoji">📅</span>Inscriptions de Janvier 2025 &agrave; Juin 2025</li>
-                    <li><span class="emoji">📝</span>Concours Blanc Khypnos</li>
-                    <li><span class="emoji">🎓</span>Enseignements les Mercredi soir et Samedi apr&egrave;s-midi</li>
-                    <li><span class="emoji">💻</span>Formation en distanciel</li>
-                    <li><span class="emoji">📆</span>P&eacute;riode : Juin &agrave; octobre 2025</li>
-                </ul>
-            </div>
+            <p><a href="https://khypnos.notion.site/Informations-sur-les-d-crets-du-28-mai-2025-202f71268efe8076aadad86fc23ac1b7" target="_blank" rel="noopener noreferrer">Informations sur les d&eacute;crets du 28 mai 2025</a></p>
+            <p><a href="https://khypnos.notion.site/D-cret-d-organisation-des-EVC-2025-Voies-interne-et-externe-221f71268efe80818ae2e4378155ff16" target="_blank" rel="noopener noreferrer">D&eacute;cret d&apos;organisation des EVC 2025 - Voies interne et externe</a></p>
         </div>
         <h2 class="section-title">💬 T&eacute;moignages</h2>
         <div class="testimonials">
@@ -287,34 +406,35 @@
             </div>
         </div>
         <h2 class="section-title">📚 Annales</h2>
-        <p style="text-align: center; font-size: 1.1rem; margin-bottom: 20px;">Un incontournable de la pr&eacute;paration des EVC consiste &agrave; travailler sur les annales. Nous vous proposons :</p>
-        <ul class="feature-list">
-            <li><span class="emoji">📂</span><strong>Un acc&egrave;s aux Annales des EVC</strong></li>
-            <li><span class="emoji">❓</span><strong>Une synth&egrave;se des questions de l&apos;&eacute;preuve fondamentale</strong></li>
-            <li><span class="emoji">❔</span><strong>Une synth&egrave;se des questions de l&apos;&eacute;preuve pratique</strong></li>
-        </ul>
         <div class="links-section">
-            <h2 class="section-title">🚀 Liens utiles</h2>
-            <div class="columns">
-                <div class="column">
-                    <ul class="feature-list">
-                        <li><span class="emoji">✅</span><strong>La pr&eacute;pa Khypnos</strong></li>
-                        <li><span class="emoji">🩺</span><strong>Guide de r&eacute;ussite Khypnos</strong></li>
-                        <li><span class="emoji">📔</span><strong>Recevoir le programme</strong></li>
-                        <li><span class="emoji">📃</span><strong>Formulaire d&apos;inscription</strong></li>
-                    </ul>
-                </div>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 20px;">Un incontournable de la pr&eacute;paration des EVC consiste &agrave; travailler sur les annales. Nous vous proposons :</p>
+            <ul class="feature-list">
+                <li><span class="emoji">📂</span><a href="https://khypnos.notion.site/Annales-des-EVC-171f71268efe81b38ff5c17fb46c4458" target="_blank" rel="noopener noreferrer"><strong>Un acc&egrave;s aux Annales des EVC</strong></a></li>
+                <li><span class="emoji">❓</span><a href="https://khypnos.notion.site/Synth-se-des-questions-Epreuve-Fondamentale-171f71268efe81fd92a0d5e7a66d15fd" target="_blank" rel="noopener noreferrer"><strong>Une synth&egrave;se des questions de l&apos;&eacute;preuve fondamentale</strong></a></li>
+                <li><span class="emoji">❔</span><a href="https://khypnos.notion.site/Synth-se-des-questions-Epreuve-Pratique-171f71268efe8133897bebcddb3d7ffe" target="_blank" rel="noopener noreferrer"><strong>Une synth&egrave;se des questions de l&apos;&eacute;preuve pratique</strong></a></li>
+                <li>
+                    <div class="testimonial">
+                        <div class="testimonial-text">Avec l&apos;introduction de la voie interne et la modification des modalit&eacute;s de l&apos;examen, il n&apos;existe &agrave; ce jour aucune annales en QCM. C&apos;est pourquoi nous proposons des formations enti&egrave;res sous un format QCM afin de vous pr&eacute;parer au mieux &agrave; cette modalit&eacute; d&apos;exercice. Nos formules de formations sont enti&egrave;rement pens&eacute;es et adapt&eacute;es pour le format QCM.</div>
+                        <div class="buttons-container"><a href="https://noteforms.com/forms/concours-blanc-khypnos-3qglrr" class="btn btn-outline" target="_blank">&nbsp;📝 Concours Blanc QCM&nbsp;</a> <a href="https://noteforms.com/forms/nouveau-formulaire-v6wjsq" class="btn btn-filled" target="_blank">&nbsp;🔥 Formule BOOST&nbsp;</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <h2 class="section-title">🚀 Liens utiles</h2>
+        <div class="links-section">
+            <div class="column">
+                <ul class="feature-list">
+                    <li><span class="emoji">✅</span><a href="https://khypnos.notion.site/La-pr-pa-Khypnos-171f71268efe803ba67ac66ad77e6f56" target="_blank" rel="noopener noreferrer"><strong>La pr&eacute;pa Khypnos</strong></a></li>
+                    <li><span class="emoji">🩺</span><a href="https://khypnos.notion.site/Guide-de-r-ussite-Khypnos-171f71268efe800ea132ff6dd150aef9" target="_blank" rel="noopener noreferrer"><strong>Guide de r&eacute;ussite Khypnos</strong></a></li>
+                    <li><span class="emoji">📔</span><a href="https://noteforms.com/forms/recevoir-le-programme-khypnos-wvfzli" target="_blank" rel="noopener noreferrer"><strong>Recevoir le programme</strong></a></li>
+                    <li><span class="emoji">📃</span><a href="https://noteforms.com/forms/nouveau-formulaire-v6wjsq" target="_blank" rel="noopener noreferrer"><strong>Formulaire d&apos;inscription</strong></a></li>
+                </ul>
             </div>
         </div>
-        <div class="callout blue">
-            <h3>💼 Les formateurs travaillent pour des institutions reconnues</h3>
-            <p>Nos formateurs sont des professionnels exp&eacute;riment&eacute;s issus du milieu m&eacute;dical et acad&eacute;mique.</p>
-        </div>
-        <footer class="footer">
-            <p>⚖️ <strong>Mentions l&eacute;gales</strong></p>
-            <p>&copy;️ <strong>Khypnos 2025</strong></p>
-        </footer>
     </div>
+    <footer class="footer">
+        <p>⚖️ <a href="https://khypnos.notion.site/Mentions-l-gales-17ff71268efe802bab07cac79401d525" target="_blank" rel="noopener noreferrer"><strong>Mentions l&eacute;gales</strong></a> &copy;️ <strong>Khypnos 2025</strong></p>
+    </footer>
 </body>
 
 </html>
