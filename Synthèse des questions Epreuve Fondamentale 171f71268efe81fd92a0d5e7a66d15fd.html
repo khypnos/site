@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Synthèse des questions: Epreuve Fondamentale</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="171f7126-8efe-81fd-92a0-d5e7a66d15fd" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/gradients_8.png" style="object-position:center 61.15999999999999%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">❓</span></div><h1 class="page-title">Synthèse des questions: Epreuve Fondamentale</h1><p class="page-description"></p></header><div class="page-body"><p id="17af7126-8efe-8009-b670-ca80c6ca1c7c" class="">
+</p><div><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="171f7126-8efe-817e-a799-fd64306794da"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Vous trouverez ici une synthèse des questions issues des différentes annales des EVC, accompagnée de leur fréquence d&#x27;apparition. Une question qui revient régulièrement présente un risque plus élevé d&#x27;être posée à nouveau. Nous abordons toutes ces questions en détail lors de notre formation.<br/><div><div id="201f7126-8efe-8001-a780-dce72620853f" class="column-list"><div id="201f7126-8efe-80fe-9bc7-de526ed5d8a0" style="width:100%" class="column"><figure id="247239a4-6e15-4d31-a335-8e4c5dce3f59" class="image" style="text-align:center"><a href="0d4d2769-648a-4dc9-9d7a-852546e9a674.png"><img style="width:240px" src="0d4d2769-648a-4dc9-9d7a-852546e9a674.png"/></a></figure></div><div id="201f7126-8efe-805d-b9d9-cde998ac6115" style="width:100%" class="column"><figure id="359266be-af10-4a3f-be95-e1dd4b5fe865" class="image" style="text-align:right"><a href="132647c6-74a1-4f7b-a7d7-175fee5b0267.png"><img style="width:240px" src="132647c6-74a1-4f7b-a7d7-175fee5b0267.png"/></a></figure></div></div></div></div></figure></div><p id="17ff7126-8efe-8073-87b9-d86a5763fc6b" class="">
+</p><table id="171f7126-8efe-81b7-9f45-ce62859bb53c" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-8107-9651-e4dfb68e3ed5"><th id="@Nf^" class="block-color-pink_background simple-table-header" style="width:404px">Domaine / Question</th><th id="[tmr" class="block-color-pink_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-8156-a9ab-c045f7e77155"><td id="@Nf^" class="" style="width:404px"><strong>Pharmacologie</strong></td><td id="[tmr" class=""></td></tr><tr id="171f7126-8efe-81ad-8add-ca163372f965"><td id="@Nf^" class="" style="width:404px">Prise en charge des traitements préopératoires</td><td id="[tmr" class="">2</td></tr><tr id="171f7126-8efe-81bf-90fc-dd630a03935e"><td id="@Nf^" class="" style="width:404px">Surdosage en anesthésiques locaux : <br/>Diagnostic<br/>Traitement</td><td id="[tmr" class=""><br/>7<br/>7</td></tr><tr id="171f7126-8efe-81d2-be00-db313ccf135e"><td id="@Nf^" class="" style="width:404px">Curares :<br/>Physiologie<br/>Indication<br/>Contre-indication<br/>Décurarisation : conséquence curarisation résiduelle<br/>Décurarisation : technique et physiologie</td><td id="[tmr" class=""><br/>2<br/>1<br/>3<br/>2<br/>5</td></tr><tr id="171f7126-8efe-8105-b018-d27ce1035489"><td id="@Nf^" class="" style="width:404px">Halogénés :<br/>Déterminants du rapport Fi/FA<br/>Déterminants de la concentration alvéolaire<br/>Relation solubilité dans le sang/ concentration alvéolaire<br/>Conséquence pratique de différence de pression de vapeur saturante<br/>MAC : Définition<br/>MAC : Eléments qui la diminuent<br/>Interaction avec les curares et conséquence pratique<br/>Effets sur la ventilation</td><td id="[tmr" class=""><br/>1<br/>2<br/>2<br/> <br/>1<br/> <br/>1<br/>1</td></tr><tr id="171f7126-8efe-8168-8f59-d48b3c14be02"><td id="@Nf^" class="" style="width:404px">Diurétiques : mode d’action</td><td id="[tmr" class=""></td></tr><tr id="171f7126-8efe-812a-a28f-c6cd316765c7"><td id="@Nf^" class="" style="width:404px">Anticoaculants :<br/>Classes et DCI d’AOD<br/>Antagonisation AVK<br/>AOD et hémorragie : prise en charge</td><td id="[tmr" class=""><br/>1<br/>2<br/>1</td></tr><tr id="171f7126-8efe-8163-a2bc-fe8d5b4c0647"><td id="@Nf^" class="" style="width:404px">Morphine :<br/>Pharmacologie chez le nourrisson<br/>Effet physiologique sur la respiration<br/>Mécanismes de l’hyperalgésie<br/>Propriétés de la fraction diffusible<br/>Demi-vie contextuelle<br/>-        Définition<br/>Raison de la fixité de celle du rémifentanil</td><td id="[tmr" class=""><br/>1<br/>2<br/>2<br/>2<br/>2</td></tr><tr id="171f7126-8efe-81e8-9b49-fb6954ab6ed2"><td id="@Nf^" class="" style="width:404px">Antagonistes NMDA et kétamine /hyperalgésie<br/>Evaluation d’une douleur neuropathique</td><td id="[tmr" class="">2<br/>1</td></tr><tr id="171f7126-8efe-815a-b805-fc4c9d1d4031"><td id="@Nf^" class="" style="width:404px">Beta- bloquants :<br/>Effets cardiaques du celiprolol</td><td id="[tmr" class=""><br/>1</td></tr><tr id="171f7126-8efe-81b5-8122-cedce4fe5fbe"><td id="@Nf^" class="" style="width:404px">Pharmacologie et :<br/>- Insuffisance rénale<br/>- Voie d’administration<br/>- Obésité</td><td id="[tmr" class=""><br/>1<br/>1<br/>1</td></tr></tbody></table><table id="171f7126-8efe-81f2-9d00-fa26dcbd2de1" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-815f-b03c-fda4125cb645"><th id="\Jam" class="block-color-teal_background simple-table-header" style="width:403px">Domaine / Question</th><th id="U^_B" class="block-color-teal_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-81c1-9543-e27b1ee64762"><td id="\Jam" class="" style="width:403px"><strong>Cardiovasculaire / Hémodynamique</strong></td><td id="U^_B" class=""></td></tr><tr id="171f7126-8efe-8143-9e4a-f43e2310bc51"><td id="\Jam" class="" style="width:403px">ECG interprétation<br/>Cardiopathie ischémique<br/>Evaluation du risque cardio-vasculaire<br/>Signes échographiques d’insuffisance cardiaque gauche<br/>Causes d’HTA secondaire</td><td id="U^_B" class="">1<br/>1<br/>4<br/>1<br/>1</td></tr><tr id="171f7126-8efe-8125-9dad-e0caabf1bfee"><td id="\Jam" class="" style="width:403px">Hémodynamique :<br/>Remplissage<br/>Types de solutés<br/>Effets indésirables</td><td id="U^_B" class=""><br/>1<br/>1<br/>1</td></tr><tr id="171f7126-8efe-81ae-8ab6-dfed8f04f67a"><td id="\Jam" class="" style="width:403px">Transfusion<br/>Risques lors de la transfusion de PSL<br/>Indications et épargne transfusionnelle</td><td id="U^_B" class=""><br/>1<br/>2</td></tr><tr id="171f7126-8efe-8156-a44b-e385854d7071"><td id="\Jam" class="" style="width:403px">Cathécolamines :<br/>Noradrénaline<br/>Propriétés et récepteurs</td><td id="U^_B" class=""><br/>1<br/>1</td></tr><tr id="171f7126-8efe-81b8-b077-e9ff4a8d3b1f"><td id="\Jam" class="" style="width:403px">Interaction cœur poumon<br/>Précharge<br/>Définition<br/>Impact de la volémie sur la précharge<br/>Calcul de delta PP<br/>Seuil et conditions de validité du Delta PP<br/>Epreuves de précharge</td><td id="U^_B" class=""><br/>1<br/>1<br/>1<br/>2<br/>5<br/>1</td></tr><tr id="171f7126-8efe-812e-a793-d3cefd3fc203"><td id="\Jam" class="" style="width:403px">Monitorage :<br/>Principes du monitorage per-opératoire<br/>Swan-Ganz<br/>- Comment mesure -t’elle le débit ?<br/>PICCO :<br/>- Positionnement<br/>- Paramètres fournis<br/>Capnographe<br/>- Déterminants de la fraction expirée de CO2<br/>- Diagnostics à évoquer lors d’une baisse<br/>Saturomètre<br/>- Facteurs qui faussent la mesure</td><td id="U^_B" class=""><br/>1<br/>1<br/>1<br/>1<br/>1<br/>1<br/> <br/>1<br/>3<br/> <br/>1</td></tr></tbody></table><table id="171f7126-8efe-81de-a484-f8b37365e8a9" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-81c9-912d-cee12625a2e9"><th id="?pWc" class="block-color-yellow_background simple-table-header" style="width:402px">Domaine / Question</th><th id="n@u`" class="block-color-yellow_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-814f-802c-edd7a3266fde"><td id="?pWc" class="" style="width:402px"><strong>Physiologie</strong></td><td id="n@u`" class=""></td></tr><tr id="171f7126-8efe-8195-8336-d77b7fcfda88"><td id="?pWc" class="" style="width:402px">Calcul du contenu/transport artériel en oxygène<br/>Calcul des RVS<br/>Déterminants de la consommation d’O2<br/>Mécanismes de l’hypoxie tissulaire<br/>Déterminants de la saturation en O2<br/>P50<br/>a.       Définition<br/>b.      Causes de diminution<br/>Retour veineux :<br/>Compartiments sanguins<br/>Loi de poiseuille</td><td id="n@u`" class="">7<br/>1<br/> <br/>2<br/>3<br/> <br/>2<br/>1<br/> <br/>1<br/>1</td></tr></tbody></table><table id="171f7126-8efe-813b-9e2b-e10506e78be6" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-81d0-a90f-f6613f09d725"><th id="am&lt;P" class="block-color-orange_background simple-table-header" style="width:400px">Domaine / Question</th><th id="NEnF" class="block-color-orange_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-8155-a0c9-cb0eb800bdb3"><td id="am&lt;P" class="" style="width:400px"><strong>Pathologies</strong></td><td id="NEnF" class=""></td></tr><tr id="171f7126-8efe-813d-a0b7-d019ba98e255"><td id="am&lt;P" class="" style="width:400px">Embolie pulmonaire :<br/>Diagnostic<br/>Traitement</td><td id="NEnF" class=""><br/>1<br/>1</td></tr><tr id="171f7126-8efe-8182-9708-c65149250a8a"><td id="am&lt;P" class="" style="width:400px">Embolie gazeuse<br/>Tracé capnographique<br/>Echographie et diagnostic de l’état de choc</td><td id="NEnF" class=""><br/>1<br/>1</td></tr><tr id="171f7126-8efe-810b-acb5-d58a7744578b"><td id="am&lt;P" class="" style="width:400px">Choc anaphylactique : Prise en charge initiale</td><td id="NEnF" class="">4</td></tr><tr id="171f7126-8efe-81a0-8318-d92a8c8b198f"><td id="am&lt;P" class="" style="width:400px">Choc hémorragique<br/>Cause de coagulopathie<br/>Objectifs transfusionnels<br/>Causes et conséquences de l’hypocalcémie associée<br/>Procédure de délivrance en urgence vitale</td><td id="NEnF" class=""><br/>3<br/>1<br/>1<br/>1</td></tr><tr id="171f7126-8efe-8105-ab4e-f05cfeae0e16"><td id="am&lt;P" class="" style="width:400px">Pancréatite aigüe : étiologies</td><td id="NEnF" class="">1</td></tr></tbody></table><table id="171f7126-8efe-81bf-9d07-d35a5d9352b0" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-81b4-a1f2-e83c5dd9dfe2"><th id=":|c?" class="simple-table-header-color simple-table-header" style="width:399px">Domaine / Question</th><th id="?]hS" class="simple-table-header-color simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-813b-ab7e-c2f4ffa20a36"><td id=":|c?" class="" style="width:399px"><strong>Maladies infectieuses</strong></td><td id="?]hS" class=""></td></tr><tr id="171f7126-8efe-81fb-9ecb-f67b54aed61c"><td id=":|c?" class="" style="width:399px">Choc septique<br/>Objectifs hémodynamiques<br/>Principes d’une antibiothérapie probabiliste en urgence en réa <br/>Critères de SIRS</td><td id="?]hS" class=""><br/>2<br/>1<br/>1</td></tr><tr id="171f7126-8efe-81d9-afa5-cb84b229ca27"><td id=":|c?" class="" style="width:399px">Bactéries résistantes : Citez les principales</td><td id="?]hS" class="">1</td></tr><tr id="171f7126-8efe-8158-987d-e814de2d4140"><td id=":|c?" class="" style="width:399px">Traitement probabiliste des méningites<br/>Traitement probabiliste pneumopathie aigue communautaire<br/>Traitements anti-staphylocoques</td><td id="?]hS" class="">1<br/>1<br/>1</td></tr></tbody></table><table id="171f7126-8efe-81fa-bbc7-d2bd9daacd26" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-8129-b27c-cbc6a4eaf1ef"><th id="{le\" class="block-color-purple_background simple-table-header" style="width:399px">Domaine / Question</th><th id="v?mO" class="block-color-purple_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-8167-912c-d8502e51a532"><td id="{le\" class="" style="width:399px"><strong>Métabolique / Néphrologie</strong></td><td id="v?mO" class=""></td></tr><tr id="171f7126-8efe-8184-87ef-f8b54f6ebdb3"><td id="{le\" class="" style="width:399px">Interprétation d’un Ionogramme sanguin<br/>Acidose métabolique : étiologies<br/>Interprétation d’un gaz du sang<br/>Valeur théorique trou anionique et calcul</td><td id="v?mO" class=""><br/>3<br/>2<br/>2</td></tr><tr id="171f7126-8efe-8106-a7c0-f75677997272"><td id="{le\" class="" style="width:399px">Hyperkaliémie<br/>Moyens de traitement d’hyperkaliémie menaçante</td><td id="v?mO" class=""><br/>2</td></tr><tr id="171f7126-8efe-81f9-b5fd-fca5973af96e"><td id="{le\" class="" style="width:399px">Dysnatrémie<br/>Eléments d’orientation devant une hyponatrémie<br/>Diabète insipide : Critères diagnostics</td><td id="v?mO" class=""><br/>1<br/>1</td></tr><tr id="171f7126-8efe-81d9-b132-df2e7fd46706"><td id="{le\" class="" style="width:399px">Facteurs de risque d’IRA post opératoire<br/>Mesure de fonction rénale en réanimation<br/>Rhabdomyolyse et IRA</td><td id="v?mO" class="">3<br/>2<br/>1</td></tr><tr id="171f7126-8efe-810f-912b-ec95d215a4d7"><td id="{le\" class="" style="width:399px">Dialyse<br/>- Indications<br/>- Principes physiques<br/>- Prescription<br/>- Complication</td><td id="v?mO" class=""><br/>1<br/>1<br/>1<br/>1</td></tr></tbody></table><table id="171f7126-8efe-81b2-83d4-e36563370bb0" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-8195-8a79-cae61cfd8201"><th id="|wJx" class="block-color-red_background simple-table-header" style="width:399px">Domaine / Question</th><th id="rmMC" class="block-color-red_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-819a-82a5-cf8822d0de55"><td id="|wJx" class="" style="width:399px"><strong>Ventilation</strong></td><td id="rmMC" class=""></td></tr><tr id="171f7126-8efe-81cc-86f5-eeb6f9e70eb0"><td id="|wJx" class="" style="width:399px">Physiologie<br/>- Calcul de compliance<br/>- Définition pression de plateau<br/>- Définition des phases du cycle ventilatoire<br/>- Définition de la PEEP<br/>- Compartiments de stockage de l’O2<br/>- Définition espace mort alvéolaire/anatomique<br/>- Vasoconstriction pulmonaire hypoxique (VPH)<br/>a.       Définition de la VPH<br/>b.      Situation et médicaments inhibant la VPH<br/>- Shunt<br/>a.       Distinction shunt/hypoventilation<br/>b.      Distinction shunt/effet shunt</td><td id="rmMC" class=""><br/>2<br/>2<br/>1<br/>1<br/>1<br/>1<br/> <br/>1<br/>1<br/> <br/>1<br/>1</td></tr><tr id="171f7126-8efe-8174-ae0a-ef350028c54c"><td id="|wJx" class="" style="width:399px">Pathologie<br/>- Conséquences du Volo-traumatisme<br/>- Conséquence de l’intubation sur la CRF<br/>- Conséquences de l’obésité sur la CRF<br/>- Manœuvres de recrutement et PEEP</td><td id="rmMC" class=""><br/>1<br/>1<br/>1<br/>1</td></tr><tr id="171f7126-8efe-81a4-9424-f839f46f2c3b"><td id="|wJx" class="" style="width:399px">Paralysie diaphragmatique</td><td id="rmMC" class="">1</td></tr><tr id="171f7126-8efe-81c2-954c-db546484404d"><td id="|wJx" class="" style="width:399px">SDRA :<br/>- Définition<br/>- Calcul de P/F</td><td id="rmMC" class=""><br/>3<br/>1</td></tr><tr id="171f7126-8efe-819e-8736-db5e4984ae68"><td id="|wJx" class="" style="width:399px">Hyper-réactivité bronchique : situations à risque</td><td id="rmMC" class="">1</td></tr><tr id="171f7126-8efe-8194-b1ca-efb9c0800fd9"><td id="|wJx" class="" style="width:399px">Conséquences circulatoires des efforts à glotte fermée</td><td id="rmMC" class="">1</td></tr><tr id="171f7126-8efe-8124-beef-f631d45a3959"><td id="|wJx" class="" style="width:399px">Technique<br/>- Réglage du ventilateur<br/>a.       en fonction du GDS<br/>b.       protectrice pour le SDRA<br/>- Ventilation Non Invasive<br/>Indications</td><td id="rmMC" class=""><br/> <br/>1<br/>4<br/>1<br/>2</td></tr></tbody></table><table id="171f7126-8efe-81b0-9b5f-ffb7197929a8" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-8140-9905-c230e7d4bad6"><th id="DjM]" class="block-color-brown_background simple-table-header" style="width:400px">Domaine / Question</th><th id="`ZES" class="block-color-brown_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-81a6-a7cc-d01e9eefb0e1"><td id="DjM]" class="" style="width:400px"><strong>Neuro-réanimation</strong></td><td id="`ZES" class=""></td></tr><tr id="171f7126-8efe-8149-be1a-d1c52fe5ee27"><td id="DjM]" class="" style="width:400px">Score de Glasgow</td><td id="`ZES" class="">2</td></tr><tr id="171f7126-8efe-8140-9799-ffe56e2928f8"><td id="DjM]" class="" style="width:400px">Physiologie<br/>- Déterminants de l’apport/consommation d’O2 au cerveau<br/>- Calcul de la PPC<br/>- Débit Sanguin Cérébral<br/>a.       Autorégulation de la perfusion cérébrale<br/>b.      Conséquence des Agents anesthésiques sur le DSC<br/>- ACSOS</td><td id="`ZES" class=""><br/>3<br/>5<br/> <br/>1<br/>1<br/>5</td></tr><tr id="171f7126-8efe-8172-96b7-c7bb7eab4bf1"><td id="DjM]" class="" style="width:400px">PIC<br/>- Mesure<br/>- Paramètres physiologiques qui l’influencent</td><td id="`ZES" class=""><br/>1<br/>1</td></tr><tr id="171f7126-8efe-8123-afa9-d5012ee5b904"><td id="DjM]" class="" style="width:400px">SDRA :<br/>- Définition<br/>- Calcul de P/F</td><td id="`ZES" class=""><br/>3<br/>1</td></tr><tr id="171f7126-8efe-8169-ab69-e12b75e49450"><td id="DjM]" class="" style="width:400px">Mort encéphalique<br/>Diagnostic</td><td id="`ZES" class=""><br/>2</td></tr><tr id="171f7126-8efe-811e-9085-c818a74d1869"><td id="DjM]" class="" style="width:400px">Complications des hématomes sous duraux post anévrysme</td><td id="`ZES" class=""></td></tr><tr id="171f7126-8efe-8176-89bb-ef73f8ee288f"><td id="DjM]" class="" style="width:400px">Fin de vie :<br/>Eléments à respecter avant arrêt des thérapeutiques actives</td><td id="`ZES" class=""><br/>2</td></tr></tbody></table><table id="171f7126-8efe-8132-b5db-e54da1fc6067" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-8164-9483-c4edd322f81e"><th id="]fdf" class="block-color-blue_background simple-table-header" style="width:399px">Domaine / Question</th><th id="cv~U" class="block-color-blue_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-8166-b149-eabd423e3a9d"><td id="]fdf" class="" style="width:399px"><strong>Maternité - Pédiatrie</strong></td><td id="cv~U" class=""></td></tr><tr id="171f7126-8efe-8100-a5d0-d072a8b9b789"><td id="]fdf" class="" style="width:399px">Prééclampsie<br/>- Eléments diagnostics<br/>- Critères de sévérité<br/>- Prise en charge médicamenteuse</td><td id="cv~U" class=""><br/>1<br/>2<br/>1</td></tr><tr id="171f7126-8efe-81ba-8892-d2cf32aea3ab"><td id="]fdf" class="" style="width:399px">Modifications physiologiques de la grossesse<br/>Facteurs de risque d’intubation difficile</td><td id="cv~U" class="">2<br/>1</td></tr><tr id="171f7126-8efe-8154-aea8-daf2e71534a2"><td id="]fdf" class="" style="width:399px">Pédiatrie<br/>- Jeune<br/>a.       Règles du jeune<br/>b.      Règles de Compensation<br/>- Adaptation cardio-vasculaire à la naissance<br/>- Causes physiologiques de la désaturation rapide<br/> Facteurs de risque de laryngospasme liés à l’anesthésie<br/>- Apport hydroélectrolytiques<br/>- Facteurs de risque d’hypothermie<br/>- Antalgie post amygdalectomie</td><td id="cv~U" class="">1<br/>1<br/>3<br/>1<br/>1<br/>2<br/>1<br/>1<br/>1<br/>1</td></tr></tbody></table><table id="171f7126-8efe-819d-bbaf-c817445a9a08" class="simple-table"><thead class="simple-table-header"><tr id="171f7126-8efe-8123-af23-fadf791b3041"><th id="P&lt;vS" class="block-color-orange_background simple-table-header" style="width:399px">Domaine / Question</th><th id="&lt;@kP" class="block-color-orange_background simple-table-header">Nombre d’occurrences</th></tr></thead><tbody><tr id="171f7126-8efe-816a-9baf-fb5798c97268"><td id="P&lt;vS" class="" style="width:399px"><strong>Généralités en anesthésie</strong></td><td id="&lt;@kP" class=""></td></tr><tr id="171f7126-8efe-81cf-be8f-e20b347c7900"><td id="P&lt;vS" class="" style="width:399px">Evaluation pré-opératoire et examens complémentaires<br/>- Evaluation du risque hémorragique<br/>- Diagnostic de dénutrition<br/>- Diabète<br/>a.        Conséquences physiologiques sur l’anesthésie<br/>b.        Dépistage de la dysautonomie cardio-vasculaire</td><td id="&lt;@kP" class=""><br/>2<br/>1<br/> <br/>2<br/>1</td></tr><tr id="171f7126-8efe-8111-a571-ddc63f309547"><td id="P&lt;vS" class="" style="width:399px">Induction<br/>- Check-list<br/>- Prévention de l’hypothermie</td><td id="&lt;@kP" class=""><br/>2<br/>1</td></tr><tr id="171f7126-8efe-8102-8fdf-e95cb73af84d"><td id="P&lt;vS" class="" style="width:399px">Intubation<br/>- Bris dentaire<br/>- Séquence rapide : Curares<br/>- Critères de ventilation/intubation difficile</td><td id="&lt;@kP" class=""><br/>1<br/>1<br/>4</td></tr><tr id="171f7126-8efe-81fd-ba1c-e3af41574f34"><td id="P&lt;vS" class="" style="width:399px">NVPO<br/>Moyens de prévention</td><td id="&lt;@kP" class=""><br/>1</td></tr><tr id="171f7126-8efe-818f-ac00-ebdb7ff0ebb5"><td id="P&lt;vS" class="" style="width:399px">Hyperthermie maligne<br/>- Facteurs physiologiques<br/>- Signes cliniques/paracliniques</td><td id="&lt;@kP" class=""><br/>1<br/>1</td></tr><tr id="171f7126-8efe-8146-a37e-cde263005dfa"><td id="P&lt;vS" class="" style="width:399px">Rachianesthésie<br/>- Dosage et molécule en pédiatrie<br/>- Prévention de l’hypotension<br/>- Prise en charge des céphalées post brèche</td><td id="&lt;@kP" class=""><br/>1<br/>2<br/>1</td></tr><tr id="171f7126-8efe-8129-a357-c42cb82397e5"><td id="P&lt;vS" class="" style="width:399px">Laparotomie : Conséquences ventilatoires</td><td id="&lt;@kP" class="">1</td></tr><tr id="171f7126-8efe-8135-a4d9-fd526a25db81"><td id="P&lt;vS" class="" style="width:399px">Coelioscopie<br/>- Modification physiologique respiratoire/hémodynamiques<br/>- Causes d’hypotension brutale</td><td id="&lt;@kP" class=""><br/>2<br/>2</td></tr><tr id="171f7126-8efe-81a6-b5a8-ebfd09ef4027"><td id="P&lt;vS" class="" style="width:399px">Chirurgie thyroïdienne : complications</td><td id="&lt;@kP" class="">1</td></tr><tr id="171f7126-8efe-8157-b469-e793970ed4d1"><td id="P&lt;vS" class="" style="width:399px">Ambulatoire et réhabilitation précoce<br/>- Grands principes<br/>- Critère de retour à la rue<br/>- Critères d’éligibilité<br/>- Critères de non-passage en SSPI</td><td id="&lt;@kP" class=""><br/>2<br/>2<br/>2<br/>1</td></tr><tr id="171f7126-8efe-81b7-b9f9-d1a7f95bd995"><td id="P&lt;vS" class="" style="width:399px">Blocs analgésiques : Anatomie du bloc axillaire anatomie</td><td id="&lt;@kP" class="">2</td></tr><tr id="171f7126-8efe-81a2-be88-e19b390b35cf"><td id="P&lt;vS" class="" style="width:399px">Légale : citez les 4 dispositions du décret du 5 déc 1994</td><td id="&lt;@kP" class="">1</td></tr></tbody></table></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,705 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Epreuves de vérification des connaissances</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="171f7126-8efe-81cf-8aab-e3739edf0035" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/solid_beige.png" style="object-position:center 40%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🔎</span></div><h1 class="page-title">Epreuves de vérification des connaissances</h1><p class="page-description"></p></header><div class="page-body"><nav id="171f7126-8efe-81e0-89fb-e40b0c52c1a0" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#171f7126-8efe-81e6-b0bd-e7085b5a8aa1"><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>1.  Généralités</strong></mark></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#171f7126-8efe-8190-a6eb-dc5db3f40897"><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>2.  Inscriptions</strong></mark></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#171f7126-8efe-81d2-bc6a-d8faa53b1d51"><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>3.  Conseils logistiques</strong></mark></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#171f7126-8efe-81aa-acfe-ebe5fda209ec"><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>4.  Déroulement du concours</strong></mark></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#171f7126-8efe-8108-8a06-d7639b18eeff"><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>5.  Corrections</strong></mark></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#171f7126-8efe-8188-9564-c6f9ed3aaac6"><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>6.  Résultats et Admission</strong></mark></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#171f7126-8efe-815f-bf75-cf53f2d96833"><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>7.  Fellowship</strong></mark></mark></a></div></nav><hr id="171f7126-8efe-8107-a35c-e7da3969195b"/><h1 id="171f7126-8efe-81e6-b0bd-e7085b5a8aa1" class=""><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>1.  Généralités</strong></mark></mark></h1><hr id="171f7126-8efe-8196-8bfb-e39eab0e1a5e"/><p id="171f7126-8efe-8107-8444-e75713fcea1c" class="">Les épreuves de vérification des connaissances (EVC) sont la première étape de la procédure d’autorisation d’exercice. Elles s’adressent aux praticiens, quelle que soit leur nationalité, dès lors qu’ils ont obtenu leur diplôme dans un Etat non membre de l’Union européenne (UE) ou non partie à l’accord sur l’Espace économique européen (EEE).</p><p id="171f7126-8efe-81a6-a3ce-cc9490ae1db6" class="">Les diplômes de ces praticiens leur permettent l’exercice des professions de médecin anesthésiste dans leur pays de résidence.</p><p id="171f7126-8efe-81df-ae9d-fb7a2392d918" class="">Au terme de la procédure d’autorisation de plein exercice, les praticiens sont en mesure d’exercer en France leur profession de plein droit.</p><p id="171f7126-8efe-81f8-863a-c0b229051eb4" class="">Le nombre de candidatures aux EVC est limité à quatre. Au quatrième échec, il n’y a plus de possibilité d’obtenir une équivalence en France.</p><p id="171f7126-8efe-81dd-ae01-e5201f426060" class="">
+</p><blockquote id="171f7126-8efe-8187-ac3d-f3ead2f18f7c" class=""><strong>Etape 1 (durée : environ 1 an)<br/></strong>Vous devez vous inscrire au concours des <a href="https://www.cng.sante.fr/candidats/internats/concours-medicaux/docteurs-juniors-praticiens/epreuves-verification-connaissances-evc">épreuves de vérification des connaissances</a> (EVC). Les inscriptions se font généralement aux alentours du mois de mai pendant un mois. Attention à ne pas rater la période d’inscription, sans quoi vous devrez attendre l’année suivante. Le concours des EVC se déroule en fin d’année au centre d’examen de Rungis (Île de France). </blockquote><p id="171f7126-8efe-8184-adf7-e1cf1c5db96b" class="">
+</p><blockquote id="171f7126-8efe-81fa-98f4-c75a15be04f2" class=""><strong>Etape 2<br/></strong>Après votre réussite aux EVC, vous êtes désormais lauréat : vous serez affecté(e) par le CNG pour accomplir un <strong>Parcours de Consolidation des Compétences</strong> appelé PCC. Ce PCC consiste en 2 années de fonctions hospitalières rémunérées sur le statut de praticien associé. Ces deux années doivent être réalisées dans un ou des services agréé(s) pour la formation des internes du DES de la spécialité dans laquelle ils ont concouru.<br/>Les candidats choisissent leur futur poste en fonction de leur classement au concours, dans la liste des postes agréés. C’est pourquoi avoir un bon classement à l’examen n’est pas seulement cosmétique, cela vous permettra d’avoir le choix dans le lieu et le service dans lequel vous ferez votre consolidation. En effet, toute votre vie durant les deux prochaines années découle de ce classement, car le nombre de villes d’affectations possibles sera plus restreinte pour les moins bien classés.<br/>Cette procédure se fait de façon dématérialisée, sur une durée d’une semaine, le planning est annoncé sur le site du CNG à la suite du résultat des concours.</blockquote><p id="171f7126-8efe-819e-b57b-ef3d7b65c5e4" class="">
+</p><blockquote id="171f7126-8efe-813f-a2c8-e5e0b14b5436" class=""><strong>Etape 3<br/></strong>Une fois ces conditions remplies, vous pouvez demander une autorisation d’exercice de votre profession en France. Vous passerez donc devant la commission d’autorisation ministérielle compétente. Pour cela, il vous faut préparer un dossier de demande d’autorisation d’exercice (AE) à envoyer au bureau des autorisations d’exercice du CNG.</blockquote><p id="171f7126-8efe-81d4-8070-fde56313fe50" class="">
+</p><p id="171f7126-8efe-8195-aa86-cf0e21750d8c" class="">Le Centre National de Gestion a la charge :</p><ul id="171f7126-8efe-81b2-b5c2-cf83b7cc505c" class="bulleted-list"><li style="list-style-type:disc">D’organiser les épreuves de vérification des connaissances,</li></ul><ul id="171f7126-8efe-81e4-b90d-e522aeec78ea" class="bulleted-list"><li style="list-style-type:disc">D’organiser la procédure nationale de choix de postes pour les lauréats aux épreuves de vérification des connaissances,</li></ul><ul id="171f7126-8efe-81db-8217-ce74d6eb7b2d" class="bulleted-list"><li style="list-style-type:disc">De prononcer les affectations.</li></ul><p id="171f7126-8efe-8136-b53f-ee103853f6dd" class="">L’interlocuteur des anesthésistes-réanimateurs est Mme Gessie MICHEL que l’on peut joindre par</p><ul id="171f7126-8efe-81b0-be65-f4d199044f86" class="bulleted-list"><li style="list-style-type:disc">Téléphone : 01 77 35 62 64</li></ul><ul id="171f7126-8efe-8115-b437-f4dd7c4bd5c5" class="bulleted-list"><li style="list-style-type:disc">Mail : gessie.michel@sante.gouv.fr</li></ul><p id="171f7126-8efe-8160-8144-d000ec06afb6" class="">En cas de problème, le lien vers l’annuaire des interlocuteurs du CNG qui peuvent être contactés :</p><p id="171f7126-8efe-81e3-ba4d-f52b5b3686c2" class=""><a href="https://www.cng.sante.fr/sites/default/files/media/2024-05/Annuaire%20DA2C_24-05.pdf">https://www.cng.sante.fr/sites/default/files/media/2024-05/Annuaire%20DA2C_24-05.pdf</a></p><h1 id="171f7126-8efe-8190-a6eb-dc5db3f40897" class=""><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>2.  Inscriptions</strong></mark></mark></h1><hr id="171f7126-8efe-8124-a9f5-d57cf39a25e6"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="171f7126-8efe-8118-8d13-f5edc4ef2314"><div style="font-size:1.5em"><span class="icon">👉</span></div><div style="width:100%"><p id="171f7126-8efe-813a-ae74-f436db51805c" class=""><strong>L’inscription au concours est gratuite.</strong></p></div></figure><p id="171f7126-8efe-8167-b924-ff9fe1c6a1b9" class="">
+</p><p id="171f7126-8efe-81bd-aa67-f1ab59db15b8" class="">Chaque candidat dépose durant la période des inscriptions une seule demande de candidature en une seule fois, sur le site en indiquant l’Agence Régionale de Santé (ARS) de son lieu de résidence s’il réside en France ou l’Agence Régionale de Santé (ARS) de son choix s’il réside hors de France.</p><p id="171f7126-8efe-8108-9425-ef2a8e125b57" class="">La période d&#x27;inscription à ces épreuves est fixée chaque année en général de début juin à la fin juin. Il est important de surveiller la publication des dates d’inscriptions limites qui sont indiquées par le CNG.</p><p id="171f7126-8efe-81a9-9ffa-e523add6cd98" class="">La demande de candidature comprend :</p><ul id="171f7126-8efe-817b-8ae9-c889b1bcfbbe" class="bulleted-list"><li style="list-style-type:disc">La copie lisible de la pièce d&#x27;identité, du passeport ou du titre de séjour.</li></ul><ul id="171f7126-8efe-81dd-b5b3-d390de4eca6d" class="bulleted-list"><li style="list-style-type:disc">La copie du diplôme</li></ul><p id="171f7126-8efe-8148-aa18-f4d07263b3e6" class="">
+</p><p id="171f7126-8efe-8188-b473-da1c729a7ad6" class="">Toutes les pièces justificatives doivent être rédigées en langue française ou traduites par un traducteur agréé auprès des tribunaux français ou, pour les candidats résidant à l&#x27;étranger, avoir fait l&#x27;objet d&#x27;une traduction certifiée par les autorités consulaires françaises.</p><p id="171f7126-8efe-8108-aafe-c3832f31128b" class="">Les ressortissants Français et les ressortissants de pays Francophone (langue officielle) ne sont pas soumis à la justification de la langue Française.</p><p id="171f7126-8efe-8162-ae0f-da1e84289124" class="">
+</p><p id="171f7126-8efe-8192-b325-d78137e44ca3" class="">Nous nous focalisons sur l’obtention de l’équivalence en Anesthésie Réanimation, mais il faut savoir que tout titulaire d’un diplôme de médecine étranger peut se présenter pour les concours des spécialités gériatrie, médecine générale et médecine d’urgence, voici le texte correspondant :</p><blockquote id="171f7126-8efe-81fc-99c6-f683f7541517" class=""><em>« Les candidats ne peuvent s&#x27;inscrire et concourir au cours d&#x27;une même session que dans la spécialité dont ils détiennent le diplôme dans leur pays d&#x27;origine”</em></blockquote><p id="171f7126-8efe-8186-8c84-c82baa76d62e" class="">Les spécialités de gériatrie, médecine générale ou médecine d&#x27;urgence sont ouvertes aux titulaires d&#x27;un diplôme de docteur en médecine permettant l&#x27;exercice plénier dans le pays d&#x27;obtention. »</p><p id="171f7126-8efe-8138-a56d-f739847a8555" class="">Ainsi, si votre objectif principal est de travailler en France, quelle que soit la spécialité, il peut être intéressant de passer les concours de médecine d’urgence, réputé plus facile que celui d’Anesthésie Réanimation, d’autant plus que vos connaissances des soins intensifs vous avantagent sur une grande partie du programme. Il est toujours possible par la suite de passer à nouveau le concours pour l’équivalence anesthésique, toujours dans la limite des 4 candidatures au total.</p><p id="171f7126-8efe-81f8-97a2-e379d96633e9" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="171f7126-8efe-818f-b02a-f5b199756a59"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><p id="171f7126-8efe-8153-9994-f4c4c5e4bc2c" class="">Si vous envisagez de changer de spécialité une fois votre RPPS obtenu, après les deux années de consolidation, sachez que c’est un parcours extrêmement difficile. En effet, la Commission d’Autorisation d’Exercice évalue l’ensemble de votre parcours à la fin des deux années de consolidation, et sera intransigeante quant à la qualité de vos évaluations. Ainsi, il faudra que les deux années passées dans une spécialité qui n’est pas la vôtre soient parfaites. Si toutefois vous arrivez à convaincre la CAE et obtenez un RPPS dans une spécialité, il faudra convaincre l’ordre des médecins pour en changer. Pour cela, il faudra avoir travaillé plusieurs années sur le territoire dans la spécialité désirée et avoir fait la preuve de ses compétences.</p><p id="171f7126-8efe-81f0-b530-c202cfa9b040" class="">Cette situation est rare et le parcours difficile, bien plus que l’inscription dans la spécialité que vous ciblez directement lors de l’EVC.</p></div></figure><p id="171f7126-8efe-8109-bc17-d843e17310a1" class="">
+</p><h1 id="171f7126-8efe-81d2-bc6a-d8faa53b1d51" class=""><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>3.  Conseils logistiques</strong></mark></mark></h1><hr id="171f7126-8efe-8134-b1a9-e2c52ca14cda"/><p id="171f7126-8efe-81fc-b671-d662d3fb2066" class="block-color-purple_background">📍 Lieu du concours</p><p id="171f7126-8efe-8169-af27-c08111318ae8" class="">Le concours se déroule en général à Rungis, en région parisienne, à l&#x27;<a href="https://maps.app.goo.gl/eaQuykoyjUza3BDS7">Espace Jean Monnet, 47, rue des Solets, 94533 Rungis.</a></p><p id="171f7126-8efe-8140-a556-cdbbe23f28c9" class="">Le calendrier détaillé des épreuves est précisé et mis en ligne sur le site internet du Centre national de gestion.</p><p id="171f7126-8efe-813f-bfcf-c8e5fb224c45" class="">Rungis se trouve au sud de Paris, juste au nord de l’aéroport d’Orly. Pour vous rendre à la salle d’examen, plusieurs options s’offrent à vous :</p><p id="171f7126-8efe-8150-862a-c9877f4960a4" class=""><span style="border-bottom:0.05em solid">En transport depuis Paris :</span></p><ul id="171f7126-8efe-8171-bfc0-e4f70b4caa72" class="bulleted-list"><li style="list-style-type:disc">Empruntez la ligne 14 jusqu’à la station « Chevilly Larrue »</li></ul><ul id="171f7126-8efe-8122-900f-f2b6ccb60c52" class="bulleted-list"><li style="list-style-type:disc">Puis prenez le bus 319 vers « Massy Palaiseau RER » jusqu’à l’arrêt « Les Solets », vous serez à 1 minute de la destination (environ 45 minutes de trajet)</li></ul><ul id="171f7126-8efe-8194-9133-cb8ab4fd4c79" class="bulleted-list"><li style="list-style-type:disc">Vous pouvez emprunter le bus 396 comme alternative, avec un peu plus de marche à pied.</li></ul><p id="171f7126-8efe-81d5-ae24-c575cc7d6104" class="">
+</p><p id="171f7126-8efe-81b8-873f-e6f42f4b1449" class="">Plus simple mais plus long, vous pouvez emprunter le RER C en direction de Massy Palaiseau, station « Rungis la fraternelle » (cercle violet ci-dessous), vous serez arrivés après 9minutes de marche à pied. Faites attention, le RER C passe moins fréquemment que la ligne 14.</p><p id="171f7126-8efe-8171-bbf6-f6517125d070" class="">
+</p><p id="171f7126-8efe-811c-ad37-ccb201d933ea" class=""><span style="border-bottom:0.05em solid">En transport depuis l’aéroport :</span></p><p id="171f7126-8efe-819a-b619-f584bff6ec73" class="">Vous pouvez emprunter la ligne de Tram T7 vers l’arrêt La Fraternelle, vous y serez en seulement 12 minutes.</p><p id="171f7126-8efe-814f-b94e-c93a4f77b92d" class="">
+</p><p id="171f7126-8efe-81e1-9a3c-e8c6db7a2ef9" class="block-color-purple_background">🏬 Hébergement</p><p id="171f7126-8efe-8120-aeba-de3a69f3bf7c" class="">Il est tout à fait possible de trouver un hôtel sur place pour éviter les aléas des transports le jour J. De nombreuses options sont disponibles à seulement quelques minutes de marche.</p><p id="171f7126-8efe-81c5-a5d8-c702dfaa5ffb" class="">Quel que soit votre choix, il est fondamental d’anticiper car les hôtels sont rapidement réservés par l’afflux massif d’étudiants qui viendront passer les examens, en majorité venant pour l’occasion.</p><ul id="171f7126-8efe-81b0-858a-e336cde394f6" class="bulleted-list"><li style="list-style-type:disc">Ibis style Orly Airport : le plus proche du site</li></ul><ul id="171f7126-8efe-8157-b8db-ca41c40a402d" class="bulleted-list"><li style="list-style-type:disc">Hilton Garden Inn : plus cher et un peu plus loin</li></ul><ul id="171f7126-8efe-8103-a97c-c05cce70eace" class="bulleted-list"><li style="list-style-type:disc">Best Western, Mercure, Novotel… Sont à environ 10 minutes de marche.</li></ul><ul id="171f7126-8efe-8123-9208-f206142c56eb" class="bulleted-list"><li style="list-style-type:disc">F1 hôtel est le moins cher et le moins confortable, à privilégier en cas de moyens financiers limités, il est aussi bruyant le matin en raison des nombreux camionneurs qui l’utilisent, et qui se lèvent très tôt.</li></ul><p id="171f7126-8efe-8187-a0d0-c8a3695294fe" class="">
+</p><p id="171f7126-8efe-8141-a8e0-d09ec71b66b2" class="block-color-purple_background">🍽️ Restauration</p><p id="171f7126-8efe-81f4-bf24-d6947ec0f187" class="">Dans le même ordre d’idée, il vous est conseillé d’anticiper de quoi vous restaurer sur place à la pause déjeuner. Les options de restauration ne sont pas très proches et vous n’aurez pas forcément envie de vous mélanger à tous les étudiants et d’attendre le service, il paraît préférable de prendre avec vous un plat réconfortant.</p><p id="171f7126-8efe-8166-8d4b-dca49589846d" class="">Si vous optez pour un restaurant, seuls ou à plusieurs, pensez à réserver.</p><p id="171f7126-8efe-81be-b6cf-ee7fe8a9db51" class="">
+</p><p id="171f7126-8efe-81c6-ae6a-ee65873b2b0c" class="block-color-purple_background">💬 Conseils divers</p><p id="171f7126-8efe-81b6-a2da-fcadf7cf27c8" class="">Il peut faire très froid à cette période (dans les 8°) de l’année. Les abris étant rares, pensez à vous équiper en fonction des prévisions météo.</p><p id="171f7126-8efe-8125-bfb0-e23cdbfa5a44" class="">Enfin, pour vous changer les idées entre les deux épreuves, un petit parc (Parc Colline Cacao) vous permettra de vous vider l’esprit ou de vous concentrer avant d’attaquer la seconde partie.</p><p id="171f7126-8efe-813e-abea-e9de439ad2ba" class="">
+</p><p id="171f7126-8efe-81e5-8e71-e8aba6b2a82c" class="block-color-purple_background">❓ En cas de questions</p><p id="171f7126-8efe-8144-82ab-cc44ae461e4b" class="">Pour toute question concernant le concours, vous pouvez contacter la responsable des Épreuves de Vérification des Connaissances (EVC) au CNG, Mme Sandrine MILHANO</p><p id="171f7126-8efe-811d-b999-c85bb103946e" class="">Numéro : 01 77 35 62 97</p><p id="171f7126-8efe-8171-b79e-e4887d65e881" class="">Adresse Mail : <a href="mailto:cng-evc@sante.gouv.fr">cng-evc@sante.gouv.fr</a></p><p id="171f7126-8efe-810c-b5d3-e4bb5bc04c7e" class="">
+</p><h1 id="171f7126-8efe-81aa-acfe-ebe5fda209ec" class=""><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>4.  Déroulement du concours</strong></mark></mark></h1><hr id="171f7126-8efe-818a-aef1-e8ee80b7af97"/><p id="171f7126-8efe-81f3-8797-f830647cc5a1" class="">Le concours est composé de deux épreuves.</p><p id="171f7126-8efe-810d-953e-f4334758d06a" class=""><strong>Epreuve des connaissances fondamentales</strong></p><p id="171f7126-8efe-818c-86a0-c1ce332a01fa" class="">Il s’agit d’une épreuve écrite anonyme de vérification des connaissances fondamentales d&#x27;une durée de deux heures, notée de 0 à 20, coefficient 1.</p><p id="171f7126-8efe-81a2-b0df-d7c687d1b93d" class="">L’épreuve fondamentale permet d’évaluer les connaissances théoriques, elle est constituée de questions sans relation les unes avec les autres, qui nécessitent des réponses courtes et précises, sur des sujets théoriques de cours.</p><p id="171f7126-8efe-8189-8852-f366ec7e37bf" class="">La physiologie et la pharmacologie sont à l’honneur dans cette partie.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="171f7126-8efe-813b-9314-e4808e4b5257"><div style="width:100%"></div></figure><p id="171f7126-8efe-8164-bced-ef891ef8664d" class="">
+</p><p id="171f7126-8efe-812a-b1cf-f5126cdf16f5" class=""><strong>Epreuve des connaissance pratiques</strong></p><p id="171f7126-8efe-816b-abf9-e1a5d31043c3" class="">Il s’agit d’une épreuve écrite anonyme de vérification des connaissances pratiques d&#x27;une durée de deux heures, notée de 0 à 20, coefficient 1</p><p id="171f7126-8efe-811a-8e78-c786111e91ba" class="">Elle permet d’évaluer à travers 2 cas cliniques les connaissances pratiques des étudiants. Les cas cliniques sont en général répartis en 1 cas d’anesthésie et 1 de réanimation.</p><p id="171f7126-8efe-8141-a0e7-fc5ca68e7fc0" class="">La forme de rédaction nécessite souvent des réponses plus longues, structurées, organisées, et dont les réponses attendues sont très focalisées sur la prise en charge réelle, indiquant la capacité du praticien à « faire ce qu’il sait ».</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="171f7126-8efe-81f9-aacf-f8510fcb4bef"><div style="width:100%"></div></figure><h1 id="171f7126-8efe-8108-8a06-d7639b18eeff" class=""><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>5.  Corrections</strong></mark></mark></h1><hr id="171f7126-8efe-81cf-9500-ebace7077f28"/><p id="171f7126-8efe-813c-b076-ce65ad450f36" class="">Comme indiqué plus haut, aucune correction officielle n’est fournie à la suite des examens. Vous pouvez demander votre copie après la correction, mais celle-ci ne présente pas d’annotation. Pourtant, nous savons quelles sont les méthodes de correction car certaines informations sont officielles concernant la méthodologie, et surtout parce que le concours des EVC est très proche dans son organisation de l’ancienne forme des ECN qui étaient rédactionnelles. En effet, ces deux concours ont été conçus à la même période, l’un pour les DES avec un parcours entièrement dans les universités françaises, l’autre pour les internes ayant un parcours à l’étranger.</p><p id="171f7126-8efe-815e-873c-f401aabeedc7" class="">Ainsi, la correction se fait à l’aide d’une grille comprenant des mots clés. Ces mots sont notés de 0,5 à 2 points en fonction de leur importance. Le correcteur cherche le mot clé dans la copie, et donne le point s’il le trouve, lui ou son synonyme. Il est important de comprendre cela pour la méthodologie, car la recherche des mots clés doit être le plus simple possible pour le correcteur, qui ne risque ainsi pas de passer à côté.</p><p id="171f7126-8efe-81ae-a549-fd9f12671487" class="">De plus, la correction des synonymes implique qu’amadouer le correcteur est essentiel. En effet, un correcteur bien disposé envers vous (car vous écrivez bien, que votre copie est rédigée de façon logique et claire) aura plus tendance à vous accorder les points lorsque l’attribution est discutable. Par exemple, sur un traitement pour lequel le mot clé serait le « remplissage vasculaire », si vous avez rédigé « optimisation hémodynamique », le mot clé n’est pas présent mais l’esprit de la question est respecté. Si le correcteur est bien disposé envers vous, il accordera les points.</p><p id="171f7126-8efe-81c8-98d7-e8fabcc3fd11" class="">
+</p><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="171f7126-8efe-8155-b0d5-f39a1c8b3377"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><p id="171f7126-8efe-81b0-afa8-cf34819aa50b" class="">La lisibilité de votre réponse, que ce soit sur l’écriture ou sur le raisonnement, ne peut que vous faire gagner des points.</p></div></figure><p id="171f7126-8efe-81a4-9f7d-e8a01c0a38bd" class="">
+</p><p id="171f7126-8efe-8154-ab77-f6eab930b868" class="">C’est aussi pour ça qu’avoir une écriture claire et lisible est essentiel. Si le correcteur doit déchiffrer votre copie, il passera moins de temps à chercher les mots clés, et pourra passer à côté d’une notion identique.</p><p id="171f7126-8efe-81cb-984b-e86ad9ddc48f" class="">De nombreuses rumeurs font état d’usage de PMZ : pas mis égal zéro, ou de MZ : mis égal zéro. C’est pourtant faux. Il n’y a pas de PMZ dans une grille corrective des EVC. La raison de cette confusion est que les PMZ étaient présents dans les grilles de correction de l’ancien ECN, et qu’on fait souvent l’analogie entre les deux examens. Pourtant, de nombreux témoignages de Jury nous ont informé que ce n’était pas pratiqué lors des EVC. Pour autant, certaines notions sont plus essentielles que d’autres et réunissent plus de points, les rendant quasi essentielles. Il ne faut pas avoir peur de mettre une information, quand bien même vous avez un doute sur sa pertinence, car cela n’invalide pas le reste des points, bien que ça puisse irriter le correcteur.</p><p id="171f7126-8efe-8139-a415-c540d0d23ab4" class="">Une grille comprend entre 4 et 8 mots clés par questions, permettant une correction rapide. En général, les correcteurs apprennent la liste par cœur de façon à ne plus s’y référer et ainsi gagner du temps. C’est aussi pour ça que « l’esprit » du mot clé compte plus que le mot lui-même.</p><p id="171f7126-8efe-81b0-9187-c7bbf0a89bb6" class="">Une fois la copie corrigée, elle sera corrigée à nouveau par un autre correcteur. A la suite de cette seconde correction, la concordance des notes est évaluée : si la différence entre les deux copies est de moins de 5%, une moyenne entre les deux notes est effectuée et constitue la note finale. Si la différence est de plus de 5%, la copie est corrigée à nouveau. Si l’écart persiste, une seconde correction est effectuée par les correcteurs, jusqu&#x27;à concordance.</p><p id="171f7126-8efe-8171-9b5c-f25a0f6c0e89" class="">Cette méthode permet d’assurer une bonne homogénéité entre les notes, et incite à prendre le temps de trouver les mots clés, pour éviter d’avoir à refaire ce travail. Pour autant, si les deux correcteurs s’entendent sur une note inférieure aux nombres de mots clés réellement présents dans la copie, la note sera validée s’il y a concordance.</p><p id="171f7126-8efe-81ad-ac0a-ed9cbb2fe60b" class="">Cette correction est un travail fastidieux, peu intéressant et peu rémunérateur. Ainsi, les médecins qui l’effectuent n’ont pas une grande motivation et peuvent rapidement perdre patience à la lecture d’une copie difficile à lire et mal organisée. C’est pourquoi la méthodologie de rédaction est essentielle pour aider le correcteur à trouver vos points.</p><p id="171f7126-8efe-81d6-b04b-ed25b9dea191" class="">
+</p><p id="171f7126-8efe-81ea-8396-c2fbdb262d06" class="block-color-teal_background">La réussite se fait donc selon trois étapes :</p><ul id="171f7126-8efe-8132-99d3-e361376c6090" class="block-color-teal_background bulleted-list"><li style="list-style-type:disc">Connaitre les mots clés</li></ul><ul id="171f7126-8efe-817a-a06e-ca3936039879" class="block-color-teal_background bulleted-list"><li style="list-style-type:disc">Penser à les rédiger</li></ul><ul id="171f7126-8efe-811e-b6cf-e55a4b1b312d" class="block-color-teal_background bulleted-list"><li style="list-style-type:disc">Faire en sorte qu’ils soient lus</li></ul><p id="171f7126-8efe-8156-b83b-de8f20edb988" class="">
+</p><p id="171f7126-8efe-8162-8680-eed5a3331ac8" class="">Le premier point dépend principalement de vos connaissances médicales et de votre préparation théorique, mais les deux autres ne dépendent que de la méthodologie, c’est la raison pour laquelle nous insistons autant sur ce point, qui sera abordé dans la partie « préparation ». C’est d’autant plus important que vous n’avez plus passé d’examens depuis longtemps. En tant que médecins, votre jeune cerveau motivé et infatigable s’est glissé dans le confort de l’habitude du travail. Il faudra le faire revenir dans le mode étudiant pour optimiser vos chances.</p><h1 id="171f7126-8efe-8188-9564-c6f9ed3aaac6" class=""><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>6.  Résultats et Admission</strong></mark></mark></h1><hr id="171f7126-8efe-817d-97cf-c87efaef49b8"/><p id="171f7126-8efe-81a0-862e-e0dcad634035" class="">Le nombre de candidats admissibles est fixé à l’avance et connu de tous, et annoncé à l’arrivée des étudiants dans la salle. Ainsi, en 2024, 173 postes étaient ouverts pour les EVC Anesthésie Réanimation. C’est une très nette augmentation du nombre de postes depuis 2017, époque où seuls 40 postes étaient à pourvoir. Pourtant, ça ne veut pas dire que 173 étudiants seront reçus : en effet, ce n’est pas uniquement un concours, mais aussi un examen, c’est-à-dire qu’il y a une note éliminatoire par épreuve qui est de 6/20, et une note éliminatoire générale, qui n’est pas fixée par avance, et qui dépend de la correction et de la qualité des copies, jugée par le Jury.</p><p id="171f7126-8efe-819c-a1aa-f5ea63c96441" class="">Le texte de loi précise :</p><blockquote id="171f7126-8efe-8140-941a-f6424607b35a" class=""><em>« Le jury décide de la note minimale exigée pour l&#x27;admission. La note de la première épreuve départage les ex-aequo. Un candidat ayant obtenu une note inférieure ou égale à 6 sur 20, à l&#x27;une des épreuves, ne peut être déclaré reçu. »</em></blockquote><p id="171f7126-8efe-81e7-8963-fb7ca2095b57" class="">Réussir cet examen dépend donc d’un double objectif : obtenir une note supérieure à la note minimale, et être meilleur que les autres pour pouvoir rentrer dans le quota de postes fixés par le Jury. Il est à noter que la première épreuve est la plus importante car permet de départager les étudiants en cas d’égalité, mais cette éventualité est plutôt rare en pratique.</p><p id="171f7126-8efe-817e-b20c-de6d49faccd1" class="">Vous pouvez faire la demande de récupération de votre copie à la suite de l’examen, mais celle-ci ne sera en aucun cas annotée ou accompagnée d’une correction, et aucun recours ne sera possible.</p><p id="171f7126-8efe-8197-b2c7-d819d1f30a3d" class="">
+</p><h1 id="171f7126-8efe-815f-bf75-cf53f2d96833" class=""><mark class="highlight-orange"><mark class="highlight-brown_background"><strong>7.  Fellowship</strong></mark></mark></h1><hr id="171f7126-8efe-8137-a77a-e59989cc04ea"/><p id="171f7126-8efe-812f-af54-f5d59e370950" class=""><strong>Qu’est-ce que le Fellowship ?</strong></p><p id="171f7126-8efe-812a-af7a-f731be42101e" class="">Le Fellowship consiste à offrir une formation aux praticiens étrangers. Ce dispositif nécessite d’une autorisation temporaire de plein exercice de la médecine au sein d’équipes françaises de CHU ou d’établissements publics ou privés à but non-lucratif, pour une durée de 3 mois à 2 ans maximum.</p><p id="171f7126-8efe-81c7-9461-ec34ddb548c5" class="">Cette formation leur permet l’acquisition ou l’approfondissement d’une compétence dans leur spécialité en disposant pour cela du plein exercice en France pendant la durée de cette formation.</p><p id="171f7126-8efe-81cc-9311-d32cda2b3cd9" class="">Ce dispositif ne poursuit pas les mêmes objectifs que les dispositifs d’accès au plein exercice pérenne en France ouverts aux praticiens à diplôme hors Union Européenne avec lesquels il ne doit pas être confondu, il ne permet l’obtention d’aucun diplôme.</p><p id="171f7126-8efe-8124-b290-f2b7ffbbf0be" class="">
+</p><p id="171f7126-8efe-81a3-869d-e45867de075b" class=""><strong>Qui peut bénéficier du Fellowship ?</strong></p><p id="171f7126-8efe-8134-9a02-c0008458ddae" class="">Il s’adresse aux praticiens spécialistes – médecins, chirurgiens-dentistes-pharmaciens – titulaires d’un diplôme de spécialité issu d’un pays non membre de l’UE ou de l’Espace économique européen ou la Suisse.</p><p id="171f7126-8efe-817f-90a5-e75aa6775a56" class="">Ce dispositif ne permet pas en soi d’obtenir l’équivalence. Pour autant, en pratiquer un vous donne un avantage concurrentiel non négligeable pour la réussite du concours, car une fois sur place, il est plus facile d’obtenir des informations sur le concours, mais aussi sur les pratiques médicales en cours en France. Les pratiques étant différentes d’un pays à l’autre et la correction attendue étant rédigée par des praticiens français, il est très utile de pratiquer dans le pays avant de passer le concours. C’est aussi un avantage pour se familiariser avec la langue et le vocabulaire local, pour ceux qui ne le maîtrisent pas parfaitement.</p><p id="171f7126-8efe-81cd-8a6d-cb34d87257be" class="">
+</p><hr id="171f7126-8efe-81e4-92eb-de0bc91a8741"/><p id="171f7126-8efe-8121-a18a-ee899d7ac314" class="">Après cette présentation complète des EVC, pour plus d’information sur le programme, suivez-nous : </p><figure id="171f7126-8efe-8139-a84c-ff15778f8a0a" class="link-to-page"><a href="Programme%20des%20EVC%20171f71268efe8139a84cff15778f8a0a.html"><span class="icon">📔</span>Programme des EVC</a></figure><p id="17af7126-8efe-8014-9fda-cf0fb07b4146" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

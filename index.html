@@ -1,0 +1,689 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Khypnos</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="17af7126-8efe-8091-a267-e6612970f28f" class="page sans"><header><img class="page-cover-image" src="KhypnosLogo_v2.png" style="object-position:center 50%"/><h1 class="page-title">Khypnos</h1><p class="page-description"></p></header><div class="page-body"><h1 id="17af7126-8efe-8076-8aaa-d84cbf151dc6" class="">Préparer les EVC en Anesthésie Réanimation</h1><p id="17af7126-8efe-8022-8d9f-fbf57a19471f" class="block-color-blue_background"><mark class="highlight-default">Méthodologie</mark>｜A<mark class="highlight-default">nnales</mark>｜<mark class="highlight-default">Recommandations</mark></p><p id="201f7126-8efe-804c-8e16-da85e7d768fc" class="">
+</p><div><figure class="block-color-orange_background callout" style="white-space:pre-wrap;display:flex" id="201f7126-8efe-80e2-ace4-e013372278b0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="17df7126-8efe-80dd-945c-d65908162010" class="">Entrainez-vous avec un <a href="Concours%20Blanc%20Khypnos%2017af71268efe808eb0cbc97aaf5d59e6.html">concours blanc sur demande</a> ! <br/>Inscription possible en format Voie interne (QCM)</p><p id="237f7126-8efe-8058-889a-d59f60420f85" class="">
+</p><p id="237f7126-8efe-804b-aade-e5bbeeede6dd" class=""><strong>Nouveau !! Formules BOOST Voie interne SEULEMENT 10 places !</strong></p><blockquote id="237f7126-8efe-8098-949e-d55614ac982f" class="">🔄 <a href="Formulaire%20d%E2%80%99inscription%2017af71268efe80148c67f9938cc20b90.html">BOOST Voie interne</a> : <br/>- Accès aux corrigés d’annales<br/>- Accès aux vidéos de formation Khypnos : <strong>toute l’anesthésie-réanimation en 60 heures</strong><br/>- Concours Blanc format QCM de l’épreuve des EVC<br/>- 4 sessions de 2h de QCM corrigés en séance visio en Octobre - Novembre 2025<br/>💳 <strong>950 Euros HT (1140 Euros TTC)</strong></blockquote><p id="237f7126-8efe-8021-bb77-d5bfef2f49e3" class="">
+</p><blockquote id="237f7126-8efe-8046-9610-c707893da80f" class="">🔀 <a href="Formulaire%20d%E2%80%99inscription%2017af71268efe80148c67f9938cc20b90.html">BOOST Voie externe</a> : Récupération des corrigés d’annales, des vidéos de formations, participation programme classique en visio à partir de juillet, Concours Blanc Septembre 2025 format rédactionnel<br/>💳 <strong>1400 Euros HT (1680 Euros TTC)</strong></blockquote></div></figure></div><div><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="202f7126-8efe-8041-9cd7-ddb4d98f05f1"><div style="width:100%"><p id="201f7126-8efe-8072-a5e2-c0b88272e466" class="">Nouveauté EVC 2025 - Voie interne</p><figure id="202f7126-8efe-8076-aada-d86fc23ac1b7" class="link-to-page"><a href="Informations%20sur%20les%20d%C3%A9crets%20du%2028%20mai%202025%20202f71268efe8076aadad86fc23ac1b7.html"><span class="icon">⚖️</span>Informations sur les décrets du 28 mai 2025</a></figure><figure id="221f7126-8efe-8081-8ae2-e4378155ff16" class="link-to-page"><a href="D%C3%A9cret%20d%E2%80%99organisation%20des%20EVC%202025%20-%20Voies%20interne%20221f71268efe80818ae2e4378155ff16.html"><span class="icon">📃</span>Décret d’organisation des EVC 2025 - Voies interne et externe </a></figure></div></figure></div><p id="202f7126-8efe-805b-ace1-f77cd79bf7e5" class="">
+</p><p id="17af7126-8efe-80de-a371-d5ec449e276b" class="">Vous souhaitez vous inscrire au concours des EVC mais ne savez pas par où commencer ? Khypnos vous propose :</p><ul id="7b19ce61-0de0-48f2-97eb-503f576d178a" class="bulleted-list"><li style="list-style-type:disc">un <a href="Guide%20de%20r%C3%A9ussite%20Khypnos%20171f71268efe800ea132ff6dd150aef9.html">📕 Guide de réussite</a> 100 % gratuit,</li></ul><ul id="172fa84c-0234-44b0-8479-7652ad07fc65" class="bulleted-list"><li style="list-style-type:disc">un <a href="Annales%20des%20EVC%20171f71268efe81b38ff5c17fb46c4458.html">📂 Accès aux Annales</a> des dernières années,</li></ul><ul id="321e9ae3-06ac-4fd1-84fc-625943cdb4a6" class="bulleted-list"><li style="list-style-type:disc">une <a href="La%20pr%C3%A9pa%20Khypnos%20171f71268efe803ba67ac66ad77e6f56.html">✅ Formation Intensive</a> en distanciel sous forme de cours du soir.</li></ul><p id="201f7126-8efe-8062-bb90-f707e93d2095" class="">
+</p><div><div id="201f7126-8efe-8001-a780-dce72620853f" class="column-list"><div id="201f7126-8efe-80fe-9bc7-de526ed5d8a0" style="width:100%" class="column"><figure id="247239a4-6e15-4d31-a335-8e4c5dce3f59" class="image" style="text-align:center"><a href="0d4d2769-648a-4dc9-9d7a-852546e9a674.png"><img style="width:240px" src="0d4d2769-648a-4dc9-9d7a-852546e9a674.png"/></a></figure></div><div id="201f7126-8efe-805d-b9d9-cde998ac6115" style="width:100%" class="column"><figure id="359266be-af10-4a3f-be95-e1dd4b5fe865" class="image" style="text-align:right"><a href="132647c6-74a1-4f7b-a7d7-175fee5b0267.png"><img style="width:240px" src="132647c6-74a1-4f7b-a7d7-175fee5b0267.png"/></a></figure></div></div></div><p id="201f7126-8efe-8060-b909-d8aee42fb36e" class="">
+</p><hr id="17af7126-8efe-800f-866c-cb874011ada8"/><p id="9769e948-36de-41e3-b7ef-9036d495f955" class=""><em><mark class="highlight-blue">Les formateurs travaillent pour:</mark></em></p><figure id="17ef7126-8efe-8089-b7ca-e5a8bbd5a117" class="image"><a href="image.png"><img style="width:288px" src="image.png"/></a></figure><h2 id="17af7126-8efe-80bb-b712-d51009d99c45" class="">📺 Vidéos Khypnos</h2><hr id="1d7f7126-8efe-809e-9743-dae2997c2047"/><figure id="1d7f7126-8efe-80b3-ac37-ffd435f614b7" class="link-to-page"><a href="Webinaires%20Khypnos%201d7f71268efe80b3ac37ffd435f614b7.html"><span class="icon">📺</span>Webinaires Khypnos</a></figure><figure id="255f7126-8efe-8057-9d3b-f891f3d1db69" class="link-to-page"><a href="Cours%20Anesth%C3%A9sie-R%C3%A9animation%20255f71268efe80579d3bf891f3d1db69.html"><span class="icon">📼</span>Cours Anesthésie-Réanimation</a></figure><figure id="1eaf7126-8efe-803f-8b78-cbf2cc00b75c" class="link-to-page"><a href="Espace%20Priv%C3%A9%201eaf71268efe803f8b78cbf2cc00b75c.html"><span class="icon">🔐</span>Espace Privé</a></figure><h2 id="1d7f7126-8efe-803a-a91f-ed71f8355f8d" class="">🗓️ Calendrier</h2><hr id="17af7126-8efe-80ae-b9a2-ea78087d3004"/><ul id="17af7126-8efe-803c-86b6-fc94daca6d62" class="bulleted-list"><li style="list-style-type:disc">Inscriptions de Janvier 2025 à Juin 2025</li></ul><figure id="17af7126-8efe-808e-b0cb-c97aaf5d59e6" class="link-to-page"><a href="Concours%20Blanc%20Khypnos%2017af71268efe808eb0cbc97aaf5d59e6.html"><span class="icon">📝</span>Concours Blanc Khypnos</a></figure><ul id="17af7126-8efe-80ef-a001-ced1e4da35b6" class="bulleted-list"><li style="list-style-type:disc">Enseignements les Mercredi soir et Samedi après midi</li></ul><ul id="17af7126-8efe-8048-b4b7-c5a6c5c82f19" class="bulleted-list"><li style="list-style-type:disc">Distanciel</li></ul><ul id="17af7126-8efe-8086-a48e-cefdfc81fad1" class="bulleted-list"><li style="list-style-type:disc">Juin à octobre 2025</li></ul><h2 id="17cf7126-8efe-80c0-bf60-ea79fc429988" class="">Les retours des anciens candidats des EVC</h2><hr id="17cf7126-8efe-80c7-a8b0-c4b71bb23dfa"/><div id="17cf7126-8efe-8053-bd56-c495fcfcbf53" class="column-list"><div id="17cf7126-8efe-8095-a9c2-fa429552d916" style="width:100%" class="column"><blockquote id="17cf7126-8efe-8041-add6-e1bb472ba08d" class=""><em>“C’est dur de préparer un concours seul à 32 ans. S’inscrire dans une prépa m’a permis de mettre à jour mes connaissances et au delà de la réussite du concours, j’ai appris des choses” <br/></em>Saida S. 32 ans</blockquote></div><div id="17cf7126-8efe-80ee-aabe-fe6908ef162b" style="width:100%" class="column"><blockquote id="17cf7126-8efe-804f-8d09-edb59bd03477" class=""><em>“On peut être meilleur que le médecin d’à côté et pour autant ne pas réussir les EVC. Ce n’est pas un problème de connaissance, c’est 90% de méthodologie. J’étais mal préparée”<br/></em>Aminata W. 33 ans</blockquote></div><div id="17cf7126-8efe-8039-a6fa-fc865cf5a738" style="width:100%" class="column"><blockquote id="17cf7126-8efe-80b7-8b5f-ce4da35804db" class=""><em>“Il faut gérer son stress. Les concours blancs sont le seul moment de ma préparation ou j’étais face à moi-même” </em>Bassem D. 37 ans</blockquote></div></div><div id="17cf7126-8efe-80a2-8d6c-dc6cb6b6b3e2" class="column-list"><div id="17cf7126-8efe-808d-99e1-fa0b4b6cf1af" style="width:100%" class="column"><blockquote id="17cf7126-8efe-8088-a380-fb7bcffc9fa8" class=""><em>“Les annales, c’est une source inestimable. Le principal problème est l’absence de correction”</em><br/>Ghazi A. 36 ans</blockquote></div><div id="17cf7126-8efe-80e8-9677-e6e5fbf69e91" style="width:100%" class="column"><blockquote id="17cf7126-8efe-8056-a52c-cc6730b9601f" class=""><em>“Les EVC sont blindés de question de  physio. Horrible à travailler tout seul.”<br/></em>Sonia S. 38 ans</blockquote></div></div><h2 id="17af7126-8efe-8087-b9c4-cbad3ab8665b" class="">Annales</h2><hr id="17af7126-8efe-803e-9e61-fd95c647cf13"/><p id="17af7126-8efe-80c2-9e0a-fbdcedf36162" class="">Un incontournable de la préparation des EVC consiste à travailler sur les annales. Nous vous proposons :</p><p id="17af7126-8efe-8028-a28d-ca59975b6db8" class="">📂 <a href="Annales%20des%20EVC%20171f71268efe81b38ff5c17fb46c4458.html">Un accès aux Annales des EVC</a></p><p id="17af7126-8efe-8045-8c82-d43906c11760" class="">❓<a href="Synth%C3%A8se%20des%20questions%20Epreuve%20Fondamentale%20171f71268efe81fd92a0d5e7a66d15fd.html">Une synthèse des questions de l’épreuve fondamentale</a></p><p id="17af7126-8efe-8064-b5d8-cf4a962ff56c" class="">❔<a href="Synth%C3%A8se%20des%20questions%20Epreuve%20Pratique%20171f71268efe8133897bebcddb3d7ffe.html">Une synthèse des questions de l’épreuve pratique</a></p><div id="17df7126-8efe-8055-b76d-fdd61e60d393" class="column-list"><div id="3353ec13-165a-4176-b56a-4839275860bc" style="width:100%" class="column"></div><div id="11f7a0ac-1eb9-4e43-917a-7ec09d964a61" style="width:100%" class="column"></div></div><hr id="17af7126-8efe-8011-9c35-fb18ac1792ea"/><figure id="171f7126-8efe-803b-a67a-c66ad77e6f56" class="block-color-default_background link-to-page"><a href="La%20pr%C3%A9pa%20Khypnos%20171f71268efe803ba67ac66ad77e6f56.html"><span class="icon">✅</span>La prépa Khypnos</a></figure><figure id="171f7126-8efe-800e-a132-ff6dd150aef9" class="link-to-page"><a href="Guide%20de%20r%C3%A9ussite%20Khypnos%20171f71268efe800ea132ff6dd150aef9.html"><span class="icon">🩺</span>Guide de réussite Khypnos</a></figure><figure id="17af7126-8efe-80e1-9b1c-eebe3c53035d" class="link-to-page"><a href="Recevoir%20le%20programme%2017af71268efe80e19b1ceebe3c53035d.html"><span class="icon">📔</span>Recevoir le programme</a></figure><figure id="17af7126-8efe-8014-8c67-f9938cc20b90" class="link-to-page"><a href="Formulaire%20d%E2%80%99inscription%2017af71268efe80148c67f9938cc20b90.html"><span class="icon">📃</span>Formulaire d’inscription</a></figure><p id="17ff7126-8efe-802f-a5e4-dc9232ccdc56" class="">
+</p><hr id="17ff7126-8efe-8028-b954-c12db1a7c569"/><div id="17ff7126-8efe-8010-89d4-e6e5854be11a" class="column-list"><div id="17ff7126-8efe-808a-8326-c574eedf0b1c" style="width:100%" class="column"><figure id="17ff7126-8efe-802b-ab07-cac79401d525" class="link-to-page"><a href="Mentions%20l%C3%A9gales%2017ff71268efe802bab07cac79401d525.html"><span class="icon">⚖️</span>Mentions légales</a></figure></div><div id="17ff7126-8efe-8022-a3bc-fbc91d77fbe7" style="width:100%" class="column"><p id="17ff7126-8efe-8013-b9c4-fd7a109d5e58" class="">©️ Khypnos 2025</p><p id="17ff7126-8efe-80d8-8373-ed3909306a07" class="">
+</p></div></div><p id="17ff7126-8efe-802b-b4a7-dcd8107aa892" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
