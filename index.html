@@ -233,30 +233,28 @@
 
         .footer {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             background: #2c3e50;
             color: white;
             border-radius: 12px;
-            margin-top: 30px;
+            margin-top: 10px;
         }
-      
-/* Bandeau avec animation au scroll */
+
+        /* Bandeau avec animation au scroll */
         .banner {
             position: fixed;
             top: 0;
-            right: 3%;
+            right: 4%;
             width: 30%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             z-index: 1000;
             transition: all 0.5s ease;
-            
             /* Animation basée sur le scroll */
             animation: bannerLifecycle linear both;
             animation-timeline: scroll(root);
@@ -264,8 +262,9 @@
             animation-range: 0px 100%;
         }
 
- @supports (animation-timeline: scroll(root)) {
+        @supports (animation-timeline: scroll(root)) {
             @keyframes bannerLifecycle {
+
                 /* Phase 1 : 0-20% du scroll (réduction) */
                 0% {
                     opacity: 1;
@@ -273,21 +272,24 @@
                     padding: 1.5rem 2rem;
                     background: rgba(255, 255, 255, 0.95);
                 }
+
                 20% {
                     opacity: 1;
                     transform: translateY(0);
                     padding: 0.8rem 2rem;
                     background: rgba(255, 255, 255, 0.98);
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
                 }
+
                 /* Phase 2 : 20-50% du scroll (stable) */
                 50% {
                     opacity: 1;
                     transform: translateY(0);
                     padding: 0.8rem 2rem;
                     background: rgba(255, 255, 255, 0.98);
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
                 }
+
                 /* Phase 3 : 50-70% du scroll (disparition progressive) */
                 70% {
                     opacity: 0;
@@ -295,6 +297,7 @@
                     padding: 0.8rem 2rem;
                     background: rgba(255, 255, 255, 0.98);
                 }
+
                 /* Phase 4 : 70-100% du scroll (complètement caché) */
                 100% {
                     opacity: 0;
@@ -306,7 +309,7 @@
         }
 
         .logo {
-            font-size: 1.0rem;
+            font-size: 0.8rem;
             color: #333;
             animation: logoShrink linear both;
             animation-timeline: scroll(root);
@@ -315,18 +318,22 @@
 
         @supports (animation-timeline: scroll(root)) {
             @keyframes logoShrink {
-                from { font-size: 1.4rem; }
-                to { font-size: 1.2rem; }
+                from {
+                    font-size: 1.4rem;
+                }
+
+                to {
+                    font-size: 1.2rem;
+                }
             }
         }
-
     </style>
 </head>
 
 <body>
-  	<div class="banner">
-      <div class="logo"><span class="emoji">📔</span><a href="https://noteforms.com/forms/recevoir-le-programme-khypnos-wvfzli" target="_blank" rel="noopener noreferrer"><strong>Recevoir le programme</strong></a></div>
-      </div>
+    <div class="banner">
+        <div class="logo" style="text-align: left;"><span class="emoji">📔</span><a href="https://noteforms.com/forms/recevoir-le-programme-khypnos-wvfzli" target="_blank" rel="noopener noreferrer"><strong>Recevoir le programme</strong></a></div>
+    </div>
     <div class="container">
         <header class="header">
             <h1>🩺 Khypnos</h1>
@@ -342,6 +349,8 @@
                     <li style="text-align: justify;">Le concours blanc fera plus d&apos;une centaine de QCM, et b&eacute;n&eacute;ficiera d&apos;une correction d&eacute;taill&eacute;e. V&eacute;rifiez que vous &ecirc;tes pr&ecirc;t.</li>
                     <li>✅ <strong>Concours Blanc format QCM</strong> de l&apos;&eacute;preuve des EVC voie interne</li>
                     <li>✅ <strong>Concours Blanc format r&eacute;dactionnel&nbsp;</strong>pour les inscriptions voie externe</li>
+                    <li>✅ <strong>10 places ouvertes<br></strong></li>
+                    <li><strong>✅&nbsp;</strong><s>200 Euros TTC</s><strong><strong>&nbsp;150 Euros TTC</strong></strong> pour les 5 premiers<strong><strong><br></strong></strong></li>
                 </ul>
             </div>
             <div class="column">
@@ -352,6 +361,8 @@
                     <li>✅ Acc&egrave;s aux vid&eacute;os de formation Khypnos : <strong>toute l&apos;anesth&eacute;sie-r&eacute;animation en 60 heures</strong></li>
                     <li>✅ <strong>Concours Blanc</strong> format QCM de l&apos;&eacute;preuve des EVC</li>
                     <li>✅ 4 sessions de 2h de <strong>QCM corrig&eacute;s</strong> en s&eacute;ance visio en Octobre - Novembre 2025</li>
+                    <li>✅ <strong>10 places ouvertes<br></strong></li>
+                    <li><strong>✅&nbsp;</strong><s>1680 Euros TTC</s><strong><strong>&nbsp;1140 Euros TTC</strong></strong> pour les 5 premiers</li>
                 </ul>
             </div>
         </div>
@@ -363,7 +374,7 @@
                 <ul class="feature-list">
                     <li><span class="emoji">📂</span><a href="https://khypnos.notion.site/Annales-des-EVC-171f71268efe81b38ff5c17fb46c4458" target="_blank" rel="noopener noreferrer"><strong>Annales des EVC</strong></a></li>
                     <li><span class="emoji">📺</span><a href="https://khypnos.notion.site/Webinaires-Khypnos-1d7f71268efe80b3ac37ffd435f614b7" target="_blank" rel="noopener noreferrer">Webinaires Khypnos</a></li>
-                    <li><span class="emoji">🎓</span><a href="https://www.youtube.com/playlist?list=PLsksUSBK_61ed49apz-ZnMHfmy3immCTi" target="_blank" rel="noopener noreferrer">Cours Anesth&eacute;sie-R&eacute;animation</a></li>
+                    <li><span class="emoji">🎓</span><a href="https://www.youtube.com/playlist?list=PLsksUSBK_61ed49apz-ZnMHfmy3immCTi" target="_blank" rel="noopener noreferrer">Vidéos en Anesth&eacute;sie-R&eacute;animation</a></li>
                     <li><br></li>
                 </ul>
             </div>
@@ -418,7 +429,7 @@
                     </div>
                 </li>
             </ul>
-          <div class="buttons-container"><a href="https://noteforms.com/forms/concours-blanc-khypnos-3qglrr" class="btn btn-outline" target="_blank">&nbsp;📝 Concours Blanc QCM&nbsp;</a> <a href="https://noteforms.com/forms/nouveau-formulaire-v6wjsq" class="btn btn-filled" target="_blank">&nbsp;🔥 Formule BOOST&nbsp;</a></div>
+            <div class="buttons-container"><a href="https://noteforms.com/forms/concours-blanc-khypnos-3qglrr" class="btn btn-outline" target="_blank">&nbsp;📝 Concours Blanc QCM&nbsp;</a> <a href="https://noteforms.com/forms/nouveau-formulaire-v6wjsq" class="btn btn-filled" target="_blank">&nbsp;🔥 Formule BOOST&nbsp;</a></div>
         </div>
         <h2 class="section-title">🚀 Liens utiles</h2>
         <div class="links-section">
@@ -433,7 +444,7 @@
         </div>
     </div>
     <footer class="footer">
-        <p>⚖️ <a href="https://khypnos.notion.site/Mentions-l-gales-17ff71268efe802bab07cac79401d525" target="_blank" rel="noopener noreferrer"><strong>Mentions l&eacute;gales</strong></a> &copy;️ <strong>Khypnos 2025</strong></p>
+        <p>⚖️ <a href="https://khypnos.notion.site/Mentions-l-gales-17ff71268efe802bab07cac79401d525" target="_blank" rel="noopener noreferrer" style="color: white;"><strong>Mentions l&eacute;gales</strong></a> &copy;️ <strong>Khypnos 2025</strong></p>
     </footer>
 </body>
 
