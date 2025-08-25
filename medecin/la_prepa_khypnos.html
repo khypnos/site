@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Prépa Khypnos - Formation EVC Anesthésie Réanimation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            min-height: 100vh;
+            margin: 0;
+            background: #f8f9ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin: 40px 0 25px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: block;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .feature-content {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-content p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .trainers-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f5e8 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        .trainers-title {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .trainer-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .trainer-image {
+            width: 150px;
+            aspect-ratio: 1;
+            /* Force un carré parfait */
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px auto;
+        }
+
+        .trainer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .trainer-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .trainer-details {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .pricing-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .pricing-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .pricing-icon {
+            font-size: 3rem;
+        }
+
+        .pricing-details {
+            text-align: left;
+        }
+
+        .price-main {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .price-detail {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .price-hourly {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-link {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .back-link a {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .back-link a:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trainers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .pricing-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .pricing-details {
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Bandeau avec animation au scroll */
+        .banner {
+            position: fixed;
+            top: 0;
+            right: 4%;
+            width: 30%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            /* Animation basée sur le scroll */
+            animation: bannerLifecycle linear both;
+            animation-timeline: scroll(root);
+            /* 0-300px : réduction, 300px-50% : visible, 50%-100% : disparition */
+            animation-range: 0px 100%;
+        }
+
+        @supports (animation-timeline: scroll(root)) {
+            @keyframes bannerLifecycle {
+
+                /* Phase 1 : 0-20% du scroll (réduction) */
+                0% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    padding: 1.5rem 2rem;
+                    background: rgba(255, 255, 255, 0.95);
+                }
+
+                20% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                }
+
+                /* Phase 2 : 20-50% du scroll (stable) */
+                50% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                }
+
+                /* Phase 3 : 50-70% du scroll (disparition progressive) */
+                70% {
+                    opacity: 0;
+                    transform: translateY(-100%);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                }
+
+                /* Phase 4 : 70-100% du scroll (complètement caché) */
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100%);
+                    padding: 0.8rem 2rem;
+                    background: rgba(255, 255, 255, 0.98);
+                }
+            }
+        }
+
+        .logo {
+            font-size: 0.8rem;
+            color: #333;
+            animation: logoShrink linear both;
+            animation-timeline: scroll(root);
+            animation-range: 100px 300px;
+        }
+
+        @supports (animation-timeline: scroll(root)) {
+            @keyframes logoShrink {
+                from {
+                    font-size: 1.4rem;
+                }
+
+                to {
+                    font-size: 1.2rem;
+                }
+            }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <div class="logo" style="text-align: left;"><span class="emoji">👉</span><a href="demande_programme.html" target="_blank" rel="noopener noreferrer"><strong>Programme Khypnos</strong></a></div>
+    </div>
+    <div class="container">
+        <header class="header">
+            <h1>🩺 Khypnos</h1>
+            <h2>Pr&eacute;parer les EVC en Anesth&eacute;sie R&eacute;animation</h2>
+            <div class="subtitle">M&eacute;thodologie &bull; Annales &bull; Recommandations</div>
+        </header>
+        <h2 class="section-title">🎯 Les points forts de notre formation</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🕑</div>
+                <p style="text-align: justify;"><strong>Plus de 70 heures de cours en ligne</strong> le soir, de 18h &agrave; 22h les mercredi et de 14h &agrave; 18h les samedi, dispens&eacute;s par des professeurs experts en m&eacute;thodologie. Le programme est couvert dans son int&eacute;gralit&eacute;, sans faire d&apos;impasse.<br><br>Des professeurs toujours disponibles pour r&eacute;pondre &agrave; vos questions.<br><br>L&apos;&eacute;quipe est compos&eacute;e exclusivement<strong>&nbsp;d&apos;anesth&eacute;sistes-r&eacute;animateurs</strong>, sp&eacute;cialis&eacute;s dans diff&eacute;rents domaines : p&eacute;diatrie, maternit&eacute;, cardiologie, neuro-r&eacute;animation&hellip;</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <p style="text-align: justify;">R&eacute;vision des <strong>corrections d&apos;annales</strong>, valid&eacute;es par un panel de professeurs selon la grille officielle. Notre &eacute;quipe de professeurs, famili&egrave;re avec plusieurs grilles officielles du CNG, ma&icirc;trise parfaitement leurs m&eacute;thodes d&apos;&eacute;valuation.<br><br>Un syst&egrave;me de points par mots-cl&eacute;s vous permet de vous auto-&eacute;valuer &agrave; chaque correction.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <p style="text-align: justify;"><strong>R&eacute;vision des corrections d&apos;annales</strong>, valid&eacute;es par un panel de professeurs selon la grille officielle. Notre &eacute;quipe de professeurs, famili&egrave;re avec plusieurs grilles officielles du CNG, ma&icirc;trise parfaitement leurs m&eacute;thodes d&apos;&eacute;valuation.<br><br>Un syst&egrave;me de points par mots-cl&eacute;s vous permet de vous auto-&eacute;valuer &agrave; chaque correction.</p>
+                <p style="text-align: justify;">Deux <strong>concours blancs</strong> de 4 heures chacun en conditions r&eacute;elles d&apos;examen. Le premier concours, organis&eacute; en d&eacute;but de formation, permet <strong>d&apos;identifier vos points faibles et axes d&apos;am&eacute;lioration</strong>, avec un classement et des conseils m&eacute;thodologiques personnalis&eacute;s. Le second concours, en fin de programme, vous aide &agrave; rep&eacute;rer vos derni&egrave;res lacunes avant l&apos;&eacute;ch&eacute;ance finale. <strong>Les sujets sont &eacute;labor&eacute;s selon le programme officiel des EVC</strong>, en se concentrant sur les th&egrave;mes les plus susceptibles d&apos;&ecirc;tre &eacute;valu&eacute;s.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🫀</div>
+                <p style="text-align: justify;">Un <strong>enseignement de la physiologie</strong> assur&eacute; par des experts en h&eacute;modynamique, neuro-r&eacute;animation et ventilation. Notre &eacute;quipe, qui enseigne quotidiennement ces sp&eacute;cialit&eacute;s aux internes des h&ocirc;pitaux fran&ccedil;ais, dispose d&apos;une <strong>expertise approfondie dans l&apos;enseignement m&eacute;dical</strong>.</p><strong>&nbsp;</strong>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <p style="text-align: center;">Une tarification transparente : <span style="font-size: 22px;"><strong>3 240&nbsp;&euro;</strong></span> (2 700 &euro; HT)&nbsp;</p>
+                <p style="text-align: center;">Soit 44&nbsp;&euro;/h TTC</p>
+            </div>
+        </div>
+    <div class="trainers-section">
+        <div class="trainers-title">🧑&zwj;🎓 Nos formateurs experts</div>
+        <div class="trainers-grid">
+            <div class="trainer-card">
+                <div class="trainer-image"><img src="img/BD_round.png" alt="Dr Duceau" style="margin: 0 auto 0 0; display: block; "></div>
+                <div class="trainer-name">Dr Duceau Baptiste</div>
+                <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 288e aux ECN 2012<br>&bull; Ancien Chef de Clinique<br>&bull; Chirurgie Cardiaque &agrave; la Piti&eacute; Salp&ecirc;tri&egrave;re</div>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-image"><img src="img/AM_round.png" alt="Dr Mailloux" style="margin: 0 auto 0 0; display: block; "></div>
+                <div class="trainer-name">Dr Arnaud Mailloux</div>
+                <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 1337e aux ECN 2012<br>&bull; Enseignant en &eacute;cole d&apos;IADE<br>&bull; Ancien enseignant en pr&eacute;pa Major ECN</div>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-image"><img src="img/TR_round.bmp" alt="Dr Rambaud" style="margin: 0 auto 0 0; display: block; "></div>
+                <div class="trainer-name">Dr Thomas Rambaud</div>
+                <div class="trainer-details">&bull; Neurologue &ndash; DESC MIR<br>&bull; Class&eacute; 2e aux ECN 2014<br>&bull; Ancien Chef de Clinique<br>&bull; Neuro-r&eacute;animation &ndash; H&ocirc;pital Foch</div>
+            </div>
+        </div>
+    </div>
+    <div class="cta-section">
+        <h3>🚀 Rejoignez notre formation compl&egrave;te</h3>
+        <p>Ces webinaires sont un aper&ccedil;u de notre programme de formation. D&eacute;couvrez notre pr&eacute;paration intensive pour maximiser vos chances de r&eacute;ussite aux EVC.</p><a href="index.html" class="cta-button">D&eacute;couvrir la formation Khypnos</a>
+    </div>
+    <div class="back-link"><a href="index.html">🏠 Retour &agrave; l&apos;accueil</a></div>
+    <footer class="footer">
+        <p>⚖️ <a href="mentions_legales.html" rel="noopener noreferrer" style="color: white;"><strong>Mentions l&eacute;gales</strong></a> &copy;️ <strong>Khypnos 2025</strong></p>
+    </footer>
+</body>
+
+</html>

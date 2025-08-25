@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu déroulant 100% CSS</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --fg: #ffffff;
+            --muted: #cbd5e1;
+            --accent: #38bdf8;
+            --surface: #111827;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #f5f5f5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ====== Bannière ====== */
+        header {
+            background: var(--bg);
+            color: var(--fg);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .bar {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: .75rem 1rem;
+        }
+
+        .brand {
+            font-weight: 700;
+        }
+
+        /* ====== Menu principal ====== */
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav>ul {
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a,
+        nav label.submenu-label {
+            display: inline-block;
+            padding: .6rem .8rem;
+            border-radius: .5rem;
+            color: var(--fg);
+            cursor: pointer;
+        }
+
+        nav a:hover,
+        nav label.submenu-label:hover {
+            background: rgba(255, 255, 255, .1);
+        }
+
+        /* ====== Sous-menus ====== */
+        .has-submenu {
+            position: relative;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--surface);
+            padding: .4rem;
+            border-radius: .6rem;
+            min-width: 200px;
+        }
+
+        .submenu li a {
+            display: block;
+            padding: .6rem .8rem;
+            border-radius: .4rem;
+            color: var(--muted);
+        }
+
+        .submenu li a:hover {
+            background: rgba(255, 255, 255, .08);
+            color: var(--fg);
+        }
+
+        /* Affichage au survol (desktop) */
+        .has-submenu:hover .submenu {
+            display: block;
+        }
+
+        /* ====== Hack CSS pour mobile ====== */
+        #menu-toggle,
+        .submenu-toggle {
+            display: none;
+        }
+
+        .hamburger {
+            margin-left: auto;
+            cursor: pointer;
+            display: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--fg);
+            margin: 5px 0;
+        }
+
+        /* Quand le checkbox est coché → afficher le menu */
+        #menu-toggle:checked~nav {
+            display: block;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        /* Mobile */
+        @media(max-width:860px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+            }
+
+            nav>ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            nav a,
+            nav label.submenu-label {
+                width: 100%;
+            }
+
+            .has-submenu {
+                position: static;
+            }
+
+            .submenu {
+                position: static;
+                display: none;
+                padding-left: 1rem;
+            }
+
+            /* checkbox pour ouvrir le sous-menu */
+            .submenu-toggle:checked+label+.submenu {
+                display: block;
+            }
+
+            /* désactiver affichage au hover sur mobile */
+            .has-submenu:hover .submenu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="bar">
+            <div class="brand">MaMarque</div><!-- Checkbox pour menu mobile --> <input type="checkbox" id="menu-toggle"> <label for="menu-toggle" class="hamburger">&nbsp;&nbsp;</label>
+            <nav>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li class="has-submenu"><!-- Checkbox pour sous-menu mobile --> <input type="checkbox" id="sm1" class="submenu-toggle"> <label for="sm1" class="submenu-label">Services ▾</label>
+                        <ul class="submenu">
+                            <li><a href="#">Conseil</a></li>
+                            <li><a href="#">Int&eacute;gration</a></li>
+                            <li><a href="#">Formation</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu"><input type="checkbox" id="sm2" class="submenu-toggle"> <label for="sm2" class="submenu-label">Produits ▾</label>
+                        <ul class="submenu">
+                            <li><a href="#">Starter</a></li>
+                            <li><a href="#">Pro</a></li>
+                            <li><a href="#">Entreprise</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Tarifs</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main style="max-width:800px;margin:2rem auto;padding:0 1rem;">
+        <h1>Menu d&eacute;roulant 100% CSS</h1>
+        <p>R&eacute;duis la fen&ecirc;tre pour tester le mode mobile avec hamburger. Sur desktop, les sous-menus s&rsquo;affichent au survol.</p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p>Juste oiyr testeer</p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p>Je continue de scorller</p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p>Toujours et encore</p>
+    </main>
+</body>
+
+</html>
