@@ -831,8 +831,8 @@
 		
 			.banner-content {
 				flex-direction: column;
-				gap: 15px;
-				padding: 0 15px;
+				gap: 5px;
+				padding: 0 10px;
 			}
 			
 			.toggle-container {
@@ -893,4 +893,5 @@
         }
 			
 			
+
 }
