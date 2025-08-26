@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinaires - Khypnos EVC Anesthésie Réanimation</title>
+	<link rel="stylesheet" href="../styles.css">
+    <style>
+        .intro-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .video-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .video-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .video-duration {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+		.video-embed img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: none;
+			border-radius: 8px;
+		}
+		
+        .video-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .topic-tag {
+            background: #e3f2fd;
+            color: #667eea;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .video-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+
+</head>
+	
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🩺 Khypnos</h1>
+            <h2>Pr&eacute;parer les EVC en Anesth&eacute;sie R&eacute;animation</h2>
+            <div class="subtitle">M&eacute;thodologie &bull; Annales &bull; Recommandations</div>
+        </header>
+        <div class="intro-section">
+            <p><strong>D&eacute;couvrez nos Webinaires de pr&eacute;paration aux EVC</strong></p>
+            <p>Sessions interactives anim&eacute;es par nos formateurs experts pour vous accompagner dans votre r&eacute;ussite aux &Eacute;preuves de V&eacute;rification des Connaissances.</p>
+        </div>
+        <h2 class="section-title">🎓 Nos derniers webinaires</h2>
+		
+		<div class="features-grid">
+            <div class="feature-card">
+				<a href="https://youtu.be/50sD1IwWn6Y" class="video-card-link" target="_blank">
+						<div class="video-embed">
+							<img src="../img/WebinaireKhypnos.png" alt="Webinaire 1" title="Webinaire 1">
+						</div>
+						<h3 class="video-title">Annale 2009 &Eacute;preuve Pratique Anesth&eacute;sie R&eacute;animation</h3>
+						<div class="video-meta">
+							<span>📅 Mars 2025</span>
+							<span class="video-duration">35 min</span>
+						</div>
+							<p class="video-description">Voici le premier Webinaire de correction propos&eacute; par la pr&eacute;pa Khypnos. Le sujet de l&apos;annale des <strong>Epreuves de Validation des Connaissances</strong> dans le cadre de la PAE peut &ecirc;tre retrouv&eacute; ici.&nbsp;</p>
+							<p class="video-description">Drs Mailloux et Duceau vous pr&eacute;sentent le <strong>cas clinique 2009</strong> pratique des EVC d&apos;anesth&eacute;sie r&eacute;animation avec des conseils m&eacute;thodologiques.</p>
+							<p class="video-description">L'annale correspondante : <a href="./annales/pratique/2009.html" class="contact-email"><strong>EVC Pratique 2009</strong></p></a>
+						<div class="video-topics">
+							<span class="topic-tag">Méthodologie</span>
+							<span class="topic-tag">Organisation</span>
+							<span class="topic-tag">Conseils</span>
+					</div>
+				</a>
+			</div>
+			
+			<div class="feature-card">
+				<a href="https://youtu.be/Ll2fREeUO8I" class="video-card-link" target="_blank">
+						<div class="video-embed">
+							<img src="../img/WebinaireKhypnos.png" alt="Webinaire 2" title="Webinaire 2">
+						</div>
+						<h3 class="video-title">Annale 2014 EVC &Eacute;preuve Pratique Anesth&eacute;sie R&eacute;animation</h3>
+						<div class="video-meta">
+							<span>📅 Avril 2025</span>
+							<span class="video-duration">40 min</span>
+						</div>
+							<p class="video-description">Voici la seconde vid&eacute;o de correction propos&eacute;e par la pr&eacute;pa Khypnos. Le sujet de l&apos;annale des Epreuves de Validation des Connaissances dans le cadre de la PAE peut &ecirc;tre retrouv&eacute; ici :&nbsp;</p>
+							<p class="video-description">Drs Mailloux et Duceau vous pr&eacute;sentent le cas clinique 2014 pratique des EVC d&apos;anesth&eacute;sie r&eacute;animation avec des conseils m&eacute;thodologiques.</p>
+							<p class="video-description">L'annale correspondante : <a href="./annales/pratique/2014.html" class="contact-email"><strong>EVC Pratique 2014</strong></p></a>
+						<div class="video-topics">
+							<span class="topic-tag">Physiologie</span>
+							<span class="topic-tag">Cardiologie</span>
+							<span class="topic-tag">H&eacute;modynamique</span>
+					</div>
+				</a>
+			</div>
+			
+			<div class="feature-card">
+				<a href="https://youtu.be/IMRXJVacP98" class="video-card-link" target="_blank">
+						<div class="video-embed">
+							<img src="../img/WebinaireKhypnos.png" alt="Webinaire 3" title="Webinaire 3">
+						</div>
+						<h3 class="video-title">Annale 2013 EVC &Eacute;preuve Fondamentale Anesth&eacute;sie R&eacute;animation</h3>
+						<div class="video-meta">
+							<span>📅 Mai 2025</span>
+							<span class="video-duration">40 min</span>
+						</div>
+							<p class="video-description">Voici la troisi&egrave;me vid&eacute;o de correction propos&eacute;e par la pr&eacute;pa Khypnos.&nbsp;</p>
+                            <p class="video-description">Drs Mailloux et Duceau vous pr&eacute;sentent le cas clinique 2013 fondamentale des EVC d&apos;anesth&eacute;sie r&eacute;animation avec des conseils m&eacute;thodologiques.</p>
+							<p class="video-description">L'annale correspondante : <a href="./annales/pratique/2014.html" class="contact-email"><strong>EVC Fondamentale 2013</strong></p></a>
+						<div class="video-topics">
+							<span class="topic-tag">Pharmacologie</span>
+							<span class="topic-tag">Anesth&eacute;siques</span>
+							<span class="topic-tag">Méthodologie</span>
+					</div>
+				</a>
+			</div>
+        </div>
+	
+        <div class="cta-section">
+                <h3>🚀 Rejoignez notre formation compl&egrave;te</h3>
+                <p>Ces webinaires sont un aper&ccedil;u de notre programme de formation. D&eacute;couvrez notre pr&eacute;paration intensive pour maximiser vos chances de r&eacute;ussite aux EVC.</p><a href="../../index.html" class="cta-button">D&eacute;couvrir la formation Khypnos</a>
+		</div>
+	
+		<div class="back-link"><a href="index.html">🏠 Retour &agrave; l&apos;accueil</a></div>
+	
+		<footer class="footer">
+			<p>⚖️ <a href="mentions_legales.html" rel="noopener noreferrer" style="color: white;"><strong>Mentions l&eacute;gales</strong></a> &copy;️ <strong>Khypnos 2025</strong></p>
+		</footer>
+
+	</div>
+	<script src="../navbar.js"></script>
+</body>
+
+</html>
