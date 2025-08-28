@@ -647,13 +647,13 @@
 		    .main-content {
         margin-top: 80px;
     }
-		
-	/* ====== Bannière ====== */
-		*{box-sizing:border-box;}
+						
+			/* ====== Bannière ====== */
+			*{box-sizing:border-box;}
 			body{margin:0;font-family:sans-serif;background:#f5f5f5;}
 			a{text-decoration:none;color:inherit;}
 
-        .bar{
+			.bar{
 			  display:flex;
 			  align-items:center;
 			  gap:1rem;
@@ -664,231 +664,268 @@
 			  justify-content: space-between;
 			  background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%);
 			}
-    
-		.brand{
-		font-weight:700;
-		flex: 1;
-		display: flex;
-		justify-content: flex-start;
+
+			.brand{
+			  font-weight:700;
+			  flex: 1;
+			  display: flex;
+			  justify-content: flex-start;
 			}
-		
-	
-		
-	/* ====== Hamburger menu ====== */
-	
-		.hamburger-menu {
-			display: none;
-			justify-content: flex-end;
-			cursor: pointer;
-			z-index: 1001;
-			margin: 0px 15px;
-		}
 
-
-		.bar1, .bar2, .bar3 {
-			width: 30px;
-			height: 3px;
-			background-color: black;
-			margin: 6px 0;
-			transition: 0.4s;
-		}
-
-		.change .bar1 {
-			transform: rotate(-45deg) translate(-6px, 6px);
-		}
-
-		.change .bar2 {
-			opacity: 0;
-		}
-
-		.change .bar3 {
-			transform: rotate(45deg) translate(-6px, -6px);
-		}
-
-		.nav-menu ul {
-			list-style-type: none;
-			display: flex;
-		}
-
-		.nav-menu ul li {
-			margin-left: 10px;
-		}
-
-		.nav-menu ul li a {
-			color: a{
-      display:inline-block;padding:.6rem .8rem;border-radius:.5rem;
-      color:var(--fg);cursor:pointer};
-			text-decoration: none;
-			transition: color 0.3s;
-		}
-
-		.nav-menu ul li a:hover {
-			color: #667eea;
-		}
-		
-	
-	/* ====== Bouton Toggle ====== */
-	
-		.toggle-container {
-		display: flex;
-		flex: 0.6;
-		justify-content: flex-center;
-		align-items: center;
-		left: 10%;
-		gap: 5px;
-		}
-
-	/* Masquer la checkbox native */
-		.toggle-checkbox {
-			display: none;
-		}
-
-	/* Label du toggle (container principal) */
-		.toggle-label {
-			position: relative;
-			display: flex;
-			align-items: center;
-			width: 80px;
-			height: 40px;
-			background: #6c757d;
-			border-radius: 25px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			border: 2px solid #495057;
-			overflow: hidden;
-		}
-
-		.toggle-label:hover {
-			background: #5a6268;
-			border-color: #343a40;
-			transform: translateY(-1px);
-		}
-
-	/* Slider (bouton mobile) */
-		.toggle-slider {
-			position: relative;
-			align-items: center;
-			left: 1px;
-			width: 33px;
-			height: 33px;
-			background: white;
-			border-radius: 50%;
-			transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-		}
-
-	/* Textes externes Médecin et IADE */
-		.external-text {
-			font-weight: bold;
-			font-size: 14px;
-			color: a{
-			  display:inline-block;padding:.6rem .8rem;border-radius:.5rem;
-			  color:var(--fg);cursor:pointer;
+			/* ====== Bannière ====== */
+			*{box-sizing:border-box;}
+			body{margin:0;font-family:sans-serif;background:#f5f5f5;}
+			a{text-decoration:none;color:inherit;}
+			
+			.bar{
+			  display:flex;
+			  align-items:center;
+			  gap:1rem;
+			  padding: 1rem;
+			  position:sticky;
+			  top:0;
+			  z-index:1000;
+			  justify-content: space-between;
+			  background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%);
 			}
-			user-select: none;
-			transition: all 0.3s ease;
-			opacity: 1;
-		}
-
-	/* États quand la checkbox est cochée */
-		.toggle-checkbox:checked + .toggle-label .toggle-slider {
-			transform: translateX(40px);
-		}
-		
-		
-	/* ======  Responsive design  ====== */
-
-		@media screen and (max-width: 768px) {
-		
-		
+			
+			.brand{
+			  font-weight:700;
+			  flex: 1;
+			  display: flex;
+			  justify-content: flex-start;
+			}
+			
+			/* ====== Hamburger menu ====== */
+			
 			.hamburger-menu {
-				display: block;
+			  display: none;
+			  cursor: pointer;
+			  z-index: 1001;
+			  /* Suppression de la marge excessive et du justify-content */
 			}
-
-			.nav-menu {
-				position: fixed;
-				top: 0;
-				right: -100%;
-				width: 30%;
-				height: 100vh;
-				background-color: #f8f9ff;
-				transition: 0.5s;
-				padding-top: 60px;
+			
+			.bar1, .bar2, .bar3 {
+			  width: 30px;
+			  height: 3px;
+			  background-color: black;
+			  margin: 6px 15px;
+			  transition: 0.4s;
 			}
-
-			.nav-menu.active {
-				right: 0;
+			
+			.change .bar1 {
+			  transform: rotate(-45deg) translate(-6px, 6px);
 			}
-
+			
+			.change .bar2 {
+			  opacity: 0;
+			}
+			
+			.change .bar3 {
+			  transform: rotate(45deg) translate(-6px, -6px);
+			}
+			
 			.nav-menu ul {
-				flex-direction: column;
+			  list-style-type: none;
+			  display: flex;
 			}
-
+			
 			.nav-menu ul li {
-				margin: 8px 0;
-				text-align: center;
+			  margin-left: 10px;
 			}
-		
-			.banner-content {
-				flex-direction: column;
-				gap: 5px;
-				padding: 0px 0px;
+			
+			.nav-menu ul li a {
+			  display:inline-block;
+			  padding:.6rem .8rem;
+			  border-radius:.5rem;
+			  color:var(--fg);
+			  cursor:pointer;
+			  text-decoration: none;
+			  transition: color 0.3s;
 			}
+			
+			.nav-menu ul li a:hover {
+			  color: #667eea;
+			}
+			
+			/* ====== Bouton Toggle ====== */
 			
 			.toggle-container {
-				display: flex;
-				flex: 2;
-				justify-content: flex-left;
+			  display: flex;
+			  flex: 0.6;
+			  justify-content: center; /* Correction de flex-center */
+			  align-items: center;
+			  gap: 5px;
 			}
 			
+			/* Masquer la checkbox native */
+			.toggle-checkbox {
+			  display: none;
+			}
+			
+			/* Label du toggle (container principal) */
 			.toggle-label {
-				width: 60px;
-				height: 38px;
-				
+			  position: relative;
+			  display: flex;
+			  align-items: center;
+			  width: 80px;
+			  height: 40px;
+			  background: #6c757d;
+			  border-radius: 25px;
+			  cursor: pointer;
+			  transition: all 0.3s ease;
+			  border: 2px solid #495057;
+			  overflow: hidden;
 			}
 			
+			.toggle-label:hover {
+			  background: #5a6268;
+			  border-color: #343a40;
+			  transform: translateY(-1px);
+			}
+			
+			/* Slider (bouton mobile) */
 			.toggle-slider {
-				width: 30px;
-				height: 30px;
+			  position: relative;
+			  align-items: center;
+			  left: 1px;
+			  width: 33px;
+			  height: 33px;
+			  background: white;
+			  border-radius: 50%;
+			  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 			}
 			
+			/* Textes externes Médecin et IADE */
+			.external-text {
+			  font-weight: bold;
+			  font-size: 14px;
+			  display:inline-block;
+			  padding:.6rem .8rem;
+			  border-radius:.5rem;
+			  color:var(--fg);
+			  cursor:pointer;
+			  user-select: none;
+			  transition: all 0.3s ease;
+			  opacity: 1;
+			}
+			
+			/* États quand la checkbox est cochée */
 			.toggle-checkbox:checked + .toggle-label .toggle-slider {
-				transform: translateX(24px);
+			  transform: translateX(40px);
 			}
 			
-			.features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .trainers-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .pricing-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .pricing-details {
-                text-align: center;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
+			/* ======  Responsive design  ====== */
 			
-			.question-image {
-                max-width: 95%;
-                margin: 15px 0;
-            }
-            
-            .image-container {
-                padding: 0 5px;
-            }
-        }
-		
+			@media screen and (max-width: 768px) {
+			
+			  .hamburger-menu {
+			    display: block;
+			    /* Positionnement correct sans marge excessive */
+			  }
+			
+			  /* CORRECTION : Menu qui se déroule du haut vers le bas */
+			  .nav-menu {
+			    position: fixed;
+			    top: -100%;
+			    width: 100%; /* Largeur complète */
+			    background-color: #e3f2fd;
+			    transition: 0.5s ease-in-out;
+			    padding-top: calc(1rem + 1rem + 40px); /* Padding équivalent à la hauteur de la .bar */
+			    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre vers le bas */
+			    z-index: 1; /* Sous la bannière */
+			  }
+			
+			  .nav-menu.active {
+			    top: 0; /* Descend pour être visible */
+			  }
+			
+			  .nav-menu ul {
+			    flex-direction: column;
+			    padding: 0;
+			    margin: 0;
+			  }
+			
+			  .nav-menu ul li {
+			    margin: 8px 0;
+			    text-align: center;
+			  }
+			
+			  .banner-content {
+			    flex-direction: column;
+			    gap: 5px;
+			    padding: 0px 0px;
+			  }
+			
+			  .toggle-container {
+			    display: flex;
+			    flex: 1; 
+			    justify-content: center;
+			    order: 0; /* Place le toggle avant le hamburger */
+			  }
+			
+			  .toggle-label {
+			    width: 60px;
+			    height: 38px;
+			  }
+			
+			  .toggle-slider {
+			    width: 30px;
+			    height: 30px;
+			  }
+			
+			  .toggle-checkbox:checked + .toggle-label .toggle-slider {
+			    transform: translateX(24px);
+			  }
+			
+			  /* Amélioration de l'ordre des éléments dans la bannière sur mobile */
+			  .bar {
+			    flex-wrap: wrap;
+			  }
+			
+			  .brand {
+			    flex: 1;
+			    order: -1;
+			  }
+			
+			  .hamburger-menu {
+			    order: 3;
+			    margin: 0; /* Suppression de la marge qui décalait le hamburger */
+			  }
+			
+			  .features-grid {
+			    grid-template-columns: 1fr;
+			  }
+			
+			  .trainers-grid {
+			    grid-template-columns: 1fr;
+			  }
+			
+			  .header h1 {
+			    font-size: 2.2rem;
+			  }
+			
+			  .pricing-content {
+			    flex-direction: column;
+			    text-align: center;
+			  }
+			
+			  .pricing-details {
+			    text-align: center;
+			  }
+			
+			  .cta-buttons {
+			    flex-direction: column;
+			    align-items: center;
+			  }
+			
+			  .question-image {
+			    max-width: 95%;
+			    margin: 15px 0;
+			  }
+			
+			  .image-container {
+			    padding: 0 5px;
+			  }
+			}
