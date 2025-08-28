@@ -717,7 +717,7 @@
 		.nav-menu ul li a {
 			color: a{
       display:inline-block;padding:.6rem .8rem;border-radius:.5rem;
-      color:var(--fg);cursor:pointer;}
+      color:var(--fg);cursor:pointer};
 			text-decoration: none;
 			transition: color 0.3s;
 		}
@@ -832,13 +832,13 @@
 			.banner-content {
 				flex-direction: column;
 				gap: 5px;
-				padding: 0 10px;
+				padding: 0px 0px;
 			}
 			
 			.toggle-container {
 				display: flex;
 				flex: 2;
-				justify-content: flex-center;
+				justify-content: flex-left;
 			}
 			
 			.toggle-label {
@@ -891,7 +891,4 @@
                 padding: 0 5px;
             }
         }
-			
-			
-
-}
+		
