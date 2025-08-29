@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide de réussite Khypnos</title>
+	<link rel="stylesheet" href="../../styles.css">
+	<style>
+	.callout {
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .callout.orange {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
+            color: white;
+        }
+        .callout.lightblue {
+            background: linear-gradient(135deg, #74b9ff 0%, #f8f9ff 150%);
+            color: white;
+        }
+        .callout.red {
+            background: linear-gradient(135deg, #ff9f9b 0%, #ff7675 100%);
+            color: #2d3436;
+        }
+        .callout.blue {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+        .callout.gray {
+            background: linear-gradient(135deg, #b2bec3 0%, #ddd 100%);
+            color: #2d3436;
+        }
+        .callout.green {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+        }
+        .callout.yellow {
+            background: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
+            color: #2d3436;
+        }
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .column {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .section-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: block;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        .orange-title {
+            color: #ff6b35;
+            font-weight: bold;
+        }
+        .gray-text {
+            color: #6c757d;
+        }
+        .orange-bg {
+            background-color: #ff6b35;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .green-bg {
+            background-color: #00b894;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .purple-bg {
+            background-color: #9c27b0;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .red-bg {
+            background-color: #e74c3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .blue-bg {
+            background-color: #3498db;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .toc {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .toc h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .toc a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        .quote {
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            background: #f8f9ff;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .expandable {
+            margin: 20px 0;
+        }
+        .expandable-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .expandable-content {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            border: 2px solid #667eea;
+            border-top: none;
+        }
+        .image-placeholder {
+            background: #e9ecef;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-style: italic;
+            margin: 15px 0;
+        }
+        .link {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        .link:hover {
+            color: #764ba2;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+	</style>
+</head>
+
+<body>
+    <div class="container">
+		<header class="header">
+            <h1>🩺 Khypnos</h1>
+            <h2>Pr&eacute;parer les EVC en Anesth&eacute;sie R&eacute;animation</h2>
+            <div class="subtitle">M&eacute;thodologie &bull; Annales &bull; Recommandations</div>
+        </header>
+
+		<h2 class="section-title">Introduction</h2>
+            <p>Si vous ouvrez ce document, c'est que vous êtes intéressé.e.s par la <span class="orange-bg"><strong>Procédure d'Autorisation d'Exercice</strong></span>, et par la barrière principale, l'<span class="orange-bg"><strong>Epreuve de Vérification des Connaissances</strong></span>. Cet outil a pour but de vous donner les armes nécessaires pour déployer tout votre potentiel au bon moment, car il n'y a rien de plus dommage qu'échouer sans avoir retranscrit tout ce qu'on savait.</p>
+			<br>
+			<p>Vous constaterez que malgré son nom, la réussite à cet examen dépend moins de l'étendue de vos connaissances que de votre méthodologie, spécifique à cet exercice.</p>
+			<br>
+			<p>Nous espérons que ce guide vous sera d'une grande aide, et que nous aurons l'occasion de travailler ensemble à l'avenir.</p>
+			<br>
+			
+		<div class="expandable">
+            <div class="expandable-title">💡 Information</div>
+            <div class="expandable-content">
+                <p>Ce guide est entièrement gratuit, dans l'objectif d'une aide à la préparation aux EVC. Les épreuves des EVC nécessitent des connaissances théoriques et méthodologiques qui sont abordées dans ce support. Par ailleurs, nous proposons une <a href="#" class="link">formation intensive</a> pour vous préparer de manière personnalisée.</p>
+            </div> 
+
+                <div class="callout green">
+                    <p><strong>📌 Il faut s'entrainer à rédiger de façon claire et structurée.</strong></p>
+                </div>
+			
+			<p><strong></strong></p>
+			
+        <h2 class="section-title">Tables des matières</h2>
+        <hr class="divider">
+        
+        <div class="columns">
+            <div class="column">
+                <h3><a href="#" class="link">Annales des EVC</a></h3>
+            </div>
+            <div class="column">
+                <h3><a href="#" class="link">Synthèse des questions: Epreuve Fondamentale</a></h3>
+            </div>
+            <div class="column">
+                <h3><a href="#" class="link">Synthèse des questions: Epreuve Pratique</a></h3>
+            </div>
+        </div>
+
+        <!-- Table des matières -->
+        <div class="toc">
+            <h3>Table des matières</h3>
+            <ul>
+                <li><a href="#generalites">1. Généralités sur le concours</a></li>
+                <li><a href="#inscriptions">2. Inscriptions au concours</a></li>
+                <li><a href="#logistique">3. Conseils logistiques</a></li>
+                <li><a href="#deroulement">4. Déroulement du concours</a></li>
+                <li><a href="#correction">5. Correction du concours</a></li>
+                <li><a href="#resultats">6. Résultats et Admission</a></li>
+                <li><a href="#fellowship">7. Fellowship</a></li>
+                <li><a href="#thematiques">8. Thématiques au programme</a></li>
+                <li><a href="#maquette">9. Maquette du DESAR</a></li>
+                <li><a href="#programme">10. Programme du DESAR</a></li>
+                <li><a href="#sources">11. Sources et Recommandations</a></li>
+                <li><a href="#methodologie-travail">12. Méthodologie de travail</a></li>
+                <li><a href="#preparation">13. Préparation complémentaire</a></li>
+                <li><a href="#methodologie-reponse">14. Méthodologie de réponse</a></li>
+            </ul>
+        </div>
+
+        <hr class="divider">
+
+        <h1 id="generalites" class="orange-title">1. Généralités sur le concours</h1>
+        <hr class="divider">
+
+        <p>Les épreuves de vérification des connaissances (EVC) sont la première étape de la procédure d'autorisation d'exercice. Elles s'adressent aux praticiens, quelle que soit leur nationalité, dès lors qu'ils ont obtenu leur diplôme dans un Etat non membre de l'Union européenne (UE) ou non partie à l'accord sur l'Espace économique européen (EEE).</p>
+        
+        <p>Les diplômes de ces praticiens leur permettent l'exercice des professions de médecin anesthésiste dans leur pays de résidence.</p>
+        
+        <p>Au terme de la procédure d'autorisation de plein exercice, les praticiens sont en mesure d'exercer en France leur profession de plein droit.</p>
+        
+        <p>Le nombre de candidatures aux EVC est limité à quatre. Au quatrième échec, il n'y a plus de possibilité d'obtenir une équivalence en France.</p>
+
+        <div class="quote">
+            <strong>Etape 1 (durée : environ 1 an)</strong><br>
+            Vous devez vous inscrire au concours des épreuves de vérification des connaissances (EVC). Les inscriptions se font généralement aux alentours du mois de mai pendant un mois. Attention à ne pas rater la période d'inscription, sans quoi vous devrez attendre l'année suivante. Le concours des EVC se déroule en fin d'année au centre d'examen de Rungis (Île de France).
+        </div>
+
+        <div class="quote">
+            <strong>Etape 2</strong><br>
+            Après votre réussite aux EVC, vous êtes désormais lauréat : vous serez affecté(e) par le CNG pour accomplir un <strong>Parcours de Consolidation des Compétences</strong> appelé PCC. Ce PCC consiste en 2 années de fonctions hospitalières rémunérées sur le statut de praticien associé...
+        </div>
+
+        <div class="quote">
+            <strong>Etape 3</strong><br>
+            Une fois ces conditions remplies, vous pouvez demander une autorisation d'exercice de votre profession en France. Vous passerez donc devant la commission d'autorisation ministérielle compétente...
+        </div>
+
+        <p>Le Centre National de Gestion a la charge :</p>
+        <ul>
+            <li>D'organiser les épreuves de vérification des connaissances,</li>
+            <li>D'organiser la procédure nationale de choix de postes pour les lauréats aux épreuves de vérification des connaissances,</li>
+            <li>De prononcer les affectations.</li>
+        </ul>
+
+        <p>L'interlocuteur des anesthésistes-réanimateurs est Mme Gessie MICHEL que l'on peut joindre par :</p>
+        <ul>
+            <li>Téléphone : 01 77 35 62 64</li>
+            <li>Mail : <a href="mailto:gessie.michel@sante.gouv.fr" class="link">gessie.michel@sante.gouv.fr</a></li>
+        </ul>
+
+        <h1 id="inscriptions" class="orange-title">2. Inscriptions au concours</h1>
+        <hr class="divider">
+
+        <div class="callout gray">
+            <p><strong>👉 L'inscription au concours est gratuite.</strong></p>
+        </div>
+
+        <p>Chaque candidat dépose durant la période des inscriptions une seule demande de candidature en une seule fois, sur le site en indiquant l'Agence Régionale de Santé (ARS) de son lieu de résidence s'il réside en France ou l'Agence Régionale de Santé (ARS) de son choix s'il réside hors de France.</p>
+
+        <p>La période d'inscription à ces épreuves est fixée chaque année en général de début juin à la fin juin. Il est important de surveiller la publication des dates d'inscriptions limites qui sont indiquées par le CNG.</p>
+
+        <h1 id="logistique" class="orange-title">3. Conseils logistiques</h1>
+        <hr class="divider">
+
+        <p><span class="purple-bg">📍 Lieu du concours</span></p>
+        <p>Le concours se déroule en général à Rungis, en région parisienne, à l'<a href="#" class="link">Espace Jean Monnet, 47, rue des Solets, 94533 Rungis.</a></p>
+
+        <p><span class="underline">En transport depuis Paris :</span></p>
+        <ul>
+            <li>Empruntez la ligne 14 jusqu'à la station « Chevilly Larrue »</li>
+            <li>Puis prenez le bus 319 vers « Massy Palaiseau RER » jusqu'à l'arrêt « Les Solets », vous serez à 1 minute de la destination (environ 45 minutes de trajet)</li>
+        </ul>
+
+        <p><span class="purple-bg">🏬 Hébergement</span></p>
+        <p>Il est tout à fait possible de trouver un hôtel sur place pour éviter les aléas des transports le jour J. De nombreuses options sont disponibles à seulement quelques minutes de marche.</p>
+        <ul>
+            <li>Ibis style Orly Airport : le plus proche du site</li>
+            <li>Hilton Garden Inn : plus cher et un peu plus loin</li>
+            <li>Best Western, Mercure, Novotel… Sont à environ 10 minutes de marche</li>
+        </ul>
+
+        <p><span class="purple-bg">🍽️ Restauration</span></p>
+        <p>Dans le même ordre d'idée, il vous est conseillé d'anticiper de quoi vous restaurer sur place à la pause déjeuner...</p>
+
+        <h1 id="deroulement" class="orange-title">4. Déroulement du concours</h1>
+        <hr class="divider">
+
+        <p>Le concours est composé de deux épreuves.</p>
+
+        <h3><strong>Epreuve des connaissances fondamentales</strong></h3>
+        <p>Il s'agit d'une épreuve écrite anonyme de vérification des connaissances fondamentales d'une durée de deux heures, notée de 0 à 20, coefficient 1.</p>
+        <p>L'épreuve fondamentale permet d'évaluer les connaissances théoriques, elle est constituée de questions sans relation les unes avec les autres, qui nécessitent des réponses courtes et précises, sur des sujets théoriques de cours.</p>
+        <p>La physiologie et la pharmacologie sont à l'honneur dans cette partie.</p>
+
+        <h3><strong>Epreuve des connaissances pratiques</strong></h3>
+        <p>Il s'agit d'une épreuve écrite anonyme de vérification des connaissances pratiques d'une durée de deux heures, notée de 0 à 20, coefficient 1</p>
+        <p>Elle permet d'évaluer à travers 2 cas cliniques les connaissances pratiques des étudiants. Les cas cliniques sont en général répartis en 1 cas d'anesthésie et 1 de réanimation.</p>
+
+        <h1 id="correction" class="orange-title">5. Correction du concours</h1>
+        <hr class="divider">
+
+        <p>Comme indiqué plus haut, aucune correction officielle n'est fournie à la suite des examens. Vous pouvez demander votre copie après la correction, mais celle-ci ne présente pas d'annotation...</p>
+
+        <div class="callout green">
+            <p><strong>📌 La lisibilité de votre réponse, que ce soit sur l'écriture ou sur le raisonnement, ne peut que vous faire gagner des points.</strong></p>
+        </div>
+
+        <div class="green-bg" style="padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <p><strong>La réussite se fait donc selon trois étapes :</strong></p>
+            <ul style="margin-left: 20px; color: white;">
+                <li>Connaitre les mots clés</li>
+                <li>Penser à les rédiger</li>
+                <li>Faire en sorte qu'ils soient lus</li>
+            </ul>
+        </div>
+
+        <h1 id="resultats" class="orange-title">6. Résultats et Admission</h1>
+        <hr class="divider">
+
+        <p>Le nombre de candidats admissibles est fixé à l'avance, connu de tous et annoncé dès l'arrivée des étudiants dans la salle. En 2024, 173 postes sont ouverts pour les EVC Anesthésie Réanimation, une augmentation considérable par rapport aux 40 postes de 2017...</p>
+
+        <h1 id="fellowship" class="orange-title">7. Fellowship</h1>
+        <hr class="divider">
+
+        <h3><strong>Qu'est-ce que le Fellowship ?</strong></h3>
+        <p>Le Fellowship consiste à offrir une formation aux praticiens étrangers. Ce dispositif nécessite d'une autorisation temporaire de plein exercice de la médecine au sein d'équipes françaises de CHU ou d'établissements publics ou privés à but non-lucratif, pour une durée de 3 mois à 2 ans maximum.</p>
+
+        <h1 id="thematiques" class="orange-title">8. Thématiques au programme</h1>
+        <hr class="divider">
+
+        <p>La question du programme de l'examen fait l'objet de nombreux débats en raison de ses limites floues. Cette imprécision est volontaire : le CNG souhaite probablement éviter les recours éventuels en cas de sujet « hors programme »...</p>
+
+        <h1 id="maquette" class="orange-title">9. Maquette du DESAR</h1>
+        <hr class="divider">
+
+        <div class="callout green">
+            <p><strong>Quatre semestres d'anesthésie :</strong></p>
+            <ul>
+                <li>Chirurgie générale,</li>
+                <li>Obstétrique,</li>
+                <li>Chirurgie pédiatrique,</li>
+                <li>Chirurgie du segment céphalique (ORL, ophtalmologie, stomatologie),</li>
+                <li>Chirurgie orthopédique,</li>
+                <li>Chirurgie urologique,</li>
+                <li>Chirurgie thoracique et cardiovasculaire.</li>
+            </ul>
+            <p><strong>Les stages fortement conseillés sont l'anesthésie pédiatrique et l'obstétrique.</strong></p>
+        </div>
+
+        <div class="callout orange">
+            <p><strong>Trois semestres de formation en réanimation :</strong></p>
+            <ul>
+                <li>Au moins un semestre doit être effectué dans un service de réanimation adulte ou pédiatrique chirurgicale (ou polyvalent),</li>
+                <li>Les autres semestres peuvent être effectués dans différents services...</li>
+            </ul>
+        </div>
+
+        <div class="callout blue">
+            <p><strong>Deux semestres hors discipline</strong> dans des services agréés par la spécialité.</p>
+        </div>
+
+        <h1 id="programme" class="orange-title">10. Programme du DESAR</h1>
+        <hr class="divider">
+
+        <div class="expandable">
+            <div class="expandable-title">10.1 Phase Socle</div>
+            <div class="expandable-content">
+                <h4>PREMIER SEMESTRE SOCLE</h4>
+                <ul>
+                    <li>Evaluation préopératoire</li>
+                    <li>Estomac plein</li>
+                    <li>Communication interprofessionnelle</li>
+                    <li>Réveil de l'anesthésie</li>
+                    <li>Monitorage peropératoire</li>
+                    <li>Abord des voies aériennes</li>
+                    <li>Transfusion sanguine</li>
+                    <li>Arrêt cardiaque</li>
+                    <li>Choc hémorragique</li>
+                    <li>Séquences anesthésie</li>
+                    <li>Sepsis</li>
+                    <li>Réglage d'un respirateur réanimation</li>
+                    <li>Hyperthermie maligne</li>
+                    <li>Vasopresseurs Inotropes</li>
+                    <li>Sédation</li>
+                    <li>Choc anaphylactique</li>
+                </ul>
+
+                <div class="callout green">
+                    <p><strong>📌 Il faut s'entrainer à rédiger de façon claire et structurée.</strong></p>
+                </div>
+
+                <h4>SECOND SEMESTRE SOCLE</h4>
+                <ul>
+                    <li>Gestion des médicaments en périopératoire</li>
+                    <li>NVPO</li>
+                    <li>Voies aériennes difficiles</li>
+                    <li>Règles de jeun périopératoire</li>
+                    <li>Pré-oxygénation</li>
+                    <li>PAVM</li>
+                    <li>SDRA</li>
+                    <li>Anesthésie pour chirurgie ambulatoire</li>
+                    <li>Check list</li>
+                    <li>Thromboprophylaxie</li>
+                    <li>Interaction cardio-pulmonaire</li>
+                    <li>Principes antibioprophylaxie</li>
+                    <li>Antibiothérapie probabiliste</li>
+                    <li>Bases de l'EER</li>
+                    <li>Panne Respirateur</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="expandable">
+            <div class="expandable-title">10.2 Phase d'Approfondissement</div>
+            <div class="expandable-content">
+                <div class="callout green">
+                    <p><strong>❓ Nous proposons une synthèse des questions de l'épreuve pratiques ici.</strong></p>
+                </div>
+
+                <p><span class="purple-bg">Lecture active</span></p>
+                <p>La première chose à noter est que votre lecture doit être « active ». Cela veut dire que, équipé d'un stylo, il faut que vous notiez les réflexes associés aux mots que vous lisez et aux informations que vous recueillez...</p>
+
+                <div class="callout green">
+                    <p><strong>📌 La lecture complète des questions de l'examen vous fait donc gagner du temps, potentiellement des points, et vous permet de mieux répondre aux questions.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <h1 id="sources" class="orange-title">11. Sources et Recommandations</h1>
+        <hr class="divider">
+
+        <div class="expandable">
+            <div class="expandable-title">11.1 Haute Autorité de Santé</div>
+            <div class="expandable-content">
+                <p>Il s'agit d'une autorité publique indépendante à caractère scientifique, la Haute Autorité de santé (HAS)...</p>
+            </div>
+        </div>
+
+        <div class="expandable">
+            <div class="expandable-title">11.2 SFAR</div>
+            <div class="expandable-content">
+                <p>C'est la société savante de référence des anesthésistes-réanimateurs en France...</p>
+                <div class="callout green">
+                    <p><strong>📌 Les recommandations récentes de la HAS et de la SFAR font office de référence et sont des sources faciles de questions pour les EVC.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <h1 id="methodologie-travail" class="orange-title">12. Méthodologie de travail</h1>
+        <hr class="divider">
+
+        <div class="expandable">
+            <div class="expandable-title">12.1 Organisation du travail</div>
+            <div class="expandable-content">
+                <p>L'une des difficultés majeures de cet examen concerne son public : les médecins ayant terminé leur cursus ne sont plus habitués à réviser de manière aussi intensive et régulière que pendant leurs études...</p>
+            </div>
+        </div>
+
+        <div class="expandable">
+            <div class="expandable-title">12.2 Entrainement</div>
+            <div class="expandable-content">
+                <p>L'entraînement est la clé de la réussite aux examens, particulièrement en médecine...</p>
+                
+                <div class="callout yellow">
+                    <p><strong>⚠️ L'entraînement aux examens doit être une pratique régulière, mais comment l'implémenter dans vos révisions ?</strong></p>
+                </div>
+
+                <p>La première chose à savoir est que tous les examens des années précédentes sont disponibles, sans les corrections, sur le site du CNG.</p>
+                <p><span class="blue-bg"><a href="#" style="color: white;">Site du CNG</a></span></p>
+            </div>
+        </div>
+
+        <h1 id="preparation" class="orange-title">13. Préparation complémentaire</h1>
+        <hr class="divider">
+
+        <div class="expandable">
+            <div class="expandable-title">13.1 Sous Colles</div>
+            <div class="expandable-content">
+                <p>L'une des méthodes les plus efficaces pour s'entraîner est la « sous-colle » — un groupe d'étude de 2 à 3 personnes...</p>
+                
+                <div class="callout green">
+                    <p><strong>📌 Il faut s'entrainer à rédiger de façon claire et structurée.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <h1 id="methodologie-reponse" class="orange-title">14. Méthodologie de réponse</h1>
+        <hr class="divider">
+
+        <div class="expandable">
+            <div class="expandable-title">14.1 Généralités</div>
+            <div class="expandable-content">
+                <p>La rédaction de votre copie est essentielle pour réussir l'examen...</p>
+                
+                <div class="callout green">
+                    <p><strong>📌 Vous allez manquer de temps, l'optimisation de votre temps est donc capitale.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="expandable">
+            <div class="expandable-title">14.2 Questions de l'épreuve pratique</div>
+            <div class="expandable-content">
+                <div class="callout green">
+                    <p><strong>❔ Nous proposons une synthèse des questions de l'épreuve pratiques ici :</strong></p>
+                </div>
+
+                <div class="callout green">
+                    <p><strong>📌 La lecture complète des questions de l'examen vous fait donc gagner du temps, potentiellement des points, et vous permet de mieux répondre aux questions.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="expandable">
+            <div class="expandable-title">14.3 Questions de l'épreuve fondamentale</div>
+            <div class="expandable-content">
+                <div class="callout green">
+                    <p><strong>❓ Nous proposons une synthèse des questions de l'épreuve fondamentale ici :</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <p style="text-align: center; margin: 30px 0;">La méthodologie pour réussir les EVC n'a plus de secret pour vous. Pour aller plus loin et optimiser vos chances de réussite, vous pouvez suivre notre formation intensive :</p>
+
+        <div class="columns">
+            <div class="column">
+                <h3><a href="#" class="link">Epreuves de vérification des connaissances</a></h3>
+            </div>
+            <div class="column">
+                <h3><a href="#" class="link">Programme des EVC</a></h3>
+            </div>
+            <div class="column">
+                <h3><a href="#" class="link">Préparation aux EVC</a></h3>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+	<div class="back-link"><a href="../index.html">🏠 Retour &agrave; l&apos;accueil</a></div>
+	
+	<footer class="footer">
+        <p>⚖️ <a href="../mentions_legales.html" rel="noopener noreferrer" style="color: white;"><strong>Mentions l&eacute;gales</strong></a> &copy;️ <strong>Khypnos 2025</strong></p>
+    </footer>
+	
+	</div>
+	<script src="../annales/navbar_synth_ann.js"></script>
+</body>
+
+</html>
