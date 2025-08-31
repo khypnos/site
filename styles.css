@@ -718,7 +718,7 @@
 
 		.nav-menu ul li a {
 		  display:inline-block;
-		  padding:.3rem .6rem;
+		  padding:.1rem .5rem;
 		  border-radius:1rem;
 		  color:var(--fg);
 		  cursor:pointer;
@@ -813,7 +813,8 @@
 				height: calc(100vh - 80px);
 				background-color: #e3f2fd;
 				transition: 0.5s;
-				padding-top: 60px;
+				padding-top: 10px;
+                margin: 0;
 				box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 			}
 
@@ -826,9 +827,18 @@
 			}
 
 			.nav-menu ul li {
-				margin: 15px 0;
+				margin: 15px 0px;
 				text-align: center;
 			}
+
+            .nav-menu ul li:not(:last-child)::after {
+                content: '';
+                display: block;
+                width: 65%;
+                height: 1px;
+                background: #e0e0e0;
+                margin: 20px auto 0;
+            }
 		
             .bar {
                 flex-wrap: nowrap; /* Empêche le wrap pour garder tout sur une ligne */
