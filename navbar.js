@@ -39,7 +39,7 @@ function loadNavbar() {
 	</div>
 
     <!-- Div promotionnel webinaire -->
-    <div class="webinar-banner" onclick="window.open('medecin/demande_webinaire.html', '_blank')">
+    <div class="webinar-banner" onclick="window.open('https://khypnos.fr/medecin/demande_webinaire.html', '_blank')">
         <span>Webinaire Gratuit Khypnos 22/09/25 18h sur les QCM : méthodologie, notation, pièges</span>
     </div>
 
