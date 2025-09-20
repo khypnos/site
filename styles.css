@@ -720,6 +720,34 @@
 		    .main-content {
         margin-top: 80px;
     }
+
+
+    /* Animation scroll-in */
+        .reveal {
+            opacity: 0;
+            transform: translateX(0);
+            transition: transform 700ms ease, opacity 700ms ease;
+            will-change: transform, opacity;
+        }
+
+        .reveal.from-left   { transform: translateX(-50%); }
+        .reveal.from-right  { transform: translateX( 50%); }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Respect des préférences d’accessibilité */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal,
+            .reveal.visible {
+                transition: none;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+
 		
 	/* ====== Bannière ====== */
 		*{box-sizing:border-box;}
