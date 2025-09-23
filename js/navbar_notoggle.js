@@ -2,7 +2,7 @@
 function loadNavbar() {
 	
     const navbarHTML = `
-    <div class="bar">
+    <div class="navbar">
     <div class="brand"><img src="/img/KhypnosLogo.png" alt="Khypnos" height="42"></div>
     <!-- Checkbox pour menu mobile -->
 	<label for="menu-toggle" class="hamburger">
@@ -29,8 +29,8 @@ function loadNavbar() {
 	</div>
 
     <!-- Div promotionnel webinaire -->
-    <div class="webinar-banner" onclick="window.open('https://khypnos.fr/medecin/demande_webinaire.html', '_blank')">
-        <span>Webinaire Gratuit Khypnos 22/09/25 18h sur les QCM : méthodologie, notation, pièges</span>
+    <div class="webinar-banner" onclick="window.open('https://khypnos.fr/medecin/qcm_khypnos.html', '_blank')">
+        <span>EVC voie interne 2025 : QCM gratuits pour vous entrainer</span>
     </div>
     `;
     
