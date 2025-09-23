@@ -246,7 +246,6 @@
             border-radius: 2px;
         }
 		
-		
 
         .feature-list {
             list-style: none;
@@ -754,7 +753,7 @@
 			body{margin:0;font-family:sans-serif;background:#f5f5f5;}
 			a{text-decoration:none;color:inherit;}
 
-        .bar {
+        .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -765,7 +764,6 @@
             background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%);
             gap: 5rem;
         }   
-        
     
 		.brand{
 		font-weight:700;
@@ -899,20 +897,19 @@
 		
 	/* ======  Promo Banner  ====== */
         .webinar-banner {
-            background-color: #FFA07A; /* Couleur saumon claire */
+            background-color: #fdbca2; /* Couleur saumon claire */
             text-align: center;
             padding: 4px 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(0,0,0,0.1);
             margin: 2px auto;              /* espace autour de la bannière */
-	max-width: 1100px;              /* évite qu’elle soit trop large */
-	border-radius: 12px;            /* angles arrondis */
-	overflow: hidden;               /* respecte les angles arrondis */
+	        border-radius: 12px;            /* angles arrondis */
+	        overflow: hidden;               /* respecte les angles arrondis */
         }
 
         .webinar-banner span {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 500;
             color: #2c3e50;
             transition: all 0.3s ease;
@@ -925,7 +922,7 @@
         }
 
         .webinar-banner:hover span {
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 600;
         }
 
@@ -973,7 +970,7 @@
                 margin: 20px auto 0;
             }
 		
-            .bar {
+            .navbar {
                 flex-wrap: nowrap; /* Empêche le wrap pour garder tout sur une ligne */
                 gap: 0.5rem;
             }
