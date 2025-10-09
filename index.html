@@ -6,17 +6,35 @@
 	<title>Khypnos - Préparation EVC Anesthésie Réanimation</title>
 	<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
 	<link rel="stylesheet" href="/styles.css">
+	<link rel="stylesheet" href="/styles_faq.css">
 </head>
 <body>
-	<div class="container">
 		<header class="header">
-			<h1>🩺 Khypnos</h1>
-			<h2>Préparer les EVC en Anesthésie Réanimation</h2>
-			<div class="subtitle">Méthodologie • Annales • Recommandations</div>
+			<video class="bg" src="/img/courbes-ventil" autoplay muted loop playsinline></video>
+			
+			<div class="content">
+				<h1>🩺 Khypnos</h1>
+				<h2>Préparer les EVC en Anesthésie Réanimation</h2>
+				<div class="subtitle">Méthodologie • Annales • Recommandations</div>
+				<br>
+				<br>
+				<div class="columnshead">
+						<a href="/medecin/demande_inscription.html" class="btn btn-light btn-left">S'inscrire</a>
+						<a href="/medecin/qcm_khypnos.html" class="btn btn-light btn-right">QCMs EVC</a>
+				</div>
+			</div>
+
 		</header>
 
+	<div class="container">
+
+		             <!-- Div promotionnel webinaire -->
+        <div class="webinar-banner" onclick="window.open('https://khypnos.fr/medecin/demande_webinaire.html', '_blank')">
+            <span>Webinaire Gratuit Khypnos 22/09/25 18h sur les QCM : méthodologie, notation, pièges</span>
+        </div>
+
 		<h2 class="section-title" data-reveal="right">Formation intensive Session Décembre 2025</h2>
-		<p data-reveal="right" style="text-align: justify; font-size: 1.2rem; margin-bottom: 30px;">
+		<p data-reveal="right" style="text-align: justify;">
 			L'entraînement est la clé de la réussite, nous vous proposons donc dès septembre des QCM corrigés au format du concours. Pour <strong>réussir les EVC voie interne</strong> dès cette année, nous vous proposons des <strong>programmes intensifs</strong> à l'automne 2025.
 		</p>
 
@@ -52,7 +70,7 @@
 		</div>
 
 		<h2 class="section-title" data-reveal="left">🎯 Notre offre complète</h2>
-		<p data-reveal="left" style="text-align: justify; font-size: 1.2rem; margin-bottom: 30px;">
+		<p data-reveal="left" style="text-align: justify; margin-bottom: 30px;">
 			Vous souhaitez vous inscrire au <strong>concours des EVC en Anesthésie-Réanimation</strong> mais ne savez pas par où commencer ? Khypnos vous propose du contenu pour <strong>réviser</strong>, <strong>apprendre&nbsp;</strong>et <strong>réussir</strong> que vous soyez inscrit à la voie interne ou à la voie externe.
 		</p>
 
@@ -78,57 +96,96 @@
 			</div>
 		</div>
 
+			<h2 class="section-title" data-reveal="left">🎯 Les ressources gratuites</h2>
+		
+			<div class="links-section" data-reveal="left"  data-stagger data-stagger-target=":scope > .ressource-grid" data-stagger-step="50">
+				<div class="ressource-grid">
+					<a class="ressource-card" href="/medecin/annales/annales.html" rel="noopener noreferrer">
+						<div class="ressource-icon">📂</div>
+						<div class="ressource-content">
+							<p>Annales des EVC</p>
+						</div>
+					</a>
+
+					<a class="ressource-card" href="/medecin/webinaires.html" rel="noopener noreferrer">
+						<div class="ressource-icon">📺</div>
+						<div class="ressource-content">
+							<p>Webinaires Khypnos</p>
+						</div>
+					</a>
+
+					<a class="ressource-card" href="https://www.youtube.com/playlist?list=PLsksUSBK_61ed49apz-ZnMHfmy3immCTi" rel="noopener noreferrer" target="_blank">
+						<div class="ressource-icon">🎓</div>
+						<div class="ressource-content">
+							<p>Vidéos en Anesthésie-Réanimation</p>
+						</div>
+					</a>
+
+					<a class="ressource-card" href="/medecin/qcm_khypnos.html" rel="noopener noreferrer">
+						<div class="ressource-icon">🏆</div>
+						<div class="ressource-content">
+							<p>QCM d'entraînement</p>
+						</div>
+					</a>
+				</div>
+		</div>
+
 		<div class="callout red">
 			<h3>⚖️ Nouveauté EVC 2025 - Voie interne</h3>
+			
 			<p><a href="/medecin/informations_decret.html" class="souschap" rel="noopener noreferrer">Informations sur les décrets du 28 mai 2025</a></p>
 			<p><a href="/medecin/informations_organisation.html" class="souschap" rel="noopener noreferrer">Décret d'organisation des EVC 2025 - Voies interne et externe</a></p>
+		
 		</div>
 
-		<h2 class="section-title" data-reveal="right">💬 Témoignages</h2>
+
+			<h2 class="section-title" data-reveal="right">💬 Témoignages</h2>
+		
 		<div class="avis-container" data-reveal="right" data-autoplay="true">
-			<div class="avis-slider" id="avisSlider">
-				<div class="avis-item">
-					<div class="avis-content">
-						<div class="avis-stars"></div>
-						<div class="avis-text">"C'est dur de préparer un concours seul à 32 ans. S'inscrire dans une prépa m'a permis de mettre à jour mes connaissances et au delà de la réussite du concours, j'ai appris des choses"</div>
-						<div class="avis-author">- Saida S. - 32 ans</div>
+				<div class="avis-slider" id="avisSlider">
+					<div class="avis-item">
+						<div class="avis-content">
+							<div class="avis-stars"></div>
+							<div class="avis-text">"C'est dur de préparer un concours seul à 32 ans. S'inscrire dans une prépa m'a permis de mettre à jour mes connaissances et au delà de la réussite du concours, j'ai appris des choses"</div>
+							<div class="avis-author">- Saida S. - 32 ans</div>
+						</div>
 					</div>
-				</div>
-				<div class="avis-item">
-					<div class="avis-content">
-						<div class="avis-stars"></div>
-						<div class="avis-text">"On peut être meilleur que le médecin d'à côté et pour autant ne pas réussir les EVC. Ce n'est pas un problème de connaissance, c'est 90% de méthodologie. J'étais mal préparée"</div>
-						<div class="avis-author">- Aminata W. - 33 ans</div>
+					<div class="avis-item">
+						<div class="avis-content">
+							<div class="avis-stars"></div>
+							<div class="avis-text">"On peut être meilleur que le médecin d'à côté et pour autant ne pas réussir les EVC. Ce n'est pas un problème de connaissance, c'est 90% de méthodologie. J'étais mal préparée"</div>
+							<div class="avis-author">- Aminata W. - 33 ans</div>
+						</div>
 					</div>
-				</div>
-				<div class="avis-item">
-					<div class="avis-content">
-						<div class="avis-stars"></div>
-						<div class="avis-text">"Il faut gérer son stress. Les concours blancs sont le seul moment de ma préparation où j'étais face à moi-même"</div>
-						<div class="avis-author">- Bassem D. - 37 ans</div>
+					<div class="avis-item">
+						<div class="avis-content">
+							<div class="avis-stars"></div>
+							<div class="avis-text">"Il faut gérer son stress. Les concours blancs sont le seul moment de ma préparation où j'étais face à moi-même"</div>
+							<div class="avis-author">- Bassem D. - 37 ans</div>
+						</div>
 					</div>
-				</div>
-				<div class="avis-item">
-					<div class="avis-content">
-						<div class="avis-stars"></div>
-						<div class="avis-text">"Les EVC sont blindés de questions de physio. Horrible à travailler tout seul."</div>
-						<div class="avis-author">- Sonia S. - 38 ans</div>
+					<div class="avis-item">
+						<div class="avis-content">
+							<div class="avis-stars"></div>
+							<div class="avis-text">"Les EVC sont blindés de questions de physio. Horrible à travailler tout seul."</div>
+							<div class="avis-author">- Sonia S. - 38 ans</div>
+						</div>
 					</div>
-				</div>
-				<div class="avis-item">
-					<div class="avis-content">
-						<div class="avis-stars"></div>
-						<div class="avis-text">"Les annales, c'est une source inestimable. Le principal problème est l'absence de correction"</div>
-						<div class="avis-author">- Ghazi A. - 36 ans</div>
+					<div class="avis-item">
+						<div class="avis-content">
+							<div class="avis-stars"></div>
+							<div class="avis-text">"Les annales, c'est une source inestimable. Le principal problème est l'absence de correction"</div>
+							<div class="avis-author">- Ghazi A. - 36 ans</div>
+						</div>
 					</div>
+					<!-- Ajouter plus d'avis selon besoin -->
 				</div>
-				<!-- Ajouter plus d'avis selon besoin -->
 			</div>
-		</div>
 
-		<h2 class="section-title" data-reveal="left">📚 Annales</h2>
+			<h2 class="section-title" data-reveal="left">📚 Annales</h2>
+		
 		<div class="links-section" data-reveal="left"  data-stagger data-stagger-target=":scope > .feature-list > li" data-stagger-step="50">
-			<p style="text-align: justify; font-size: 1.1rem; margin-bottom: 20px;">
+			<p style="text-align: justify; margin-bottom: 20px;">
 				Un incontournable de la préparation des EVC consiste à travailler sur les annales. Nous vous proposons :
 			</p>
 			<ul class="feature-list">
@@ -144,32 +201,167 @@
 			</ul>
 			<div class="buttons-container">
 				<a href="/medecin/demande_concours.html" class="btn btn-outline">&nbsp;📝 Concours Blanc QCM&nbsp;</a>
-				<a href="/medecin/demande_concours.html" class="btn btn-filled">&nbsp;🔥 Formule BOOST&nbsp;</a>
+				<a href="/medecin/demande_inscription.html" class="btn btn-filled">&nbsp;🔥 Formule BOOST&nbsp;</a>
 			</div>
 		</div>
 
-		<h2 class="section-title" data-reveal="right">🚀 Liens utiles</h2>
+			<h2 class="section-title" data-reveal="right">🚀 Liens utiles</h2>
 
 		<!-- Stagger fin, ciblage des items de liste -->
-		<div class="links-section" data-reveal="right" data-stagger data-stagger-target=":scope > .column > .feature-list > li" data-stagger-step="50">
-			<div class="column">
-				<ul class="feature-list">
-					<li><span class="emoji">✅</span><a href="/medecin/la_prepa_khypnos.html" class="souschap" rel="noopener noreferrer"><strong>La prépa Khypnos</strong></a></li>
-					<li><span class="emoji">🩺</span><a href="" class="souschap" rel="noopener noreferrer"><strong>Guide de réussite Khypnos</strong></a></li>
-					<li><span class="emoji">📔</span><a href="/medecin/demande_programme.html" class="souschap" rel="noopener noreferrer"><strong>Recevoir le programme</strong></a></li>
-					<li><span class="emoji">📃</span><a href="/medecin/demande_inscription.html" class="souschap" rel="noopener noreferrer"><strong>Formulaire d'inscription</strong></a></li>
-				</ul>
+			<div class="links-section" data-reveal="right" data-stagger data-stagger-target=":scope > .column > .feature-list > li" data-stagger-step="50">
+				<div class="column">
+					<ul class="feature-list">
+						<li><span class="emoji">✅</span><a href="/medecin/la_prepa_khypnos.html" class="souschap" rel="noopener noreferrer"><strong>La prépa Khypnos</strong></a></li>
+						<li><span class="emoji">🩺</span><a href="" class="souschap" rel="noopener noreferrer"><strong>Guide de réussite Khypnos</strong></a></li>
+						<li><span class="emoji">📔</span><a href="/medecin/demande_programme.html" class="souschap" rel="noopener noreferrer"><strong>Recevoir le programme</strong></a></li>
+						<li><span class="emoji">📃</span><a href="/medecin/demande_inscription.html" class="souschap" rel="noopener noreferrer"><strong>Formulaire d'inscription</strong></a></li>
+					</ul>
+				</div>
 			</div>
-		</div>
+
+
+			<h2 class="section-title" data-reveal="left">Foire aux Questions</h2>
+
+				<!-- Stagger fin, ciblage des items de liste -->
+				<div class="links-section" data-reveal="left" data-stagger data-stagger-target=":scope > .column > .feature-list > li" data-stagger-step="50">
+					<div class="faq" data-reveal="left" id="faq" role="list">
+					
+						<!-- FAQ 1 -->
+					<article class="faq-item" role="region" aria-expanded="false">
+						<header class="faq-header" role="button" aria-controls="faq1" tabindex="0">
+							<div class="faq-icon" aria-hidden="true">
+								<span class="icon-plus"></span>
+							</div>
+							<div class="faq-question">Comment fonctionne votre programme de préparation ?</div>
+						</header>
+						<div class="faq-body" id="faq1">
+							<div class="faq-content">
+								<div class="faq-inner">
+									Nous proposons un parcours structuré pour les EVC Anesthésie-Réanimation, avec des cours sur l'ensemble du programme des EVC Anesthésie-Réanimation, des corrections d'annales des EVC Anesthésie-Réanimation, des concours blancs. Ce programme est adapté pour la voie interne ou la voie externe en fonction de votre inscription. Plus de 1000 QCM Anesthésie-Réanimation.
+								</div>
+							</div>
+						</div>
+					</article>
+
+
+					<!-- FAQ 2 -->
+					<article class="faq-item" role="region" aria-expanded="false">
+						<header class="faq-header" role="button" aria-controls="faq3" tabindex="0">
+							<div class="faq-icon" aria-hidden="true">
+								<span class="icon-plus"></span>
+							</div>
+							<div class="faq-question">Quelles sont les modalités d’inscription ?</div>
+						</header>
+						<div class="faq-body" id="faq3">
+							<div class="faq-content">
+								<div class="faq-inner">
+									L’inscription se fait en ligne avec possibilité de paiement par Carte bleue, ApplePay, virement SEPA. Vous recevrez un e‑mail de confirmation avec toutes les informations pratiques.
+								</div>
+							</div>
+						</div>
+					</article>
+
+
+					<!-- FAQ 3 -->
+					<article class="faq-item" role="region" aria-expanded="false">
+						<header class="faq-header" role="button" aria-controls="faq2" tabindex="0">
+							<div class="faq-icon" aria-hidden="true">
+								<span class="icon-plus"></span>
+							</div>
+							<div class="faq-question">Puis-je accéder aux replays et aux corrigés détaillés ?</div>
+						</header>
+						<div class="faq-body" id="faq2">
+							<div class="faq-content">
+								<div class="faq-inner">
+									Oui, les replays et corrigés détaillés sont disponibles dans votre espace privé une fois l'inscription validée, avec des justifications et références utiles.
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<!-- FAQ 4 -->
+					<article class="faq-item" role="region" aria-expanded="false">
+						<header class="faq-header" role="button" aria-controls="faq1" tabindex="0">
+							<div class="faq-icon" aria-hidden="true">
+								<span class="icon-plus"></span>
+							</div>
+							<div class="faq-question">Est-il possible de bénéficier de facilité de paiement ?</div>
+						</header>
+						<div class="faq-body" id="faq1">
+							<div class="faq-content">
+								<div class="faq-inner">
+									Nous proposons un paiement en 4 mensualités pour les formations. Les concours blancs ne bénéficient pas de facilité de paiement.
+								</div>
+							</div>
+						</div>
+					</article>
+
+					<!-- FAQ 5 -->
+					<article class="faq-item" role="region" aria-expanded="false">
+						<header class="faq-header" role="button" aria-controls="faq1" tabindex="0">
+							<div class="faq-icon" aria-hidden="true">
+								<span class="icon-plus"></span>
+							</div>
+							<div class="faq-question">Quel contenu est disponible gratuitement ?</div>
+						</header>
+						<div class="faq-body" id="faq1">
+							<div class="faq-content">
+								<div class="faq-inner">
+									Des Webinaires gratuits avec des corrections d'annales sont disponibles sur notre <a href="https://www.youtube.com/@khypnos", style="text-decoration: underline;", target="_blank">chaine youtube</a>.<br>
+									Les <a href="/medecin/annales/annales.html", style="text-decoration: underline;", target="_blank">annales (non corrigées) des EVC Anesthésie-Réanimation</a> sont disponibles gratuitement sur notre site afin de vous entrainer.<br>
+									Pour la voie interne, <a href="/medecin/qcm_khypnos.html", style="text-decoration: underline;", target="_blank">des QCMs gratuits</a> sont mis à jour régulièrement.
+								</div>
+							</div>
+						</div>
+					</article>
+
+
+					<!-- FAQ 6 -->
+					<article class="faq-item" role="region" aria-expanded="false">
+						<header class="faq-header" role="button" aria-controls="faq1" tabindex="0">
+							<div class="faq-icon" aria-hidden="true">
+								<span class="icon-plus"></span>
+							</div>
+							<div class="faq-question">Comment obtenir les corrections des annales des EVC anesthésie-réanimation ?</div>
+						</header>
+						<div class="faq-body" id="faq1">
+							<div class="faq-content">
+								<div class="faq-inner">
+									Nous proposons les corrections des annales au sein de notre formation. Les annales 2024, 2023, 2021, 2020, 2017, 2014, 2013, 2009 entièrement corrigées, avec conseils méthodologiques et rappels de cours, sont disponibles en téléchargement pour nos étudiants.
+								</div>
+							</div>
+						</div>
+					</article>
+
+					<!-- FAQ 7 -->
+					<article class="faq-item" role="region" aria-expanded="false">
+						<header class="faq-header" role="button" aria-controls="faq1" tabindex="0">
+							<div class="faq-icon" aria-hidden="true">
+								<span class="icon-plus"></span>
+							</div>
+							<div class="faq-question">Proposez-vous des formations pour d'autres disciplines ?</div>
+						</header>
+						<div class="faq-body" id="faq1">
+							<div class="faq-content">
+								<div class="faq-inner">
+									Nous sommes Anesthésistes-Réanimateurs de formation et d'exercice. Nous ne prétendons pas être experts dans une autre discipline et ne donnons pas de formation en dehors de l'Anesthésie-Réanimation.
+								</div>
+							</div>
+						</div>
+					</article>
+	
+				</div>
 	</div>
 
-	<script src="js/scroll-to-top.min.js"></script>
-	<script src="js/navbar.js"></script>
-	<script src="js/script.js"></script>
-	<script src="js/avis-carousel.js" defer></script>
+
+	<script src="/js/scroll-to-top.min.js"></script>
+	<script src="/js/navbar.js"></script>
+	<script src="/js/script.js"></script>
+	<script src="/js/avis-carousel.js" defer></script>
 	<script src="/js/footer-manager.js" defer></script>
 	<!-- Animation au scroll + stagger -->
-	<script src="js/scroll-reveal.js" defer></script>
+	<script src="/js/scroll-reveal.js" defer></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
 			new FooterManager({
@@ -178,5 +370,10 @@
 			}).init();
 		});
 	</script>
+
+	<script src="/js/faq.js"></script>
+
+
+
 </body>
 </html>

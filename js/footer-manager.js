@@ -32,9 +32,9 @@ class FooterManager {
 			<div class="footer-container">
 				<div class="footer-section">
 					<h4>Formations</h4>
-					<a href="/medecin/la_prepa_khypnos.html">Formations EVC</a>
+					<a href="/medecin/la_prepa_khypnos.html">Formations EVC Anesthésie-Réanimation</a>
 					<a href="/medecin/webinaires.html">Webinaires gratuits</a>
-					<a href="/medecin/qcm_khypnos.html">Plateforme QCM</a>
+					<a href="/medecin/qcm_khypnos.html">QCM EVC Anesthésie-Réanimation</a>
 					<a href="/medecin/demande_concours.html">Concours blancs</a>
 				</div>
 				<div class="footer-section">

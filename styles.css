@@ -3,13 +3,16 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #2c3e50;
             min-height: 100vh;
-            margin: 0
+            margin: 0;
+            overflow-x: hidden;
+	        width: 100%;
         }
 
         .container {
@@ -21,15 +24,54 @@
             border-radius: 15px;
             margin-top: 5px;
             margin-bottom: 5px;
+            font-size: 1.2rem;
         }
 
         .header {
+            position: relative;                 /* ancre l’absolu de la vidéo */
+            text-align: center;
+            background: transparent;            /* laissons la vidéo + overlay gérer le fond */
+            color: rgb(0, 0, 0);
+            padding: 150px 10px 50px 10px;      /* conserve la hauteur actuelle */
+            border-radius: 0;
+            margin-bottom: 0;
+            width: 100%;
+            overflow: hidden;                   /* masque les débords éventuels de la vidéo */
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 1;                      /* ajustez entre 0 et 1 selon l’effet désiré */
+            pointer-events: none;
+        }
+
+        .header .bg {
+            position: absolute;
+            inset: 0;                           /* colle aux bords du header */
+            width: 100%;
+            height: 100%;                       /* remplissage total du header */
+            object-fit: cover;                  /* remplit sans déformer, recadre si besoin */
+            z-index: 0;
+            pointer-events: none;               /* la vidéo ne capte pas les clics */
+        }
+
+        .header .content {
+            position: relative;                 /* passe au-dessus de la vidéo et de l’overlay */
+            z-index: 1;
+            color: #000000;
+        }
+
+
+        .headerbis {
             text-align: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
+            padding: 100px 10px 20px 10px;
+            border-radius: 0px;
+            margin-bottom: 0px;
         }
 
         .header h1 {
@@ -43,37 +85,11 @@
             margin-bottom: 15px;
             font-weight: 400;
         }
+        
 
         .header .subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
-        }
-
-        .callout {
-            padding: 25px;
-            margin: 25px 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .callout.orange {
-            background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
-            color: white;
-        }
-
-        .callout.lightblue {
-            background: linear-gradient(135deg, #74b9ff 0%, #f8f9ff 150%);
-            color: white;
-        }
-
-        .callout.red {
-            background: linear-gradient(135deg, #ff9f9b 0%, #ff7675 100%);
-            color: #2d3436;
-        }
-
-        .callout.blue {
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-            color: white;
         }
 
         .boost-section {
@@ -150,11 +166,11 @@
 	        cursor: grab;
         }
 
-            .avis-container.is-dragging {
+        .avis-container.is-dragging {
                 cursor: grabbing;
         }
 
-            .avis-slider {
+        .avis-slider {
             display: flex;
             width: max-content;
             /* Auto-scroll avec animation CSS pilotée en JS (on/off + vitesse) */
@@ -164,13 +180,13 @@
             scroll-behavior: auto; /* géré en JS */
         }
 
-            .avis-item {
+        .avis-item {
             flex: 0 0 auto;
             width: 300px;
             margin: 0 15px;
         }
 
-            .avis-content {
+        .avis-content {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -182,38 +198,26 @@
             border-left: 4px solid #667eea;
         }
 
-            .avis-stars {
+        .avis-stars {
             color: #ffc107;
             font-size: 18px;
             margin-bottom: 10px;
         }
 
-            .avis-text {
+        .avis-text {
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             margin-bottom: 10px;
-            font-size: 14px;
         }
 
-            .testimonial-text {
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #555;
-        }
-
-            .avis-author {
+        .avis-author {
             text-align: right;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 0.9rem;
             color: #555;
         }
 
-        
-        .testimonial-author {
-            font-weight: bold;
-            color: #667eea;
-        }
+
 
 
             /* Animation de base, la distance est calculée et mise à jour en JS */
@@ -229,7 +233,6 @@
 
 
         .section-title {
-            font-size: 2rem;
             color: #2c3e50;
             margin: 30px 0 20px 0;
             text-align: center;
@@ -246,16 +249,20 @@
             border-radius: 2px;
         }
 		
+		
+        .column h3 {
+            font-size: 1.3rem;
+        }
 
         .feature-list {
             list-style: none;
             padding: 0;
+            font-size: 1.1rem;
         }
 
         .feature-list li {
             padding: 12px 0;
             border-bottom: 1px solid #eee;
-            font-size: 1.1rem;
         }
 
         .feature-list li:last-child {
@@ -282,7 +289,7 @@
         }
 
         .btn {
-            flex: 1;
+            flex: 1 1 0;
             display: inline-block;
             padding: 15px 25px;
             text-decoration: none;
@@ -292,6 +299,7 @@
             font-size: 18px;
             transition: all 0.3s ease;
             border: 2px solid;
+            min-width: 0;   /* autorise la réduction */
         }
 
         .btn-outline {
@@ -313,10 +321,44 @@
         }
 
         .btn-filled:hover {
-            background-color: #1e3d6f;
+            background-color: #764ba2;
             border-color: #1e3d6f;
         }
 
+        .columnshead {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* exactement 2 colonnes */
+        gap: 12px;
+        align-items: center;            /* vertical */
+        }
+
+        .columnshead .btn-left {
+        justify-self: end;
+        }
+
+        .columnshead .btn-right {
+        justify-self: start;
+        }
+        
+        .btn-light {
+            display: inline-block;
+            border-color: #764ba2;
+            background-color: #ffffff;
+            max-width: 190px;
+            min-width: 160px;
+            font-size: 14px;
+            padding: 10px 20px;
+            font-weight: normal;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+                
+        .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+        }
 
 		.annales-grid {
             display: grid;
@@ -471,6 +513,57 @@
             line-height: 1.7;
             color: #2c3e50;
             font-weight: 500;
+            text-align: center;
+        }
+
+        /* Ressources Gratuites en card */
+
+        .ressource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* plus petit que 350px */
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        .ressource-card {
+            display: block;                 /* l’ancre devient un bloc */
+	        text-decoration: none;          /* pas de soulignement */
+	        color: inherit;                 /* hérite la couleur du texte */
+	        cursor: pointer;
+            background: #f8f9ff;
+            padding: 16px 16px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: transform .25s, box-shadow .25s;
+        }
+
+        .ressource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        /* Icône en tête, plus discrète */
+        .ressource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Contenu compact + “titre” centré */
+        .ressource-content {
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .ressource-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            font-weight: 600;       /* aspect titre */
+            text-align: center;     /* centrage demandé */
+            margin: 0;
+        }
+        .ressource-content .souschap {
+            display: inline-block;
             text-align: center;
         }
 
@@ -753,28 +846,61 @@
 			body{margin:0;font-family:sans-serif;background:#f5f5f5;}
 			a{text-decoration:none;color:inherit;}
 
-        .navbar {
+
+        /* Contexte global pour gérer les encoches iOS correctement */
+        :root {
+        --overlay-w: 96%;              /* 60% de la largeur de la page */
+        --overlay-max-w: 1100px;        /* optionnel, limite max */
+        --overlay-top: max(12px, env(safe-area-inset-top, 12px));
+        --overlay-radius: 40px;
+        --overlay-bg: rgba(255, 255, 255, 0.70);
+        --overlay-border: rgba(0, 0, 0, 0.06);
+        --overlay-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
+
+        /* Wrapper fixe, plein écran pour centrer facilement l’inner */
+                .overlay-nav {
+        position: fixed;
+        inset: 0 0 auto 0;    /* top, left, right, pas de bottom */
+        display: grid;
+        place-items: start center;
+        padding-top: var(--overlay-top);
+        z-index: 9999;
+        }
+
+
+        .bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem;
+            padding: 0.7rem;
             position: sticky;
+            max-width: 1100px;         /* largeur max de la barre + bannière */
+            margin: 5px 2% 4px;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.06);
             top: 0;
             z-index: 1000;
-            background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%);
             gap: 5rem;
+            width: min(var(--overlay-w), var(--overlay-max-w));
+            border-radius: var(--overlay-radius);
+            background: var(--overlay-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--overlay-border);
+            box-shadow: var(--overlay-shadow);
         }   
-    
+        
 		.brand{
-		font-weight:700;
-		flex: 1;
-		display: flex;
-		justify-content: flex-start;
-        min-width: 0; /* Permet la compression du texte si nécessaire */
+            font-weight:700;
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            min-width: 0; /* Permet la compression du texte si nécessaire */
 		}
 		
 	
-		
 	/* ====== Hamburger menu ====== */
 	
 		.hamburger-menu {
@@ -807,9 +933,12 @@
 			transform: rotate(45deg) translate(-6px, -6px);
 		}
 
+
 		.nav-menu ul {
 			list-style-type: none;
 			display: flex;
+            font-weight: bold;
+            font-size: 0.8rem;
 		}
 
 		.nav-menu ul li {
@@ -897,32 +1026,33 @@
 		
 	/* ======  Promo Banner  ====== */
         .webinar-banner {
-            background-color: #fdbca2; /* Couleur saumon claire */
+            background-color: #FFA07A; /* Couleur saumon claire */
             text-align: center;
             padding: 4px 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(0,0,0,0.1);
             margin: 2px auto;              /* espace autour de la bannière */
+	        max-width: 1100px;              /* évite qu’elle soit trop large */
 	        border-radius: 12px;            /* angles arrondis */
 	        overflow: hidden;               /* respecte les angles arrondis */
         }
 
         .webinar-banner span {
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 500;
             color: #2c3e50;
             transition: all 0.3s ease;
         }
 
         .webinar-banner:hover {
-            transform: scale(1.02);
+            transform: scale(1.05);
             background-color: #FF8C69; /* Saumon légèrement plus foncé au hover */
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         .webinar-banner:hover span {
-            font-size: 18px;
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
@@ -931,6 +1061,10 @@
 
         @media screen and (max-width: 1200px) {
 
+
+            html, body { overflow-x: hidden; }
+	        html { scrollbar-gutter: stable both-edges; } /* utile aussi sur Android */
+
 			.hamburger-menu {
 				display: block;
 			}
@@ -938,27 +1072,36 @@
 			.nav-menu {
 				position: fixed;
 				top: 75px;
-				right: -100%;
-				width: 100%;
-				height: calc(100vh - 80px);
-				background-color: #e3f2fd;
-				transition: 0.5s;
+				right: 0;
+		        left: 0;                 /* occupe l’écran */
+		        width: 100vw;
+				height: calc(100vh - 75px);
+                background: rgba(255, 255, 255, 0.90);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: 0.5s;
+                transform: translateX(100%); /* au repos, hors écran */
 				padding-top: 10px;
                 margin: 0;
-				box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+				box-shadow: var(--overlay-shadow);
+                border-radius: 10px;
+                inline-size: 100svw;
 			}
 
 			.nav-menu.active {
-				right: 0;
+				transform: translateX(0);
 			}
 
 			.nav-menu ul {
 				flex-direction: column;
+
 			}
 
 			.nav-menu ul li {
 				margin: 15px 0px;
 				text-align: center;
+                
+                font-size: 1.0rem;
 			}
 
             .nav-menu ul li:not(:last-child)::after {
@@ -970,7 +1113,7 @@
                 margin: 20px auto 0;
             }
 		
-            .navbar {
+            .bar {
                 flex-wrap: nowrap; /* Empêche le wrap pour garder tout sur une ligne */
                 gap: 0.5rem;
             }
@@ -1019,6 +1162,11 @@
 
 		@media screen and (max-width: 768px) {
 		
+
+            .bar {
+                max-width: 380px;
+            }
+
 		    .toggle-container {
                 flex: 1 0 auto; /* Taille fixe */
                 left: 14%;
@@ -1032,6 +1180,28 @@
             .trainers-grid {
                 grid-template-columns: 1fr;
             }
+
+            
+            .header h1 { font-size: 1.6rem; }
+	        .header h2 { font-size: 1.15rem; }
+	        .section-title { font-size: 1.4rem; }
+
+            .column h3 {font-size: 1.15rem; }
+
+            .feature-list {font-size: 0.95rem;}
+
+	        p { font-size: 0.95rem; }
+	        .feature-list li { font-size: 0.95rem; }
+	        .question-text { font-size: 0.95rem; }
+	        .feature-content p { font-size: 0.95rem; }
+
+	        .btn { font-size: 0.9375rem; padding: 0.625rem 1rem; }
+	        .btn-light { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
+            .webinar-banner span { font-size: 0.9rem; }
+            .webinar-banner:hover span { font-size: 0.95rem; }
+
+
+
 
             .header h1 {
                 font-size: 2.2rem;
@@ -1076,13 +1246,24 @@
                 border: none;
             }
 
-            .webinar-banner span {
-        font-size: 12px;
-            }
-    
-            .webinar-banner:hover span {
-        font-size: 13px;
+
+            .ressource-grid { gap: 14px; }
+            .ressource-icon { font-size: 1.75rem; }
+            .ressource-content { padding: 10px; }
+            .ressource-content p { font-size: 0.95rem; }
+
+
+    }    
+        
+    @media screen and (max-width: 380px) {
+		
+            .bar {
+                max-width: 350px;
             }
 
-        }
-		
+            .brand {
+                min-width: 32px;
+                font-size: 0.7rem; /* Légèrement plus petit sur mobile */
+                        }
+
+        }          

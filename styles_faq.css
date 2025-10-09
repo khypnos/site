@@ -1,0 +1,103 @@
+
+		:root{
+			--bg:#ffffff;
+			--card:#f7f7fb;
+			--text:#1f2430;
+			--muted:#5b6070;
+			--accent:#4c6fff;
+			--shadow:0 6px 24px rgba(0,0,0,.08);
+			--radius-pill:25px;
+		}
+
+		.faq{display:grid;gap:14px}
+
+		/* Carte FAQ */
+		.faq-item{
+			background:var(--card);
+			border-radius:var(--radius-pill);
+			box-shadow:var(--shadow);
+			overflow:hidden; /* garde la forme ovale quand on déroule */
+			transition: box-shadow .2s ease, background .2s ease, border-radius .2s ease;
+			cursor:pointer;
+		}
+		.faq-item:hover{box-shadow:0 10px 28px rgba(0,0,0,.12)}
+		.faq-item[aria-expanded="true"]{
+			border-radius: 25px; /* ajustez 12–20px selon votre goût */
+			background:linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%)}
+
+		/* En-tête cliquable */
+		.faq-header{
+			display:flex;align-items:center;gap:14px;
+			padding:12px 16px;
+		}
+
+		/* Icône plus à gauche */
+		.faq-icon{
+			width:26px;height:26px;flex:none;
+			display:grid;place-items:center;
+			border-radius:50%;
+			background:#fff;
+			outline:1px solid rgba(0,0,0,.06);
+			transition:transform .2s ease, background .2s ease;
+		}
+		.faq-item[aria-expanded="true"] .faq-icon{background:#fff}
+
+		/* Plus -> Minus animé */
+		.icon-plus{position:relative;width:14px;height:14px}
+		.icon-plus::before,
+		.icon-plus::after{
+			content:"";position:absolute;left:0;top:50%;
+			width:100%;height:2px;background:var(--accent);transform:translateY(-50%);
+			border-radius:2px;transition:transform .2s ease, opacity .2s ease;
+		}
+		/* barre verticale */
+		.icon-plus::after{
+			transform:translateY(-50%) rotate(90deg);
+		}
+		/* Quand ouvert, on masque la barre verticale -> devient un “moins” */
+		.faq-item[aria-expanded="true"] .icon-plus::after{opacity:0;transform:translateY(-50%) rotate(90deg) scaleX(.2)}
+
+		.faq-question{
+			font-size:1.0rem;
+			font-weight:600;
+			letter-spacing:.2px;
+		}
+
+		/* Corps déroulant */
+		.faq-body{
+			display:grid;
+			grid-template-rows:0fr;
+			transition:grid-template-rows .25s ease;
+		}
+		.faq-item[aria-expanded="true"] .faq-body{grid-template-rows:1fr}
+		.faq-content{
+			overflow:hidden;
+		}
+		.faq-inner{
+			font-size: 1.0rem;
+			padding:0 22px 18px 64px; /* aligné après l’icône */
+			color:var(--muted);
+		}
+
+		/* Accessibilité focus */
+		.faq-item:focus-visible,
+		.faq-item .faq-header:focus-visible{
+			outline:3px solid rgba(76,111,255,.45);
+			outline-offset:3px;
+		}
+
+		/* Responsive petites largeurs: un peu plus compacts */
+		@media (max-width:768px){
+			.faq-inner{padding-left:56px; font-size: 0.9rem;}
+			.faq-header{padding:10px 12px}
+			.faq-question{font-size: 0.85rem;}
+			.faq-icon{width:26px;height:26px}
+		}
+
+
+	.links-section .faq .faq-header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 18px 22px;
+}
