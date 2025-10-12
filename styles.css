@@ -64,7 +64,6 @@
             color: #000000;
         }
 
-
         .headerbis {
             text-align: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -72,12 +71,43 @@
             padding: 100px 10px 20px 10px;
             border-radius: 0px;
             margin-bottom: 0px;
+	        align-items: center;
+            width: 100%;
+	        gap: 0.5ch;
+        }
+
+        .headerbis h1 .logo {
+            max-height: 1.2em;   /* suit automatiquement la taille du h1 */
+            width: auto;   /* conserve les proportions */
+            vertical-align: middle;
+            /* Optionnel : adoucir le rendu sur écrans haute densité */
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .header h1 .logo {
+            max-height: 1.2em;   /* suit automatiquement la taille du h1 */
+            width: auto;   /* conserve les proportions */
+            vertical-align: middle;
+            /* Optionnel : adoucir le rendu sur écrans haute densité */
+            image-rendering: -webkit-optimize-contrast;
         }
 
         .header h1 {
             font-size: 3rem;
             margin-bottom: 10px;
             font-weight: 700;
+            display: inline-flex;
+	        align-items: center;
+	        gap: 0.5ch;
+        }
+
+        .headerbis h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: inline-flex;
+	        align-items: center;
+	        gap: 0.5ch;
         }
 
         .header h2 {
@@ -85,9 +115,19 @@
             margin-bottom: 15px;
             font-weight: 400;
         }
-        
 
+        .headerbis h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
         .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .headerbis .subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
         }
@@ -98,7 +138,6 @@
             border-radius: 10px;
             margin: 15px 0;
         }
-
 
         .columns {
             display: grid;
@@ -119,7 +158,7 @@
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
+         }
 
         .offer:hover {
             transform: translateY(-5px);
@@ -218,8 +257,6 @@
         }
 
 
-
-
             /* Animation de base, la distance est calculée et mise à jour en JS */
             @keyframes scroll {
                 0%   { transform: translateX(0); }
@@ -248,6 +285,13 @@
             margin: 10px auto;
             border-radius: 2px;
         }
+
+        .section-text {
+			font-size: 1.1rem;
+			line-height: 1.7;
+			font-weight: 500;
+			text-align: justify;
+		}
 		
 		
         .column h3 {
@@ -257,7 +301,7 @@
         .feature-list {
             list-style: none;
             padding: 0;
-            font-size: 1.1rem;
+            font-size: 1.0rem;
         }
 
         .feature-list li {
@@ -477,17 +521,29 @@
 
 		.features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;  
+            margin: 20px 0;
+        }
+
+                /* Force 2 colonnes jusqu’à 520–560px env. */
+        @media (max-width: 760px) {
+            .features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        /* Puis seulement là, on passe à 1 colonne */
+        @media (max-width: 420px) {
+            .features-grid { grid-template-columns: 1fr; }
         }
 
         .feature-card {
             background: #f8f9ff;
-            padding: 30px;
+            padding: 10px;
             border-radius: 12px;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s, box-shadow 0.3s;
+            text-align: justify;
+            font-size: 1rem;
         }
 
         .feature-card:hover {
@@ -496,25 +552,18 @@
         }
 
         .feature-icon {
-            font-size: 3rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             text-align: center;
         }
 
         .feature-content {
             background: #f0f8ff;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+            padding: 14px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
         }
 
-        .feature-content p {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #2c3e50;
-            font-weight: 500;
-            text-align: center;
-        }
 
         /* Ressources Gratuites en card */
 
@@ -630,44 +679,20 @@
             line-height: 1.5;
         }
 
-        .pricing-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 20px 0;
-            text-align: center;
-        }
 
-        .pricing-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+.pricing-item {
+	display: inline-flex;       /* ou display: flex si tu veux toute la ligne */
+	align-items: center;
+	gap: 0.5ch;                 /* espace entre icône et texte */
+}
 
-        .pricing-icon {
-            font-size: 3rem;
-        }
+.pricing-icon {
+	font-size: 2em;           /* ajuste la taille de l’emoji si besoin */
+}
 
-        .pricing-details {
-            text-align: left;
-        }
-
-        .price-main {
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        .price-detail {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .price-hourly {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
+.pricing-content {
+	font-size: 1.4em;             /* suit le texte courant */
+}
 		
 		.subject-section {
 			background: #fff3cd;
@@ -809,9 +834,24 @@
             border-top: 2px solid #eee;
         }
 		
-		    .main-content {
-        margin-top: 80px;
-    }
+		.main-content {margin-top: 80px;}
+
+        .faq-inner .pay {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4ch;
+            /* Empêche la coupure entre l’icône et le texte du moyen de paiement */
+            white-space: nowrap;
+        }
+
+        .faq-inner .pay-logo {
+            height: 1em;      /* suit la taille du texte */
+            width: auto;      /* garde les proportions */
+            display: inline-block;
+            vertical-align: +0.2em; /* petit ajustement optique */
+            /* Optionnel */
+            image-rendering: -webkit-optimize-contrast;
+        }
 
 
     /* Animation scroll-in */
@@ -1065,6 +1105,8 @@
             html, body { overflow-x: hidden; }
 	        html { scrollbar-gutter: stable both-edges; } /* utile aussi sur Android */
 
+            p { font-size: 1rem; }
+
 			.hamburger-menu {
 				display: block;
 			}
@@ -1163,9 +1205,7 @@
 		@media screen and (max-width: 768px) {
 		
 
-            .bar {
-                max-width: 380px;
-            }
+            .bar { max-width: 580px; }
 
 		    .toggle-container {
                 flex: 1 0 auto; /* Taille fixe */
@@ -1173,39 +1213,110 @@
                 margin: 0rem 2rem;
 			}
 
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .trainers-grid {
-                grid-template-columns: 1fr;
-            }
-
-            
-            .header h1 { font-size: 1.6rem; }
-	        .header h2 { font-size: 1.15rem; }
-	        .section-title { font-size: 1.4rem; }
-
+            .trainer-name {font-size: 1.15rem; }
+            .trainer-details {font-size: 0.9rem;}
+            .header h1 { font-size: 2.2rem; }
+            .headerbis h1 { font-size: 2.2rem; }
+	        .header h2 { font-size: 1.5rem; }
+            .headerbis h2 { font-size: 1.5rem; }
+            .header .subtitle {font-size: 1.15rem}
+            .headerbis .subtitle {font-size: 1.15rem}
+	        .section-title { font-size: 1.5rem; }
             .column h3 {font-size: 1.15rem; }
-
-            .feature-list {font-size: 0.95rem;}
-
-	        p { font-size: 0.95rem; }
-	        .feature-list li { font-size: 0.95rem; }
+            .feature-list {font-size: 0.90rem;}
+	        .feature-list li { font-size: 0.90rem; }
+            p { font-size: 0.95rem; }
+            h2 { font-size: 1.4rem; }
+            .subject-title {font-size: 1.2rem; }
+            .question-title { font-size: 1.2rem; }
 	        .question-text { font-size: 0.95rem; }
+            .subject-text { font-size: 0.95rem; }
 	        .feature-content p { font-size: 0.95rem; }
-
 	        .btn { font-size: 0.9375rem; padding: 0.625rem 1rem; }
 	        .btn-light { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
             .webinar-banner span { font-size: 0.9rem; }
             .webinar-banner:hover span { font-size: 0.95rem; }
 
 
-
-
-            .header h1 {
-                font-size: 2.2rem;
+            .pricing-content {
+                flex-direction: column;
+                text-align: center;
             }
+
+            .pricing-details {
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .question-image {
+                max-width: 95%;
+                margin: 15px 0;
+            }
+
+            .image-container {
+                padding: 0 5px;
+            }
+
+            .responsive-iframe-container {
+                position: relative;
+                overflow: hidden;
+                padding-top: 150%; /* Ajustez selon la hauteur de votre formulaire */
+                height: 0;
+            }
+
+            .responsive-iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            .synthesis-links { font-size: 0.9rem; }
+            .ressource-grid { gap: 14px; }
+            .ressource-icon { font-size: 1.75rem; }
+            .ressource-content { padding: 10px; }
+            .ressource-content p { font-size: 0.95rem; }
+
+
+    }    
+
+
+        @media screen and (max-width: 480px) {
+                
+
+            .bar { max-width: 380px; }
+
+            .features-grid { grid-template-columns: 1fr; }
+            .trainers-grid { grid-template-columns: 1fr; }
+            .trainer-name {font-size: 1.15rem; }
+            .trainer-details {font-size: 0.9rem;}
+            .header h1 { font-size: 2.0rem; }
+            .headerbis h1 { font-size: 2.0rem; }
+            .header h2 { font-size: 1.4rem; }
+            .headerbis h2 { font-size: 1.4rem; }
+            .header .subtitle {font-size: 1.0rem}
+            .headerbis .subtitle {font-size: 1.0rem}
+            .section-title { font-size: 1.4rem; }
+            .column h3 {font-size: 0.95rem; }
+            .feature-list {font-size: 0.85rem;}
+            .feature-list li { font-size: 0.85rem; }
+            p { font-size: 0.85rem; }
+            h2 { font-size: 1.3rem; }
+            .subject-title {font-size: 1.1rem; }
+            .question-title { font-size: 1.1rem; }
+            .question-text { font-size: 0.85rem; }
+            .subject-text { font-size: 0.85rem; }
+            .feature-content p { font-size: 0.85rem; }
+            .btn { font-size: 0.9375rem; padding: 0.625rem 1rem; }
+            .btn-light { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
+            .webinar-banner span { font-size: 0.8rem; }
+            .webinar-banner:hover span { font-size: 0.9rem; }
 
             .pricing-content {
                 flex-direction: column;
@@ -1253,7 +1364,11 @@
             .ressource-content p { font-size: 0.95rem; }
 
 
-    }    
+            }    
+
+
+
+
         
     @media screen and (max-width: 380px) {
 		

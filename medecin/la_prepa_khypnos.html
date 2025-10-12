@@ -7,82 +7,275 @@
     <title>La Prépa Khypnos - Formation EVC Anesthésie Réanimation</title>
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="stylesheet" href="/styles.css">
+
+<style>
+.offers { margin: 40px 0; }
+.offers-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 22px;
+}
+
+/* Cartes en colonne, bouton collé en bas */
+.offer-card {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	min-height: 100%;          /* pour aligner les hauteurs si besoin */
+	padding: 22px;
+	border-radius: 16px;
+	box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+	position: relative;
+    flex: 1 1 300px;    /* base ~300px, s’adapte */
+	min-width: 260px;   /* ne descend pas trop */
+}
+
+/* Titre centré + séparateur 50% */
+.offer-card h3 {
+	margin: 0;
+	text-align: center;
+	font-size: clamp(1.05rem, 0.9rem + 0.7vw, 1.35rem);
+	font-weight: 800;
+	line-height: 1.25;
+	position: relative;
+	padding-bottom: 14px; /* espace pour la barre */
+}
+.offer-card h3::after {
+	content: "";
+	display: block;
+	width: 80%;
+	height: 1px;                 /* épaisseur de la barre */
+	margin: 10px auto 0;         /* centrage */
+	border-radius: 999px;
+	background: rgba(255,255,255,0.8); /* “clair” par défaut, ajusté par variantes ci-dessous */
+	/* Sur fonds très clairs, on foncera via les classes de variante */
+}
+
+/* Liste plus fine */
+.offer-points {
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 8px;
+}
+.offer-points li {
+	list-style: none;
+	font-size: 0.98rem;
+	line-height: 1.55;
+	font-weight: 450;
+	color: #142034;
+}
+
+/* Bouton centré et “pinned” en bas */
+.offer-btn {
+	margin-top: auto;            /* pousse le bouton en bas */
+	align-self: center;          /* centrage horizontal */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5ch;
+
+	padding: 10px 16px;
+	border-radius: 999px;
+	font-weight: 700;
+	text-decoration: none;
+	color: #0b1220;
+	background: rgba(255,255,255,0.92);
+	box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+	transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.offer-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+	background: #fff;
+}
+
+/* Variantes de fond — du plus clair au plus foncé */
+.offer--cb { /* le plus clair */
+	background-image: linear-gradient(135deg, #eef2ff 0%, #d9e2ff 45%, #c7d2fe 100%);
+}
+.offer--pack { /* moyen */
+	background-image: linear-gradient(135deg, #e9ecff 0%, #9fb2f6 45%, #7f93ea 100%);
+}
+.offer--full { /* le plus foncé */
+	background-image: linear-gradient(135deg, #dcd6ff 0%, #8a72d8 45%, #5f3db4 100%);
+}
+
+/* Couleurs adaptées du séparateur selon la luminosité du fond */
+.offer--cb h3::after { background: rgba(20,32,52,0.2); }   /* fond très clair → barre un peu plus foncée */
+.offer--pack h3::after { background: rgba(255,255,255,0.85); }
+.offer--full h3::after { background: rgba(255,255,255,0.9); }
+
+/* Couleurs de texte pour lisibilité */
+.offer--cb h3, .offer--cb .offer-points { color: #0b1220; }
+.offer--pack h3, .offer--pack .offer-points { color: #0b1220; }
+.offer--full h3, .offer--full .offer-points { color: #0b1220; } /* si tu préfères du texte blanc sur la foncée: remplace par #ffffff */
+
+/* Responsive léger */
+@media (max-width: 760px) {
+	.offers-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+	.offer-card { padding: 18px; border-radius: 14px; }
+	.offer-btn { padding: 9px 14px; }
+}
+
+</style>
+
 </head>
 
 <body>
 
-    	<header class="headerbis">
-			<h1>🩺 Khypnos</h1>
-			<h2>Préparer les EVC en Anesthésie Réanimation</h2>
-			<div class="subtitle">Méthodologie • Annales • Recommandations</div>
-		</header>
-	
     <div class="container">
         
         <h2 class="section-title">🎯 Les points forts de notre formation</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🕑</div>
-                <p style="text-align: justify;"><strong>Plus de 70 heures de cours en ligne</strong> le soir, de 18h &agrave; 22h les mercredi et de 14h &agrave; 18h les samedi, dispens&eacute;s par des professeurs experts en m&eacute;thodologie.<br>Des professeurs toujours disponibles pour r&eacute;pondre &agrave; vos questions.<br><br>L&apos;&eacute;quipe est compos&eacute;e exclusivement<strong>&nbsp;d&apos;anesth&eacute;sistes-r&eacute;animateurs</strong>, sp&eacute;cialis&eacute;s dans diff&eacute;rents domaines : p&eacute;diatrie, maternit&eacute;, cardiologie, neuro-r&eacute;animation&hellip;</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🕑</div>
+                    <strong>Plus de 70 heures de cours en ligne en direct, </strong>de 18h à 22h les mercredi et de 14h à 18h les samedi.
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    Une équipe <strong>d'anesthésistes / réanimateurs</strong>, spécialisés dans différents domaines : pédiatrie, maternité, cardiologie, neuro-réanimation.
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <strong>Tout le programme d'anesthésie-réanimation</strong> couvert, en direct (accessible en replay), avec un <strong>focus sur les recommandations récentes de la SFAR.</strong>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    Des professeurs disponibles par <strong>mail ou sur le groupe Whatsapp de la prépa</strong> pour des échanges fluides et dynamiques.
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📂</div>
+                    Les <strong>corrections d'annales</strong> détaillées et commentées avec rappels de cours, mises à jour avec les recommandations les plus récentes.
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    Des <strong>concours blancs</strong> pour la voie interne (format QCM) et pour la voie externe (rédactionnels).
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🫀</div>
+                    Un <strong>enseignement centré sur la physiologie</strong> assurée par des experts en hémodynamique, neuro-réanimation et ventilation.
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    Une équipe expérimentée, enseignant quotidiennement ces spécialités <strong>aux internes des hôpitaux universitaires français</strong>.
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">👨‍🎓</div>
-                <p style="text-align: justify;"><strong></strong>Des professeurs toujours disponibles pour répondre à vos questions.<br>L'équipe est compos&eacute;e exclusivement<strong>&nbsp;d&apos;anesth&eacute;sistes-r&eacute;animateurs</strong>, sp&eacute;cialis&eacute;s dans diff&eacute;rents domaines : p&eacute;diatrie, maternit&eacute;, cardiologie, neuro-r&eacute;animation&hellip;</p>
+
+
+                <h2 class="section-title" data-reveal="left">🧑‍🎓 Nos formateurs experts</h2>
+                <div class="trainers-section">
+                    <div class="trainers-grid">
+                        <div class="trainer-card">
+                            <div class="trainer-image"><img src="/img/BD_round.png" alt="Dr Duceau" style="margin: 0 auto 0 0; display: block; "></div>
+                            <div class="trainer-name">Dr Duceau Baptiste</div>
+                            <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 288e aux ECN 2012<br>&bull; Ancien Chef de Clinique<br>&bull; Chirurgie Cardiaque &agrave; la Piti&eacute; Salp&ecirc;tri&egrave;re</div>
+                        </div>
+                        <div class="trainer-card">
+                            <div class="trainer-image"><img src="/img/AM_round.png" alt="Dr Mailloux" style="margin: 0 auto 0 0; display: block; "></div>
+                            <div class="trainer-name">Dr Arnaud Mailloux</div>
+                            <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 1337e aux ECN 2012<br>&bull; Enseignant en &eacute;cole d&apos;IADE<br></div>
+                        </div>
+                        <div class="trainer-card">
+                            <div class="trainer-image"><img src="/img/TR_round.bmp" alt="Dr Rambaud" style="margin: 0 auto 0 0; display: block; "></div>
+                            <div class="trainer-name">Dr Thomas Rambaud</div>
+                            <div class="trainer-details">&bull; Neurologue &ndash; DESC MIR<br>&bull; Class&eacute; 2e aux ECN 2014<br>&bull; Ancien Chef de Clinique<br>&bull; Neuro-r&eacute;animation &ndash; H&ocirc;pital Foch</div>
+                        </div>
+                    </div>
+                </div>
+
+        <h2 class="section-title">Les formules 2025</h2>
+
+		<div class="columns" data-reveal="right" data-stagger data-stagger-target=":scope > .offer" data-stagger-step="110">
+			<div class="offer" data-reveal="right">
+				<div class="buttons-container">
+					<a href="/medecin/demande_concours.html" class="btn btn-outline">📝 Concours Blanc<br>150€ TTC (5 premiers)</a>
+				</div>
+				<ul class="feature-list">
+					<li style="text-align: justify;">Le concours blanc fera plus d'une centaine de QCM, et bénéficiera d'une correction détaillée. Vérifiez que vous êtes prêt.</li>
+					<li>✅ <strong>Concours Blanc format QCM</strong> de l'épreuve des EVC voie interne</li>
+					<li>✅ <strong>Concours Blanc format rédactionnel&nbsp;</strong>pour les inscriptions voie externe</li>
+					<li>✅ <strong>10 places ouvertes<br></strong></li>
+                    <li>Prix <strong>200€ TTC</strong></li>
+            	</ul>
+			</div>
+
+			<div class="offer" data-reveal="right">
+				<div class="buttons-container">
+					<a href="medecin/demande_inscription.html" class="btn btn-filled">&nbsp;🔥 Formule BOOST<br>1140€ TTC (5 premiers)</a>
+				</div>
+				<ul class="feature-list">
+					<li style="text-align: justify;">Avec la formule BOOST, plus de <strong>1000 QCM</strong> pour <strong>intégrer les 309 places disponibles</strong> aux EVC Anesthésie-Réanimation!</li>
+					<li>✅ Accès aux <strong>corrigés d'annales</strong></li>
+					<li>✅ Accès aux vidéos de formation Khypnos : <strong>toute l'anesthésie-réanimation en 60 heures</strong></li>
+					<li>✅ <strong>Concours Blanc</strong> format QCM de l'épreuve des EVC</li>
+					<li>✅ 4 sessions de 2h de <strong>QCM corrigés</strong> en séance visio en Octobre - Novembre 2025</li>
+					<li>✅ <strong>10 places ouvertes<br></strong></li>
+					<li>Prix <strong>1680 Euros TTC</strong></li>
+				</ul>
+			</div>
+		</div>
+
+        <h2 class="section-title">Formations 2026 - Ouverture janvier 2026</h2>
+
+        <div class="column">
+            	<h3>Offre de Formation 2026</h3>
+				<ul class="feature-list">
+					<li><span class="emoji">📅</span>Inscriptions de Janvier 2026 à Juin 2026</li>
+					<li><span class="emoji">📝</span><a href="/medecin/demande_concours.html" class="souschap" rel="noopener noreferrer">Concours Blanc Khypnos</a> au sein d'une formule ou en stand-alone</li>
+					<li><span class="emoji">💻</span>Formation en <strong>distanciel</strong></li>
+        			<li>Formation complète : Enseignements les <strong>Mercredi soir</strong> et <strong>Samedi après-midi</strong></li>
+					<li><span class="emoji">📆</span>Période : Juin à novembre 2026</li>
+				</ul>
+		</div>
+
+        <section class="offers">
+            <div class="offers-grid">
+                <article class="offer-card offer--cb">
+                    <h3>Concours blanc seul</h3>
+                    <ul class="offer-points">
+                        <li>Au choix :</li>
+                        <li> • <strong>Format QCM</strong> (voie interne)</li>
+                        <li> • <strong>Format rédactionnel</strong> (voie externe)</li>
+                        <li>Correction en session interactive</li>
+                        <li>Conseils méthodologiques</li>
+                    </ul>
+                    <a class="offer-btn" href="/medecin/demande_concours.html">S’inscrire</a>
+                </article>
+
+                <article class="offer-card offer--pack">
+                    <h3>Pack 800 QCMs</h3>
+                    <ul class="offer-points">
+                        <li><strong>Ciblé Voie interne</strong></li>
+                        <li>4 épreuves de 200 QCMs</li>
+                        <li>Corrections sous format PDF avec justifications</li>
+                        <li>Formation en autonomie</li>
+                    </ul>
+                    <a class="offer-btn" href="#inscription-pack-800">S’inscrire</a>
+                </article>
+
+                <article class="offer-card offer--full">
+                    <h3>Formation complète</h3>
+                    <ul class="offer-points">
+                        <li><strong>Formation la plus complète</strong></li>
+                        <li>Sessions de cours en direct</li>
+                        <li>Accès aux vidéos de formation Khypnos</li>
+                        <li>Accès aux corrigés d’annales</li>
+                        <li>2 concours blancs</li>
+                    </ul>
+                    <a class="offer-btn" href="#inscription-formation-complete">S’inscrire</a>
+                </article>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🕑</div>
-                <p style="text-align: justify;"><strong>Tous le programme d'anesthésie-réanimation</strong> est couvert lors de nos cours, en direct (et accessibles en replay), avec un <strong>focus sur les recommandations récentes de la SFAR.</strong></p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📋</div>
-                <p style="text-align: justify;">R&eacute;vision des <strong>corrections d&apos;annales</strong>, valid&eacute;es par un panel de professeurs selon la grille officielle. Notre &eacute;quipe de professeurs, famili&egrave;re avec plusieurs grilles officielles du CNG, ma&icirc;trise parfaitement leurs m&eacute;thodes d&apos;&eacute;valuation.<br><br>Un syst&egrave;me de points par mots-cl&eacute;s vous permet de vous auto-&eacute;valuer &agrave; chaque correction.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎓</div>
-                <p style="text-align: justify;">Deux <strong>concours blancs</strong> de 4 heures chacun en conditions r&eacute;elles d&apos;examen. Le premier concours, organis&eacute; en d&eacute;but de formation, permet <strong>d&apos;identifier vos points faibles et axes d&apos;am&eacute;lioration</strong>, avec un classement et des conseils m&eacute;thodologiques personnalis&eacute;s. Le second concours, en fin de programme, vous aide &agrave; rep&eacute;rer vos derni&egrave;res lacunes avant l&apos;&eacute;ch&eacute;ance finale. <strong>Les sujets sont &eacute;labor&eacute;s selon le programme officiel des EVC</strong>, en se concentrant sur les th&egrave;mes les plus susceptibles d&apos;&ecirc;tre &eacute;valu&eacute;s.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🫀</div>
-                <p style="text-align: justify;">Un <strong>enseignement de la physiologie</strong> assur&eacute; par des experts en h&eacute;modynamique, neuro-r&eacute;animation et ventilation. Notre &eacute;quipe, qui enseigne quotidiennement ces sp&eacute;cialit&eacute;s aux internes des h&ocirc;pitaux fran&ccedil;ais, dispose d&apos;une <strong>expertise approfondie dans l&apos;enseignement m&eacute;dical</strong>.</p><strong>&nbsp;</strong>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💳</div>
-                <p style="text-align: center;">Une tarification transparente : <span style="font-size: 22px;"><strong>3 240&nbsp;&euro;</strong></span>
-                <p style="text-align: center;">(2 700 &euro; HT)&nbsp;</p>
-				<p style="text-align: center;">Soit 44&nbsp;&euro;/h TTC</p>
-            </div>
-        </div>
-    <div class="trainers-section">
-        <div class="trainers-title">🧑&zwj;🎓 Nos formateurs experts</div>
-        <div class="trainers-grid">
-            <div class="trainer-card">
-                <div class="trainer-image"><img src="/img/BD_round.png" alt="Dr Duceau" style="margin: 0 auto 0 0; display: block; "></div>
-                <div class="trainer-name">Dr Duceau Baptiste</div>
-                <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 288e aux ECN 2012<br>&bull; Ancien Chef de Clinique<br>&bull; Chirurgie Cardiaque &agrave; la Piti&eacute; Salp&ecirc;tri&egrave;re</div>
-            </div>
-            <div class="trainer-card">
-                <div class="trainer-image"><img src="/img/AM_round.png" alt="Dr Mailloux" style="margin: 0 auto 0 0; display: block; "></div>
-                <div class="trainer-name">Dr Arnaud Mailloux</div>
-                <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 1337e aux ECN 2012<br>&bull; Enseignant en &eacute;cole d&apos;IADE<br>&bull; Ancien enseignant en pr&eacute;pa Major ECN</div>
-            </div>
-            <div class="trainer-card">
-                <div class="trainer-image"><img src="/img/TR_round.bmp" alt="Dr Rambaud" style="margin: 0 auto 0 0; display: block; "></div>
-                <div class="trainer-name">Dr Thomas Rambaud</div>
-                <div class="trainer-details">&bull; Neurologue &ndash; DESC MIR<br>&bull; Class&eacute; 2e aux ECN 2014<br>&bull; Ancien Chef de Clinique<br>&bull; Neuro-r&eacute;animation &ndash; H&ocirc;pital Foch</div>
-            </div>
-        </div>
-    </div>
-    <div class="cta-section">
-        <h3>🚀 Rejoignez notre formation compl&egrave;te</h3>
-        <p>Ces webinaires sont un aper&ccedil;u de notre programme de formation. D&eacute;couvrez notre pr&eacute;paration intensive pour maximiser vos chances de r&eacute;ussite aux EVC.</p><a href="/index.html" class="cta-button">D&eacute;couvrir la formation Khypnos</a>
-    </div>
+        </section>
     
     		<nav class="back-link" aria-label="Retour">
 				<a href="/index.html">🏠 Retour à l’accueil</a>
-		</nav>
+		    </nav>
 
 	</div>
     
+    <script src="/js/header-manager.js" defer></script>    
     <script src="/js/scroll-to-top.min.js"></script>	
     <script src="/js/navbar.js"></script>
 	<script src="/js/script.js"></script>

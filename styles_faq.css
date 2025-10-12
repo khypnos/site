@@ -75,8 +75,10 @@
 		}
 		.faq-inner{
 			font-size: 1.0rem;
+			text-align: justify;
 			padding:0 22px 18px 64px; /* aligné après l’icône */
 			color:var(--muted);
+
 		}
 
 		/* Accessibilité focus */
