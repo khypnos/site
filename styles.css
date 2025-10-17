@@ -61,7 +61,17 @@
         .header .content {
             position: relative;                 /* passe au-dessus de la vidéo et de l’overlay */
             z-index: 1;
-            color: #000000;
+            color: #000000;                   /* remplissage  */
+        }
+
+        .header h1 {
+            color: #ffffff; /* remplissage blanc */
+            -webkit-text-stroke: 2px #667eea; /* épaisseur et couleur du contour */
+            text-shadow: 2px #667eea;         /* (fallback non standard) */
+            /* Pour améliorer la lisibilité sur video + overlay */
+            text-shadow:
+                0 0 1px rgba(0,0,0,.25),
+                0 2px 4px rgba(0,0,0,.25);
         }
 
         .headerbis {
