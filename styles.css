@@ -1247,6 +1247,7 @@
 	        .btn-light { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
             .webinar-banner span { font-size: 0.9rem; }
             .webinar-banner:hover span { font-size: 0.95rem; }
+            .back-link { font-size: 0.95rem; }
 
 
             .pricing-content {
