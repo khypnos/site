@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khypnos - Acheter les Annales EVC Anesthésie-Réanimation</title>
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+	<link rel="stylesheet" href="/styles.css">
+    <style>
+        /* Segmented control (reprend ta charte #667eea / #764ba2) */
+.offer-toggle {
+	--bg: #eef2ff;
+	--fg: #2c3e50;
+	--accent: #667eea;
+	--accent-2: #764ba2;
+	position: relative;
+	display: grid;
+	grid-auto-flow: column;
+	gap: 6px;
+	padding: 6px;
+	border-radius: 9999px;
+	background: var(--bg);
+	border: 1px solid rgba(102, 126, 234, 0.25);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.06) inset;
+	max-width: 960px; /* un peu plus large pour 3 onglets */
+	margin: 12px auto 8px;
+}
+.offer-toggle button[role="tab"] {
+	position: relative;
+	z-index: 1; /* au-dessus du thumb */
+	appearance: none;
+	border: 0;
+	background: transparent;
+	color: var(--fg);
+	font-weight: 700;
+	padding: 10px 14px;
+	border-radius: 9999px;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: color .2s ease, transform .1s ease;
+}
+.offer-toggle button[role="tab"]:hover { transform: translateY(-1px); }
+.offer-toggle button.is-active { color: #fff; }
+.offer-toggle__thumb {
+	position: absolute;
+	inset: 6px auto 6px 6px; /* sera déplacé en JS */
+	width: calc(33.333% - 6px); /* valeur initiale approximative, ajustée en JS */
+	border-radius: 9999px;
+	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+	box-shadow: 0 6px 16px rgba(103, 126, 234, 0.35);
+	transition: transform .25s ease, width .25s ease;
+}
+
+/* Conteneur des panneaux */
+.offer-panels {
+	display: flex;
+	justify-content: center;
+	margin-top: 1rem;
+}
+.offer-panels stripe-buy-button {
+	display: block;
+	margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+	.offer-toggle { max-width: 36rem; }
+	.offer-toggle button[role="tab"] {
+		font-size: 0.90rem;
+		padding: 0.6rem 0.7rem;
+	}
+}
+@media (max-width: 600px) {
+	.offer-toggle { max-width: 22rem; gap: 0.25rem; }
+	.offer-toggle button[role="tab"] {
+		font-size: 0.85rem;
+		padding: 0.5rem 0.625rem; /* 8px 10px */
+		white-space: normal;       /* autorise les retours à la ligne */
+		text-align: center;
+		line-height: 1.3;
+	}
+}
+
+.text-justify { text-align: justify; }
+
+.pricing-list {
+	margin: 0.75rem 0 1rem;
+	padding: 0;
+	display: grid;
+	gap: 0.5rem 1rem;
+}
+
+.pricing-item {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: baseline;
+	gap: 0.5rem 1rem;
+	padding: 0.5rem 0;
+	border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.pricing-item:last-child { border-bottom: 0; }
+
+.pricing-item dt {
+	margin: 0;
+	font-weight: 600;
+	color: #2c3e50; /* cohérent avec votre charte */
+}
+
+.pricing-item dd {
+	margin: 0;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.h-inline {
+	margin: 0.75rem 0 0.25rem;
+	font-size: 1.05rem;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2 class="section-title">Corrections d'annales des EVC Anesthésie-Réanimation</h2>
+
+        <div class="links-section">
+
+            <p class="text-justify">
+                Nous proposons les annales 2024, 2023, 2021, 2020, 2019, 2017 (pratique uniquement), 2014, 2013, 2009.
+                Les corrigés sont tous enrichis de rappels de cours, de recommandations à lire et de conseils méthodologiques.
+            </p>
+            <br>
+
+            <p class="text-justify">🎯 Objectif&nbsp;: <strong>vous entraîner en autonomie</strong>.</p>
+
+            <p class="text-justify">💻 Les annales vous parviennent par <strong>e‑mail au format PDF</strong>.</p>
+
+            <p>
+                📩 Exemple téléchargeable sur demande:
+                <a href="mailto:khypnos.med@gmail.com" class="contact-email"><strong>khypnos.med@gmail.com</strong></a>
+            </p>
+            <br>
+
+            <p class="text-justify">💳 Tarifs</p>
+            <ul class="feature-list">
+                <li>Une annale (EVCP + EVCF, année au choix)&nbsp;: <strong>50&nbsp;€ TTC</strong></li>
+                <li>Pack 4 annales (EVCP + EVCF, 4 années au choix)&nbsp;: <strong>150&nbsp;€ TTC</strong></li>
+                <li>Pack complet (toutes les annales disponibles)&nbsp;: <strong>250&nbsp;€ TTC</strong></li>
+            </ul>
+
+        </div>
+        
+        <!-- Stripe JS (chargé une seule fois) -->
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+        <!-- Toggle visuel: 3 options -->
+        <div class="offer-toggle" role="tablist" aria-label="Choix de l’offre">
+            <button type="button" role="tab" aria-selected="true" aria-controls="panel-simple" id="tab-simple" class="is-active">
+                Annale simple • 50€
+            </button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="panel-pack4" id="tab-pack4">
+                Pack 4 annales • 150€
+            </button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="panel-complet" id="tab-complet">
+                Pack complet • 250€
+            </button>
+            <span class="offer-toggle__thumb" aria-hidden="true"></span>
+        </div>
+
+        <!-- Panneaux -->
+        <div class="offer-panels">
+            <!-- Annale simple -->
+            <div id="panel-simple" role="tabpanel" aria-labelledby="tab-simple">
+                <stripe-buy-button
+                    buy-button-id="buy_btn_1SPmTiKkjxDJ53DVhiabSqmj"
+                    publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
+                </stripe-buy-button>
+            </div>
+
+            <!-- Pack 4 annales -->
+            <div id="panel-pack4" role="tabpanel" aria-labelledby="tab-pack4" hidden>
+                <stripe-buy-button
+                    buy-button-id="buy_btn_1SPmPVKkjxDJ53DVPi8Cuuit"
+                    publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
+                </stripe-buy-button>
+            </div>
+
+            <!-- Pack complet -->
+            <div id="panel-complet" role="tabpanel" aria-labelledby="tab-complet" hidden>
+                <stripe-buy-button
+                    buy-button-id="buy_btn_1SPmEiKkjxDJ53DVZcc2V9gW"
+                    publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
+                </stripe-buy-button>
+            </div>
+        </div>
+
+
+        <h2 class="section-title">🚀 Liens utiles</h2>
+        <div class="links-section">
+            <div class="column">
+                <ul class="feature-list">
+                    <li><span class="emoji">✅</span><a href="/medecin/la_prepa_khypnos.html" rel="noopener noreferrer"><strong>La pr&eacute;pa Khypnos</strong></a></li>
+                    <li><span class="emoji">🩺</span><a href="https://khypnos.notion.site/Guide-de-r-ussite-Khypnos-171f71268efe800ea132ff6dd150aef9" rel="noopener noreferrer"><strong>Guide de r&eacute;ussite Khypnos</strong></a></li>
+                    <li><span class="emoji">📔</span><a href="/medecin/demande_programme.html"><strong>Recevoir le programme</strong></a></li>
+                    <li><span class="emoji">📃</span><a href="/medecin/demande_inscription.html" rel="noopener noreferrer"><strong>Formulaire d&apos;inscription</strong></a></li>
+                </ul>
+            </div>
+        </div>
+        
+		<nav class="back-link" aria-label="Retour">
+				<a href="/index.html">🏠 Retour à l’accueil</a>
+		</nav>
+
+	</div>
+
+    <script src="/js/header-manager.js" defer></script>    
+    <script src="/js/scroll-to-top.min.js"></script>	
+    <script src="/js/navbar.js"></script>
+	<script src="/js/script.js"></script>
+    <script src="/js/footer-manager.js" defer></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			new FooterManager({
+				anchor: '.container',
+				position: 'beforeend'
+			}).init();
+		});
+	</script>
+
+    <script>
+    (function(){
+        const toggle = document.querySelector('.offer-toggle');
+        if (!toggle) return;
+
+        const thumb = toggle.querySelector('.offer-toggle__thumb');
+        const tabs = [
+            document.getElementById('tab-simple'),
+            document.getElementById('tab-pack4'),
+            document.getElementById('tab-complet')
+        ].filter(Boolean);
+
+        const panels = [
+            document.getElementById('panel-simple'),
+            document.getElementById('panel-pack4'),
+            document.getElementById('panel-complet')
+        ].filter(Boolean);
+
+        function measureAndMove(idx){
+            if (!tabs[idx]) return;
+            // base = bord gauche du 1er onglet
+            const baseLeft = tabs[0].getBoundingClientRect().left + window.scrollX;
+            const targetRect = tabs[idx].getBoundingClientRect();
+            const dx = (targetRect.left + window.scrollX) - baseLeft;
+            thumb.style.transform = `translateX(${dx}px)`;
+            thumb.style.width = `${targetRect.width}px`;
+        }
+
+        function activate(idx){
+            tabs.forEach((t, i) => {
+                const active = i === idx;
+                t.classList.toggle('is-active', active);
+                t.setAttribute('aria-selected', String(active));
+                t.setAttribute('tabindex', active ? '0' : '-1');
+            });
+            panels.forEach((p, i) => { if (p) p.hidden = i !== idx; });
+            requestAnimationFrame(() => measureAndMove(idx));
+        }
+
+        // Clic
+        tabs.forEach((btn, idx) => btn.addEventListener('click', () => activate(idx)));
+
+        // Clavier (gauche/droite + Entrée/Espace)
+        tabs.forEach((btn, idx) => {
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const next = e.key === 'ArrowRight' ? (idx + 1) % tabs.length : (idx - 1 + tabs.length) % tabs.length;
+                    tabs[next].focus();
+                    activate(next);
+                }
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    activate(idx);
+                }
+            });
+        });
+
+        // Init: si aucun actif, activer le premier
+        window.addEventListener('load', () => {
+            const hasActive = tabs.some(t => t.classList.contains('is-active'));
+            if (!hasActive) {
+                tabs[0].classList.add('is-active');
+                tabs[0].setAttribute('aria-selected', 'true');
+                for (let i = 1; i < panels.length; i++) if (panels[i]) panels[i].hidden = true;
+            }
+            const activeIdx = tabs.findIndex(t => t.classList.contains('is-active')) || 0;
+            measureAndMove(activeIdx);
+        });
+
+        // Recalcule au redimensionnement
+        window.addEventListener('resize', () => {
+            const activeIdx = tabs.findIndex(t => t.classList.contains('is-active'));
+            requestAnimationFrame(() => measureAndMove(activeIdx === -1 ? 0 : activeIdx));
+        });
+    })();
+    </script>
+	
+</body>
+
+</html>
