@@ -85,6 +85,7 @@
 .text-justify { text-align: justify; }
 
 .pricing-list {
+    font-size: 1rem;
 	margin: 0.75rem 0 1rem;
 	padding: 0;
 	display: grid;
@@ -104,7 +105,7 @@
 
 .pricing-item dt {
 	margin: 0;
-	font-weight: 600;
+	font-weight: 400 ;
 	color: #2c3e50; /* cohérent avec votre charte */
 }
 
@@ -118,6 +119,15 @@
 	margin: 0.75rem 0 0.25rem;
 	font-size: 1.05rem;
 }
+
+@media screen and (max-width: 768px) { 
+    .pricing-list { font-size: 0.95rem; }
+}
+
+@media screen and (max-width: 480px) { 
+    .pricing-list { font-size: 0.85rem; }
+}
+
 
     </style>
 </head>
@@ -147,11 +157,21 @@
             <br>
 
             <p class="text-justify">💳 Tarifs</p>
-            <ul class="feature-list">
-                <li>Une annale (EVCP + EVCF, année au choix)&nbsp;: <strong>50&nbsp;€ TTC</strong></li>
-                <li>Pack 4 annales (EVCP + EVCF, 4 années au choix)&nbsp;: <strong>150&nbsp;€ TTC</strong></li>
-                <li>Pack complet (toutes les annales disponibles)&nbsp;: <strong>250&nbsp;€ TTC</strong></li>
-            </ul>
+
+            <dl class="pricing-list">
+                <div class="pricing-item">
+                    <dt><strong>Une annale</strong> (EVCP + EVCF, année au choix)</dt>
+                    <dd>50€ TTC</dd>
+                </div>
+                <div class="pricing-item">
+                    <dt><strong>Pack 4 annales</strong> (EVCP + EVCF, 4 années au choix)</dt>
+                    <dd>150€ TTC</dd>
+                </div>
+                <div class="pricing-item">
+                    <dt><strong>>Pack complet</strong>Pack complet (toutes les annales disponibles)</dt>
+                    <dd>250€ TTC</dd>
+                </div>
+            </dl>
 
         </div>
         
