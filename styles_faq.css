@@ -96,6 +96,13 @@
 			.faq-icon{width:26px;height:26px}
 		}
 
+		@media (max-width:480px){
+			.faq-inner{padding-left:42px; font-size: 0.8rem;}
+			.faq-header{padding:8px 8px}
+			.faq-question{font-size: 0.80rem;}
+			.faq-icon{width:18px;height:18px}
+		}
+
 
 	.links-section .faq .faq-header {
 	display: flex;

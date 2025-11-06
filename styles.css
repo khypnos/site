@@ -1234,7 +1234,7 @@
 	        .btn-light { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
             .webinar-banner span { font-size: 0.9rem; }
             .webinar-banner:hover span { font-size: 0.95rem; }
-            .back-link { font-size: 0.95rem; }
+            .back-link { font-size: 0.95rem; margin: 20px 0;}
             .annales-link { font-size: 0.95rem; }
 
             .cta-buttons {
@@ -1281,7 +1281,6 @@
                 
 
             .bar { max-width: 380px; }
-
             .features-grid { grid-template-columns: 1fr; }
             .trainers-grid { grid-template-columns: 1fr; }
             .trainer-name {font-size: 1.15rem; }
@@ -1307,7 +1306,7 @@
             .btn-light { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
             .webinar-banner span { font-size: 0.8rem; }
             .webinar-banner:hover span { font-size: 0.9rem; }
-            .back-link { font-size: 0.9rem; }
+            .back-link { font-size: 0.8rem; white-space: nowrap; }
             .annales-link { font-size: 0.9rem; }
 
             .cta-buttons {
@@ -1348,9 +1347,6 @@
 
 
             }    
-
-
-
 
         
     @media screen and (max-width: 380px) {
