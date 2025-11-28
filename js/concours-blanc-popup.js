@@ -2,13 +2,11 @@
 	// Config
 	const CONFIG = {
 		textHTML:
-			'<strong>Concours blanc </strong><br>' +
-            '<strong>160 QCMs</strong><br>' +
-            'Distribution des sujets : 15/11/2025<br>' +
-            'Correction ZOOM : 21/11/2025<br>' +
-			'Les inscriptions sont ouvertes.<br>' +
-			'<a href="#" id="cb-link">S’inscrire</a>',
-		linkHref: '/medecin/demande_concours.html',               // Remplacez par l’URL d’inscription
+			'<strong>Dernière ligne droite</strong><br>' +
+            '<strong>150 QCMs Fondamentaux</strong><br>' +
+			'<p>QCMs de démonstration gratuit dans la rubrique "QCM"</p><br>'+
+			'<a href="#" id="cb-link", class="back-link">S’inscrire</a>',
+		linkHref: 'https://buy.stripe.com/fZudRa8TH3Kr7wA8UO4c80h',               // Remplacez par l’URL d’inscription
 		autoMinimizeDelay: 4000,     // ms avant réduction auto
 		storageKey: 'cb-popup-last-shown', // empreinte "YYYY-MM-DD"
 		zIndex: 9999
@@ -174,7 +172,7 @@
 		toggle.title = 'Concours blanc';
 		toggle.setAttribute('aria-label','Réouvrir la notification');
 		toggle.hidden = true;
-		toggle.textContent = '📝 Concours blanc';
+		toggle.textContent = '📝 QCMs Fondamentaux';
 
 		popup.appendChild(content);
 		popup.appendChild(closeBtn);
