@@ -4,7 +4,7 @@
 		textHTML:
 			'<strong>Dernière ligne droite</strong><br>' +
             '<strong>150 QCMs Fondamentaux</strong><br>' +
-			'<p>QCMs de démonstration gratuit dans la rubrique "QCM"</p><br>'+
+			'<p>QCMs de démonstration gratuits dans la rubrique "QCMs"</p><br>'+
 			'<a href="#" id="cb-link", class="back-link">S’inscrire</a>',
 		linkHref: 'https://buy.stripe.com/fZudRa8TH3Kr7wA8UO4c80h',               // Remplacez par l’URL d’inscription
 		autoMinimizeDelay: 4000,     // ms avant réduction auto
