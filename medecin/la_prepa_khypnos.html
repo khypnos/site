@@ -8,117 +8,6 @@
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="stylesheet" href="/styles.css">
 
-<style>
-.offers { margin: 40px 0; }
-.offers-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-	gap: 22px;
-}
-
-/* Cartes en colonne, bouton collé en bas */
-.offer-card {
-	display: flex;
-	flex-direction: column;
-	gap: 14px;
-	min-height: 100%;          /* pour aligner les hauteurs si besoin */
-	padding: 22px;
-	border-radius: 16px;
-	box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-	position: relative;
-    flex: 1 1 300px;    /* base ~300px, s’adapte */
-	min-width: 260px;   /* ne descend pas trop */
-}
-
-/* Titre centré + séparateur 50% */
-.offer-card h3 {
-	margin: 0;
-	text-align: center;
-	font-size: clamp(1.05rem, 0.9rem + 0.7vw, 1.35rem);
-	font-weight: 800;
-	line-height: 1.25;
-	position: relative;
-	padding-bottom: 14px; /* espace pour la barre */
-}
-.offer-card h3::after {
-	content: "";
-	display: block;
-	width: 80%;
-	height: 1px;                 /* épaisseur de la barre */
-	margin: 10px auto 0;         /* centrage */
-	border-radius: 999px;
-	background: rgba(255,255,255,0.8); /* “clair” par défaut, ajusté par variantes ci-dessous */
-	/* Sur fonds très clairs, on foncera via les classes de variante */
-}
-
-/* Liste plus fine */
-.offer-points {
-	margin: 0;
-	padding: 0;
-	display: grid;
-	gap: 8px;
-}
-.offer-points li {
-	list-style: none;
-	font-size: 0.98rem;
-	line-height: 1.55;
-	font-weight: 450;
-	color: #142034;
-}
-
-/* Bouton centré et “pinned” en bas */
-.offer-btn {
-	margin-top: auto;            /* pousse le bouton en bas */
-	align-self: center;          /* centrage horizontal */
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5ch;
-
-	padding: 10px 16px;
-	border-radius: 999px;
-	font-weight: 700;
-	text-decoration: none;
-	color: #0b1220;
-	background: rgba(255,255,255,0.92);
-	box-shadow: 0 2px 10px rgba(0,0,0,0.10);
-	transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-}
-.offer-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-	background: #fff;
-}
-
-/* Variantes de fond — du plus clair au plus foncé */
-.offer--cb { /* le plus clair */
-	background-image: linear-gradient(135deg, #eef2ff 0%, #d9e2ff 45%, #c7d2fe 100%);
-}
-.offer--pack { /* moyen */
-	background-image: linear-gradient(135deg, #e9ecff 0%, #9fb2f6 45%, #7f93ea 100%);
-}
-.offer--full { /* le plus foncé */
-	background-image: linear-gradient(135deg, #dcd6ff 0%, #8a72d8 45%, #5f3db4 100%);
-}
-
-/* Couleurs adaptées du séparateur selon la luminosité du fond */
-.offer--cb h3::after { background: rgba(20,32,52,0.2); }   /* fond très clair → barre un peu plus foncée */
-.offer--pack h3::after { background: rgba(255,255,255,0.85); }
-.offer--full h3::after { background: rgba(255,255,255,0.9); }
-
-/* Couleurs de texte pour lisibilité */
-.offer--cb h3, .offer--cb .offer-points { color: #0b1220; }
-.offer--pack h3, .offer--pack .offer-points { color: #0b1220; }
-.offer--full h3, .offer--full .offer-points { color: #0b1220; } /* si tu préfères du texte blanc sur la foncée: remplace par #ffffff */
-
-/* Responsive léger */
-@media (max-width: 760px) {
-	.offers-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-	.offer-card { padding: 18px; border-radius: 14px; }
-	.offer-btn { padding: 9px 14px; }
-}
-
-</style>
 
 </head>
 
@@ -170,104 +59,111 @@
                         <div class="trainer-card">
                             <div class="trainer-image"><img src="/img/BD_round.png" alt="Dr Duceau" style="margin: 0 auto 0 0; display: block; "></div>
                             <div class="trainer-name">Dr Duceau Baptiste</div>
-                            <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 288e aux ECN 2012<br>&bull; Ancien Chef de Clinique<br>&bull; Chirurgie Cardiaque &agrave; la Piti&eacute; Salp&ecirc;tri&egrave;re</div>
+                            <div class="trainer-details">&bull; Anesthésiste-Réanimateur<br>&bull; Classé 288e aux ECN 2012<br>&bull; Ancien Chef de Clinique<br>&bull; Chirurgie Cardiaque &agrave; la Pitié Salp&ecirc;trière</div>
                         </div>
                         <div class="trainer-card">
                             <div class="trainer-image"><img src="/img/AM_round.png" alt="Dr Mailloux" style="margin: 0 auto 0 0; display: block; "></div>
                             <div class="trainer-name">Dr Arnaud Mailloux</div>
-                            <div class="trainer-details">&bull; Anesth&eacute;siste-R&eacute;animateur<br>&bull; Class&eacute; 1337e aux ECN 2012<br>&bull; Enseignant en &eacute;cole d&apos;IADE<br></div>
+                            <div class="trainer-details">&bull; Anesthésiste-Réanimateur<br>&bull; Classé 1337e aux ECN 2012<br>&bull; Enseignant en école d'IADE<br></div>
                         </div>
                         <div class="trainer-card">
                             <div class="trainer-image"><img src="/img/TR_round.bmp" alt="Dr Rambaud" style="margin: 0 auto 0 0; display: block; "></div>
                             <div class="trainer-name">Dr Thomas Rambaud</div>
-                            <div class="trainer-details">&bull; Neurologue &ndash; DESC MIR<br>&bull; Class&eacute; 2e aux ECN 2014<br>&bull; Ancien Chef de Clinique<br>&bull; Neuro-r&eacute;animation &ndash; H&ocirc;pital Foch</div>
+                            <div class="trainer-details">&bull; Neurologue &ndash; DESC MIR<br>&bull; Classé 2e aux ECN 2014<br>&bull; Ancien Chef de Clinique<br>&bull; Neuro-réanimation &ndash; H&ocirc;pital Foch</div>
                         </div>
                     </div>
                 </div>
 
-        <h2 class="section-title">Les formules 2025</h2>
-
-		<div class="columns" data-reveal="right" data-stagger data-stagger-target=":scope > .offer" data-stagger-step="110">
-			<div class="offer" data-reveal="right">
-				<div class="buttons-container">
-					<a href="/medecin/demande_concours.html" class="btn btn-outline">📝 Concours Blanc<br>150€ TTC (5 premiers)</a>
-				</div>
-				<ul class="feature-list">
-					<li style="text-align: justify;">Le concours blanc fera plus d'une centaine de QCM, et bénéficiera d'une correction détaillée. Vérifiez que vous êtes prêt.</li>
-					<li>✅ <strong>Concours Blanc format QCM</strong> de l'épreuve des EVC voie interne</li>
-					<li>✅ <strong>Concours Blanc format rédactionnel&nbsp;</strong>pour les inscriptions voie externe</li>
-					<li>✅ <strong>10 places ouvertes<br></strong></li>
-                    <li>Prix <strong>200€ TTC</strong></li>
-            	</ul>
-			</div>
-
-			<div class="offer" data-reveal="right">
-				<div class="buttons-container">
-					<a href="medecin/demande_inscription.html" class="btn btn-filled">&nbsp;🔥 Formule BOOST<br>1140€ TTC (5 premiers)</a>
-				</div>
-				<ul class="feature-list">
-					<li style="text-align: justify;">Avec la formule BOOST, plus de <strong>1000 QCM</strong> pour <strong>intégrer les 309 places disponibles</strong> aux EVC Anesthésie-Réanimation!</li>
-					<li>✅ Accès aux <strong>corrigés d'annales</strong></li>
-					<li>✅ Accès aux vidéos de formation Khypnos : <strong>toute l'anesthésie-réanimation en 60 heures</strong></li>
-					<li>✅ <strong>Concours Blanc</strong> format QCM de l'épreuve des EVC</li>
-					<li>✅ 4 sessions de 2h de <strong>QCM corrigés</strong> en séance visio en Octobre - Novembre 2025</li>
-					<li>✅ <strong>10 places ouvertes<br></strong></li>
-					<li>Prix <strong>1680 Euros TTC</strong></li>
-				</ul>
-			</div>
-		</div>
-
-        <h2 class="section-title">Formations 2026 - Ouverture janvier 2026</h2>
+        
+        <h2 class="section-title">Formations 2026</h2>
 
         <div class="column">
             	<h3>Offre de Formation 2026</h3>
 				<ul class="feature-list">
-					<li><span class="emoji">📅</span>Inscriptions de Janvier 2026 à Juin 2026</li>
+					<li><span class="emoji">📅</span>Inscriptions de Février 2026 à Juin 2026</li>
 					<li><span class="emoji">📝</span><a href="/medecin/demande_concours.html" class="souschap" rel="noopener noreferrer">Concours Blanc Khypnos</a> au sein d'une formule ou en stand-alone</li>
 					<li><span class="emoji">💻</span>Formation en <strong>distanciel</strong></li>
         			<li>Formation complète : Enseignements les <strong>Mercredi soir</strong> et <strong>Samedi après-midi</strong></li>
-					<li><span class="emoji">📆</span>Période : Juin à novembre 2026</li>
+					<li><span class="emoji">📆</span>Période : Juin à Octobre 2026</li>
 				</ul>
 		</div>
 
-        <section class="offers">
-            <div class="offers-grid">
-                <article class="offer-card offer--cb">
-                    <h3>Concours blanc seul</h3>
-                    <ul class="offer-points">
-                        <li>Au choix :</li>
-                        <li> • <strong>Format QCM</strong> (voie interne)</li>
-                        <li> • <strong>Format rédactionnel</strong> (voie externe)</li>
-                        <li>Correction en session interactive</li>
-                        <li>Conseils méthodologiques</li>
-                    </ul>
-                    <a class="offer-btn" href="/medecin/demande_concours.html">S’inscrire</a>
-                </article>
+<h2 class="section-title">Tarifs 2026</h2>
 
-                <article class="offer-card offer--pack">
-                    <h3>Pack 800 QCMs</h3>
-                    <ul class="offer-points">
-                        <li><strong>Ciblé Voie interne</strong></li>
-                        <li>4 épreuves de 200 QCMs</li>
-                        <li>Corrections sous format PDF avec justifications</li>
-                        <li>Formation en autonomie</li>
-                    </ul>
-                    <a class="offer-btn" href="#inscription-pack-800">S’inscrire</a>
-                </article>
+<section class="offers">
+	<div class="payment-options">
+		<!-- Carte Concours blanc seul -->
+		<article class="payment-card featured">
+			<div class="payment-badge">Populaire</div>
+			<h3>Concours blanc <br> seul</h3>
 
-                <article class="offer-card offer--full">
-                    <h3>Formation complète</h3>
-                    <ul class="offer-points">
-                        <li><strong>Formation la plus complète</strong></li>
-                        <li>Sessions de cours en direct</li>
-                        <li>Accès aux vidéos de formation Khypnos</li>
-                        <li>Accès aux corrigés d’annales</li>
-                        <li>2 concours blancs</li>
-                    </ul>
-                    <a class="offer-btn" href="#inscription-formation-complete">S’inscrire</a>
-                </article>
-            </div>
-        </section>
+			<div class="payment-price">120€ TTC</div>
+
+			<ul class="payment-features">
+				<li><span style="color: #28a745">✓</span> Au choix :</li>
+				<li>• <strong>Format QCM</strong> (voie interne, 50 QCMs)</li>
+				<li>• <strong>Format rédactionnel</strong> (voie externe, EVCF 20 questions, EVCP 20 questions environ)</li>
+				<li><span style="color: #28a745">✓</span> Correction en session interactive</li>
+				<li><span style="color: #28a745">✓</span> Conseils méthodologiques</li>
+			</ul>
+
+			<a class="primary-btn" href="/medecin/demande_concours.html">S’inscrire</a>
+		</article>
+
+		<!-- Carte Formation annales Voie Externe -->
+		<article class="payment-card featured">
+			<h3>Formation annales <br> Voie Externe</h3>
+
+			<div class="payment-price">900€ TTC</div>
+
+			<ul class="payment-features">
+				<li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
+				<li><span style="color: #28a745">✓</span> Conseils méthodologiques</li>
+				<li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
+				<li><span style="color: #dc3545">✗</span> Pas d'accès aux cours Khypnos</li>
+				<li><span style="color: #dc3545">✗</span> Pas d'accès aux concours blanc</li>
+				<li><span style="color: #dab61a">✓</span> Accès aux formateurs Khypnos pendant les sessions de correction</li>
+			</ul>
+
+			<a class="primary-btn" href="#inscription-pack-800">S’inscrire</a>
+		</article>
+
+		<!-- Carte Formation complète Voie Externe -->
+		<article class="payment-card offer-card offer--full">
+			<div class="payment-badge">⭐ Recommandé</div>
+			<h3>Formation complète <br> Voie Externe</h3>
+
+			<div class="payment-price">1800€ TTC</div>
+
+			<ul class="payment-features">
+				<li><strong>Formation la plus complète</strong></li>
+				<li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
+				<li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : 60h de cours remis à jours</li>
+				<li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
+				<li><span style="color: #28a745">✓</span> 2 concours blancs au format des EVC</li>
+				<li><span style="color: #28a745">✓</span> Accès aux formateurs Khypnos priorisé pour toutes questions</li>
+				<li><span style="color: #28a745">✓</span> 10 places ouvertes</li>
+			</ul>
+
+			<a class="primary-btn" href="#inscription-formation-complete">S’inscrire</a>
+		</article>
+
+		<!-- Carte Formation Voie Interne -->
+		<article class="payment-card offer-card offer--full">
+			<h3>Formation <br> Voie Interne</h3>
+
+			<div class="payment-price">Prix selon formation</div>
+
+			<ul class="payment-features">
+				<li><strong>Les offres sont détaillées directement dans l'application Khypnos QCMs</strong></li>
+			</ul>
+
+			<a class="secondary-btn" href="https://khypnos-qcm.vercel.app/" target="_blank">
+				Accès Khypnos QCMs
+			</a>
+		</article>
+	</div>
+</section>
     
     		<nav class="back-link" aria-label="Retour">
 				<a href="/index.html">🏠 Retour à l’accueil</a>

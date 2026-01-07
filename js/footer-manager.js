@@ -34,7 +34,7 @@ class FooterManager {
 					<h4>Formations</h4>
 					<a href="/medecin/la_prepa_khypnos.html">Formations EVC Anesthésie-Réanimation</a>
 					<a href="/medecin/webinaires.html">Webinaires gratuits</a>
-					<a href="/medecin/qcm_khypnos.html">QCM EVC Anesthésie-Réanimation</a>
+					<a href="https://khypnos-qcm.vercel.app/">Application Khypnos QCMs</a>
 					<a href="/medecin/demande_concours.html">Concours blancs</a>
 				</div>
 				<div class="footer-section">
