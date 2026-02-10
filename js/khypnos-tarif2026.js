@@ -33,7 +33,7 @@ function renderKhypnosOffers2026() {
             <li><span style="color: #28a745">✓</span> Correction en session interactive</li>
             <li><span style="color: #28a745">✓</span> Conseils méthodologiques</li>
           </ul>
-          <a class="primary-btn" href="/medecin/demande_concours.html">S’inscrire</a>
+          <a class="primary-btn" href="/medecin/demande_concours.html" target="_blank" >S’inscrire</a>
         </article>
 
         <!-- Carte Formation annales Voie Externe -->
@@ -44,10 +44,10 @@ function renderKhypnosOffers2026() {
             <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
             <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
             <li><span style="color: #dc3545">✗</span> Pas d'accès aux cours Khypnos</li>
-            <li><span style="color: #dc3545">✗</span> Pas d'accès aux concours blanc</li>
-            <li><span style="color: #dab61a">✓</span> Accès aux formateurs Khypnos pendant les sessions de correction</li>
+            <li><span style="color: #dc3545">✗</span> Pas d'accès aux concours blancs</li>
+            <li><span style="color: #dab61a">✓</span> Accès aux formateurs Khypnos par mail</li>
           </ul>
-          <a class="primary-btn" href="#inscription">S’inscrire</a>
+          <a class="primary-btn" href="https://buy.stripe.com/7sY3cw2vjep53gkfjc4c80l" target="_blank">S’inscrire</a>
         </article>
 
         <!-- Carte Formation complète Voie Externe -->
@@ -59,13 +59,13 @@ function renderKhypnosOffers2026() {
             <li><strong>Formation la plus complète</strong></li>
             <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
             <li><span style="color: #28a745">✓</span> Correction de copie et conseils méthodologiques</li>
-            <li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : 60h de cours remis à jours</li>
+            <li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : 40h de cours couvrant tout le programme</li>
             <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
             <li><span style="color: #28a745">✓</span> 2 concours blancs au format des EVC</li>
-            <li><span style="color: #28a745">✓</span> Accès aux formateurs Khypnos priorisé pour toutes questions</li>
+            <li><span style="color: #28a745">✓</span> Groupe Whatsapp avec les formateurs Khypnos, réponse rapide à toutes les questions</li>
             <li><span style="color: #28a745">✓</span> 10 places ouvertes</li>
           </ul>
-          <a class="primary-btn" href="#inscription">S’inscrire</a>
+          <a class="primary-btn" href="https://buy.stripe.com/dRmaEY6Lzft95os8UO4c80m" target="_blank">S’inscrire</a>
         </article>
 
         <!-- Carte Formation Voie Interne -->
@@ -83,3 +83,10 @@ function renderKhypnosOffers2026() {
     </section>
   `;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('khypnos-offers-2026');
+  if (container) {
+    container.innerHTML = renderKhypnosOffers2026();
+  }
+});
