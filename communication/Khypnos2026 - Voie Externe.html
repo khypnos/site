@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Programme Khypnos 2026 - Voie Externe</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+			line-height: 1.6;
+			color: #2c3e50;
+			background: white;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 40px;
+		}
+
+
+		.headerbis {
+			text-align: center;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 30px 10px 20px 10px;
+			border-radius: 20px;
+			margin-bottom: 0px;
+			align-items: center;
+			width: 100%;
+			gap: 0.5ch;
+		}
+
+		.headerbis h1 .logokhypnos {
+			max-height: 4.0rem;   /* suit automatiquement la taille du h1 */
+			width: auto;   /* conserve les proportions */
+			vertical-align: middle;
+			/* Optionnel : adoucir le rendu sur écrans haute densité */
+			image-rendering: -webkit-optimize-contrast;
+		}
+
+
+
+		.section-title {
+			color: #2c3e50;
+			margin: 40px 0 20px 0;
+			text-align: center;
+			font-size: 1.8rem;
+			position: relative;
+		}
+
+		.section-title::after {
+			content: '';
+			width: 60px;
+			height: 4px;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			display: block;
+			margin: 10px auto;
+			border-radius: 2px;
+		}
+
+		.trainers-section {
+			background: linear-gradient(135deg, #f8f9ff 0%, #e8f5e8 100%);
+			padding: 40px;
+			border-radius: 15px;
+			margin: 40px 0;
+		}
+
+		.trainers-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 30px;
+			margin-bottom: 30px;
+		}
+
+		.trainer-card {
+			background: white;
+			padding: 25px;
+			border-radius: 10px;
+			text-align: center;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.trainer-image {
+			width: 150px;
+			aspect-ratio: 1;
+			/* Force un carré parfait */
+			border-radius: 50%;
+			overflow: hidden;
+			margin: 0 auto 20px auto;
+		}
+
+		.trainer-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.trainer-name {
+			font-size: 1.3rem;
+			font-weight: 600;
+			color: #2c3e50;
+			margin-bottom: 10px;
+		}
+
+		.trainer-details {
+			font-size: 1rem;
+			color: #666;
+			line-height: 1.5;
+		}
+
+		.features-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 18px;
+			margin: 20px 0;
+		}
+
+		.feature-card {
+			background: #f8f9ff;
+			padding: 20px;
+			border-radius: 12px;
+			box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+			transition: transform 0.3s, box-shadow 0.3s;
+			text-align: left;
+			font-size: 1rem;
+		}
+
+		.feature-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+		}
+
+		.feature-icon {
+			font-size: 2rem;
+			margin-bottom: 15px;
+			text-align: center;
+		}
+
+
+
+		.visio-section {
+		column-count: 2;
+		column-gap: 24px;
+		padding: 20px;
+		}
+
+		.visio-item {
+		padding: 12px 16px;
+		background: #f5f5f5;
+		border-radius: 6px;
+		border-left: 3px solid #667eea;
+		margin-bottom: 16px;
+		break-inside: avoid; /* Évite qu'un élément soit coupé entre 2 colonnes */
+		}
+
+/*
+		.visio-section {
+			background: #f8f9ff;
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			padding: 30px;
+			border-radius: 12px;
+			margin: 30px 0;
+			border-left: 5px solid #667eea;
+			box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+		}
+
+		.visio-item {
+			padding: 12px 0;
+			border-bottom: 1px solid #eee;
+			font-size: 1rem;
+		}
+*/
+
+		.visio-item:last-child {
+			border-bottom: none;
+		}
+
+		.visio-date {
+			font-weight: 600;
+			color: #667eea;
+		}
+
+		.visio-prof {
+			color: #666;
+			font-style: italic;
+		}
+
+		.cours-section {
+			background: #f8f9ff;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 24px;
+			padding: 25px;
+			border-radius: 12px;
+			margin: 30px 0;
+		}
+
+		.cours-category {
+			margin-bottom: 25px;
+		}
+
+		.cours-category h3 {
+			font-size: 1.1rem;
+			color: #667eea;
+			margin-bottom: 10px;
+		}
+
+		.cours-list {
+			list-style: none;
+			padding-left: 20px;
+		}
+
+		.cours-list li {
+			padding: 4px 0;
+			font-size: 0.85rem;
+			color: #2c3e50;
+		}
+
+		.cours-list li::before {
+			content: "• ";
+			color: #667eea;
+			font-weight: bold;
+			margin-right: 8px;
+		}
+
+		/* Styles des cartes de tarifs du site original */
+		.payment-options {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 16px;
+	margin-top: 24px;
+}
+
+.payment-card {
+	position: relative;
+	background: #ffffff;
+	border-radius: 10px;
+	padding: 24px 16px 16px;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+	border: 1px solid #e4e4e4;
+	display: flex;
+	flex-direction: column;
+	height: 100%; /* même hauteur pour toutes les cards */
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.payment-card h3 {
+	font-size: 18px;
+	margin: 0;
+	text-align: center;
+}
+
+.payment-badge {
+	position: absolute;
+	top: -12px;
+	right: 20px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	padding: 6px 16px;
+	border-radius: 20px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.payment-price {
+	font-size: 30px;
+	font-weight: bold;
+	color: #667eea;
+	margin: 16px 0;
+	text-align: center;
+}
+
+/* La liste prend la hauteur variable */
+.payment-features {
+	list-style: none;
+	padding: 0;
+	color: #666666;
+	margin: 16px 0;
+	flex-grow: 1; /* clé pour aligner les boutons en bas */
+}
+
+.payment-features li {
+	padding: 6px 0;
+	font-size: 15px;
+}
+
+/* Hover léger */
+.payment-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+	border-color: #d9dcff;
+}
+
+		.primary-btn {
+			display: block;
+			text-align: center;
+			margin-top: auto;
+			padding: 12px 20px;
+			border-radius: 999px;
+			border: 2px solid #667eea;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			font-weight: 600;
+			font-size: 15px;
+			text-decoration: none;
+			transition: all 0.2s ease;
+		}
+
+		.primary-btn:hover {
+			background: linear-gradient(135deg, #5058d6 0%, #6a3d8a 100%);
+			transform: translateY(-2px);
+		}
+
+		@media print {
+			body {
+				background: white;
+			}
+			.container {
+				padding: 20px;
+			}
+			a {
+				color: #667eea;
+				text-decoration: underline;
+			}
+			.payment-card {
+				page-break-inside: avoid;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.trainers-grid {
+				grid-template-columns: 1fr;
+			}
+			.payment-options {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+
+
+	<div class="container">
+
+		<!-- Header -->
+		<header class="headerbis">
+			<h1><img src="/img/KhypnosLogo.png" alt="Khypnos" class="logokhypnos"></h1>
+			<h2>Programme Khypnos 2026</h2>
+			<div class="subtitle">• Voie Externe •</div>
+		</header>
+
+		<!-- Formateurs Experts -->
+		<h2 class="section-title">Nos formateurs experts</h2>
+		<div class="trainers-section">
+			<div class="trainers-grid">
+				<div class="trainer-card">
+					<div class="trainer-image"><img src="/img/BD_round.png" alt="Dr Duceau" style="margin: 0 auto 0 0; display: block; "></div>
+					<div class="trainer-name">Dr Duceau Baptiste</div>
+					<div class="trainer-details">
+						• Anesthésiste-Réanimateur<br>
+						• Classé 288e aux ECN 2012<br>
+						• Ancien Chef de Clinique<br>
+						• Chirurgie Cardiaque à la Pitié Salpêtrière
+					</div>
+				</div>
+				<div class="trainer-card">
+					<div class="trainer-image"><img src="/img/AM_round.png" alt="Dr Mailloux" style="margin: 0 auto 0 0; display: block; "></div>
+					<div class="trainer-name">Dr Arnaud Mailloux</div>
+					<div class="trainer-details">
+						• Anesthésiste-Réanimateur<br>
+						• Classé 1337e aux ECN 2012<br>
+						• Enseignant en école d'IADE
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Visioconférences Voie Externe -->
+		<h2 class="section-title">🎥 Visioconférences Voie Externe - 32 heures de direct</h2>
+
+		<div class="visio-section">
+			<div class="visio-item">
+				<span class="visio-date">Samedi 13 juin à 14h (2h)</span> : Concours Blanc Khypnos #1 Voie externe - Formation complète uniquement</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Mercredi 2 juillet à 18h (2h)</span> : Annale 2024 Pratique</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 5 juillet à 14h (2h)</span> : Annale 2024 Fondamental</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Mercredi 9 juillet à 18h (2h)</span> : Annale 2021 Pratique</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 12 juillet à 14h (2h)</span> : Annale 2021 Fondamental</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Mercredi 16 juillet à 18h (2h)</span> : Annale 2025 Pratique</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 19 juillet à 14h (2h)</span> : Annale 2025 Fondamental</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Mercredi 23 juillet à 18h (2h)</span> : Annale 2023 Pratique</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 26 juillet à 14h (2h)</span> : Annale 2023 Fondamental</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Mercredi 30 juillet à 18h (2h)</span> : Annale 2019 Pratique</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 2 août à 14h (2h)</span> : Annale 2019 Fondamental</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Mercredi 6 août à 18h (2h)</span> : Annale 2013 Pratique</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 9 août à 14h (2h)</span> : Annale 2013 Fondamental</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Mercredi 13 août à 18h (2h)</span> : Annale 2014 Pratique</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 16 août à 14h (2h)</span> : Annale 2014 Fondamental</span>
+			</div>
+			<div class="visio-item">
+				<span class="visio-date">Samedi 23 août à 14h (2h)</span> : Concours Blanc Khypnos #2 Voie externe - Formation complète uniquement</span>
+			</div>
+		</div>
+
+		<div style="text-align: center; margin: 40px 0; padding: 20px; background: #f0f8ff; border-radius: 10px;">
+			<p style="font-size: 1.1rem">
+				 <strong>⚠️ Les dates sont sujettes à modification en fonction de la date du concours</strong>
+			</p>
+		</div>
+
+		<!-- Cours Enregistrés (police plus petite, organisés par catégorie) -->
+		<h2 class="section-title">Cours Enregistrés - Plus de 30 heures de cours sur tout le programme</h2>
+
+		<div class="cours-section">
+			<div class="cours-category">
+				<h3>Fondamentaux</h3>
+				<ul class="cours-list">
+					<li>PKPD</li>
+					<li>Théorie Anesthésie</li>
+					<li>Halogénés</li>
+					<li>Hypnotiques IV</li>
+					<li>Curares</li>
+					<li>Morphinomimétiques</li>
+					<li>Douleur</li>
+				</ul>
+			</div>
+			<div class="cours-category">
+				<h3>Hémostase</h3>
+				<ul class="cours-list">
+					<li>Hémostase physiologique</li>
+					<li>Bilan d'hémostase en CSA</li>
+					<li>Orientation devant une anomalie du bilan / Thrombophilie / Willebrandt</li>
+					<li>HNF / HPBM</li>
+					<li>AVK</li>
+					<li>AOD</li>
+					<li>Thromboprophylaxie</li>
+					<li>Antiagrégants plaquettaires</li>
+					<li>Thrombopénie induite à l'héparine</li>
+				</ul>
+			</div>
+			<div class="cours-category">
+				<h3>Anesthésie Cardiaque</h3>
+				<ul class="cours-list">
+					<li>Dissection aortique</li>
+					<li>Gestion d'un pacemaker</li>
+					<li>Electroentrainement</li>
+					<li>Principaux troubles du rythme</li>
+					<li>Evaluation du risque cardiaque en chirurgie non cardiaque</li>
+					<li>Choc cardiogénique</li>
+				</ul>
+			</div>
+			<div class="cours-category">
+				<h3>Physiologie</h3>
+				<ul class="cours-list">
+					<li>Retour veineux systémique</li>
+					<li>Précharge dépendance et courbe de Starling</li>
+					<li>Débit et pression artérielle</li>
+					<li>Systèmes de régulation de la pression artérielle</li>
+					<li>Vascularisation coronaire</li>
+					<li>Cycle cardiaque et courbe pression/volume</li>
+					<li>Transport d'O2 et états de choc</li>
+					<li>Volumes ventilatoires et principes dynamiques de la ventilation</li>
+					<li>SDRA</li>
+					<li>Paralysie diaphragmatique</li>
+					<li>BPCO/Astme</li>
+				</ul>
+			</div>
+			<div class="cours-category">
+				<h3>Ventilation</h3>
+				<ul class="cours-list">
+					<li>Modes ventilatoires</li>
+					<li>Ventilateur et spécificités</li>
+					<li>Réglages ventilatoires</li>
+					<li>Sevrage de la ventilation</li>
+					<li>VPH, hyper réactivité bronchique</li>
+				</ul>
+			</div>
+			<div class="cours-category">
+				<h3>Anesthésie Obstétricale</h3>
+				<ul class="cours-list">
+					<li>Consultation d'anesthésie</li>
+					<li>Pré-eclampsie/HELLP</li>
+					<li>Modifications physiologiques</li>
+					<li>Péridurale</li>
+					<li>Césarienne</li>
+					<li>Embolie amniotique</li>
+					<li>Hémoragie du post partum</li>
+					<li>Syndrome post PL</li>
+					<li>Déficit neurologique et installation</li>
+				</ul>
+			</div>
+			<div class="cours-category">
+				<h3>Recommandations Récentes</h3>
+				<ul class="cours-list">
+					<li>Hypersensibilité immédiate</li>
+					<li>Sepsis</li>
+					<li>Péridurale</li>
+				</ul>
+			</div>
+			<div class="cours-category">
+				<h3>Focus Physiopathologie</h3>
+				<ul class="cours-list">
+					<li>Embolie pulmonaire</li>
+					<li>Travail respiratoire</li>
+					<li>DO2 / VO2</li>
+					<li>Neuroréanimation</li>
+					<li>Milieu intérieur</li>
+					<li>Dialyse</li>
+				</ul>
+			</div>
+
+			<div class="cours-category">
+				<h3>Anesthésie Pédiatrique</h3>
+				<ul class="cours-list">
+					<li>Principalement revue dans les annales</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<!-- Tarifs 2026 avec les cartes du site original -->
+		<h2 class="section-title">Tarifs 2026</h2>
+    
+	<section class="offers">
+      <div class="payment-options">
+        <!-- Carte Concours blanc seul -->
+        <article class="payment-card featured">
+          <div class="payment-badge">Populaire</div>
+          <h3>Concours blanc <br> seul</h3>
+          <div class="payment-price">120€ TTC</div>
+          <ul class="payment-features">
+            <li><span style="color: #28a745">✓</span> Au choix :</li>
+            <li>• <strong>Format QCM</strong> (voie interne, 50 QCMs)</li>
+            <li>• <strong>Format rédactionnel</strong> (voie externe, EVCF 20 questions, EVCP 20 questions environ)</li>
+            <li><span style="color: #28a745">✓</span> Correction en session interactive</li>
+            <li><span style="color: #28a745">✓</span> Conseils méthodologiques</li>
+          </ul>
+          <a class="primary-btn" href="/medecin/demande_concours.html" target="_blank" >S’inscrire</a>
+        </article>
+
+        <!-- Carte Formation annales Voie Externe -->
+        <article class="payment-card featured">
+          <h3>Formation annales <br> Voie Externe</h3>
+          <div class="payment-price">1300€ TTC</div>
+          <ul class="payment-features">
+            <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
+            <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
+            <li><span style="color: #dc3545">✗</span> Pas d'accès aux cours Khypnos</li>
+            <li><span style="color: #dc3545">✗</span> Pas d'accès aux concours blancs</li>
+            <li><span style="color: #dab61a">✓</span> Accès aux formateurs Khypnos par mail</li>
+          </ul>
+          <a class="primary-btn" href="https://buy.stripe.com/7sY3cw2vjep53gkfjc4c80l" target="_blank">S’inscrire</a>
+        </article>
+
+        <!-- Carte Formation complète Voie Externe -->
+        <article class="payment-card offer-card offer--full">
+          <div class="payment-badge">⭐ Recommandé</div>
+          <h3>Formation complète <br> Voie Externe</h3>
+          <div class="payment-price">1800€ TTC</div>
+          <ul class="payment-features">
+            <li><strong>Formation la plus complète</strong></li>
+            <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
+            <li><span style="color: #28a745">✓</span> Correction de copie et conseils méthodologiques</li>
+            <li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : Plus de 30h de cours couvrant tout le programme</li>
+            <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
+            <li><span style="color: #28a745">✓</span> 2 concours blancs au format des EVC</li>
+            <li><span style="color: #28a745">✓</span> Groupe Whatsapp avec les formateurs Khypnos, réponse rapide à toutes les questions</li>
+            <li><span style="color: #28a745">✓</span> 10 places ouvertes</li>
+          </ul>
+          <a class="primary-btn" href="https://buy.stripe.com/dRmaEY6Lzft95os8UO4c80m" target="_blank">S’inscrire</a>
+        </article>
+	</div>
+
+	<div>
+
+		<div style="text-align: center; margin: 40px 0; padding: 20px; background: #f0f8ff; border-radius: 10px;">
+			<p style="font-size: 1.1rem; margin-bottom: 15px;">
+				💳 <strong>Paiement en 4 mensualités possible</strong> pour les formations
+			</p>
+			<p style="font-size: 0.95rem; color: #666;">
+				Moyens de paiement : CB, PayPal, Virement SEPA, Apple Pay, etc.
+			</p>
+		</div>
+
+		<!-- Footer -->
+		<div style="text-align: center; margin-top: 60px; padding-top: 30px; border-top: 3px solid #667eea; color: #666;">
+			<p style="font-size: 1.2rem; font-weight: bold; color: #667eea; margin-bottom: 15px;">Khypnos</p>
+			<p>Préparation aux EVC Anesthésie Réanimation</p>
+			<p style="margin-top: 10px;">Contact : <a href="mailto:khypnos.med@gmail.fr" style="color: #667eea; text-decoration: none; font-weight: 600;">khypnos.med@gmail.fr</a></p>
+			<p style="font-size: 1rem; margin-top: 10px; font-weight: 600;"><a href="https://www.khypnos.fr">www.khypnos.fr</a></p>		</div>
+		</div>
+</body>
+</html>
