@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khypnos - Concours Blanc</title>
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml"?sizes="any">
 	<link rel="stylesheet" href="/styles.css">
     <style>
 
-        /* Segmented control assorti à la charte (#667eea / #764ba2) */
+        /* Segmented control assorti ? la charte (#667eea / #764ba2) */
         .offer-toggle {
             --bg: #eef2ff;
             --fg: #2c3e50;
@@ -48,7 +48,7 @@
 
         .offer-toggle__thumb {
             position: absolute;
-            inset: 6px auto 6px 6px; /* sera déplacé en JS */
+            inset: 6px auto 6px 6px; /* sera d?plac? en JS */
             width: calc(50% - 6px);
             border-radius: 9999px;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
@@ -64,7 +64,7 @@
                 /* supprimez toute autre ligne 'margin:' sur .offer-panels */
             }
 
-            /* Stripe web component centré dans son parent (double sécurité) */
+            /* Stripe web component centr? dans son parent (double s?curit?) */
             .offer-panels stripe-buy-button {
                 display: block;
                 margin: 0 auto;
@@ -80,11 +80,42 @@
         .offer-toggle button[role="tab"] {
             font-size: 0.9rem;
             padding: 0.5rem 0.625rem; /* 8px 10px */
-            white-space: normal;       /* autorise les retours à la ligne */
+            white-space: normal;       /* autorise les retours ? la ligne */
             text-align: center;
             line-height: 1.3;
                 }
         }
+
+        .panel-qcm {
+            text-align: center;
+            }
+
+            /* Lien en bloc centr? avec ic?ne + texte */
+        .panel-qcm .app-link {
+            display: inline-flex;
+            flex-direction: column; /* ic?ne au-dessus, texte en dessous */
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            gap: 0.5rem; /* espace entre l?ic?ne et le texte */
+            }
+
+            /* Logo */
+        .panel-qcm .app-logo {
+            align-items: center;
+            width: 64px;
+            height: 64px;
+            }
+
+            /* Texte */
+        .panel-qcm .app-text {
+            font-weight: 600;
+            color: #333; /* adapte ? ta charte */
+            }
+        
+        .panel-qcm .app-link:hover .app-text {
+            text-decoration: underline;
+            }
 
     </style>
 </head>
@@ -93,26 +124,26 @@
 
     <div class="container">
 
-        <h2 class="section-title">Inscription à un Concours Blanc</h2>
+        <h2 class="section-title">Inscription ? un Concours Blanc</h2>
         <p>Entrainez vous avec un <strong>Concours Blanc sur demande</strong>. Plusieurs formules sont disponibles pour s'adapter au mieux &agrave; vos besoins.<br>
-        📩 Contact : <a href="mailto:khypnos.med@gmail.com" class="contact-email"><strong>khypnos.med@gmail.com</strong></a></p>
+        ? Contact : <a href="mailto:khypnos.med@gmail.com" class="contact-email"><strong>khypnos.med@gmail.com</strong></a></p>
         <div class="links-section">
-            <p style="text-align: justify;"><strong>💡 Prochains Concours Blanc Khypnos</strong> avec correction interactive</strong></p>
-            <p style="text-align: justify;"><strong>📅 Octobre 2025 en rédactionnel - Inscription possible mais correction en autonomie</strong></p>
-            <p style="text-align: justify;"><strong>📅 Novembre 2025 - Concours Blanc Khypnos QCMs #2</strong></p>
-            <p style="text-align: justify;">✅️ Options <strong>voie interne</strong> ou <strong>voie externe.</strong></p>
-            <p style="text-align: justify;">🎯 Objectifs : préparer dans les <strong>conditions réelles</strong> du concours, en QCM (160 QCMs) ou en rédactionnel (format identique aux annales EVCF/EVCP).</p>
-            <p style="text-align: justify;">💻 <strong>Session de correction en Zoom</strong> avec rappel de cours et fiches pratique</p>
+            <p style="text-align: justify;"><strong>? Prochains Concours Blanc Khypnos</strong> avec correction interactive</strong></p>
+            <p style="text-align: justify;"><strong>? R?dactionnel (voie externe) Date ? d?finir - 2026</strong></p>
+            <p style="text-align: justify;"><strong>? QCM (voie interne) Date ? d?finir - 2026</strong></p>
+            <p style="text-align: justify;">?? Options <strong>voie interne</strong> ou <strong>voie externe.</strong></p>
+            <p style="text-align: justify;">? Objectifs : pr?parer dans les <strong>conditions r?elles</strong> du concours, en QCM (50 QCMs) ou en r?dactionnel (format identique aux annales EVCF/EVCP).</p>
+            <p style="text-align: justify;">? <strong>Session de correction en Zoom</strong> avec rappel de cours et fiches pratique</p>
 
         </div>
         
-        <!-- Stripe JS (chargé une seule fois) -->
+        <!-- Stripe JS (charg? une seule fois) -->
         <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
         <!-- Toggle visuel -->
-        <div class="offer-toggle" role="tablist" aria-label="Choix de l’offre">
+        <div class="offer-toggle" role="tablist" aria-label="Choix de l?offre">
             <button type="button" role="tab" aria-selected="true"  aria-controls="panel-redac" id="tab-redac" class="is-active">
-                Concours Blanc rédactionnel
+                Concours Blanc r?dactionnel
             </button>
             <button type="button" role="tab" aria-selected="false" aria-controls="panel-qcm"   id="tab-qcm">
                 Concours Blanc QCMs
@@ -122,37 +153,52 @@
 
         <!-- Panneaux -->
         <div class="offer-panels">
-            <!-- Rédactionnel -->
+            <!-- R?dactionnel -->
             <div id="panel-redac" role="tabpanel" aria-labelledby="tab-redac">
                 <stripe-buy-button
-                buy-button-id="buy_btn_1SGIm3KkjxDJ53DVIyZIo47J"
+                buy-button-id="buy_btn_1SnPlGKkjxDJ53DV9IOaw3X8"
                 publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
                 </stripe-buy-button>
             </div>
 
             <!-- QCMs -->
+            <div id="panel-qcm" class="panel-qcm" role="tabpanel" aria-labelledby="tab-qcm" hidden>
+                <a
+                    href="https://khypnos-qcm.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="app-link">
+                <img
+                    src="/img/favicon.svg"
+                    alt="Application Khypnos QCM"
+                    class="app-logo">
+                    <br>
+                <span class="app-text">Achat directement dans l'application Khypnos QCM</span>
+                </a>
+            </div>
+            <!--
             <div id="panel-qcm" role="tabpanel" aria-labelledby="tab-qcm" hidden>
                 <stripe-buy-button
-                buy-button-id="buy_btn_1SDD82KkjxDJ53DVTuv73cHI"
+                buy-button-id="buy_btn_1SnPfQKkjxDJ53DVXGkCeuY0"
                 publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
-            </div>
+            </div>-->
         </div>
 
 
-        <h2 class="section-title">🚀 Liens utiles</h2>
+        <h2 class="section-title">? Liens utiles</h2>
         <div class="links-section">
             <div class="column">
                 <ul class="feature-list">
-                    <li><span class="emoji">✅</span><a href="/medecin/la_prepa_khypnos.html" rel="noopener noreferrer"><strong>La prépa Khypnos</strong></a></li>
-                    <li><span class="emoji">🩺</span><a href="https://khypnos.notion.site/Guide-de-r-ussite-Khypnos-171f71268efe800ea132ff6dd150aef9" rel="noopener noreferrer"><strong>Guide de réussite Khypnos</strong></a></li>
-                    <li><span class="emoji">📔</span><a href="/medecin/demande_programme.html"><strong>Recevoir le programme</strong></a></li>
-                    <li><span class="emoji">📃</span><a href="/medecin/demande_inscription.html" rel="noopener noreferrer"><strong>Formulaire d'inscription</strong></a></li>
+                    <li><span class="emoji">?</span><a href="/medecin/la_prepa_khypnos.html" rel="noopener noreferrer"><strong>La pr?pa Khypnos</strong></a></li>
+                    <li><span class="emoji">?</span><a href="https://khypnos.notion.site/Guide-de-r-ussite-Khypnos-171f71268efe800ea132ff6dd150aef9" rel="noopener noreferrer"><strong>Guide de r?ussite Khypnos</strong></a></li>
+                    <li><span class="emoji">?</span><a href="/medecin/demande_programme.html"><strong>Recevoir le programme</strong></a></li>
+                    <li><span class="emoji">?</span><a href="/medecin/demande_inscription.html" rel="noopener noreferrer"><strong>Formulaire d'inscription</strong></a></li>
                 </ul>
             </div>
         </div>
         
 		<nav class="back-link" aria-label="Retour">
-				<a href="/index.html">🏠 Retour à l’accueil</a>
+				<a href="/index.html">? Retour ? l?accueil</a>
 		</nav>
 
 	</div>
@@ -173,7 +219,7 @@
 
     <script>
     (function(){
-        // Sélecteurs
+        // S?lecteurs
         const toggle = document.querySelector('.offer-toggle');
         if (!toggle) return;
 
@@ -186,15 +232,15 @@
         const panelQcm   = document.getElementById('panel-qcm');
         const panels = [panelRedac, panelQcm];
 
-        // Mesure et déplacement du "thumb" (pastille animée)
+        // Mesure et d?placement du "thumb" (pastille anim?e)
         function measureAndMove(idx){
-            // Sécurité si onglet non monté
+            // S?curit? si onglet non mont?
             if (!tabs[idx]) return;
 
             const firstRect  = tabs[0].getBoundingClientRect();
             const targetRect = tabs[idx].getBoundingClientRect();
 
-            // Décalage horizontal depuis le bord gauche du premier bouton
+            // D?calage horizontal depuis le bord gauche du premier bouton
             const dx = targetRect.left - firstRect.left;
 
             // Applique la position et la largeur cible
@@ -212,11 +258,11 @@
             });
             panels.forEach((p, i) => { if (p) p.hidden = i !== idx; });
 
-            // Recalcule la position du thumb après le changement de layout
+            // Recalcule la position du thumb apr?s le changement de layout
             requestAnimationFrame(() => measureAndMove(idx));
         }
 
-        // Initialisation du thumb à partir de l’onglet actif
+        // Initialisation du thumb ? partir de l?onglet actif
         function initThumb(){
             const activeIdx = tabs[0].classList.contains('is-active') ? 0 : 1;
             measureAndMove(activeIdx);
@@ -226,7 +272,7 @@
         tabRedac.addEventListener('click', () => activate(0));
         tabQcm.addEventListener('click',   () => activate(1));
 
-        // Accessibilité clavier (flèches gauche/droite)
+        // Accessibilit? clavier (fl?ches gauche/droite)
         tabs.forEach((btn, idx) => {
             btn.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
@@ -235,7 +281,7 @@
                     tabs[next].focus();
                     activate(next);
                 }
-                // Activation au clavier (Entrée/Espace)
+                // Activation au clavier (Entr?e/Espace)
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     activate(idx);
@@ -243,9 +289,9 @@
             });
         });
 
-        // Initialise après chargement (layout stabilisé)
+        // Initialise apr?s chargement (layout stabilis?)
         window.addEventListener('load', () => {
-            // Si aucun onglet n’a la classe is-active au chargement, on active le premier
+            // Si aucun onglet n?a la classe is-active au chargement, on active le premier
             if (!tabs.some(t => t.classList.contains('is-active'))) {
                 tabs[0].classList.add('is-active');
                 tabs[0].setAttribute('aria-selected', 'true');
