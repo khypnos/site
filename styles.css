@@ -1508,62 +1508,43 @@ gap: 5px;
   max-width: 960px;
   margin: 0 auto 48px auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* ← Clé : hauteur fixe = hauteur du lecteur 16/9 + header */
+  height: 400px;
 }
 
 /* Sidebar */
 .vg-sidebar {
-  width: 250px;
+  width: 220px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   background: #f8f9fa;
   border-right: 1px solid rgba(102, 126, 234, 0.12);
+  overflow: hidden; /* pas de débordement */
 }
 
 .vg-tab {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 14px 12px;
+  flex: 1;
+  padding: 6px;
   border: none;
   border-bottom: 1px solid rgba(102, 126, 234, 0.08);
   cursor: pointer;
-  text-align: left;
   background: transparent;
   transition: background 0.2s ease;
+  overflow: hidden;
+  min-height: 0;
+  display: block; /* ← plus flex column */
 }
 
-.vg-tab:hover {
-  background: rgba(102, 126, 234, 0.06);
-}
-
-.vg-tab.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.vg-active-bar {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: rgba(255, 255, 255, 0.55);
-  border-radius: 0 4px 4px 0;
-}
-
-.vg-tab.active .vg-active-bar {
-  display: block;
-}
-
-/* Miniature */
+/* La miniature remplit tout l'onglet */
 .vg-thumb-wrapper {
   position: relative;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
   width: 100%;
+  height: 100%;  /* ← prend toute la hauteur de l'onglet */
 }
 
 .vg-thumb {
@@ -1573,18 +1554,57 @@ gap: 5px;
   display: block;
 }
 
+/* Le texte est superposé en bas de la miniature */
+.vg-tab-text {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+  padding: 4px 6px;
+  backdrop-filter: blur(4px);
+}
+
+.vg-tab-title {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vg-tab-sub {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Supprime les surcharges de couleur pour l'onglet actif (déjà blanc) */
+.vg-tab.active .vg-tab-title,
+.vg-tab.active .vg-tab-sub {
+  color: #ffffff;
+}
+
 .vg-tab.active .vg-thumb {
-  filter: brightness(0.75);
+  filter: brightness(0.65);
 }
 
 .vg-play-badge {
   position: absolute;
-  bottom: 6px;
-  right: 6px;
+  bottom: 4px;
+  right: 4px;
   background: rgba(0, 0, 0, 0.55);
   color: #fff;
-  font-size: 10px;
-  padding: 2px 6px;
+  font-size: 9px;
+  padding: 1px 5px;
   border-radius: 4px;
   line-height: 1.6;
 }
@@ -1593,20 +1613,27 @@ gap: 5px;
 .vg-tab-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
+  flex-shrink: 0; /* le texte ne se compresse pas */
 }
 
 .vg-tab-title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.2;
   color: #2c3e50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .vg-tab-sub {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
   color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .vg-tab.active .vg-tab-title,
@@ -1624,12 +1651,13 @@ gap: 5px;
 }
 
 .vg-player-header {
-  padding: 18px 22px 14px;
+  padding: 14px 18px 10px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  flex-shrink: 0;
 }
 
 .vg-player-label {
-  font-size: 11px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -1637,22 +1665,22 @@ gap: 5px;
 }
 
 .vg-player-title {
-  margin: 4px 0 2px;
-  font-size: 16px;
+  margin: 3px 0 1px;
+  font-size: 15px;
   font-weight: 700;
   color: #ffffff;
 }
 
 .vg-player-sub {
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.75);
 }
 
 .vg-iframe-wrapper {
+  flex: 1;        /* ← prend tout l'espace restant */
+  min-height: 0;
   position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
   background: #000;
 }
 
@@ -1668,28 +1696,27 @@ gap: 5px;
 @media (max-width: 680px) {
   .video-gallery {
     flex-direction: column;
+    height: auto;
   }
 
   .vg-sidebar {
     width: 100%;
     flex-direction: row;
+    height: 110px;
     overflow-x: auto;
     border-right: none;
     border-bottom: 1px solid rgba(102, 126, 234, 0.12);
   }
 
   .vg-tab {
-    min-width: 140px;
+    min-width: 130px;
+    flex: 0 0 130px;
     border-bottom: none;
     border-right: 1px solid rgba(102, 126, 234, 0.08);
   }
 
-  .vg-active-bar {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
+  .vg-iframe-wrapper {
+    aspect-ratio: 16 / 9;
+    flex: none;
   }
 }
