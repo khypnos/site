@@ -119,7 +119,87 @@
 				</div>
 			</div>
 
-			
+
+			<!-- Module Vidéothèque YouTube -->
+	<h2 class="section-title" data-reveal="left">🎬 Nos vidéos</h2>
+	<div class="video-gallery" data-reveal="left">
+
+	<!-- Colonne gauche : onglets -->
+	<div class="vg-sidebar">
+
+		<div class="vg-tab active" data-index="0">
+		<div class="vg-thumb-wrapper">
+			<img src="https://img.youtube.com/vi/1O7ump5G0kI/mqdefault.jpg" alt="Vidéo 1" class="vg-thumb">
+			<span class="vg-play-badge">▶</span>
+		</div>
+		<div class="vg-tab-text">
+			<span class="vg-tab-title">Titre de la vidéo 1</span>
+			<span class="vg-tab-sub">Physiologie • 45 min</span>
+		</div>
+		<div class="vg-active-bar"></div>
+		</div>
+
+		<div class="vg-tab" data-index="1">
+		<div class="vg-thumb-wrapper">
+			<img src="https://img.youtube.com/vi/9C9vGZJF2UI/mqdefault.jpg" alt="Vidéo 2" class="vg-thumb">
+			<span class="vg-play-badge">▶</span>
+		</div>
+		<div class="vg-tab-text">
+			<span class="vg-tab-title">Titre de la vidéo 2</span>
+			<span class="vg-tab-sub">Hémodynamique • 38 min</span>
+		</div>
+		<div class="vg-active-bar"></div>
+		</div>
+
+		<div class="vg-tab" data-index="2">
+		<div class="vg-thumb-wrapper">
+			<img src="https://img.youtube.com/vi/Sd7sHXgWuFg/mqdefault.jpg" alt="Vidéo 3" class="vg-thumb">
+			<span class="vg-play-badge">▶</span>
+		</div>
+		<div class="vg-tab-text">
+			<span class="vg-tab-title">Titre de la vidéo 3</span>
+			<span class="vg-tab-sub">Ventilation • 52 min</span>
+		</div>
+		<div class="vg-active-bar"></div>
+		</div>
+
+		<div class="vg-tab" data-index="3">
+		<div class="vg-thumb-wrapper">
+			<img src="https://img.youtube.com/vi/AEVfOCNk4Zw/mqdefault.jpg" alt="Vidéo 4" class="vg-thumb">
+			<span class="vg-play-badge">▶</span>
+		</div>
+		<div class="vg-tab-text">
+			<span class="vg-tab-title">Titre de la vidéo 4</span>
+			<span class="vg-tab-sub">Pharmacologie • 41 min</span>
+		</div>
+		<div class="vg-active-bar"></div>
+		</div>
+
+	</div>
+
+		<!-- Colonne droite : lecteur -->
+		<div class="vg-player">
+			<div class="vg-player-header">
+			<span class="vg-player-label">▶ En cours</span>
+			<h3 class="vg-player-title" id="vg-current-title">Titre de la vidéo 1</h3>
+			<p class="vg-player-sub" id="vg-current-sub">Physiologie • 45 min</p>
+			</div>
+			<div class="vg-iframe-wrapper">
+			<iframe
+				id="vg-iframe"
+				src="https://www.youtube.com/embed/YOUTUBE_ID_1?rel=0&modestbranding=1"
+				title="Vidéo Khypnos"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen>
+			</iframe>
+			</div>
+		</div>
+
+		</div>
+		<!-- Fin Module Vidéothèque -->
+
+				
 		<!-- Stagger sur les formateurs -->
 			<h2 class="section-title" data-reveal="right">Nos formateurs experts</h2>
 			<div class="trainers-section" data-reveal="right">
@@ -423,6 +503,7 @@
 			}).init();
 		});
 	</script>
+	<script src="/js/module-videotheque.js"></script>
 
 	<script src="/js/faq.js"></script>
 	<!--

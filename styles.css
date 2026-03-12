@@ -1495,3 +1495,201 @@ gap: 5px;
 		font-size: 26px;
 	}
 }
+
+/* ─── Module Vidéothèque YouTube ────────────────────────────────────────────── */
+
+.video-gallery {
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
+  background: #ffffff;
+  max-width: 960px;
+  margin: 0 auto 48px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar */
+.vg-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  border-right: 1px solid rgba(102, 126, 234, 0.12);
+}
+
+.vg-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 12px;
+  border: none;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.08);
+  cursor: pointer;
+  text-align: left;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.vg-tab:hover {
+  background: rgba(102, 126, 234, 0.06);
+}
+
+.vg-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.vg-active-bar {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 0 4px 4px 0;
+}
+
+.vg-tab.active .vg-active-bar {
+  display: block;
+}
+
+/* Miniature */
+.vg-thumb-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+.vg-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vg-tab.active .vg-thumb {
+  filter: brightness(0.75);
+}
+
+.vg-play-badge {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1.6;
+}
+
+/* Texte des onglets */
+.vg-tab-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vg-tab-title {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #2c3e50;
+}
+
+.vg-tab-sub {
+  font-size: 11px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.vg-tab.active .vg-tab-title,
+.vg-tab.active .vg-tab-sub {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Zone lecteur */
+.vg-player {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  min-width: 0;
+}
+
+.vg-player-header {
+  padding: 18px 22px 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.vg-player-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.vg-player-title {
+  margin: 4px 0 2px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.vg-player-sub {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.vg-iframe-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.vg-iframe-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Responsive mobile */
+@media (max-width: 680px) {
+  .video-gallery {
+    flex-direction: column;
+  }
+
+  .vg-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.12);
+  }
+
+  .vg-tab {
+    min-width: 140px;
+    border-bottom: none;
+    border-right: 1px solid rgba(102, 126, 234, 0.08);
+  }
+
+  .vg-active-bar {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+  }
+}

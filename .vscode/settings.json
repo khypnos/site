@@ -1,0 +1,7 @@
+{
+  "liveServer.settings.useWebExt": false,
+  "extensions.supportVirtualWorkspaces": {
+    "ritwickdey.liveserver": true
+  },
+  "liveServer.settings.root": "/"
+}
