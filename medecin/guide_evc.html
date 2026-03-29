@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guide de réussite aux EVC – Khypnos</title>
+  <meta name="description" content="Le guide complet de préparation aux Épreuves de Vérification des Connaissances (EVC) en Anesthésie-Réanimation, par Khypnos." />
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="/styles.css">
+  
+<style>
+
+  /* ── LAYOUT PRINCIPAL ── */
+  .guide-wrapper {
+    margin: 0 auto;
+  }
+
+  /* ── TABLE DES MATIÈRES ── */
+  .toc-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .toc-card h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+    display: block;
+  }
+  .toc-grid a:hover {
+    color: #764ba2;
+    border-bottom-color: #764ba2;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 30px 36px;
+    margin-bottom: 20px;
+    scroll-margin-top: 24px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  .section-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .section h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50; /* aligne sur le global */
+    margin: 0;
+  }
+
+  /* ── TYPOGRAPHIE INTERNE (hérite du global pour les tailles) ── */
+  .section p {
+    margin-bottom: 12px;
+    /* color héritée : #2c3e50 via body global */
+    /* font-size héritée : 1.2rem → 1rem → 0.95rem → 0.85rem via media global */
+  }
+  .section p:last-child { margin-bottom: 0; }
+
+  .section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #764ba2;
+    margin: 20px 0 8px;
+  }
+  .section h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #667eea;
+    margin: 16px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .section ul,
+  .section ol {
+    padding-left: 22px;
+    margin: 8px 0 12px;
+  }
+  .section li {
+    margin-bottom: 6px;
+    font-size: inherit; /* suit le parent .section */
+    line-height: 1.6;
+  }
+
+  /* ── ÉTAPES (remplacement des blockquotes du guide) ── */
+  .step-block {
+    border-left: 4px solid #667eea;
+    padding: 14px 18px;
+    margin: 14px 0;
+    background: #f8f9ff;
+    border-radius: 0 8px 8px 0;
+    font-size: inherit; /* suit le parent .section */
+    line-height: 1.6;
+  }
+  .step-block strong { color: #667eea; }
+
+  /* ── CALLOUTS (alignés sur .testimonial du global) ── */
+  .callout {
+    display: flex;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 14px 0;
+    /* font-size héritée */
+  }
+
+  .callout-content {
+    flex: 1;
+    font-size: inherit;
+    line-height: 1.6;
+    }
+  
+  .callout-content p {
+    margin-bottom: 6px;
+    font-size: inherit; /* pas de taille fixe, hérite du callout */
+    }
+  
+  .callout-content p:last-child { margin-bottom: 0; }
+
+  .callout-green  { background: #f0faf4; border-left: 4px solid #4caf50; }
+  .callout-orange { background: #fff8f0; border-left: 4px solid #ff9800; }
+  .callout-red    { background: #fff0f0; border-left: 4px solid #f44336; }
+  .callout-gray   { background: #f8f9ff; border-left: 4px solid #999; }
+  .callout-blue   { background: #f0f4ff; border-left: 4px solid #4a90e2; }
+  .callout-yellow { background: #fffde7; border-left: 4px solid #ffc107; }
+  .callout .icon  { font-size: 1.2rem; flex-shrink: 0; line-height: 1.6; }
+
+  /* ── ACCORDION ── */
+  details.section-detail {
+    border: 1px solid #e3e6ff;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+  details.section-detail summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c3e50;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9ff;
+    transition: background 0.2s;
+    font-size: inherit; /* suit le parent au lieu d'être fixé */
+    line-height: 1.6;
+  }
+  details.section-detail summary:hover { background: #eef0ff; }
+  details.section-detail summary::-webkit-details-marker { display: none; }
+  details.section-detail summary::after {
+    content: '▸';
+    color: #667eea;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  details.section-detail[open] summary::after { transform: rotate(90deg); }
+  details.section-detail .detail-content {
+    padding: 16px 18px;
+    border-top: 1px solid #e3e6ff;
+    font-size: inherit;
+    line-height: 1.6;
+  }
+  details.section-detail .detail-content p { font-size: inherit; }
+  details.section-detail .detail-content li { font-size: inherit; }
+
+  /* ── NUMÉRO DE SECTION (badge) ── */
+  .section-number-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  /* ── CTA BLOC FINAL ─ aligne sur .cta-section global ── */
+  .cta-block {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 24px;
+    border-radius: 12px;
+    margin-top: 32px;
+    text-align: center;
+  }
+  .cta-block h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: white; /* override du global qui ne cible pas ici */
+  }
+  .cta-block p {
+    opacity: 0.9;
+    margin-bottom: 22px;
+    color: white;
+  }
+  /* Réutilise .cta-button du global, surcharge légère */
+  .cta-block .cta-button {
+    font-size: 1rem;
+    padding: 14px 30px;
+  }
+
+  /* ── BLOCKQUOTE (citations officielles dans le guide) ── */
+  .section blockquote {
+    border-left: 3px solid #667eea;
+    padding: 10px 16px;
+    margin: 14px 0;
+    color: #555;
+    font-style: italic;
+    background: #f8f9ff;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── RESPONSIVE — complète les breakpoints du global ── */
+    /* ≤ 1200px : p passe à 1rem dans le global */
+    @media screen and (max-width: 1200px) {
+    .section,
+    .toc-card {
+        font-size: 1rem;
+        /* tous les enfants en inherit suivent automatiquement */
+    }
+    }
+
+    /* ≤ 768px : p passe à 0.95rem dans le global */
+    @media screen and (max-width: 768px) {
+    .section,
+    .toc-card {
+        font-size: 0.95rem;
+        padding: 22px 18px;
+    }
+    .section h2  { font-size: 1.1rem; }
+    .section h3  { font-size: 1rem; }
+    .section h4  { font-size: 0.85rem; }
+    .toc-card    { padding: 20px 18px; }
+    .section-number { width: 34px; height: 34px; font-size: 0.9rem; }
+    .toc-grid    { grid-template-columns: 1fr 1fr; }
+    .cta-block h2 { font-size: 1.3rem; }
+
+    /* Accordéon : summary plus compact */
+    details.section-detail summary { padding: 12px 14px; }
+    details.section-detail .detail-content { padding: 12px 14px; }
+
+    /* Callout : réduire le padding */
+    .callout { padding: 12px 14px; }
+    .step-block { padding: 12px 14px; }
+    }
+
+    /* ≤ 480px : p passe à 0.85rem dans le global */
+    @media screen and (max-width: 480px) {
+    .section,
+    .toc-card {
+        font-size: 0.85rem;
+    }
+    .guide-wrapper { padding: 0 12px 32px; }
+    .section { padding: 16px 12px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .cta-block { padding: 28px 16px; }
+    .section h2 { font-size: 1rem; }
+    .section h3 { font-size: 0.95rem; }
+
+    /* Padding encore plus réduit sur petits écrans */
+    details.section-detail summary { padding: 10px 12px; }
+    details.section-detail .detail-content { padding: 10px 12px; }
+    .callout { padding: 10px 12px; gap: 8px; }
+    .step-block { padding: 10px 12px; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="toc-wrapper">
+    <div class="toc-card">
+        <h2>Table des matières</h2>
+        <div class="toc-grid">
+        <a href="#s1">1. Généralités sur le concours</a>
+        <a href="#s2">2. Inscriptions</a>
+        <a href="#s3">3. Conseils logistiques</a>
+        <a href="#s4">4. Déroulement du concours</a>
+        <a href="#s5">5. Correction</a>
+        <a href="#s6">6. Résultats et admission</a>
+        <a href="#s7">7. Fellowship</a>
+        <a href="#s8">8. Thématiques au programme</a>
+        <a href="#s9">9. Maquette du DESAR</a>
+        <a href="#s10">10. Programme du DESAR</a>
+        <a href="#s11">11. Sources et recommandations</a>
+        <a href="#s12">12. Méthodologie de travail</a>
+        <a href="#s13">13. Préparation complémentaire</a>
+        <a href="#s14">14. Méthodologie de réponse</a>
+        <a href="/medecin/faq_evc.html">Questions fréquentes</a>
+        </div>
+    </div>
+    </div>
+
+    <div class="guide-wrapper">
+
+    <!-- 1 -->
+    <section class="section" id="s1">
+        <div class="section-header">
+        <div class="section-number">1</div>
+        <h2>Généralités sur le concours</h2>
+        </div>
+        <p>Les Épreuves de Vérification des Connaissances (EVC) constituent la première étape de la procédure d'autorisation d'exercice. Elles s'adressent aux praticiens, quelle que soit leur nationalité, dès lors qu'ils ont obtenu leur diplôme dans un État non membre de l'Union européenne ou non partie à l'Espace économique européen.</p>
+        <p>Au terme de la procédure d'autorisation de plein exercice, les praticiens peuvent exercer leur profession en France à part entière. Le nombre de candidatures est limité à quatre : au quatrième échec, toute possibilité d'obtenir une équivalence en France est close.</p>
+
+        <div class="step-block"><strong>Étape 1 (environ 1 an)</strong><br>Inscription au concours des EVC, généralement en mai. Le concours se déroule en fin d'année au centre d'examen de Rungis (Île-de-France). Ne manquez pas la période d'inscription, sous peine d'attendre l'année suivante.</div>
+        <div class="step-block"><strong>Étape 2 — Parcours de Consolidation des Compétences (PCC)</strong><br>Après la réussite aux EVC, vous serez affecté par le CNG pour deux années de fonctions hospitalières rémunérées en tant que praticien associé, dans un service agréé pour la formation des internes du DES. Le classement au concours détermine le choix du poste : un bon classement offre davantage d'options géographiques et de services.</div>
+        <div class="step-block"><strong>Étape 3 — Autorisation d'exercice</strong><br>Une fois les deux années de consolidation accomplies, vous pouvez déposer un dossier de demande d'autorisation d'exercice (AE) auprès du bureau des autorisations du CNG.</div>
+
+        <p>Le Centre National de Gestion (CNG) organise les épreuves, la procédure nationale de choix de postes et prononce les affectations. L'interlocutrice dédiée aux anesthésistes-réanimateurs est <strong>Mme Gessie Michel</strong> (tél. : 01 77 35 62 64 — <a href="mailto:gessie.michel@sante.gouv.fr">gessie.michel@sante.gouv.fr</a>).</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="section" id="s2">
+        <div class="section-header">
+        <div class="section-number">2</div>
+        <h2>Inscriptions au concours</h2>
+        </div>
+        <div class="callout callout-green"><span class="icon">👉</span><div class="callout-content"><p><strong>L'inscription au concours est entièrement gratuite.</strong></p></div></div>
+        <p>Chaque candidat dépose une seule demande de candidature, sur le site du CNG, en indiquant l'ARS de son lieu de résidence (ou l'ARS de son choix s'il réside hors de France). La période d'inscription se tient généralement de début à fin juin.</p>
+        <p>Le dossier de candidature comprend :</p>
+        <ul>
+        <li>La copie lisible d'une pièce d'identité, d'un passeport ou d'un titre de séjour.</li>
+        <li>La copie du diplôme.</li>
+        </ul>
+        <p>Toutes les pièces doivent être rédigées en français ou traduites par un traducteur agréé auprès des tribunaux français. Les ressortissants français et ceux de pays francophones ne sont pas soumis à cette obligation.</p>
+        <p>Il est également possible de se présenter aux concours des spécialités de gériatrie, médecine générale ou médecine d'urgence si vous êtes titulaire d'un diplôme de docteur en médecine. La médecine d'urgence, réputée plus accessible que l'anesthésie-réanimation, peut constituer une option stratégique, d'autant que vos connaissances en soins intensifs représentent un avantage significatif.</p>
+        <div class="callout callout-gray"><span class="icon">⚠️</span><div class="callout-content"><p>Un éventuel changement de spécialité après l'obtention du RPPS est un parcours extrêmement difficile : la Commission d'Autorisation d'Exercice sera intransigeante sur la qualité des évaluations réalisées durant les deux années de consolidation. Il est donc fortement conseillé de s'inscrire directement dans la spécialité cible.</p></div></div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="s3">
+        <div class="section-header">
+        <div class="section-number">3</div>
+        <h2>Conseils logistiques</h2>
+        </div>
+        <h3>📍 Lieu du concours</h3>
+        <p>Le concours se déroule en général à l'<strong>Espace Jean Monnet, 47 rue des Solets, 94533 Rungis</strong>, au sud de Paris, à proximité de l'aéroport d'Orly.</p>
+        <p><strong>Depuis Paris :</strong> Ligne 14 jusqu'à « Chevilly-Larue », puis bus 319 vers « Massy-Palaiseau » jusqu'à l'arrêt « Les Solets » (environ 45 minutes). Autre option : RER C direction Massy-Palaiseau, station « Rungis la Fraternelle », puis 9 minutes à pied.</p>
+        <p><strong>Depuis l'aéroport :</strong> Tram T7, arrêt « La Fraternelle » (12 minutes).</p>
+
+        <h3>🏬 Hébergement</h3>
+        <p>Il est tout à fait possible de trouver un hôtel sur place pour éviter les aléas de transport le jour J. Les options ne manquent pas à quelques minutes à pied : Ibis Style Orly Airport (le plus proche), Hilton Garden Inn, Best Western, Mercure, Novotel. L'hôtel F1, le moins cher, peut convenir en cas de budget serré. <strong>Réservez le plus tôt possible</strong> : l'afflux d'étudiants remplit rapidement les établissements.</p>
+
+        <h3>🍽️ Restauration</h3>
+        <p>Prévoyez de quoi vous restaurer sur place à la pause déjeuner. Les options proches sont limitées et les files d'attente longues. Un repas préparé à l'avance ou une réservation dans un restaurant proche est fortement recommandé.</p>
+
+        <h3>💬 Conseils divers</h3>
+        <p>Les températures peuvent être proches de 8°C en période de concours — habillez-vous en conséquence. Entre les deux épreuves, le <strong>Parc Colline Cacao</strong> offre un espace pour se ressourcer ou se concentrer avant la seconde partie.</p>
+
+        <h3>❓ Contact pour le concours</h3>
+        <p><strong>Mme Sandrine Milhano</strong> — responsable EVC au CNG<br>
+        Tél. : 01 77 35 62 97 — <a href="mailto:cng-evc@sante.gouv.fr">cng-evc@sante.gouv.fr</a></p>
+    </section>
+
+    <!-- 4 -->
+    <section class="section" id="s4">
+        <div class="section-header">
+        <div class="section-number">4</div>
+        <h2>Déroulement du concours</h2>
+        </div>
+        <h3>Épreuve des connaissances fondamentales</h3>
+        <p>Épreuve écrite anonyme d'une durée de <strong>2 heures</strong>, notée de 0 à 20, coefficient 1. Elle évalue les connaissances théoriques à travers des questions sans lien entre elles, nécessitant des réponses courtes et précises. La physiologie et la pharmacologie y sont particulièrement représentées.</p>
+
+        <h3>Épreuve des connaissances pratiques</h3>
+        <p>Épreuve écrite anonyme d'une durée de <strong>2 heures</strong>, notée de 0 à 20, coefficient 1. Elle évalue les connaissances pratiques à travers deux cas cliniques (généralement un cas d'anesthésie et un cas de réanimation). Les réponses attendues sont plus longues, structurées, et orientées vers la prise en charge réelle, illustrant la capacité du praticien à « mettre en pratique ce qu'il sait ».</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="section" id="s5">
+        <div class="section-header">
+        <div class="section-number">5</div>
+        <h2>Correction du concours</h2>
+        </div>
+        <p>Aucune correction officielle n'est fournie à l'issue des épreuves. Toutefois, le mode de correction est connu : il s'effectue à l'aide d'une <strong>grille de mots clés</strong>, chacun valant entre 0,5 et 2 points selon son importance. Le correcteur recherche le mot clé — ou l'un de ses synonymes — dans la copie.</p>
+        <p>Il en découle deux conséquences importantes :</p>
+        <ul>
+        <li><strong>La lisibilité est essentielle :</strong> un correcteur qui doit déchiffrer votre écriture risque de passer à côté de notions pourtant correctes.</li>
+        <li><strong>La disposition du correcteur joue un rôle :</strong> une copie claire, logique et bien rédigée incite le correcteur à accorder le bénéfice du doute sur les synonymes ou formulations proches.</li>
+        </ul>
+        <div class="callout callout-green"><span class="icon">📌</span><div class="callout-content"><p>La lisibilité de votre réponse — tant dans l'écriture que dans le raisonnement — ne peut que vous faire gagner des points.</p></div></div>
+        <p>Contrairement à une idée reçue, il n'existe <strong>pas de PMZ (« Pas Mis = Zéro »)</strong> dans les EVC. Cette confusion provient de l'analogie avec l'ancien ECN. En revanche, certaines notions réunissent plus de points et sont donc quasi incontournables. N'hésitez pas à ajouter une information même si vous avez un doute sur sa pertinence : cela n'invalide pas le reste de la copie.</p>
+        <p>Une grille comprend généralement 4 à 8 mots clés par question. Après une première correction, la copie est vérifiée par un second correcteur. Si l'écart entre les deux notes est inférieur à 5 %, une moyenne est calculée. En cas d'écart supérieur, la correction est reprise jusqu'à concordance.</p>
+        <div class="callout callout-green"><span class="icon">✅</span><div class="callout-content">
+        <p><strong>La réussite repose sur trois étapes :</strong></p>
+        <ul>
+            <li>Connaître les mots clés</li>
+            <li>Penser à les rédiger</li>
+            <li>Faire en sorte qu'ils soient lus</li>
+        </ul>
+        </div></div>
+    </section>
+
+    <!-- 6 -->
+    <section class="section" id="s6">
+        <div class="section-header">
+        <div class="section-number">6</div>
+        <h2>Résultats et admission</h2>
+        </div>
+        <p>Le nombre de candidats admissibles est fixé à l'avance et annoncé dès le début des épreuves. En 2024, <strong>173 postes</strong> étaient ouverts pour les EVC en Anesthésie-Réanimation, contre 40 en 2017. Cela ne signifie pas que 173 candidats sont automatiquement reçus : il s'agit à la fois d'un concours et d'un examen comportant une note éliminatoire de <strong>6/20 par épreuve</strong>. Le jury détermine également une note minimale d'admission en fonction de la qualité générale des copies.</p>
+        <blockquote style="border-left:3px solid #667eea;padding:10px 16px;margin:16px 0;color:#555;font-style:italic;">« Le jury décide de la note minimale exigée pour l'admission. La note de la première épreuve départage les ex-æquo. Un candidat ayant obtenu une note inférieure ou égale à 6 sur 20 à l'une des épreuves ne peut être déclaré reçu. »</blockquote>
+        <p>La première épreuve est légèrement plus importante car elle sert à départager les candidats à égalité, bien que cela soit rare en pratique. Vous pouvez demander votre copie après l'examen, mais elle ne sera pas annotée et aucun recours ne sera possible.</p>
+    </section>
+
+    <!-- 7 -->
+    <section class="section" id="s7">
+        <div class="section-header">
+        <div class="section-number">7</div>
+        <h2>Fellowship</h2>
+        </div>
+        <h3>Qu'est-ce que le Fellowship ?</h3>
+        <p>Le Fellowship consiste à offrir une formation aux praticiens étrangers sous la forme d'une <strong>autorisation temporaire de plein exercice</strong> au sein d'équipes françaises de CHU ou d'établissements publics (ou privés à but non lucratif), pour une durée de 3 mois à 2 ans. Ce dispositif permet d'acquérir ou d'approfondir une compétence dans sa spécialité, sans ouvrir de droit à un diplôme.</p>
+        <h3>Qui peut en bénéficier ?</h3>
+        <p>Les praticiens spécialistes (médecins, chirurgiens-dentistes, pharmaciens) titulaires d'un diplôme de spécialité hors Union européenne.</p>
+        <p>Bien que le Fellowship ne permette pas d'obtenir directement une équivalence, il offre un <strong>avantage concurrentiel significatif</strong> : meilleur accès aux pratiques médicales françaises et aux recommandations locales, familiarisation avec le vocabulaire médical et les habitudes de l'examen, et mise en contexte préalable à la préparation du concours.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="section" id="s8">
+        <div class="section-header">
+        <div class="section-number">8</div>
+        <h2>Thématiques au programme</h2>
+        </div>
+        <p>Les limites du programme des EVC sont volontairement floues : le CNG souhaite éviter les recours en cas de sujet jugé « hors programme ». Plusieurs indices permettent néanmoins d'identifier les thèmes susceptibles d'être abordés.</p>
+        <p>En France, l'Anesthésie-Réanimation est désormais appréhendée comme la <strong>médecine péri-opératoire</strong>, englobant l'optimisation préopératoire, la gestion de la douleur postopératoire, le dépistage des complications, et la gestion des voies d'abord difficiles. La réanimation occupe une place prépondérante dans l'enseignement français.</p>
+        <p>Les sujets d'examen sont rédigés par des professeurs universitaires. Leurs centres d'intérêt et les tendances récentes de la spécialité influencent directement les thèmes choisis. La correction s'appuie largement sur les <strong>recommandations officielles</strong> : maîtriser les recommandations récentes de la SFAR et de la HAS constitue donc une base solide et directement évaluable.</p>
+        <div class="callout callout-blue"><span class="icon">💡</span><div class="callout-content"><p>Les sujets « atypiques » des dernières années (pharmacologie des halogénés, retour veineux) correspondent directement à des enseignements magistraux dispensés aux internes de Paris. Tenir compte du programme du DES Île-de-France est donc une stratégie pertinente.</p></div></div>
+    </section>
+
+    <!-- 9 -->
+    <section class="section" id="s9">
+        <div class="section-header">
+        <div class="section-number">9</div>
+        <h2>Maquette du DESAR</h2>
+        </div>
+        <p>La maquette est l'organisation de l'internat d'Anesthésie-Réanimation, qui dure <strong>5 ans</strong> en France (10 semestres). Elle révèle les priorités pédagogiques du cursus et, par extension, les thèmes les plus susceptibles de tomber à l'examen.</p>
+        <div class="callout callout-green"><span class="icon">🟢</span><div class="callout-content"><p><strong>Quatre semestres d'anesthésie :</strong> chirurgie générale, obstétrique, chirurgie pédiatrique, chirurgie du segment céphalique, chirurgie orthopédique, chirurgie urologique, chirurgie thoracique et cardiovasculaire. Les stages d'anesthésie pédiatrique et d'obstétrique sont fortement conseillés.</p></div></div>
+        <div class="callout callout-orange"><span class="icon">🟠</span><div class="callout-content"><p><strong>Trois semestres de réanimation :</strong> au moins un en réanimation chirurgicale adulte ou pédiatrique, les autres pouvant être réalisés en SAMU, en neurochirurgie, en chirurgie cardiothoracique, aux urgences (déchocage), ou en réanimation médicale.</p></div></div>
+        <div class="callout callout-blue"><span class="icon">🔵</span><div class="callout-content"><p><strong>Deux semestres libres</strong> dans des services agréés, y compris en anesthésie-réanimation.</p></div></div>
+        <p>Ce cursus met en évidence plusieurs priorités : la réanimation représente presque la moitié de l'enseignement, l'obstétrique et la pédiatrie sont obligatoires, et le médecin anesthésiste-réanimateur joue un rôle central de conseil en médecine péri-opératoire.</p>
+    </section>
+
+    <!-- 10 -->
+    <section class="section" id="s10">
+        <div class="section-header">
+        <div class="section-number">10</div>
+        <h2>Programme du DESAR</h2>
+        </div>
+        <p>Lorsqu’on se questionne sur le programme précis des examens d’équivalence, les textes officiels renvoient vers le décret du Journal Officiel sur l’enseignement du DESAR en France (Diplôme d'Études Spécialisées d’Anesthésie-Réanimation) qui est le cursus d’enseignement de la médecine pour les internes Français. Il n’y a donc pas d’évocation d’un programme particulier, excepté celui du cursus classique. Ainsi, pour connaître les thématiques importantes à maîtriser, il faut connaître le programme du DESAR. Vous n’y avez pas accès tant que vous n’êtes pas inscrit à une université française, mais vous pouvez généralement assister aux cours si vous travaillez dans un centre hospitalier français et que vous en faites la demande.</p>
+        <p>Le programme du <strong>DES Île-de-France</strong> est probablement le plus pertinent à étudier, en raison de la concentration des professeurs universitaires parisiens dans les jurys.</p>
+        <p>Ile Programme du DESAR d’Ile-de-France est divisé en <strong>(i) une phase socle</strong>, réunissant tous les enseignements fondamentaux, et <strong>(ii) une partie d’approfondissement</strong>, dédiée à l’étude des concepts de fin de cursus.</p>
+
+        <details class="section-detail">
+        <summary>Phase Socle — Semestre 1</summary>
+        <div class="detail-content">
+            <p>Les thèmes fondamentaux de l'anesthésie-réanimation : évaluation préopératoire, estomac plein, communication interprofessionnelle, réveil de l'anesthésie, monitorage peropératoire, abord des voies aériennes, transfusion, arrêt cardiaque, choc hémorragique, séquences d'anesthésie, sepsis, réglage d'un respirateur de réanimation, hyperthermie maligne, vasopresseurs/inotropes, sédation, choc anaphylactique.</p>
+            <div class="callout callout-green"><span class="icon">📌</span><div class="callout-content"><p>Pour les questions récurrentes sur les thèmes de base, constituez-vous une réponse « standard » claire et structurée contenant tous les éléments pratiques. Vous gagnerez un temps précieux lors de la rédaction.</p></div></div>
+        </div>
+        </details>
+
+        <details class="section-detail">
+        <summary>Phase Socle — Semestre 2</summary>
+        <div class="detail-content">
+            <p>Gestion des médicaments en périopératoire, NVPO, voies aériennes difficiles, règles de jeun, pré-oxygénation, PAVM, SDRA, chirurgie ambulatoire, check-list, thromboprophylaxie, interactions cardio-pulmonaires, antibioprophylaxie, antibiothérapie probabiliste, bases de l'EER, panne de respirateur.</p>
+            <p>Cette phase est encadrée par des algorithmes et recommandations de la SFAR et du MAPAR. Les thèmes d'antibiothérapie probabiliste couvrent les péritonites, PAVM, pyélonéphrites bloquées et infections de site opératoire en orthopédie.</p>
+        </div>
+        </details>
+
+        <details class="section-detail">
+        <summary>Phase d'Approfondissement — Défaillances d'organes</summary>
+        <div class="detail-content">
+            <p>Pression artérielle, débit cardiaque, choc hémorragique traumatique, choc cardiogénique, embolie pulmonaire grave. Cette partie est fortement orientée vers la physiologie réanimatoire : débit cardiaque, retour veineux, états de choc.</p>
+        </div>
+        </details>
+
+        <details class="section-detail">
+        <summary>Phase d'Approfondissement — Pharmacologie</summary>
+        <div class="detail-content">
+            <p>Pharmacologie de l'induction, pharmacocinétique/pharmacodynamique des anesthésiques intraveineux, halogénés, morphinomimétiques, sédation procédurale, interactions hypnotiques/morphiniques, curares, anesthésiques locaux, monitorage de l'anesthésie (variables de la MAC). La survenue d'un sujet complet sur les halogénés en 2023 illustre la nécessité d'anticiper des sujets similaires sur les curares ou les morphinomimétiques.</p>
+        </div>
+        </details>
+
+        <details class="section-detail">
+        <summary>Phase d'Approfondissement — Réanimation cardiaque</summary>
+        <div class="detail-content">
+            <p>Anévrisme de l'aorte abdominale, dissection aortique, endocardite, ischémie mésentérique, tamponnade, troubles du rythme et de la conduction. Ces thèmes n'ont pas encore fait l'objet d'un cas pratique aux EVC, mais leur complexité croissante laisse envisager leur apparition prochaine.</p>
+        </div>
+        </details>
+
+        <details class="section-detail">
+        <summary>Fin du cursus — Assistance circulatoire, ALR, Méthodologie, Infectiologie</summary>
+        <div class="detail-content">
+            <p><strong>Assistance circulatoire :</strong> ECMO veino-artérielle et veino-veineuse, ECLS et arrêt cardiaque réfractaire, sevrage de l'ECMO, hémostase sous ECMO, SDRA. Ces sujets, très spécialisés, sont à réviser uniquement après la maîtrise des thèmes de base.</p>
+            <p><strong>Anesthésie loco-régionale :</strong> indications, produits, complications et contre-indications des différents blocs.</p>
+            <p><strong>Infectiologie :</strong> urosepsis, PAVM, péritonites (postopératoires et communautaires), infections cutanées et des tissus mous, infections de cathéter, bon usage des antibiotiques, antifongiques. La lecture d'un antibiogramme — compétence attendue — n'a pas encore été évaluée à l'examen mais reste une lacune à combler.</p>
+        </div>
+        </details>
+    </section>
+
+    <!-- 11 -->
+    <section class="section" id="s11">
+        <div class="section-header">
+        <div class="section-number">11</div>
+        <h2>Sources et recommandations</h2>
+        </div>
+        <p>L'utilisation des sources françaises est indispensable pour deux raisons : elles inspirent directement la rédaction des sujets, et elles constituent une base de correction incontestable.</p>
+
+        <h3>Haute Autorité de Santé (HAS)</h3>
+        <p>Autorité publique indépendante à caractère scientifique. Ses recommandations ont la force de preuve la plus élevée, bien que leur nombre spécifiquement lié à l'anesthésie-réanimation soit limité.</p>
+
+        <h3>SFAR — Société Française d'Anesthésie et de Réanimation</h3>
+        <p>Société savante de référence. Ses recommandations doivent être connues avec précision. Deux types :</p>
+        <ul>
+        <li><strong>RFE (Recommandations Formalisées d'Experts) :</strong> force de recommandation gradée selon la classification GRADE (1+/1−/2+/2−).</li>
+        <li><strong>RPP (Recommandations de Pratiques Professionnelles) :</strong> avis d'experts sur des thèmes sans littérature suffisante.</li>
+        </ul>
+        <p>Accès : <a href="https://sfar.org/recommandations/" target="_blank">sfar.org/recommandations</a></p>
+
+        <h3>MAPAR</h3>
+        <p>Guide de référence en Anesthésie-Réanimation édité par des médecins du CHU du Kremlin-Bicêtre (16<sup>e</sup> édition). Il couvre l'ensemble des bonnes pratiques et existe en version dématérialisée. Communications accessibles sur <a href="https://www.mapar.org" target="_blank">mapar.org</a>.</p>
+
+        <h3>eICU — Application de la SRLF</h3>
+        <p>Application gratuite (iOS et Android) regroupant les aides cognitives et fiches de prise en charge en réanimation, régulièrement mises à jour. Indispensable pour réviser les conduites à tenir en pathologies réanimatoires.</p>
+
+        <h3>Recommandations européennes</h3>
+        <p>Les recommandations européennes (notamment en cardiologie) ont une influence réelle sur la pratique française. En cas de divergence avec les recommandations françaises, il est conseillé de privilégier les recommandations les plus récentes.</p>
+
+        <div class="callout callout-green"><span class="icon">📌</span><div class="callout-content"><p>Les recommandations récentes de la HAS et de la SFAR constituent des sources faciles de questions pour les EVC et doivent être maîtrisées en priorité.</p></div></div>
+    </section>
+
+    <!-- 12 -->
+    <section class="section" id="s12">
+        <div class="section-header">
+        <div class="section-number">12</div>
+        <h2>Méthodologie de travail</h2>
+        </div>
+
+        <h3>12.1 Organisation du travail</h3>
+        <p>L'une des difficultés majeures des EVC tient au profil des candidats : des médecins installés dans leurs habitudes professionnelles, moins entraînés à la révision intensive que lors de leurs études. Quelques principes permettent de retrouver une efficacité optimale :</p>
+        <ul>
+        <li><strong>Méthode Pomodoro :</strong> sessions de 25 minutes de travail intensif (téléphone en silencieux, dans une autre pièce), suivies de 5 minutes de pause. Une pause plus longue après trois ou quatre cycles. Cette méthode améliore la concentration et favorise la mémorisation.</li>
+        <li><strong>Espace dédié :</strong> travailler toujours au même endroit (bureau, bibliothèque) aide le cerveau à entrer plus facilement en mode « étude ».</li>
+        <li><strong>Fiches de révision :</strong> identifiez les mots clés et notions susceptibles de rapporter des points, et structurez-les en fiches. Vous pourrez les consulter régulièrement sans perdre de temps.</li>
+        <li><strong>Révision avant le coucher :</strong> les processus de mémorisation s'activent pendant le sommeil. Vingt minutes de relecture des fiches avant de dormir constituent un investissement très rentable.</li>
+        </ul>
+
+        <h3>12.2 Entraînement</h3>
+        <p>Les études montrent que la pratique régulière d'examens blancs est un facteur déterminant de succès. Deux raisons principales :</p>
+        <ul>
+        <li>L'exposition répétée à la pression de l'examen permet de la dédramatiser et d'apprendre à la gérer.</li>
+        <li>Les EVC sont un <strong>examen rédactionnel</strong> : rédiger pendant deux heures à la main est une épreuve d'endurance qui exige un entraînement régulier. Une écriture lente ou illisible pénalise de nombreux candidats.</li>
+        </ul>
+        <p>Les sujets des années précédentes sont disponibles sans correction sur le site du CNG : <a href="https://www.cng.sante.fr/candidats/internats/concours-medicaux/docteurs-juniors-praticiens/epreuves-verification-connaissances-evc" target="_blank">cng.sante.fr</a>. Une question déjà posée a de fortes chances de réapparaître sous une forme similaire.</p>
+        <div class="callout callout-yellow"><span class="icon">⚠️</span><div class="callout-content"><p>L'entraînement régulier aux examens blancs doit être intégré dès le début de vos révisions, pas seulement en fin de préparation.</p></div></div>
+    </section>
+
+    <!-- 13 -->
+    <section class="section" id="s13">
+        <div class="section-header">
+        <div class="section-number">13</div>
+        <h2>Préparation complémentaire</h2>
+        </div>
+
+        <h3>13.1 Sous-colles</h3>
+        <p>La « sous-colle » est un groupe de travail de 2 à 3 personnes se réunissant régulièrement (au minimum une fois par semaine, idéalement le soir ou le week-end, sur un créneau fixe). Elle offre plusieurs avantages majeurs :</p>
+        <ul>
+        <li>Explorer les parties du programme négligées en travaillant seul.</li>
+        <li>S'auto-évaluer et identifier ses points faibles avant l'examen.</li>
+        <li>Maintenir la motivation et le rythme de travail.</li>
+        </ul>
+        <p>Organisation suggérée : chaque participant arrive avec 10 à 20 questions de cours. La première heure est dédiée aux réponses, la seconde à la correction mutuelle et à l'approfondissement des notions. L'entrainement à la <strong>rédaction manuscrite</strong> doit être au cœur de ces séances.</p>
+        <div class="callout callout-green"><span class="icon">📌</span><div class="callout-content"><p>Il faut s'entraîner à rédiger de façon claire et structurée. Le format attendu est spécifique et doit être maîtrisé bien avant le jour du concours.</p></div></div>
+
+        <h3>13.2 Classes préparatoires</h3>
+        <p>Les classes préparatoires apportent un cadre structurant essentiel pour les travailleurs solitaires, en évitant deux écueils opposés :</p>
+        <ul>
+        <li><strong>L'excès de confiance</strong> : sous-estimer ses concurrents conduit à ralentir ses efforts au moment où les autres progressent.</li>
+        <li><strong>L'excès de doute</strong> : sans repères extérieurs, la confiance en sa capacité à réussir peut s'éroder.</li>
+        </ul>
+        <p>Une préparation structurée vous aide à maintenir le cap, à aborder méthodiquement chaque thématique du programme et à ne pas tourner en rond sur les mêmes notions.</p>
+    </section>
+
+    <!-- 14 -->
+    <section class="section" id="s14">
+        <div class="section-header">
+        <div class="section-number">14</div>
+        <h2>Méthodologie de réponse</h2>
+        </div>
+
+        <h3>14.1 Généralités</h3>
+        <p>Connaître parfaitement les recommandations et les cours ne suffit pas si vous ne parvenez pas à retranscrire vos connaissances le jour J. La réussite repose sur deux piliers indissociables : l'acquisition des connaissances et la capacité à les retranscrire.</p>
+        <div class="callout callout-green"><span class="icon">📌</span><div class="callout-content"><p>Vous allez manquer de temps. L'optimisation de chaque minute est capitale.</p></div></div>
+        <p>Quelques règles générales applicables aux deux épreuves :</p>
+        <ul>
+        <li>Si vous hésitez à ajouter une notion, indiquez-la : il n'existe pas de « mis zéro » aux EVC. Le risque maximal est d'irriter légèrement le correcteur, mais le bénéfice potentiel d'un point supplémentaire est bien supérieur.</li>
+        <li>Restez sur votre première intuition, sauf si vous avez des arguments très solides pour en changer.</li>
+        <li>Si vous ne connaissez pas la réponse à une question, passez à la suivante en laissant un espace et revenez-y en fin d'épreuve.</li>
+        <li>Pour les questions à choix binaire (augmente/diminue, vrai/faux), tranchez : ne cherchez pas de réponse intermédiaire.</li>
+        </ul>
+        <p>Quelques réflexes utiles :</p>
+        <ul>
+        <li>Un antécédent d'une situation est toujours un facteur de risque de cette même situation.</li>
+        <li>Pour l'évaluation préopératoire, laissez-vous guider par votre fiche de consultation habituelle.</li>
+        <li>L'hémocue et la glycémie capillaire font partie de l'examen clinique — ne les oubliez pas dans les troubles de la conscience.</li>
+        <li>Dans toute situation grave au bloc, pensez à mentionner l'appel à l'aide et la communication avec le chirurgien.</li>
+        </ul>
+
+        <h3>14.2 Questions de l'épreuve pratique</h3>
+        <h4>Lecture active</h4>
+        <p>Dès la lecture du cas clinique, stylo en main, notez les réflexes associés à chaque information. Rien n'est laissé au hasard dans un énoncé (principe du « fusil de Tchekhov »). Les informations fournies seront utiles dans environ 90 % des cas.</p>
+        <h4>Organisation du brouillon</h4>
+        <p>Notez les mots clés essentiels et les notions associées à ne pas oublier. Associez ensuite ces notions aux questions posées avant de commencer la rédaction.</p>
+        <h4>Annotation du sujet</h4>
+        <p>Surlignez ou entourez chaque mot essentiel dans l'énoncé, puis reliez-le par des flèches aux mots clés notés en marge. Après lecture des questions, associez ces notions clés aux questions concernées.</p>
+        <h4>Lecture complète du sujet avant de rédiger</h4>
+        <p>Lisez l'intégralité des questions <em>avant</em> de commencer à rédiger. C'est une règle absolue. Les questions sont cohérentes entre elles : lire la suite peut vous donner des informations précieuses pour répondre aux questions précédentes, et vous évite de développer trop tôt un point qui sera demandé plus loin.</p>
+        <div class="callout callout-green"><span class="icon">📌</span><div class="callout-content"><p>Lire toutes les questions avant de commencer vous fait gagner du temps, vous permet d'éviter les doublons et vous aide à mieux structurer vos réponses.</p></div></div>
+        <h4>Justification des réponses</h4>
+        <p>Justifiez uniquement si la question le demande explicitement (présence du mot « justifiez »). Dans le cas contraire, c'est une perte de temps. Si une question comporte deux parties, notez immédiatement un rappel entre cette question et la suivante pour ne pas oublier la seconde partie.</p>
+
+        <h3>14.3 Questions de l'épreuve fondamentale</h3>
+        <p>Ces questions sont plus courtes et plus précises. Deux points de vigilance :</p>
+        <ul>
+        <li><strong>Nombre de réponses imposé :</strong> si l'on vous demande deux causes, n'en citez pas trois — vous auriez zéro à la question. Numérotez vos réponses.</li>
+        <li><strong>Singulier ou pluriel :</strong> une question au singulier n'attend qu'une seule réponse ; au pluriel, plusieurs réponses sont attendues et cotées.</li>
+        </ul>
+
+        <h3>14.4 Synthèse des questions récurrentes</h3>
+        <p>L'analyse des examens précédents révèle des thèmes très récurrents :</p>
+        <ul>
+        <li><strong>Anesthésiques locaux :</strong> 14 occurrences — soit une fois par examen en moyenne. Maîtrise indispensable.</li>
+        <li><strong>Décurarisation :</strong> 12 occurrences. Peu de travail pour beaucoup de points.</li>
+        <li><strong>Physiologie hémodynamique et transport de l'oxygène :</strong> 17 questions. La physiologie réanimatoire est fondamentale.</li>
+        <li><strong>Neuro-réanimation :</strong> 21 questions, dont un sujet entier en 2024. Thème à ne jamais négliger.</li>
+        <li><strong>Choc anaphylactique :</strong> 4 occurrences. <strong>Choc hémorragique :</strong> 5 occurrences.</li>
+        </ul>
+        <div class="callout callout-green"><span class="icon">💡</span><div class="callout-content"><p>En 2021, 86 % des questions avaient déjà été posées lors des années précédentes. Une maîtrise parfaite des annales aurait suffi à obtenir une note supérieure à 16/20. Connaître ses annales est la stratégie la plus rentable.</p></div></div>
+        <p>Ne vous laissez pas intimider par les questions difficiles : elles ne sont pas déterminantes car peu de candidats y excellent. Ce sont les questions simples et fréquentes qui font la différence. Un échec résulte souvent non d'un manque de connaissances, mais de points perdus faute de méthodologie.</p>
+    </section>
+
+    <div class="cta-block">
+        <h2>Prêt à aller plus loin ?</h2>
+        <p>Ce guide vous a donné les clés. Notre formation intensive vous accompagne de manière personnalisée pour maximiser vos chances de réussite aux EVC.</p>
+        <a href="https://khypnos.fr" class="cta-button">Découvrir la formation Khypnos</a>
+    </div>
+
+    </div>
+
+</div>
+    <script src="/js/header-manager.js" defer></script>    
+    <script src="/js/scroll-to-top.min.js"></script>	
+    <script src="/js/navbar.js"></script>
+	  <script src="/js/script.js"></script>
+    <script src="/js/footer-manager.js" defer></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        new FooterManager({
+          anchor: '.container',
+          position: 'beforeend'
+        }).init();
+      });
+    </script>
+
+</body>
+</html>

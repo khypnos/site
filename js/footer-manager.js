@@ -45,7 +45,7 @@ class FooterManager {
 				<!-- La section Réseaux est injectée dynamiquement -->
 			</div>
 			<div class="footer-bottom">
-				<p>&copy; 2025 Khypnos - Tous droits réservés</p>
+				<p>&copy; 2026 Khypnos - Tous droits réservés</p>
 			</div>
 		`;
 		// IMPORTANT: plus d'append ici

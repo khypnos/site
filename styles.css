@@ -581,7 +581,7 @@ justify-self: start;
 
 .ressource-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* plus petit que 350px */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* plus petit que 350px */
     gap: 18px;
     margin: 20px 0;
 }
