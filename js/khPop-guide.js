@@ -8,7 +8,7 @@
     id: 'kh-pop-guide',
     title: '📖 Guide complet EVC',
     text: 'Retrouvez l\'intégralité du guide : programme, correction, méthodologie et sources.',
-    linkHref: 'guide-evc.html',
+    linkHref: '/medecin/guide_evc.html',
     linkLabel: 'Lire le guide complet',
     triggerMs: 4000,      // apparaît après 5 secondes
     autoCompactMs: 4000   // se réduit 4 secondes après l'apparition
