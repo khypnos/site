@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercer la médecine en France – Khypnos</title>
+  <meta name="description" content="Guide pratique pour les PADHUE souhaitant exercer la médecine en France : EVC, PAE, statuts transitoires, visa, rémunérations." />
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+  /* ── LAYOUT PRINCIPAL ── */
+  .guide-wrapper {
+    margin: 0 auto;
+  }
+  /* ── TABLE DES MATIÈRES ── */
+  .toc-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .toc-card h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+    display: block;
+  }
+  .toc-grid a:hover {
+    color: #764ba2;
+    border-bottom-color: #764ba2;
+  }
+  /* ── SECTIONS ── */
+  .section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 30px 36px;
+    margin-bottom: 20px;
+    scroll-margin-top: 24px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  .section-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .section h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+  }
+  .section p {
+    margin-bottom: 12px;
+  }
+  .section p:last-child { margin-bottom: 0; }
+  .section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #764ba2;
+    margin: 20px 0 8px;
+  }
+  .section h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #667eea;
+    margin: 16px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .section ul,
+  .section ol {
+    padding-left: 22px;
+    margin: 8px 0 12px;
+  }
+  .section li {
+    margin-bottom: 6px;
+    font-size: inherit;
+    line-height: 1.6;
+  }
+  /* ── ÉTAPES ── */
+  .step-block {
+    border-left: 4px solid #667eea;
+    padding: 14px 18px;
+    margin: 14px 0;
+    background: #f8f9ff;
+    border-radius: 0 8px 8px 0;
+    font-size: inherit;
+    line-height: 1.6;
+  }
+  .step-block strong { color: #667eea; }
+  /* ── CALLOUTS ── */
+  .callout {
+    display: flex;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 14px 0;
+  }
+  .callout-content {
+    flex: 1;
+    font-size: inherit;
+    line-height: 1.6;
+  }
+  .callout-content p {
+    margin-bottom: 6px;
+    font-size: inherit;
+  }
+  .callout-content p:last-child { margin-bottom: 0; }
+  .callout-green  { background: #f0faf4; border-left: 4px solid #4caf50; }
+  .callout-orange { background: #fff8f0; border-left: 4px solid #ff9800; }
+  .callout-red    { background: #fff0f0; border-left: 4px solid #f44336; }
+  .callout-gray   { background: #f8f9ff; border-left: 4px solid #999; }
+  .callout-blue   { background: #f0f4ff; border-left: 4px solid #4a90e2; }
+  .callout-yellow { background: #fffde7; border-left: 4px solid #ffc107; }
+  .callout .icon  { font-size: 1.2rem; flex-shrink: 0; line-height: 1.6; }
+  /* ── ACCORDION ── */
+  details.section-detail {
+    border: 1px solid #e3e6ff;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+  details.section-detail summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c3e50;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9ff;
+    transition: background 0.2s;
+    font-size: inherit;
+    line-height: 1.6;
+  }
+  details.section-detail summary:hover { background: #eef0ff; }
+  details.section-detail summary::-webkit-details-marker { display: none; }
+  details.section-detail summary::after {
+    content: '▸';
+    color: #667eea;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  details.section-detail[open] summary::after { transform: rotate(90deg); }
+  details.section-detail .detail-content {
+    padding: 16px 18px;
+    border-top: 1px solid #e3e6ff;
+    font-size: inherit;
+    line-height: 1.6;
+  }
+  details.section-detail .detail-content p { font-size: inherit; }
+  details.section-detail .detail-content li { font-size: inherit; }
+  /* ── CTA BLOC FINAL ── */
+  .cta-block {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 24px;
+    border-radius: 12px;
+    margin-top: 32px;
+    text-align: center;
+  }
+  .cta-block h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: white;
+  }
+  .cta-block p {
+    opacity: 0.9;
+    margin-bottom: 22px;
+    color: white;
+  }
+  .cta-block .cta-button {
+    font-size: 1rem;
+    padding: 14px 30px;
+  }
+  /* ── BLOCKQUOTE ── */
+  .section blockquote {
+    border-left: 3px solid #667eea;
+    padding: 10px 16px;
+    margin: 14px 0;
+    color: #555;
+    font-style: italic;
+    background: #f8f9ff;
+    border-radius: 0 6px 6px 0;
+  }
+  /* ── RESPONSIVE ── */
+  @media screen and (max-width: 1200px) {
+    .section, .toc-card { font-size: 1rem; }
+  }
+  @media screen and (max-width: 768px) {
+    .section, .toc-card { font-size: 0.95rem; padding: 22px 18px; }
+    .section h2  { font-size: 1.1rem; }
+    .section h3  { font-size: 1rem; }
+    .section h4  { font-size: 0.85rem; }
+    .toc-card    { padding: 20px 18px; }
+    .section-number { width: 34px; height: 34px; font-size: 0.9rem; }
+    .toc-grid    { grid-template-columns: 1fr 1fr; }
+    .cta-block h2 { font-size: 1.3rem; }
+    details.section-detail summary { padding: 12px 14px; }
+    details.section-detail .detail-content { padding: 12px 14px; }
+    .callout { padding: 12px 14px; }
+    .step-block { padding: 12px 14px; }
+  }
+  @media screen and (max-width: 480px) {
+    .section, .toc-card { font-size: 0.85rem; }
+    .guide-wrapper { padding: 0 12px 32px; }
+    .section { padding: 16px 12px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .cta-block { padding: 28px 16px; }
+    .section h2 { font-size: 1rem; }
+    .section h3 { font-size: 0.95rem; }
+    details.section-detail summary { padding: 10px 12px; }
+    details.section-detail .detail-content { padding: 10px 12px; }
+    .callout { padding: 10px 12px; gap: 8px; }
+    .step-block { padding: 10px 12px; }
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- TABLE DES MATIÈRES -->
+  <div class="toc-wrapper">
+    <div class="toc-card">
+      <h2>Table des matières</h2>
+      <div class="toc-grid">
+        <a href="#s1">1. Glossaire</a>
+        <a href="#s2">2. Le parcours type</a>
+        <a href="#s3">3. EVC : inscriptions et calendrier</a>
+        <a href="#s4">4. Liste A / Liste B</a>
+        <a href="#s5">5. Travailler avant l'autorisation</a>
+        <a href="#s6">6. Rémunérations</a>
+        <a href="#s7">7. Visa et titre de séjour</a>
+        <a href="#s8">8. Trouver des offres / postes</a>
+        <a href="#s9">9. Checklist action</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-wrapper">
+
+    <!-- 1 -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <h2>Glossaire</h2>
+      </div>
+      <ul>
+        <li><strong>PADHUE</strong> : praticien à diplôme hors Union européenne.</li>
+        <li><strong>EVC</strong> : Épreuves de Vérification des Connaissances (concours national).</li>
+        <li><strong>PAE</strong> : Procédure d'Autorisation d'Exercice (le "parcours" complet).</li>
+        <li><strong>PCC</strong> : Parcours de Consolidation des Compétences (pratique supervisée après EVC).</li>
+        <li><strong>CAE</strong> : Commission d'Autorisation d'Exercice (examine le dossier final et délivre l'autorisation par délégation).</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <h2>Le parcours type</h2>
+      </div>
+      <div class="step-block"><strong>Étape 1 — Inscription + réussite aux EVC (CNG)</strong><br>Inscription en ligne sur la plateforme CNG, généralement en juin. Concours classant, organisé en fin d'année.</div>
+      <div class="step-block"><strong>Étape 2 — PCC (Parcours de Consolidation des Compétences)</strong><br>2 ans de pratique supervisée pour les médecins, selon le cadre réglementaire en vigueur et l'affectation.</div>
+      <div class="step-block"><strong>Étape 3 — Dépôt du dossier → passage en CAE → Autorisation d'exercice</strong><br>Dossier déposé auprès du bureau des autorisations du CNG après validation du PCC.</div>
+      <div class="step-block"><strong>Étape 4 — Inscription à l'Ordre des médecins</strong><br>Une fois l'autorisation d'exercice obtenue, l'inscription à l'Ordre est possible et ouvre le plein exercice autonome.</div>
+      <div class="callout callout-red">
+        <span class="icon">🚨</span>
+        <div class="callout-content">
+          <p>Sans réussite aux EVC (hors situation diplôme UE/EEE conforme), pas d'accès au plein exercice autonome en France.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <h2>EVC : inscriptions, calendrier, modalités</h2>
+      </div>
+      <p>L'épreuve a usuellement lieu en fin d'année, le plus souvent en octobre, bien que l'organisation prenne souvent du retard lorsque des réformes sont en cours. Les dates du concours sont annoncées sur le site du CNG environ 2 à 3 mois avant l'épreuve.</p>
+      <p>Attendre l'annonce pour débuter la préparation peut faire prendre du retard par rapport aux concurrents.</p>
+
+      <h3>Pages CNG (référence)</h3>
+      <ul>
+        <li>Page générale EVC (conditions, modalités d'inscription, sessions) :<br>
+          <a href="https://www.cng.sante.fr/candidats/concours/internats/concours-medicaux/concours-medicaux/epreuves-verification-connaissances-evc" target="_blank">cng.sante.fr – EVC</a>
+        </li>
+        <li>Page "Session EVC" (calendrier, actualités, affectations, plateforme) — pour la session 2026, il est probable qu'elle suive la séquence classique : inscription en juin, examens en octobre, résultats en décembre :<br>
+          <a href="https://www.cng.sante.fr/session-evc-2025" target="_blank">cng.sante.fr – Session EVC 2025</a>
+        </li>
+      </ul>
+
+      <h3>Principe d'inscription (rappel pratique)</h3>
+      <ul>
+        <li>Dépôt en ligne sur la plateforme CNG pendant la fenêtre d'inscription (<strong>juin</strong> le plus souvent).</li>
+        <li>Choix d'une <strong>ARS</strong> : ARS de résidence si déjà en France, sinon ARS au choix (selon les règles CNG de la session concernée).</li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <h2>Liste A / Liste B</h2>
+      </div>
+      <ul>
+        <li><strong>Liste A</strong> : concours classant (places limitées).</li>
+        <li><strong>Liste B</strong> : certains statuts (ex : protection internationale, etc.) avec modalités spécifiques (admission sur seuil, non classant selon cas).</li>
+      </ul>
+    </section>
+
+    <!-- 5 -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <h2>Peut-on travailler avant l'autorisation définitive ?</h2>
+      </div>
+
+      <h3>FFI (faisant fonction d'interne)</h3>
+      <p>Le <strong>FFI</strong> est recruté <strong>directement par l'hôpital français</strong> (sans convention internationale) et peut être <strong>renouvelé sans limite stricte</strong> selon les établissements. C'est une solution d'accès "terrain" (expérience du système de soins français), mais <strong>ce n'est pas</strong> le plein exercice autonome.</p>
+
+      <h3>Stagiaire associé</h3>
+      <p>Cadre : coopération internationale (conventions). Le <strong>stagiaire associé est plafonné à 2 ans</strong>.</p>
+      <ul>
+        <li>Ressource pratique : <a href="https://www.internestrasbourg.fr/stagiaire-associe/" target="_blank">internestrasbourg.fr – stagiaire associé</a></li>
+      </ul>
+
+      <h3>Les deux statuts en résumé</h3>
+      <p>Dans les deux cas, les missions sont proches de celles d'un interne, la rémunération est comparable. Ce sont des <strong>statuts transitoires</strong> : ils ne donnent <strong>pas</strong> accès au plein exercice, ne permettent <strong>pas</strong> l'inscription à l'Ordre, et la reconnaissance du diplôme passe toujours par la <strong>réussite des EVC</strong> puis la <strong>PAE</strong>.</p>
+      <div class="callout callout-blue">
+        <span class="icon">💡</span>
+        <div class="callout-content">
+          <p>Les médecins étrangers sont <strong>très valorisés</strong> par certains services car ce statut leur permet d'avoir un <strong>fort soutien</strong> aux équipes, sans pour autant ouvrir un nouveau poste de médecin sénior.</p>
+        </div>
+      </div>
+
+      <h3>Stratégie réaliste pour trouver un poste</h3>
+      <ol>
+        <li><strong>Ciblage géographique</strong> : hôpitaux périphériques / territoires en tension (souvent plus d'opportunités).</li>
+        <li><strong>Ciblage structure</strong> : services avec besoin de renfort en gardes/anesthésie et organisation pédagogique.</li>
+        <li><strong>Approche</strong> : contact <strong>direct du service</strong> + DAM (direction des affaires médicales), puis dossier administratif. Le contact d'un des médecins du service ayant suivi le circuit de PAE est une très bonne stratégie.</li>
+        <li><strong>Effet levier</strong> : un poste transitoire bien évalué (FFI / stagiaire associé) peut aider à sécuriser une suite de parcours.</li>
+      </ol>
+
+      <details class="section-detail">
+        <summary>Difficultés typiques</summary>
+        <div class="detail-content">
+          <ul>
+            <li>Beaucoup de recrutements se font par <strong>réseau / contact direct</strong>.</li>
+            <li>Délais administratifs (autorisation de travail / visa / titre de séjour) non alignés avec les dates de prise de poste.</li>
+            <li>Hétérogénéité des exigences entre établissements (pièces, délais, "process" DAM).</li>
+            <li>En Anesthésie-Réanimation : crainte d'un niveau d'autonomie insuffisant en gardes → importance de la <strong>supervision</strong> et d'une progression cadrée.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="section-detail">
+        <summary>Circuits concrets</summary>
+        <div class="detail-content">
+          <ul>
+            <li><strong>FHF Emploi</strong> : annonces hospitalières — <a href="https://emploi.fhf.fr/" target="_blank">emploi.fhf.fr</a></li>
+            <li><strong>Contact direct</strong> (souvent le plus efficace) : chef·fe de service + <strong>DAM</strong> + DRH, avec un CV médical + disponibilités + situation administrative.</li>
+            <li><strong>Bouche à oreille</strong> : contacter des médecins du service pour une <strong>recommandation</strong> auprès du chef de service.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- 6 -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <h2>Rémunérations : ordres de grandeur</h2>
+      </div>
+      <div class="callout callout-blue">
+        <span class="icon">ℹ️</span>
+        <div class="callout-content">
+          <p>Les rémunérations exactes dépendent des gardes/astreintes, des indemnités, du logement/nourriture (selon établissement), et de la quotité de travail.</p>
+        </div>
+      </div>
+
+      <h3>FFI (faisant fonction d'interne)</h3>
+      <p>La rémunération des internes/FFI est encadrée par l'arrêté "émoluments" :</p>
+      <ul>
+        <li>Indemnité de sujétions particulières : <strong>435,18 € brut mensuel</strong>.</li>
+        <li>Émoluments forfaitaires "étudiants faisant fonction d'interne" : <strong>16 892 € brut annuel</strong>.</li>
+        <li>Arrêté (référence) : <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042349239" target="_blank">legifrance.gouv.fr</a></li>
+      </ul>
+      <p>En pratique, les <strong>gardes</strong> et les avantages (logement/nourriture) modifient fortement le net.</p>
+
+      <h3>Stagiaire associé</h3>
+      <p><strong>Rémunération (ordre de grandeur)</strong> : environ <strong>2 000 € brut/mois</strong>, soit autour de <strong>1 600 € net</strong>, avec possibilité d'augmenter via les <strong>gardes</strong> et parfois des <strong>avantages en nature</strong> (logement, transport).</p>
+      <ul>
+        <li>Détail pratique : <a href="https://www.internestrasbourg.fr/stagiaire-associe/" target="_blank">internestrasbourg.fr – stagiaire associé</a></li>
+        <li>Cadre réglementaire : <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000024095666/" target="_blank">legifrance.gouv.fr – arrêté stagiaires associés</a></li>
+      </ul>
+      <div class="callout callout-orange">
+        <span class="icon">⚠️</span>
+        <div class="callout-content">
+          <p>Le poste de stagiaire associé peut devenir une <strong>impasse</strong> si la charge de travail et le confort conduisent à <strong>procrastiner la préparation des EVC</strong>. Le poste est un <strong>accélérateur, pas un prérequis</strong>. La clé reste une préparation régulière et structurée.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <div class="section-number">7</div>
+        <h2>"Papiers" + séquence pratique (visa et titre de séjour)</h2>
+      </div>
+
+      <h3>La logique générale</h3>
+      <ul>
+        <li><strong>Depuis l'étranger</strong> : dans la majorité des cas, il faut d'abord un <strong>projet concret</strong> (convocation EVC / convention de stage / contrat) pour déposer la demande de visa, puis valider le <strong>titre de séjour</strong> en France.</li>
+        <li><strong>Délais</strong> : visa/titre de séjour peuvent être le "goulot" → anticiper (dossier complet, traductions, rendez-vous, OFII si applicable).</li>
+      </ul>
+      <div class="callout callout-red">
+        <span class="icon">🚨</span>
+        <div class="callout-content">
+          <p>Les règles de visa et les pièces demandées varient selon le pays et le consulat. Toujours passer par le parcours officiel France-Visas / Service-Public plutôt que des listes non officielles.</p>
+        </div>
+      </div>
+
+      <h3>Portails officiels</h3>
+      <ul>
+        <li><strong>France-Visas</strong> (assistant officiel) : <a href="https://france-visas.gouv.fr/" target="_blank">france-visas.gouv.fr</a></li>
+        <li><strong>ANEF</strong> (démarches de séjour en ligne) : <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank">administration-etrangers-en-france.interieur.gouv.fr</a></li>
+        <li>Service-Public (démarches ANEF) : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R59398" target="_blank">service-public.gouv.fr</a></li>
+      </ul>
+
+      <h3>Type de visa pour passer les EVC</h3>
+      <p>L'objectif est un <strong>visa court séjour Schengen type C</strong> (séjour ≤ 90 jours). En pratique, il sert surtout à venir 3–4 jours le temps des épreuves.</p>
+
+      <details class="section-detail">
+        <summary>Visa touristique (court séjour) — Le plus fréquent</summary>
+        <div class="detail-content">
+          <p>Dossier typique : <strong>réservation d'hôtel</strong>, <strong>billet A/R</strong>, <strong>preuve de ressources</strong>. C'est le plus utilisé par les candidats et généralement accepté.</p>
+        </div>
+      </details>
+
+      <details class="section-detail">
+        <summary>Visa "visite familiale"</summary>
+        <div class="detail-content">
+          <p>Possible si une <strong>famille proche</strong> en France peut héberger. Pièce clé : <strong>attestation d'accueil</strong> validée par la <strong>mairie</strong>. Conditions de logement à faire valider.</p>
+        </div>
+      </details>
+
+      <details class="section-detail">
+        <summary>Visa "étudiant concours"</summary>
+        <div class="detail-content">
+          <p>Visa pensé <strong>spécifiquement</strong> pour venir passer un examen/concours. Pièce maîtresse : <strong>convocation officielle du CNG</strong>. En pratique, peu utilisé — la majorité des candidats passe par le visa touristique.</p>
+        </div>
+      </details>
+
+      <div class="callout callout-green">
+        <span class="icon">📌</span>
+        <div class="callout-content">
+          <p>En théorie, le visa <strong>"étudiant concours"</strong> est le plus adapté. En pratique, le visa <strong>touristique</strong> est le plus courant et accepté. Conseil : anticiper et déposer le dossier <strong>dès réception de la convocation</strong>.</p>
+        </div>
+      </div>
+
+      <h3>Délais : repères officiels (exemple Maroc)</h3>
+      <ul>
+        <li>Court séjour : instruction <strong>7 à 10 jours minimum</strong>, jusqu'à 3 semaines en haute saison.</li>
+        <li>Long séjour : instruction <strong>3 semaines à 3 mois</strong>.</li>
+        <li>Lien : <a href="https://france-visas.gouv.fr/en/maroc" target="_blank">france-visas.gouv.fr – Maroc</a></li>
+      </ul>
+
+      <h3>Cas fréquents (liens officiels)</h3>
+      <details class="section-detail">
+        <summary>A) Stage en hôpital public (stagiaire associé)</summary>
+        <div class="detail-content">
+          <ul>
+            <li>Service-Public – "Stagiaire étranger : visa long séjour ou carte de séjour" : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F17312" target="_blank">service-public.gouv.fr</a></li>
+            <li>Campus France (VLS-TS stagiaire) : <a href="https://www.campusfrance.org/fr/visa-long-sejour-stagiaire" target="_blank">campusfrance.org</a></li>
+          </ul>
+        </div>
+      </details>
+      <details class="section-detail">
+        <summary>B) Activité salariée (FFI)</summary>
+        <div class="detail-content">
+          <ul>
+            <li>France-Visas – "Activité salariée" : <a href="https://france-visas.gouv.fr/activite-salariee" target="_blank">france-visas.gouv.fr</a></li>
+          </ul>
+        </div>
+      </details>
+      <details class="section-detail">
+        <summary>C) Carte "talent – professions médicales et de la pharmacie"</summary>
+        <div class="detail-content">
+          <ul>
+            <li>Service-Public : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F16922" target="_blank">service-public.gouv.fr</a></li>
+            <li>FHF (contexte réglementaire) : <a href="https://www.fhf.fr/expertises/ressources-humaines/personnel-medical/carte-de-sejour-pluriannuelle-talent-profession-medicale-et-de-la-pharmacie" target="_blank">fhf.fr</a></li>
+          </ul>
+        </div>
+      </details>
+
+      <h3>Séquence concrète</h3>
+      <div class="step-block"><strong>Objectif : stagiaire associé</strong><br>1) Obtenir une <strong>convention</strong> de stage + documents de l'établissement d'accueil<br>2) Demande de visa via France-Visas (motif "stagiaire")<br>3) À l'arrivée : valider/faire les démarches via <strong>ANEF/OFII</strong></div>
+      <div class="step-block"><strong>Objectif : poste salarié (FFI)</strong><br>1) Identifier un établissement recruteur (service + DAM)<br>2) L'employeur gère ou déclenche l'<strong>autorisation de travail</strong><br>3) Dépôt de la demande de visa via France-Visas, puis démarches de séjour en France</div>
+    </section>
+
+    <!-- 8 -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <div class="section-number">8</div>
+        <h2>Où trouver des offres / postes</h2>
+      </div>
+      <h3>CNG (affectations / bourse à l'emploi)</h3>
+      <ul>
+        <li>Page session (ex. 2025) : <a href="https://www.cng.sante.fr/session-evc-2025" target="_blank">cng.sante.fr – Session EVC 2025</a></li>
+      </ul>
+      <h3>Fédération Hospitalière de France</h3>
+      <ul>
+        <li><a href="https://emploi.fhf.fr/" target="_blank">emploi.fhf.fr</a> — annonces d'emploi hospitalier public</li>
+      </ul>
+    </section>
+
+    <!-- 9 -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <div class="section-number">9</div>
+        <h2>Checklist "action" (résumé opérationnel)</h2>
+      </div>
+      <ul>
+        <li>☐ Identifier le <strong>cadre</strong> (diplôme UE/EEE vs hors UE, liste A vs B, voie interne vs externe selon session)</li>
+        <li>☐ Préparer les <strong>pièces</strong> (identité, diplômes, traductions assermentées, niveau de français si requis, etc.)</li>
+        <li>☐ Suivre les <strong>dates</strong> (inscription EVC, calendrier d'épreuves, résultats)</li>
+        <li>☐ Préparer une stratégie "terrain" (FFI / stagiaire associé si pertinent, sans perdre de vue EVC/PAE)</li>
+        <li>☐ Anticiper la partie <strong>visa / séjour</strong> (France-Visas → ANEF) si départ depuis l'étranger</li>
+      </ul>
+    </section>
+
+    <div class="cta-block">
+      <h2>Prêt à préparer les EVC ?</h2>
+      <p>Ce guide vous donne les clés du parcours. Notre formation intensive vous accompagne de manière structurée pour maximiser vos chances de réussite aux EVC.</p>
+      <a href="https://khypnos.fr" class="cta-button">Découvrir la formation Khypnos</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="/js/header-manager.js" defer></script>
+<script src="/js/scroll-to-top.min.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/footer-manager.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    new FooterManager({
+      anchor: '.container',
+      position: 'beforeend'
+    }).init();
+  });
+</script>
+</body>
+</html>
