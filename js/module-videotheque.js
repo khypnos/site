@@ -4,8 +4,8 @@
   // Configuration des vidéos : remplacez les IDs et textes
   const videos = [
     { youtubeId: "1O7ump5G0kI", title: "Résumé des Recommandations SFAR/HAS Sepsis 2025", sub: "Recommandations • 16 min" },
+    { youtubeId: "Sd7sHXgWuFg", title: "Les courbes pression-volume : les comprendre facilement", sub: "Physiologie • 10 min" },
     { youtubeId: "9C9vGZJF2UI", title: "Douleur : Allodynie / Hyperalgésie", sub: "Douleur • 9 min" },
-    { youtubeId: "Sd7sHXgWuFg", title: "Bêta-bloquants : Comment agissent-ils sur le cœur ?", sub: "Pharmacologie • 12 min" },
     { youtubeId: "AEVfOCNk4Zw", title: "Résumé des Recommandations SFAR sur l'allergie (HSI) 2025 au bloc", sub: "Recommandations • 16 min" },
   ];
 
