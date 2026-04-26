@@ -181,68 +181,139 @@ body {
     border-left: 4px solid #667eea;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* TÉMOIGNAGES — CARROUSEL AVIS */
+
+/* Wrapper qui contient le carrousel + le lien "Voir tous les avis" */
+.avis-wrapper {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cadre du carrousel */
 .avis-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow: hidden;
-    padding: 20px 0;
-    background-color: #f8f9ff;
-    border-radius: 15px;
-    border: 2px solid #667eea;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    touch-action: pan-y;
-    cursor: grab;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  background-color: #f8f9ff;
+  border-radius: 15px;
+  border: 2px solid #667eea;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
 }
-.avis-container.is-dragging {
-    cursor: grabbing;
-}
+
+/* Ruban défilant */
 .avis-slider {
-    display: flex;
-    width: max-content;
-    animation: scroll var(--scroll-duration, 30s) linear infinite;
-    animation-play-state: var(--play-state, running);
-    scroll-behavior: auto;
+  display: flex;
+  width: max-content;
+  animation: avis-scroll var(--scroll-duration, 40s) linear infinite;
+  will-change: transform;
 }
-.avis-item {
-    flex: 0 0 auto;
-    width: 300px;
-    margin: 0 15px;
-}
-.avis-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-left: 4px solid #667eea;
-}
-.avis-stars {
-    color: #ffc107;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-.avis-text {
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-}
-.avis-author {
-    text-align: right;
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: #555;
-}
-@keyframes scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(var(--scroll-distance, -1500px)); }
-}
+
+/* Pause au survol */
 .avis-container:hover .avis-slider {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
+
+/* Cartes */
+.avis-item {
+  flex: 0 0 auto;
+  width: 300px;
+  margin: 0 15px;
+  display: flex;
+}
+
+.avis-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-height: 200px;          /* hauteur de base */
+  height: auto;               /* s'adapte au contenu */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 4px solid #667eea;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.avis-stars {
+  color: #ffc107;
+  font-size: 18px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.avis-text {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.avis-author {
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.avis-date {
+  font-weight: normal;
+  color: #888;
+}
+
+
+.avis-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 24px;
+  color: #3c4043;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.avis-all-link:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.google-logo {
+  width: 1em;     /* même hauteur que le texte */
+  height: 1em;
+  flex-shrink: 0;
+}
+
+@keyframes avis-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avis-slider { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .avis-item    { width: 260px; margin: 0 10px; }
+  .avis-content { padding: 16px; }
+}
+
 .section-title {
     color: #2c3e50;
     margin: 40px 0 20px 0;
@@ -927,6 +998,8 @@ a { text-decoration: none; color: inherit; }
     html, body { overflow-x: hidden; }
     html { scrollbar-gutter: stable both-edges; }
     p, li { font-size: 1rem; } /* ← modifié : li ajouté */
+    .feature-list, .payment-features, .feature-card { font-size: 1rem; }
+
     .hamburger-menu {
         display: block;
     }
@@ -1023,6 +1096,7 @@ a { text-decoration: none; color: inherit; }
     .column h3 { font-size: 1.15rem; }
     /* ← modifié : .feature-list et .feature-list li supprimés (héritent de p, li) */
     p, li { font-size: 0.95rem; } /* ← modifié : li ajouté */
+    .feature-list, .payment-features, .feature-card { font-size: 0.95rem; }
     h2 { font-size: 1.4rem; }
     .subject-title { font-size: 1.2rem; }
     .question-title { font-size: 1.2rem; }
@@ -1083,6 +1157,7 @@ a { text-decoration: none; color: inherit; }
     .column h3 { font-size: 0.95rem; }
     /* ← modifié : .feature-list et .feature-list li supprimés (héritent de p, li) */
     p, li { font-size: 0.85rem; } /* ← modifié : li ajouté */
+    .feature-list, .payment-features, .feature-card { font-size: 0.85rem; }
     h2 { font-size: 1.3rem; }
     .subject-title { font-size: 1.1rem; }
     .question-title { font-size: 1.1rem; }
