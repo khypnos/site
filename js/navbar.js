@@ -31,7 +31,7 @@ function loadNavbar() {
             <nav class="nav-menu">
                 <ul>
                     <li><a href="/index.html">Accueil</a></li>
-                    <li><a href="https://www.notion.so/Espace-Priv-1eaf71268efe803f8b78cbf2cc00b75c?pvs=4">🔒 Espace Privé</a></li>
+                    <li><a href="/login.html">🔒 Espace Privé</a></li>
                     <li><a href="/medecin/annales/annales.html">Annales</a></li>
                     <li><a href="https://khypnos-qcm.vercel.app/">QCMs</a></li>
                     <li><a href="/medecin/demande_inscription.html">Inscription</a></li>

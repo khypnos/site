@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos - Mon espace</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .dashboard-wrapper { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+
+    .dashboard-header { margin-bottom: 2rem; }
+    .dashboard-header h1 { margin: 0 0 .35rem; font-size: 1.7rem; color: #1a1a2e; }
+    .dashboard-header p  { margin: 0; color: #6b7280; font-size: .95rem; }
+
+    /* Tags formules */
+    .plan-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0 0; }
+    .plan-tag {
+      padding: .3rem .85rem;
+      background: #f4f4f8; color: #1a1a2e;
+      border-radius: 999px; font-size: .82rem; font-weight: 500;
+      border: 1px solid #e5e7eb;
+    }
+
+    /* Carte accès vidéothèque */
+    .video-access-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+      background: #1a1a2e;
+      border-radius: 16px;
+      padding: 1.5rem 1.75rem;
+      margin: 2rem 0;
+      color: #fff;
+    }
+    .video-access-card .vac-left { flex: 1; }
+    .video-access-card .vac-icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .video-access-card h2 { margin: 0 0 .25rem; font-size: 1.15rem; font-weight: 600; color: #fff; }
+    .video-access-card p  { margin: 0; font-size: .9rem; color: rgba(255,255,255,.7); }
+    .btn-videotheque {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .7rem 1.25rem;
+      background: #fff; color: #1a1a2e;
+      border-radius: 10px;
+      font-size: .9rem; font-weight: 600;
+      text-decoration: none; white-space: nowrap;
+      transition: background .15s, transform .1s;
+    }
+    .btn-videotheque:hover { background: #f4f4f8; transform: translateY(-1px); }
+    .btn-videotheque svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Sections Notion */
+    .notion-sections { margin-top: 2rem; }
+    .notion-section-block { margin-bottom: 1rem; }
+
+    /* Carte lien Notion */
+    .notion-link-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid #ececf1; border-radius: 12px;
+      background: #fff;
+      text-decoration: none;
+      color: #1a1a2e;
+      box-shadow: 0 1px 2px rgba(16,24,40,.04);
+      transition: box-shadow .15s, transform .1s;
+      margin-bottom: .75rem;
+    }
+    .notion-link-card:hover { box-shadow: 0 4px 14px rgba(16,24,40,.09); transform: translateY(-1px); }
+    .notion-link-card .nlc-left { display: flex; align-items: center; gap: .75rem; }
+    .notion-link-card .nlc-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: #f4f4f8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .notion-link-card .nlc-label { font-size: .95rem; font-weight: 500; }
+    .notion-link-card .nlc-sub { font-size: .8rem; color: #9ca3af; margin-top: .1rem; }
+    .nlc-arrow {
+      width: 20px; height: 20px; color: #9ca3af; flex-shrink: 0;
+      transition: color .12s, transform .12s;
+    }
+    .notion-link-card:hover .nlc-arrow { color: #1a1a2e; transform: translateX(2px); }
+
+    /* Spinner chargement */
+    .loading-state {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 4rem 1rem; color: #6b7280; gap: .75rem;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #1a1a2e;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 560px) {
+      .video-access-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .btn-videotheque { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <main class="dashboard-wrapper">
+      <div id="app">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Chargement de ton espace…</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { requireAuth } from '/espace-client/_auth.js'
+
+    const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co'
+
+    const session = await requireAuth()
+    if (!session) throw new Error('Non authentifié')
+
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/get-dashboard`, {
+      headers: { Authorization: `Bearer ${session.access_token}` }
+    })
+
+    if (!res.ok) {
+      window.location.href = '/login.html?error=access_denied'
+      throw new Error('Accès refusé')
+    }
+
+    const { nom, planLabels, hasVideo, sections } = await res.json()
+    const app = document.getElementById('app')
+
+    const planTagsHTML = planLabels
+      .map(label => `<span class="plan-tag">${label}</span>`)
+      .join('')
+
+    const videoCardHTML = hasVideo ? `
+      <div class="video-access-card">
+        <div class="vac-left">
+          <div class="vac-icon">🎬</div>
+          <h2>Vidéothèque</h2>
+          <p>Retrouve toutes les vidéos de cours associées à ta formule.</p>
+        </div>
+        <a class="btn-videotheque" href="/espace-client/videotheque.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Accéder
+        </a>
+      </div>
+    ` : ''
+
+    app.innerHTML = `
+      <div class="dashboard-header">
+        <h1>Bonjour ${nom} 👋</h1>
+        <p>Voici les ressources privées liées à ton abonnement.</p>
+        <div class="plan-tags">${planTagsHTML}</div>
+      </div>
+      ${videoCardHTML}
+      <div class="notion-sections" id="infos-sections"></div>
+    `
+
+    const infosEl = document.getElementById('infos-sections')
+    for (const section of sections) {
+      infosEl.innerHTML += `
+        <a class="notion-link-card" href="${section.notionUrl}" target="_blank" rel="noopener">
+          <div class="nlc-left">
+            <div class="nlc-icon">📋</div>
+            <div>
+              <div class="nlc-label">${section.label}</div>
+              <div class="nlc-sub">Ouvrir dans Notion →</div>
+            </div>
+          </div>
+          <svg class="nlc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      `
+    }
+  </script>
+
+  <script src="/js/header-manager.js" defer></script>
+  <script src="/js/scroll-to-top.min.js"></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/footer-manager.js" defer></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			new FooterManager({
+				anchor: '.container',
+				position: 'beforeend'
+			}).init();
+		});
+	</script>
+
+</body>
+</html>

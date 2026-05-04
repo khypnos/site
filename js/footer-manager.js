@@ -5,9 +5,9 @@ class FooterManager {
 		this.position = position; // 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'
 		// URLs réseaux (facultatif). Laisse vide pour masquer un réseau.
 		this.social = {
-			youtube: social.youtube || 'https://www.youtube.com/@khypnos',   // <-- remplace si besoin
-			facebook: social.facebook || 'https://www.facebook.com/p/Khypnos-61573689777722/',  // <-- remplace si besoin
-			linkedin: social.linkedin || 'https://www.linkedin.com/company/khypnos', // <-- remplace si besoin
+			youtube: social.youtube || 'https://www.youtube.com/@khypnos',   
+			facebook: social.facebook || 'https://www.facebook.com/p/Khypnos-61573689777722/', 
+			linkedin: social.linkedin || 'https://www.linkedin.com/company/khypnos', 
 		};
 	}
 

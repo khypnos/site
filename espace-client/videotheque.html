@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos — Vidéothèque</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .videotheque-wrapper { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+
+    /* En-tête page */
+    .vt-header { margin-bottom: 2rem; }
+    .vt-header h1 { margin: 0 0 .35rem; font-size: 1.7rem; color: #1a1a2e; }
+    .vt-header p  { margin: 0; color: #6b7280; font-size: .95rem; }
+
+    /* Filtres rubriques */
+    .filters {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+      margin-bottom: 2rem;
+    }
+    .filter-btn {
+      padding: .4rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      background: #fff; color: #1a1a2e;
+      font-size: .85rem; font-weight: 500;
+      cursor: pointer; font-family: inherit;
+      transition: background .12s ease, border-color .12s ease;
+    }
+    .filter-btn:hover   { background: #f4f4f8; }
+    .filter-btn.active  { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+
+    .filter-btn[data-colored] {
+  border-color: var(--rc); color: var(--rc);
+    }
+    .filter-btn[data-colored].active {
+      background: var(--rc); color: #fff; border-color: var(--rc);
+    }
+
+    /* Grille vidéos */
+    #video-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Section par rubrique */
+    .rubrique-section-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1rem;
+    }
+    .rubrique-section-badge {
+      padding: .3rem .9rem;
+      border-radius: 999px;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+    .rubrique-section-count {
+      font-size: .85rem;
+      color: #9ca3af;
+    }
+
+    /* Grille à l'intérieur de chaque section */
+    .rubrique-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Carte vidéo */
+    .video-card {
+      background: #fff;
+      border: 1px solid #ececf1;
+      border-radius: 14px;
+      padding: 1.25rem 1.25rem 1rem;
+      display: flex; flex-direction: column; gap: .5rem;
+      box-shadow: 0 1px 2px rgba(16,24,40,.04);
+      transition: box-shadow .15s ease, transform .1s ease;
+    }
+    .video-card:hover { box-shadow: 0 4px 16px rgba(16,24,40,.1); transform: translateY(-2px); }
+
+    .video-card-header {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem;
+    }
+    .video-card h2 {
+      margin: 0; font-size: 1rem; color: #1a1a2e; line-height: 1.4; flex: 1;
+    }
+
+    /* Carte vidéo déjà vue — légèrement grisée */
+    .video-card[data-watched="true"] {
+      opacity: .55;
+      filter: grayscale(50%);
+      transition: opacity .2s, filter .2s;
+    }
+    .video-card[data-watched="true"]:hover {
+      opacity: .8;
+      filter: grayscale(0%);
+    }
+
+    .watched-badge {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #ecfdf5; color: #065f46;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; title: 'Visionné';
+    }
+
+    .video-description { color: #6b7280; font-size: .88rem; line-height: 1.45; margin: 0; }
+    .video-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: .4rem;
+      margin-top: .25rem;
+    }
+    .video-meta .duration {
+      font-size: .8rem; color: #9ca3af;
+      display: flex; align-items: center; gap: .25rem;
+    }
+    .rubrique-tag {
+      padding: .2rem .65rem;
+      border-radius: 999px; font-size: .78rem;
+    }
+
+
+
+    .btn-watch {
+      margin-top: auto;
+      display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+      padding: .65rem 1rem;
+      background: #1a1a2e; color: #fff;
+      border-radius: 10px; border: none;
+      font-size: .9rem; font-weight: 500;
+      cursor: pointer; font-family: inherit; text-decoration: none;
+      transition: background .15s ease;
+    }
+    .btn-watch:hover  { background: #2a2a45; }
+    .btn-watch svg { width: 16px; height: 16px; }
+
+    /* États */
+    .loading-state {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .75rem; padding: 3rem 1rem; color: #6b7280; grid-column: 1 / -1;
+    }
+    .vt-spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #1a1a2e;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty-state {
+      text-align: center; padding: 3rem 1rem; color: #6b7280; grid-column: 1 / -1;
+    }
+    .empty-state svg { opacity: .3; margin-bottom: .75rem; }
+
+    /* Retour dashboard */
+    .back-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: #6b7280; text-decoration: none; font-size: .9rem;
+      margin-bottom: 1.5rem;
+      transition: color .12s ease;
+    }
+    .back-link:hover { color: #1a1a2e; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <main class="videotheque-wrapper">
+      <a href="/espace-client/index.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Retour à mon espace
+      </a>
+
+      <header class="vt-header">
+        <h1>🎬 Vidéothèque</h1>
+        <p>Toutes les vidéos de cours associées à ta formule.</p>
+      </header>
+
+      <div class="vt-toolbar" style="display:flex; gap:.75rem; align-items:center; margin: 0 0 1rem;">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Rechercher une vidéo…"
+          style="flex:1; padding:.65rem .85rem; border:1px solid #e5e7eb; border-radius:10px; font-size:.95rem;"
+        >
+      </div>
+
+      <div id="filters" class="filters"></div>
+
+      <div id="video-grid" class="video-grid">
+        <div class="loading-state">
+          <div class="vt-spinner"></div>
+          <span>Chargement des vidéos…</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { supabase, requireAuth } from '/espace-client/_auth.js'
+
+    const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co'
+
+    const session = await requireAuth()
+    if (!session) throw new Error('Non authentifié')
+
+    // --- Modal lecteur vidéo ---
+    const modalHtml = `
+      <div id="video-modal" style="
+        display:none; position:fixed; inset:0; z-index:9999;
+        background:rgba(0,0,0,.85);
+        align-items:center; justify-content:center;
+      ">
+        <div style="position:relative; width:90vw; max-width:900px;">
+          <button id="modal-close" style="
+            position:absolute; top:-36px; right:0;
+            background:none; border:none; color:#fff;
+            font-size:1.5rem; cursor:pointer; line-height:1;
+          ">✕</button>
+          <video id="modal-video" controls controlsList="nodownload" disablePictureInPicture
+            oncontextmenu="return false"
+            style="width:100%; border-radius:12px; background:#000; max-height:80vh;">
+          </video>
+        </div>
+      </div>
+    `
+    document.body.insertAdjacentHTML('beforeend', modalHtml)
+
+    const $modal      = document.getElementById('video-modal')
+    const $modalVideo = document.getElementById('modal-video')
+    const $modalClose = document.getElementById('modal-close')
+
+    function openModal(url) {
+      $modalVideo.src = url
+      $modal.style.display = 'flex'
+      $modalVideo.play().catch(() => {})
+    }
+    function closeModal() {
+      $modal.style.display = 'none'
+      $modalVideo.pause()
+      $modalVideo.src = ''
+    }
+    $modalClose.addEventListener('click', closeModal)
+    $modal.addEventListener('click', (e) => { if (e.target === $modal) closeModal() })
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal() })
+
+    // --- Chargement vidéos ---
+    const res = await fetch(SUPABASE_URL + '/functions/v1/get-videos', {
+      headers: { Authorization: 'Bearer ' + session.access_token }
+    })
+
+    if (res.status === 403) {
+      document.getElementById('video-grid').innerHTML =
+        '<p class="empty-state">Ton abonnement ne donne pas accès à la vidéothèque.</p>'
+      throw new Error('Accès refusé vidéothèque')
+    }
+
+    const videos = await res.json()
+
+    const $search = document.getElementById('search-input')
+    let searchQuery = ''
+    $search?.addEventListener('input', () => {
+      searchQuery = ($search.value || '').trim().toLowerCase()
+      renderGrid()
+    })
+
+    const allRubriques = [...new Set(videos.flatMap(v => v.rubriques ?? []))].sort()
+
+    // Palette de couleurs pour les rubriques
+    const RUBRIQUE_PALETTE = [
+      { bg: '#fef3c7', color: '#92400e' }, // amber
+      { bg: '#dbeafe', color: '#1e40af' }, // blue
+      { bg: '#dcfce7', color: '#166534' }, // green
+      { bg: '#fce7f3', color: '#9d174d' }, // pink
+      { bg: '#ede9fe', color: '#5b21b6' }, // violet
+      { bg: '#ffedd5', color: '#9a3412' }, // orange
+      { bg: '#e0f2fe', color: '#075985' }, // sky
+      { bg: '#f0fdf4', color: '#14532d' }, // emerald
+      { bg: '#fdf4ff', color: '#86198f' }, // fuchsia
+      { bg: '#fff1f2', color: '#9f1239' }, // rose
+    ]
+    const rubriqueColor = (r) => RUBRIQUE_PALETTE[
+      [...r].reduce((acc, c) => acc + c.charCodeAt(0), 0) % RUBRIQUE_PALETTE.length
+    ]
+
+
+    let activeFilter = null
+    const $filters = document.getElementById('filters')
+    const $grid    = document.getElementById('video-grid')
+
+    async function markWatched(videoId) {
+      await fetch(SUPABASE_URL + '/functions/v1/mark-watched', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ video_id: videoId }),
+      })
+      const video = videos.find(v => v.notion_id === videoId)
+      if (video) video.watched = true
+    }
+
+    async function unmarkWatched(videoId) {
+      await fetch(SUPABASE_URL + '/functions/v1/unmark-watched', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ video_id: videoId }),
+      })
+      const video = videos.find(v => v.notion_id === videoId)
+      if (video) video.watched = false
+    }
+
+    function renderFilters() {
+      $filters.innerHTML = [
+        { key: null, label: 'Toutes' },
+        ...allRubriques.map(r => ({ key: r, label: r }))
+        ].map(({ key, label }) => {
+        const c = key ? rubriqueColor(key) : null
+        const style = c ? `style="--rc:${c.color}; background:${activeFilter === key ? c.color : c.bg}; color:${activeFilter === key ? '#fff' : c.color}; border-color:${c.color};"` : ''
+        return `
+          <button class="filter-btn ${activeFilter === key ? 'active' : ''}"
+            ${key ? 'data-colored' : ''}
+            data-key="${key ?? ''}" type="button" ${style}>${label}</button>
+        `
+        }).join('')
+
+      $filters.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFilter = btn.dataset.key || null
+          renderFilters()
+          renderGrid()
+        })
+      })
+    }
+
+    function renderGrid() {
+      // Filtrage texte uniquement (plus de filtre par rubrique unique)
+      const filtered = videos.filter(v => {
+        if (!searchQuery) return true
+        return (v.nom + ' ' + (v.description ?? '')).toLowerCase().includes(searchQuery)
+      })
+
+      if (!filtered.length) {
+        $grid.innerHTML = '<p class="empty-state">Aucune vidéo trouvée.</p>'
+        return
+      }
+
+      // Grouper par rubrique
+      const groups = new Map()
+      groups.set('__sans_rubrique__', [])
+
+      // Respecte l'ordre des rubriques connu
+      allRubriques.forEach(r => groups.set(r, []))
+
+      filtered.forEach(v => {
+        if (!v.rubriques || v.rubriques.length === 0) {
+          groups.get('__sans_rubrique__').push(v)
+        } else {
+          v.rubriques.forEach(r => {
+            if (groups.has(r)) groups.get(r).push(v)
+          })
+        }
+      })
+
+      // Filtre actif = masque les sections non sélectionnées
+      const sectionsToShow = activeFilter
+        ? [[activeFilter, groups.get(activeFilter) ?? []]]
+        : [...groups.entries()].filter(([key, vids]) => key !== '__sans_rubrique__' || vids.length > 0)
+
+      $grid.innerHTML = sectionsToShow.map(([rubrique, vids]) => {
+        if (!vids.length) return ''
+
+        const label = rubrique === '__sans_rubrique__' ? 'Sans rubrique' : rubrique
+        const c = rubrique !== '__sans_rubrique__' ? rubriqueColor(rubrique) : { bg: '#f4f4f8', color: '#6b7280' }
+
+        const cards = vids.map(v => `
+          <article class="video-card" data-id="${v.notion_id}" data-watched="${v.watched ? 'true' : 'false'}">
+            <div class="video-card-header">
+              <h2>${v.nom}</h2>
+              <button class="watched-toggle" type="button" data-id="${v.notion_id}"
+                aria-pressed="${v.watched ? 'true' : 'false'}"
+                title="${v.watched ? 'Marquer comme à revoir' : 'Marquer comme vu'}"
+                style="
+                  flex-shrink:0;
+                  padding: ${v.watched ? '.2rem .6rem' : '0'};
+                  width: ${v.watched ? 'auto' : '28px'};
+                  height: 28px;
+                  border-radius: 999px;
+                  border: 1px solid ${v.watched ? '#a7f3d0' : '#e5e7eb'};
+                  background: ${v.watched ? '#ecfdf5' : '#fff'};
+                  color: ${v.watched ? '#065f46' : '#6b7280'};
+                  display: flex; align-items: center; justify-content: center;
+                  gap: .25rem;
+                  cursor: pointer;
+                  font-size: .78rem; font-weight: 600;
+                  white-space: nowrap;
+                "
+              >
+                ${v.watched ? 'Vue ✓' : '•'}
+              </button>
+            </div>
+            ${v.description ? `<p class="video-description">${v.description}</p>` : ''}
+            <div class="video-meta">
+              ${v.duree_min ? `
+                <span class="duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  ${v.duree_min} min
+                </span>` : ''}
+              ${(v.rubriques ?? []).map(r => {
+                const rc = rubriqueColor(r)
+                return `<span class="rubrique-tag" style="background:${rc.bg};color:${rc.color};">${r}</span>`
+              }).join('')}
+            </div>
+            ${v.video_block_id
+              ? `<button class="btn-watch" type="button"
+                  data-block-id="${v.video_block_id}"
+                  data-notion-id="${v.notion_id}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Regarder
+                </button>`
+              : '<p style="font-size:.85rem;color:#9ca3af;margin-top:auto">Vidéo bientôt disponible</p>'}
+          </article>
+        `).join('')
+
+        return `
+          <div class="rubrique-section">
+            <div class="rubrique-section-header">
+              <span class="rubrique-section-badge" style="background:${c.bg};color:${c.color};">${label}</span>
+              <span class="rubrique-section-count">${vids.length} vidéo${vids.length > 1 ? 's' : ''}</span>
+            </div>
+            <div class="rubrique-cards-grid">${cards}</div>
+          </div>
+        `
+      }).join('')
+
+      // Ré-attache les handlers (identiques à avant)
+      $grid.querySelectorAll('button.btn-watch').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const blockId = btn.dataset.blockId
+          const videoId = btn.dataset.notionId
+          const origHTML = btn.innerHTML
+          btn.disabled = true
+          btn.innerHTML = '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;display:inline-block;animation:spin .7s linear infinite"></span>'
+          try {
+            const r = await fetch(SUPABASE_URL + '/functions/v1/get-video-url', {
+              method: 'POST',
+              headers: { Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ block_id: blockId }),
+            })
+            if (!r.ok) throw new Error('URL indisponible')
+            const { url } = await r.json()
+            openModal(url)
+            await markWatched(videoId)
+            renderGrid()
+          } catch (e) {
+            alert('Impossible de charger la vidéo. Réessaie.')
+          } finally {
+            btn.disabled = false
+            btn.innerHTML = origHTML
+          }
+        })
+      })
+
+      $grid.querySelectorAll('button.watched-toggle').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const videoId = btn.dataset.id
+          const video = videos.find(v => v.notion_id === videoId)
+          if (!video) return
+          const target = !video.watched
+          video.watched = target
+          renderGrid()
+          try {
+            target ? await markWatched(videoId) : await unmarkWatched(videoId)
+            renderGrid()
+          } catch (e) {
+            video.watched = !target
+            renderGrid()
+          }
+        })
+      })
+    }
+
+    renderFilters()
+    renderGrid()
+  </script>
+
+  <script src="/js/header-manager.js" defer></script>
+  <script src="/js/scroll-to-top.min.js"></script>
+  <script src="/js/navbar.js"></script>
+  <!-- script.js retiré (conflit const indexUrls) -->
+  <script src="/js/footer-manager.js" defer></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			new FooterManager({
+				anchor: '.container',
+				position: 'beforeend'
+			}).init();
+		});
+	</script>
+
+</body>
+</html>

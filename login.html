@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos — Connexion</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .login-wrapper {
+      min-height: calc(100vh - 160px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .login-card {
+      width: 100%; max-width: 420px;
+      background: #fff;
+      border: 1px solid #ececf1;
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      box-shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.08);
+    }
+    .login-card .lock-badge {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: #f4f4f8;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; font-size: 1.25rem;
+    }
+    .login-card h1 {
+      font-size: 1.4rem; font-weight: 600;
+      text-align: center; margin: 0 0 .35rem; color: #1a1a2e;
+    }
+    .login-card .subtitle {
+      text-align: center; color: #6b7280; font-size: .95rem; margin: 0 0 1.75rem;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block; margin-bottom: .35rem;
+      font-size: .875rem; font-weight: 500; color: #374151;
+    }
+    .form-group input {
+      width: 100%; padding: .75rem .9rem;
+      border: 1px solid #e5e7eb; border-radius: 10px;
+      font-size: .95rem; font-family: inherit;
+      box-sizing: border-box;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .form-group input:focus {
+      outline: none; border-color: #1a1a2e;
+      box-shadow: 0 0 0 3px rgba(26,26,46,.12);
+    }
+    .btn-submit {
+      width: 100%; padding: .8rem 1rem;
+      border-radius: 10px; border: none;
+      background: #1a1a2e; color: #fff;
+      font-size: .95rem; font-weight: 500;
+      cursor: pointer; font-family: inherit;
+      transition: background .15s;
+      margin-top: .5rem;
+    }
+    .btn-submit:hover { background: #2a2a45; }
+    .btn-submit:disabled { background: #9ca3af; cursor: not-allowed; }
+    .form-message {
+      margin-top: .75rem; padding: .75rem .9rem;
+      border-radius: 10px; font-size: .9rem; display: none;
+    }
+    .form-message.error   { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .form-message.success { display: block; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .login-footer {
+      margin-top: 1rem; text-align: center; font-size: .875rem;
+    }
+    .login-footer a { color: #1a1a2e; text-decoration: none; }
+    .login-footer a:hover { text-decoration: underline; }
+    .login-footnote {
+      margin-top: 1.5rem; text-align: center;
+      font-size: .8rem; color: #9ca3af;
+    }
+    .login-footnote a { color: #1a1a2e; text-decoration: none; }
+    /* Vue reset password */
+    #view-reset { display: none; }
+    #view-reset.active, #view-login.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <main class="login-wrapper">
+      <section class="login-card">
+        <div class="lock-badge">🔒</div>
+        <h1>Accès espace étudiant</h1>
+        <p class="subtitle">Connecte-toi pour accéder à ta formation Khypnos.</p>
+
+        <!-- VUE LOGIN -->
+        <div id="view-login" class="active">
+          <form id="login-form" novalidate>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="ton@email.fr" autocomplete="email" required />
+            </div>
+            <div class="form-group">
+              <label for="password">Mot de passe</label>
+              <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+            </div>
+            <div id="login-message" class="form-message"></div>
+            <button id="btn-login" class="btn-submit" type="submit">Se connecter</button>
+          </form>
+          <div class="login-footer" style="margin-top:1rem">
+            <a href="#" id="link-forgot">Mot de passe oublié ?</a>
+          </div>
+          <p class="login-footnote">Besoin d'aide ? <a href="mailto:contact@khypnos.fr">contact@khypnos.fr</a></p>
+        </div>
+
+        <!-- VUE RESET PASSWORD -->
+        <div id="view-reset">
+          <p style="color:#6b7280;font-size:.9rem;margin:0 0 1.25rem">
+            Saisis ton adresse email, tu recevras un lien pour réinitialiser ton mot de passe.
+          </p>
+          <form id="reset-form" novalidate>
+            <div class="form-group">
+              <label for="reset-email">Email</label>
+              <input id="reset-email" type="email" placeholder="ton@email.fr" autocomplete="email" required />
+            </div>
+            <div id="reset-message" class="form-message"></div>
+            <button id="btn-reset" class="btn-submit" type="submit">Envoyer le lien</button>
+          </form>
+          <div class="login-footer" style="margin-top:1rem">
+            <a href="#" id="link-back-login">← Retour à la connexion</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    import { supabase } from '/espace-client/_auth.js'
+
+  const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  const redirectTo = isLocal
+    ? `${window.location.origin}/espace-client/index.html`
+    : 'https://khypnos.fr/espace-client/index.html'
+
+    // --- Navigation entre vues ---
+    document.getElementById('link-forgot').addEventListener('click', (e) => {
+      e.preventDefault()
+      document.getElementById('view-login').classList.remove('active')
+      document.getElementById('view-reset').classList.add('active')
+    })
+    document.getElementById('link-back-login').addEventListener('click', (e) => {
+      e.preventDefault()
+      document.getElementById('view-reset').classList.remove('active')
+      document.getElementById('view-login').classList.add('active')
+    })
+
+    // --- Login email/password ---
+    const $loginMsg = document.getElementById('login-message')
+    const $btnLogin = document.getElementById('btn-login')
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const email    = document.getElementById('email').value.trim()
+      const password = document.getElementById('password').value
+
+      $btnLogin.disabled = true
+      $btnLogin.textContent = 'Connexion…'
+      $loginMsg.className = 'form-message'
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+      if (error) {
+        $loginMsg.textContent = 'Email ou mot de passe incorrect.'
+        $loginMsg.className = 'form-message error'
+        $btnLogin.disabled = false
+        $btnLogin.textContent = 'Se connecter'
+      } else {
+        window.location.href = redirectTo
+      }
+    })
+
+    // --- Reset password ---
+    const $resetMsg = document.getElementById('reset-message')
+    const $btnReset = document.getElementById('btn-reset')
+
+    document.getElementById('reset-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const email = document.getElementById('reset-email').value.trim()
+
+      $btnReset.disabled = true
+      $btnReset.textContent = 'Envoi…'
+      $resetMsg.className = 'form-message'
+
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: isLocal
+          ? 'http://127.0.0.1:5500/reset-password.html'
+          : 'https://khypnos.fr/reset-password.html'
+      })
+
+      $btnReset.disabled = false
+      $btnReset.textContent = 'Envoyer le lien'
+
+      if (error) {
+        $resetMsg.textContent = "Erreur lors de l'envoi. Réessaie."
+        $resetMsg.className = 'form-message error'
+      } else {
+        $resetMsg.textContent = '✉️ Lien envoyé ! Vérifie ta boîte mail (et les spams).'
+        $resetMsg.className = 'form-message success'
+      }
+    })
+  </script>
+
+  <script src="/js/header-manager.js" defer></script>
+  <script src="/js/scroll-to-top.min.js"></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/footer-manager.js" defer></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			new FooterManager({
+				anchor: '.container',
+				position: 'beforeend'
+			}).init();
+		});
+	</script>
+
+</body>
+</html>
