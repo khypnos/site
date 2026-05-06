@@ -59,7 +59,7 @@ function renderKhypnosOffers2026() {
             <li><strong>Formation la plus complète</strong></li>
             <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
             <li><span style="color: #28a745">✓</span> Correction de copie et conseils méthodologiques</li>
-            <li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : 40h de cours couvrant tout le programme</li>
+            <li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : 30h de cours couvrant tout le programme</li>
             <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
             <li><span style="color: #28a745">✓</span> 2 concours blancs au format des EVC</li>
             <li><span style="color: #28a745">✓</span> Groupe Whatsapp avec les formateurs Khypnos, réponse rapide à toutes les questions</li>
