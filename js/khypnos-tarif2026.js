@@ -14,16 +14,20 @@ function renderKhypnosOffers2026() {
         <li><span class="emoji">💻</span>Formation en <strong>distanciel</strong></li>
         <li>Formation complète : Enseignements les <strong>Mercredi soir</strong> et <strong>Samedi après-midi</strong></li>
         <li><span class="emoji">📆</span>Période : Juin à Octobre 2026</li>
-        <li><span class="emoji">💳</span>Possibilité de paiement en plusieurs échéances : nous contacter</li>
+        <li><span class="emoji">💳</span>Paiement en <strong>4 mensualités</strong> disponible</li>
+        <li><span class="emoji">🟢</span><strong>Remboursement</strong> des "Formations" <strong>dans les 30 premiers jours</strong> si non adapté à tes besoins</li>
       </ul>
     </div>
 
     <h2 class="section-title">Tarifs 2026</h2>
+    <p style="margin-top:-10px; margin-bottom:20px; text-align: justify;">
+  Choisis ta formule selon ta voie (interne / externe) et ton besoin : concours blanc seul, annales en direct, ou parcours complet.
+    </p>
     <section class="offers">
       <div class="payment-options">
         <!-- Carte Concours blanc seul -->
         <article class="payment-card featured">
-          <div class="payment-badge">Populaire</div>
+          <!-- <div class="payment-badge">Populaire</div> -->
           <h3>Concours blanc <br> seul</h3>
           <div class="payment-price">120€ TTC</div>
           <ul class="payment-features">
@@ -71,15 +75,21 @@ function renderKhypnosOffers2026() {
         <!-- Carte Formation Voie Interne -->
         <article class="payment-card offer-card offer--full">
           <h3>Formation <br> Voie Interne</h3>
-          <div class="payment-price">Prix selon formation</div>
+          <div class="payment-price">Offres dans l’app</div>
           <ul class="payment-features">
-            <li><strong>Les offres sont détaillées directement dans l'application Khypnos QCMs</strong></li>
+            <li><strong>Voie interne (format QCM)</strong></li>
+            <li>Les formules et tarifs sont détaillés dans l’application Khypnos QCM car elles dépendent des parcours choisis.</li>
           </ul>
           <a class="secondary-btn" href="https://khypnos-qcm.vercel.app/" target="_blank">
-            Accès Khypnos QCMs
+            Voir les offres voie interne
           </a>
         </article>
+
       </div>
+
+              <div class="back-link" style="margin-top: 30px;">
+  <a href="/medecin/formulaire_contact.html">Une question sur la formule à choisir ? Contactez-nous</a>
+              </div>
     </section>
   `;
 }
