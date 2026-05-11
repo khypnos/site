@@ -1005,6 +1005,7 @@ a { text-decoration: none; color: inherit; }
 }
 
  /* Togggle pour Offre / Tarif */
+
         .offers-toggle {
             --bg: #eef2ff;
             --fg: #2c3e50;
@@ -1016,71 +1017,95 @@ a { text-decoration: none; color: inherit; }
             grid-auto-flow: column;
             gap: 6px;
             padding: 6px;
+
             border-radius: 9999px;
             background: var(--bg);
             border: 1px solid rgba(102, 126, 234, 0.25);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06) inset;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) inset;
+
             max-width: 720px;
             margin: 12px auto 8px;
         }
 
+        /* Boutons (onglets) */
         .offers-toggle button[role="tab"] {
             position: relative;
             z-index: 1; /* au-dessus du thumb */
+
             appearance: none;
             border: 0;
             background: transparent;
+
             color: var(--fg);
             font-weight: 700;
             padding: 10px 14px;
             border-radius: 9999px;
+
             cursor: pointer;
             white-space: nowrap;
-            transition: color .2s ease, transform .1s ease;
-        }
-        .offers-toggle button[role="tab"]:hover { transform: translateY(-1px); }
-        .offers-toggle button.is-active { color: #fff; }
 
-        .offer-toggle__thumb {
+            transition: color 0.2s ease, transform 0.1s ease;
+        }
+
+        .offers-toggle button[role="tab"]:hover {
+            transform: translateY(-1px);
+        }
+
+        .offers-toggle button.is-active {
+            color: #fff;
+        }
+
+        /* Pastille animée */
+        .offers-toggle__thumb {
             position: absolute;
-            inset: 6px auto 6px 6px; /* sera déplacé en JS */
-            width: calc(50% - 6px);
+            inset: 6px auto 6px 6px; /* déplacé en JS */
+            width: calc(50% - 6px); /* valeur fallback si JS pas encore passé */
+
             border-radius: 9999px;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
             box-shadow: 0 6px 16px rgba(103, 126, 234, 0.35);
-            transition: transform .25s ease;
+
+            transition: transform 0.25s ease, width 0.25s ease;
         }
 
         /* Conteneur des panneaux */
-            .offers-panels {
-                display: flex;              /* active flex */
-                justify-content: center;    /* centre horizontalement */
-                margin-top: 1rem;           /* gardez seulement cette marge */
-                /* supprimez toute autre ligne 'margin:' sur .offer-panels */
-            }
-
-            /* Stripe web component centré dans son parent (double sécurité) */
-            .offers-panels stripe-buy-button {
-                display: block;
-                margin: 0 auto;
-            }
-
-
-            @media (max-width: 30rem) { /* 480px */
-        .offers-toggle {
-            max-width: 22rem;      /* 352px */
-            gap: 0.25rem;          /* 4px */
+        .offers-panels {
+            margin-top: 1rem;
         }
 
-        .offers-toggle button[role="tab"] {
-            font-size: 0.9rem;
-            padding: 0.5rem 0.625rem; /* 8px 10px */
-            white-space: normal;       /* autorise les retours à la ligne */
-            text-align: center;
-            line-height: 1.3;
-                }
+        .offers-toggle--sticky{
+        position: sticky;
+        top: 86px;              /* ajuste selon ta barre nav */
+        z-index: 50;
+        /* look “propre” quand ça colle */
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
         }
 
+        /* Optionnel: donne un petit fond pour éviter que ça se mélange au contenu */
+        .offers-toggle--sticky {
+        background: rgba(238, 242, 255, 0.92); /* proche de --bg */
+        }
+
+        .offers-toggle-sticky-wrap{
+        position: relative;
+        }
+
+        /* Mobile */
+        @media (max-width: 30rem) { /* 480px */
+            .offers-toggle {
+                max-width: 22rem; /* 352px */
+                gap: 0.25rem; /* 4px */
+            }
+
+            .offers-toggle button[role="tab"] {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.625rem; /* 8px 10px */
+                white-space: normal; /* autorise les retours à la ligne */
+                text-align: center;
+                line-height: 1.3;
+            }
+        }
 
 /* ======  Responsive design  ====== */
 @media screen and (max-width: 1200px) {
