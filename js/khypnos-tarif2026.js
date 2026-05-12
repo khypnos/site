@@ -89,7 +89,7 @@ function renderKhypnosOffers2026() {
                 <li><strong>Formation la plus complète</strong></li>
                 <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
                 <li><span style="color: #28a745">✓</span> Correction de copie et conseils méthodologiques</li>
-                <li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : 30h de cours couvrant tout le programme</li>
+                <li><span style="color: #28a745">✓</span> Accès immédiat aux vidéos de formation Khypnos : 30h de cours couvrant tout le programme</li>
                 <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
                 <li><span style="color: #28a745">✓</span> 2 concours blancs inclus</li>
                 <li><span style="color: #28a745">✓</span> Groupe Whatsapp avec les formateurs Khypnos</li>
@@ -163,8 +163,8 @@ function renderKhypnosOffers2026() {
             <!-- Complète VE -->
             <article class="payment-card offer-card offer--full">
               <div class="payment-badge">⭐ Recommandé</div>
-              <h3>Formation complète<br>Voie Externe</h3>
-              <div class="payment-price">1800€ TTC</div>
+              <h3>Formation complète<br>Voie Interne</h3>
+              <div class="payment-price">880€ TTC</div>
               <ul class="payment-features">
                 <li><strong>Formation la plus complète</strong></li>
                 <li><span style="color: #28a745">✓</span> Tous les lots de QCMs</li>
@@ -173,7 +173,7 @@ function renderKhypnosOffers2026() {
                 <li><span style="color: #28a745">✓</span> Séances de correction en visioconférence</li>
                 <li><span style="color: #28a745">✓</span> Réponse dans les 48 heures à toutes questions à l'équipe pédagogique Khypnos</li>
                 <li><span style="color: #28a745">✓</span> Groupe Whatsapp avec les formateurs Khypnos</li>
-                <li><span style="color: #28a745">✓</span> Accès aux vidéos de formation Khypnos : 30h de cours couvrant tout le programme</li>
+                <li><span style="color: #28a745">✓</span> Accès immédiat aux vidéos de formation Khypnos : 30h de cours couvrant tout le programme</li>
               </ul>
               <a class="primary-btn" href="https://khypnos-qcm.vercel.app/" target="_blank">Acheter dans l'application</a>
             </article>
