@@ -160,6 +160,10 @@
     `
 
     const infosEl = document.getElementById('infos-sections')
+
+    if (!sections.length) {
+    infosEl.innerHTML = `<p style="color:#6b7280">Ton abonnement donne accès uniquement à la vidéothèque.</p>`
+      } else {
     for (const section of sections) {
       infosEl.innerHTML += `
         <a class="notion-link-card" href="${section.notionUrl}" target="_blank" rel="noopener">
@@ -174,6 +178,9 @@
         </a>
       `
     }
+      }
+
+    
   </script>
 
   <script src="/js/header-manager.js" defer></script>
