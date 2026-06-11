@@ -20,6 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "Accompagnement d'une grande qualité, l'équipe est à l'écoute et est très disponible. Je conseille fortement cette préparation aux concours !"
     },
     {
+      author: "Cherifa BM.",
+      rating: 5,
+      date: "2026-06-10",                  
+      text: "Khypnos a vraiment été l’outil idéal d’accompagnement pour les EVC. Baptiste et Arnaud sont disponibles et à l’écoute et proposent un véritable accompagnement personnalisé, en ajoutant même des séances d’entrainement à la demande des candidats. Je recommande à 100 % !"
+    },
+    {
       author: "Zara J.",
       rating: 5,
       date: "2026-03-29",                 
