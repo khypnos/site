@@ -1,0 +1,342 @@
+/* ============================================================
+   THEME ELEGANCE — Khypnos
+   Override stylistique. Aucune classe renommée, aucun JS impacté.
+   ============================================================ */
+
+:root {
+  /* ── Palette principale ─────────────────────────────────── */
+  --c-navy:        #1a2f4f;    /* Bleu nuit médical — couleur principale */
+  --c-navy-soft:   #2c4a6e;
+  --c-accent:      #667eea;    /* Conservation brand, utilisé en accent */
+  --c-accent-2:    #764ba2;
+  --c-accent-warm: #c89b6e;    /* Touche chaude (or doux) pour le luxe */
+
+  /* ── Surfaces & texte ───────────────────────────────────── */
+  --c-bg:          #fafaf8;    /* Off-white légèrement chaud (vs gris) */
+  --c-surface:     #ffffff;
+  --c-surface-2:   #f6f7fb;    /* Remplace les bleus pâles partout */
+  --c-border:      #e8eaef;
+  --c-border-soft: #f0f2f6;
+  --c-text:        #1a2332;
+  --c-text-muted:  #5a6478;
+
+  /* ── Ombres ultra-douces multi-couches ──────────────────── */
+  --sh-xs: 0 1px 2px rgba(15,23,42,.04);
+  --sh-sm: 0 1px 3px rgba(15,23,42,.05), 0 1px 2px rgba(15,23,42,.04);
+  --sh-md: 0 4px 14px rgba(15,23,42,.06), 0 2px 4px rgba(15,23,42,.03);
+  --sh-lg: 0 14px 40px rgba(15,23,42,.08), 0 4px 8px rgba(15,23,42,.03);
+
+  /* ── Rayons cohérents ───────────────────────────────────── */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+
+  /* ── Surcharge des variables navbar existantes ──────────── */
+  --overlay-bg:     rgba(255, 255, 255, 0.82);
+  --overlay-border: rgba(26, 47, 79, 0.08);
+  --overlay-shadow: 0 10px 40px rgba(26,47,79,.08), 0 2px 8px rgba(26,47,79,.04);
+}
+
+/* ============================================================
+   1. iOS / Safe-area — bande qui remplit le notch dès le chargement
+   ============================================================ */
+html {
+  background: var(--c-bg);  /* couleur visible derrière la barre transparente */
+}
+body {
+  background: var(--c-bg);
+}
+
+/* Bande fixe en haut qui couvre la safe-area du notch */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(26, 47, 79, 0.04);
+  z-index: 9998; /* juste sous la navbar (qui est à 9999) */
+  pointer-events: none;
+}
+
+/* ============================================================
+   2. Typographie globale — plus nette
+   ============================================================ */
+body {
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================================
+   3. Container — bordure subtile + ombre douce
+   ============================================================ */
+.container {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md);
+}
+
+/* ============================================================
+   4. Hero (.header / .headerbis) — gradient navy médical
+   ============================================================ */
+.header::before,
+.headerbis {
+  background: linear-gradient(135deg, #1a2f4f 0%, #2c4a6e 45%, #4a5d8f 100%);
+}
+
+/* Suppression du text-stroke "Word Art" */
+.header h1 {
+  -webkit-text-stroke: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,.25);
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+.headerbis h1 {
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0,0,0,.15);
+}
+
+/* ============================================================
+   5. Section titles — typographie plus premium
+   ============================================================ */
+.section-title {
+  color: var(--c-navy);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  font-size: 1.9rem;
+}
+.section-title::after {
+  width: 36px;
+  height: 3px;
+  background: var(--c-accent);
+  border-radius: 2px;
+  opacity: 1;
+}
+
+/* ============================================================
+   6. Cartes — refonte douce
+   ============================================================ */
+.feature-card,
+.ressource-card,
+.column,
+.offer,
+.trainer-card,
+.annales-column,
+.payment-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--sh-xs);
+  border-radius: var(--r-md);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.feature-card:hover,
+.ressource-card:hover,
+.offer:hover,
+.payment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-md);
+  border-color: rgba(102, 126, 234, 0.25);
+}
+
+/* ============================================================
+   7. Sections "fond doux" — neutre chaud au lieu de bleu pâle
+   ============================================================ */
+.links-section {
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border-soft);
+  border-radius: var(--r-md);
+}
+.trainers-section {
+  background: linear-gradient(180deg, var(--c-surface-2) 0%, #f1f5f0 100%);
+  border: 1px solid var(--c-border-soft);
+  border-radius: var(--r-lg);
+}
+.synthesis-section {
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+}
+.question-section {
+  background: var(--c-surface-2);
+  border-left: 3px solid var(--c-accent);
+  box-shadow: var(--sh-xs);
+}
+
+/* ============================================================
+   8. Boutons — finesse
+   ============================================================ */
+.btn {
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-width: 1px;
+  transition: all .2s ease;
+}
+.btn-filled {
+  background: var(--c-navy);
+  border-color: var(--c-navy);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26,47,79,.18);
+}
+.btn-filled:hover {
+  background: var(--c-navy-soft);
+  border-color: var(--c-navy-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(26,47,79,.25);
+}
+.btn-outline {
+  border-color: var(--c-navy);
+  color: var(--c-navy);
+  background: transparent;
+}
+.btn-outline:hover {
+  background: var(--c-navy);
+  border-color: var(--c-navy);
+  color: #fff;
+}
+.btn-light {
+  border: 1px solid var(--c-border);
+  color: var(--c-navy);
+  font-weight: 600;
+  box-shadow: var(--sh-xs);
+}
+
+/* CTA section — gradient navy au lieu de violet */
+.cta-section,
+.back-link a,
+.cta-block {
+  background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-soft) 100%);
+}
+.cta-button {
+  color: var(--c-navy);
+  font-weight: 600;
+  border-radius: var(--r-sm);
+}
+
+/* ============================================================
+   9. Carrousel avis — encadrement plus discret
+   ============================================================ */
+.avis-container {
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-xs);
+}
+.avis-content {
+  border-left: 3px solid var(--c-accent);
+  border-radius: var(--r-sm);
+  box-shadow: var(--sh-xs);
+}
+
+/* ============================================================
+   10. FAQ + témoignages
+   ============================================================ */
+.testimonial {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-accent);
+  box-shadow: var(--sh-xs);
+  border-radius: var(--r-sm);
+}
+
+/* ============================================================
+   11. Module vidéothèque — header navy au lieu de violet
+   ============================================================ */
+.vg-player-header {
+  background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-soft) 100%);
+}
+.video-gallery {
+  border: 1px solid var(--c-border);
+  box-shadow: var(--sh-md);
+  border-radius: var(--r-md);
+}
+
+/* ============================================================
+   12. Toggle offres — accent navy
+   ============================================================ */
+.offers-toggle__thumb {
+  background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-soft) 100%);
+  box-shadow: 0 4px 12px rgba(26,47,79,.25);
+}
+
+/* ============================================================
+   13. Badges & accents prix
+   ============================================================ */
+.payment-badge {
+  background: var(--c-accent-warm);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(200,155,110,.3);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.payment-price {
+  color: var(--c-navy);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.section-number,
+.section-number-badge {
+  background: var(--c-navy);
+  box-shadow: 0 2px 6px rgba(26,47,79,.2);
+}
+
+/* ============================================================
+   14. Liens & soulignés — accessibilité + finesse
+   ============================================================ */
+a { text-underline-offset: 3px; }
+.contact-email,
+.toc-grid a,
+.year { color: var(--c-accent); }
+
+/* ============================================================
+   15. Tags webinaires
+   ============================================================ */
+.topic-tag {
+  background: var(--c-surface-2);
+  color: var(--c-navy);
+  border: 1px solid var(--c-border);
+  font-weight: 600;
+}
+.video-duration {
+  background: var(--c-navy);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   16. Guide EVC — sections + accordéons cohérents
+   ============================================================ */
+.section,
+.toc-card {
+  border: 1px solid var(--c-border);
+  box-shadow: var(--sh-xs);
+}
+details.section-detail {
+  border-color: var(--c-border);
+}
+details.section-detail summary {
+  background: var(--c-surface-2);
+}
+
+/* ============================================================
+   17. Détail : retire les bordures violettes trop visibles
+   ============================================================ */
+.avis-container { border-color: var(--c-border) !important; }
+.synthesis-section { border-color: var(--c-border) !important; }
+
+/* ============================================================
+   18. Footer (le module JS) — surcharge couleur
+   ============================================================ */
+.khypnos-footer {
+  background: var(--c-navy) !important;
+}
