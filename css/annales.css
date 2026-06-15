@@ -1,0 +1,356 @@
+/* ─────────────────────────────────────────────
+   /css/annales.css
+   Styles dédiés aux pages d'annales
+   À charger APRÈS theme-elegance.css
+   ───────────────────────────────────────────── */
+
+/* ── Section intro (callout d'information) ── */
+.subject-section {
+    background: var(--c-surface-2, #f6f7fb);
+    border: 1px solid var(--c-border, #e8eaef);
+    border-left: 4px solid var(--c-navy, #1a2f4f);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 24px 0 40px;
+}
+
+.subject-section .subject-title {
+    margin: 0 0 14px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--c-navy, #1a2f4f);
+    letter-spacing: 0.2px;
+}
+
+.subject-section p {
+    margin: 0 0 12px;
+    color: var(--c-text-muted, #5a6478);
+    line-height: 1.65;
+    font-size: 15px;
+}
+
+.subject-section p:last-of-type {
+    margin-bottom: 0;
+}
+
+.subject-section .back-link {
+    margin: 22px 0 0;
+    text-align: left;
+}
+
+/* ── Variantes de section titles (accent vertical à gauche) ── */
+.section-title.fundamental,
+.section-title.practical,
+.section-title.internal {
+    position: relative;
+    padding-left: 18px;
+    margin-top: 48px;
+    color: var(--c-navy, #1a2f4f);
+}
+
+.section-title.fundamental::before,
+.section-title.practical::before,
+.section-title.internal::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    border-radius: 2px;
+}
+
+/* ── Grille d'années ── */
+.annales-grid {
+    margin: 18px 0 36px;
+}
+
+.annales-column {
+    width: 100%;
+}
+
+.annales-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.annales-list li {
+    margin: 0;
+}
+
+.annales-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 18px;
+    background: white;
+    border: 1px solid var(--c-border, #e8eaef);
+    border-radius: 12px;
+    color: var(--c-text-muted, #5a6478);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.4;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s, color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.annales-link:hover {
+    border-color: var(--c-navy, #1a2f4f);
+    box-shadow: 0 6px 18px rgba(26, 47, 79, 0.08);
+    transform: translateY(-2px);
+    color: var(--c-navy, #1a2f4f);
+}
+
+.annales-link .year {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--c-navy, #1a2f4f);
+    letter-spacing: 0.3px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Section synthèses (carte CTA en bas) ── */
+.synthesis-section {
+    background: var(--c-surface-2, #f6f7fb);
+    border: 1px solid var(--c-border, #e8eaef);
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin: 48px 0 32px;
+    text-align: center;
+}
+
+.synthesis-section h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--c-navy, #1a2f4f);
+}
+
+.synthesis-section p {
+    margin: 0 auto 22px;
+    max-width: 580px;
+    color: var(--c-text-muted, #5a6478);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.synthesis-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+}
+
+.synthesis-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background: white;
+    border: 1.5px solid var(--c-navy, #1a2f4f);
+    border-radius: 10px;
+    color: var(--c-navy, #1a2f4f);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.synthesis-link:hover {
+    background: var(--c-navy, #1a2f4f);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(26, 47, 79, 0.18);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .subject-section {
+        padding: 20px;
+    }
+
+    .annales-list {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .annales-link {
+        padding: 12px 14px;
+    }
+
+    .annales-link .year {
+        font-size: 18px;
+    }
+
+    .synthesis-section {
+        padding: 24px 18px;
+    }
+
+    .synthesis-links {
+        flex-direction: column;
+    }
+
+    .synthesis-link {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ═════════════════════════════════════════════
+   Pages d'annale individuelles (fondamentale/pratique)
+   ═════════════════════════════════════════════ */
+
+/* Titre principal de la page (centré, plus grand) */
+.section-title.page-title {
+    text-align: center;
+    font-size: 1.75rem;
+    color: var(--c-navy, #1a2f4f);
+    margin: 12px 0 32px;
+    padding-left: 0;
+}
+.section-title.page-title::before {
+    display: none;
+}
+
+/* Subject-section : on reprend le style du menu, on étend pour le contenu riche */
+.subject-section .subject-text {
+    color: var(--c-text, #1a2332);
+    font-size: 15.5px;
+    line-height: 1.7;
+}
+.subject-section .subject-text p {
+    margin: 0 0 12px;
+}
+.subject-section .subject-text p:last-child {
+    margin-bottom: 0;
+}
+.subject-section .subject-text strong {
+    color: var(--c-navy, #1a2f4f);
+    font-weight: 600;
+}
+.subject-section .subject-text ul {
+    margin: 8px 0 16px;
+    padding-left: 24px;
+}
+.subject-section .subject-text li {
+    margin: 4px 0;
+    color: var(--c-text-muted, #5a6478);
+}
+.subject-section .subject-text li::marker {
+    color: var(--c-navy, #1a2f4f);
+}
+
+/* Cartes de questions */
+.question-section {
+    background: white;
+    border: 1px solid var(--c-border, #e8eaef);
+    border-left: 4px solid var(--c-accent-warm, #c89b6e);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin: 18px 0;
+    box-shadow: 0 1px 3px rgba(26, 47, 79, 0.04);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.question-section:hover {
+    box-shadow: 0 6px 18px rgba(26, 47, 79, 0.08);
+}
+.question-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--c-navy, #1a2f4f);
+    letter-spacing: 0.2px;
+}
+.question-text {
+    color: var(--c-text, #1a2332);
+    font-size: 15.5px;
+    line-height: 1.7;
+}
+.question-text p {
+    margin: 0 0 10px;
+}
+.question-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Image dans une question */
+.image-container {
+    text-align: center;
+    margin: 0 0 18px;
+}
+.question-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(26, 47, 79, 0.10);
+    display: inline-block;
+}
+
+/* CTA de fin de page */
+.cta-section {
+    background: linear-gradient(135deg, var(--c-navy, #1a2f4f) 0%, var(--c-navy-soft, #2c4a6e) 100%);
+    color: white;
+    padding: 36px 32px;
+    border-radius: 16px;
+    margin: 40px 0 24px;
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(26, 47, 79, 0.18);
+}
+.cta-section h3 {
+    margin: 0 0 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+.cta-section p {
+    margin: 0 auto 22px;
+    max-width: 600px;
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.92;
+}
+.cta-button {
+    display: inline-block;
+    background: white;
+    color: var(--c-navy, #1a2f4f);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .section-title.page-title {
+        font-size: 1.45rem;
+        margin: 8px 0 24px;
+    }
+    .question-section {
+        padding: 18px 20px;
+    }
+    .question-title {
+        font-size: 16px;
+    }
+    .question-text,
+    .subject-section .subject-text {
+        font-size: 15px;
+    }
+    .cta-section {
+        padding: 28px 22px;
+    }
+    .cta-section h3 {
+        font-size: 1.3rem;
+    }
+}

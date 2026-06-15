@@ -1,0 +1,11 @@
+# Node
+node_modules/
+
+# Migration annales (utilitaire local, pas commit)
+scripts/
+medecin/annales/_migrated/
+medecin/annales/_old/
+
+# package node_modules
+package.json
+package-lock.json

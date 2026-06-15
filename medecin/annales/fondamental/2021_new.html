@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annales EVC 2021 - Épreuve Fondamentale - Khypnos</title>
+    <meta name="description" content="Annale 2021 de l'épreuve fondamentale des EVC d'Anesthésie-Réanimation : 20 questions de connaissances théoriques avec question iconographique.">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/theme-elegance.css">
+    <link rel="stylesheet" href="/css/annales.css">
+</head>
+<body>
+<script src="/js/banner.js"></script>
+
+<script>
+window.ANNALE = {
+    year: 2021,
+    type: "fondamentale",
+    title: "Épreuve fondamentale 2021 • EVC Anesthésie-Réanimation",
+    sections: [
+        {
+            title: "Format de l'épreuve",
+            body: `<p><strong>Cette épreuve fondamentale comprend 20 questions couvrant l'ensemble des connaissances théoriques en anesthésie-réanimation, avec une question iconographique sur la ventilation mécanique.</strong></p>`
+        },
+        {
+            questions: [
+                {
+                    image: { src: "img/img2021_1.png", alt: "Courbe de pression d'un patient en ventilation à volume contrôlé avec pause inspiratoire de 30 % de Ti" },
+                    text: `La courbe de pression ci-dessous représente la pression d'un patient soumis à une ventilation à volume contrôlé (avec débit inspiré constant) avec une pause inspiratoire de 30 % de Ti.<br>Que représentent P0, P1, P2 et P3 ?<br>Comment calculer la compliance quasi-statique et la pression motrice ?`
+                },
+                { text: `Donnez la formule de calcul du delta PP (ΔPP). Quelle est la valeur seuil pouvant prédire une réponse au remplissage ? Précisez les conditions de validité de la mesure.` },
+                { text: `Quel est l'effet de la position couchée sur le volume de fermeture et la CRF chez un obèse ? Quelles en sont les conséquences respiratoires ? Quels sont les 2 moyens simples pour lutter contre cet effet ?` },
+                { text: `Définir la P50. Citez les causes d'une diminution de la P50 et leurs conséquences sur la délivrance tissulaire de l'oxygène.` },
+                { text: `Citez les contre-indications à la succinylcholine.` },
+                { text: `À propos du sugammadex : quelle est son indication ? Quelles sont ses posologies en fonction des conditions d'utilisation ?` },
+                { text: `Citez 5 critères de ventilation au masque difficile chez l'adulte (en dehors des pathologies cervicales).` },
+                { text: `Quels sont les critères de jeûne préopératoire chez l'enfant de moins d'un an ?` },
+                { text: `Quels sont les risques cardiovasculaires de l'anesthésie chez un diabétique ? Quels sont les éléments spécifiquement cliniques pour les dépister à la consultation d'anesthésie ?` },
+                { text: `Comment définir un patient dénutri en préopératoire ?` },
+                { text: `Quels sont les signes cliniques d'une intoxication aux anesthésiques locaux ?` },
+                { text: `Quel est le traitement spécifique d'urgence d'une intoxication aux anesthésiques locaux ?` },
+                { text: `Citez 5 items du volet 1 de la check-list OMS (check-list préopératoire).` },
+                { text: `Vous êtes appelé en urgence pour la survenue d'un arrêt cardio-vasculaire avec fibrillation ventriculaire au cours d'une séance de dialyse chez un patient de 70 ans. Quelle est la principale étiologie suspectée et les principes de la prise en charge ?` },
+                { text: `Quelles sont les modalités spécifiques de la prise en charge d'un syndrome hémorragique sévère sous dabigatran ?` },
+                { text: `Quels sont les critères diagnostiques d'un diabète insipide central ?` },
+                { text: `M. X a une créatininémie à 70 µmol/L, une diurèse à 750 mL/24 h et une créatininurie à 3 mmol/L. Définir et calculer la clairance de la créatinine.` },
+                { text: `Citez 5 causes d'HTA secondaire.` },
+                { text: `Quelles intoxications évoquez-vous devant une acidose métabolique non lactique à trou anionique augmenté ?` },
+                { text: `Six heures après votre prise en charge d'un choc hémorragique, le bilan biologique de contrôle met en évidence une calcémie ionisée à 0,98 mmol/L. Comment l'interprétez-vous ? Quelles en sont les causes et les conséquences ?` }
+            ]
+        }
+    ]
+};
+</script>
+
+<div class="container">
+    <main id="annale-root"></main>
+    <div data-annale-cta></div>
+    <nav class="back-link" aria-label="Retour aux annales">
+        <a href="/medecin/annales/annales.html">📚 Retour aux annales</a>
+    </nav>
+</div>
+
+<script src="/js/annale.js" defer></script>
+<script src="/js/khPop.js" data-link="/medecin/annales/achat_corrections"></script>
+<script src="/js/header-manager.js" defer></script>
+<script src="/js/scroll-to-top.min.js"></script>
+<script src="/js/navbar_notoggle.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/footer-manager.js" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new FooterManager({ anchor: '.container', position: 'beforeend' }).init();
+    });
+</script>
+</body>
+</html>
