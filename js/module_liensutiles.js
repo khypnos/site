@@ -3,7 +3,7 @@ function renderLiensUtiles() {
 
 <h2 class="section-title">🚀 Liens utiles</h2>
 
-<div class="links-section" data-reveal="right" data-stagger data-stagger-target=":scope > .column > .feature-list > li" data-stagger-step="50">
+<div class="links-section">
 					<div class="column">
 						<ul class="feature-list">
 							<li><span class="emoji">✅</span><a href="/medecin/la_prepa_khypnos.html" class="souschap" rel="noopener noreferrer"><strong>La prépa Khypnos</strong></a></li>

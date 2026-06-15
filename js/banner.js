@@ -29,7 +29,7 @@
 
   // --- Styles (3 variantes) --------------------------------------
   const STYLES = `
-  .khy-banner{position:relative;width:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;font-size:.92rem;line-height:1.4;z-index:50;animation:khy-slide .5s ease both}
+  .khy-banner{position:relative;width:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;font-size:.92rem;line-height:1.4;z-index:50}
   .khy-banner__inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.75rem;padding:.7rem 3rem .7rem 1.25rem;text-align:center;flex-wrap:wrap}
   .khy-banner__icon{width:18px;height:18px;flex-shrink:0;display:inline-flex;align-items:center}
   .khy-banner__icon svg{width:100%;height:100%}
@@ -40,7 +40,6 @@
   .khy-banner__close{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:transparent;border:0;cursor:pointer;padding:.35rem;border-radius:6px;display:inline-flex;color:inherit;opacity:.6;transition:opacity .2s,background .2s}
   .khy-banner__close:hover{opacity:1;background:rgba(255,255,255,.1)}
   .khy-banner__close svg{width:16px;height:16px}
-  @keyframes khy-slide{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
 
   /* Variante 1 — DARK (sobre, premium) */
   .khy-banner--dark{background:#0b0b0f;color:#f5f5f7;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -121,7 +120,6 @@
   // --- Gestion fermeture -----------------------------------------
   if (CONFIG.dismissible) {
     banner.querySelector(".khy-banner__close").addEventListener("click", () => {
-      banner.style.animation = "khy-slide .3s ease reverse forwards";
       setTimeout(() => banner.remove(), 280);
       localStorage.setItem(CONFIG.storageKey, "dismissed");
     });
