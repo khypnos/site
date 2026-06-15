@@ -1,0 +1,188 @@
+/* =========================================================
+   /css/faq.css — Styles pour la page FAQ dédiée
+   Utilisé par : /medecin/faq_evc.html
+   Doit être chargé APRÈS /styles.css ET /css/theme-elegance.css
+   ========================================================= */
+
+/* ── Conteneur principal ──────────────────────────────── */
+.faq-wrapper {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── Catégories ───────────────────────────────────────── */
+.faq-category-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 32px 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #c89b6e;                  /* accent chaud (élégance) */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.faq-category-title::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #e8eaef, transparent);
+  border-radius: 2px;
+}
+
+/* ── Item accordéon ───────────────────────────────────── */
+.faq-item {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(26, 47, 79, 0.06);
+  margin-bottom: 10px;
+  border: 2px solid transparent;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+.faq-item:hover {
+  border-color: #1a2f4f;           /* navy */
+  box-shadow: 0 4px 16px rgba(26, 47, 79, 0.12);
+}
+.faq-item.open {
+  border-color: #1a2f4f;
+  box-shadow: 0 4px 20px rgba(26, 47, 79, 0.15);
+}
+
+/* ── Bouton question ──────────────────────────────────── */
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a2332;
+  line-height: 1.4;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 60px;
+}
+.faq-item.open .faq-question {
+  color: #1a2f4f;                  /* navy */
+}
+@media (min-width: 768px) {
+  .faq-question {
+    font-size: 16px;
+    padding: 20px 24px;
+  }
+}
+
+/* ── Icône chevron ────────────────────────────────────── */
+.faq-chevron {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f6f7fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.3s ease;
+}
+.faq-chevron svg {
+  width: 14px;
+  height: 14px;
+  stroke: #5a6478;
+  transition: stroke 0.25s;
+}
+.faq-item.open .faq-chevron {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* brand moment */
+  transform: rotate(180deg);
+}
+.faq-item.open .faq-chevron svg {
+  stroke: #ffffff;
+}
+
+/* ── Réponse ──────────────────────────────────────────── */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.faq-answer-inner {
+  padding: 0 20px 20px;
+  color: #5a6478;
+  font-size: 14px;
+  line-height: 1.75;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 16px;
+}
+.faq-answer-inner a {
+  color: #1a2f4f;                  /* navy pour les liens internes aux réponses */
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.faq-answer-inner a:hover {
+  border-bottom-color: #1a2f4f;
+}
+@media (min-width: 768px) {
+  .faq-answer-inner {
+    padding: 16px 24px 22px;
+    font-size: 15px;
+  }
+}
+
+/* ── Compteur de questions (si utilisé) ──────────────── */
+.faq-count {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 13px;
+  color: #999;
+}
+.faq-count strong {
+  color: #1a2f4f;
+}
+
+/* ─────────────────────────────────────────────
+   Exceptions pour contenus spécifiques
+   ───────────────────────────────────────────── */
+
+/* CTA boutons à l'intérieur d'une réponse FAQ.
+   On annule les overrides sur les liens pour laisser
+   styles.css gérer le rendu (.back-link a, .cta a, etc.) */
+.faq-answer-inner .back-link a,
+.faq-answer-inner .cta a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Logos des moyens de paiement inline (FAQ 2) */
+.faq-answer-inner .pay {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.faq-answer-inner .pay-logo {
+  height: 18px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Sur mobile, légèrement plus petits */
+@media (max-width: 480px) {
+  .faq-answer-inner .pay-logo {
+    height: 14px;
+  }
+}

@@ -6,6 +6,8 @@
     <title>FAQ – Épreuves de Vérification des Connaissances en Anesthésie-Réanimation | Khypnos</title>
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/theme-elegance.css">
+    <link rel="stylesheet" href="/css/faq.css">
 
     <script type="application/ld+json">
     {
@@ -264,154 +266,6 @@
     }
     </script>
 
-    <style>
-
-      /* ── Conteneur principal ── */
-      .faq-wrapper {
-        width: 100%;
-        max-width: 860px;
-        margin: 0 auto;
-      }
-
-      /* ── Catégories ── */
-      .faq-category-title {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 32px 0 12px;
-        font-size: 13px;
-        font-weight: 700;
-        color: #667eea;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .faq-category-title::after {
-        content: '';
-        flex: 1;
-        height: 2px;
-        background: linear-gradient(90deg, #e9ecef, transparent);
-        border-radius: 2px;
-      }
-
-      /* ── Item accordéon ── */
-      .faq-item {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        margin-bottom: 10px;
-        border: 2px solid transparent;
-        transition: border-color 0.25s ease, box-shadow 0.25s ease;
-        overflow: hidden;
-      }
-
-      .faq-item:hover {
-        border-color: #667eea;
-        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
-      }
-
-      .faq-item.open {
-        border-color: #667eea;
-        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
-      }
-
-      /* ── Bouton question ── */
-      .faq-question {
-        width: 100%;
-        background: none;
-        border: none;
-        padding: 18px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        cursor: pointer;
-        text-align: left;
-        font-family: inherit;
-        font-size: 15px;
-        font-weight: 600;
-        color: #333;
-        line-height: 1.4;
-        transition: color 0.2s;
-        -webkit-tap-highlight-color: transparent;
-        min-height: 60px;
-      }
-
-      @media (min-width: 768px) {
-        .faq-question {
-          font-size: 16px;
-          padding: 20px 24px;
-        }
-      }
-
-      .faq-item.open .faq-question {
-        color: #667eea;
-      }
-
-      /* ── Icône chevron ── */
-      .faq-chevron {
-        flex-shrink: 0;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: #f5f5f5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.25s ease, transform 0.3s ease;
-      }
-
-      .faq-chevron svg {
-        width: 14px;
-        height: 14px;
-        stroke: #666;
-        transition: stroke 0.25s;
-      }
-
-      .faq-item.open .faq-chevron {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        transform: rotate(180deg);
-      }
-
-      .faq-item.open .faq-chevron svg {
-        stroke: white;
-      }
-
-      /* ── Réponse ── */
-      .faq-answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.35s ease;
-      }
-
-      .faq-answer-inner {
-        padding: 0 20px 20px;
-        color: #555;
-        font-size: 14px;
-        line-height: 1.75;
-        border-top: 1px solid #f0f0f0;
-        padding-top: 16px;
-      }
-
-      @media (min-width: 768px) {
-        .faq-answer-inner {
-          padding: 16px 24px 22px;
-          font-size: 15px;
-        }
-      }
-
-      /* ── Compteur de questions ── */
-      .faq-count {
-        text-align: center;
-        margin-top: 28px;
-        font-size: 13px;
-        color: #999;
-      }
-
-      .faq-count strong {
-        color: #667eea;
-      }
-    </style>
   </head>
 
 <body>
@@ -641,7 +495,7 @@
         <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
       </button>
       <div class="faq-answer">
-        <div class="faq-answer-inner">Tous les sujets des examens précédents sont disponibles gratuitement, sans corrections, sur le site du Centre National de Gestion : <a href="https://www.cng.sante.fr/candidats/internats/concours-medicaux/docteurs-juniors-praticiens/epreuves-verification-connaissances-evc" target="_blank" style="color:#667eea;text-decoration:none;font-weight:600;">cng.sante.fr</a></div>
+        <div class="faq-answer-inner">Tous les sujets des examens précédents sont disponibles gratuitement, sans corrections, sur le site du Centre National de Gestion : <a href="https://www.cng.sante.fr/candidats/internats/concours-medicaux/docteurs-juniors-praticiens/epreuves-verification-connaissances-evc" target="_blank">cng.sante.fr</a></div>
       </div>
     </div>
 
@@ -762,6 +616,7 @@
 	  <script src="/js/script.js"></script>
  	  <script src="/js/khPop-guide.js"></script>
     <script src="/js/footer-manager.js" defer></script>
+    <script src="/js/faq.js" defer></script>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -771,32 +626,6 @@
         }).init();
       });
     </script>
-
-
-    <script>
-      document.querySelectorAll('.faq-question').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const item = btn.closest('.faq-item');
-          const answer = item.querySelector('.faq-answer');
-          const isOpen = item.classList.contains('open');
-
-          // Ferme tous les autres
-          document.querySelectorAll('.faq-item.open').forEach(openItem => {
-            openItem.classList.remove('open');
-            openItem.querySelector('.faq-answer').style.maxHeight = '0';
-            openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-          });
-
-          // Ouvre ou ferme celui-ci
-          if (!isOpen) {
-            item.classList.add('open');
-            answer.style.maxHeight = answer.scrollHeight + 'px';
-            btn.setAttribute('aria-expanded', 'true');
-          }
-        });
-      });
-    </script>
-
 
 </body>
 </html>

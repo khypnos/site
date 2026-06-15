@@ -1,34 +1,39 @@
+(function() {
+  // Scope: .faq-wrapper (page FAQ dédiée) OU #faq (accueil)
+  const containers = document.querySelectorAll('.faq-wrapper, #faq');
+  if (containers.length === 0) return;
 
-		(function(){
-			const faq = document.getElementById('faq');
-			const items = Array.from(faq.querySelectorAll('.faq-item'));
+  containers.forEach(container => {
+    const items = container.querySelectorAll('.faq-item');
 
-			// Ouvrir/fermer un item et fermer les autres
-			function toggleItem(item){
-				const isOpen = item.getAttribute('aria-expanded') === 'true';
-				// fermer tous
-				items.forEach(it => it.setAttribute('aria-expanded','false'));
-				// ouvrir celui-ci si il n’était pas ouvert
-				item.setAttribute('aria-expanded', String(!isOpen));
-			}
+    items.forEach(item => {
+      const btn = item.querySelector('.faq-question');
+      if (!btn) return;
 
-			// Clic n’importe où sur la carte
-			items.forEach(item => {
-				item.addEventListener('click', (e) => {
-					// éviter que la sélection de texte ou des clics profonds cassent la logique
-					// mais autoriser le clic partout dans l’item
-					toggleItem(item);
-				});
-				// Support clavier: Entrée/Espace sur l’en-tête
-				const header = item.querySelector('.faq-header');
-				header.addEventListener('keydown', (e) => {
-					if(e.key === 'Enter' || e.key === ' '){
-						e.preventDefault();
-						toggleItem(item);
-					}
-				});
-			});
+      btn.addEventListener('click', () => {
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
 
-			// Optionnel: ouvrir le premier par défaut
-			// toggleItem(items[0]);
-		})();
+        // Ferme les autres items du même container
+        items.forEach(other => {
+          if (other !== item && other.classList.contains('open')) {
+            other.classList.remove('open');
+            other.querySelector('.faq-answer').style.maxHeight = '0';
+            other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Toggle l'item courant
+        if (isOpen) {
+          item.classList.remove('open');
+          answer.style.maxHeight = '0';
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+})();
