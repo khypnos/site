@@ -34,8 +34,9 @@ function loadNavbar() {
                     <li><a href="/login.html">🔒 Espace Privé</a></li>
                     <li><a href="/medecin/annales/annales.html">Annales</a></li>
                     <li><a href="https://khypnos-qcm.vercel.app/">QCMs</a></li>
+                    <li><a href="/medecin/videotheque_free.html">Vidéothèque</a></li>
                     <li><a href="/medecin/demande_inscription.html">Inscription</a></li>
-                    <li><a href="/medecin/demande_concours.html">Concours Blanc</a></li>
+                    <!-- <li><a href="/medecin/demande_concours.html">Concours Blanc</a></li> -->
                     <li><a href="/medecin/demande_programme.html">Programme</a></li>
                 </ul>
             </nav>

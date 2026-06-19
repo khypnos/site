@@ -1,329 +1,261 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khypnos - Acheter les Annales EVC Anesthésie-Réanimation</title>
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
-	<link rel="stylesheet" href="/styles.css">
+    <title>Khypnos — Annales EVC Anesthésie-Réanimation (livre)</title>
+    <meta name="description" content="Annales EVC Anesthésie-Réanimation 2020–2025 — recueil corrigé disponible sur Amazon. Épreuves fondamentales & pratiques. Par les Dr Duceau et Mailloux.">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/css/theme-elegance.css">
-    <style>
-        /* Segmented control (reprend ta charte #667eea / #764ba2) */
-.offer-toggle {
-	--bg: #eef2ff;
-	--fg: #2c3e50;
-	--accent: #667eea;
-	--accent-2: #764ba2;
-	position: relative;
-	display: grid;
-	grid-auto-flow: column;
-	gap: 6px;
-	padding: 6px;
-	border-radius: 9999px;
-	background: var(--bg);
-	border: 1px solid rgba(102, 126, 234, 0.25);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.06) inset;
-	max-width: 960px; /* un peu plus large pour 3 onglets */
-	margin: 12px auto 8px;
-}
-.offer-toggle button[role="tab"] {
-	position: relative;
-	z-index: 1; /* au-dessus du thumb */
-	appearance: none;
-	border: 0;
-	background: transparent;
-	color: var(--fg);
-	font-weight: 700;
-	padding: 10px 14px;
-	border-radius: 9999px;
-	cursor: pointer;
-	white-space: nowrap;
-	transition: color .2s ease, transform .1s ease;
-}
-.offer-toggle button[role="tab"]:hover { transform: translateY(-1px); }
-.offer-toggle button.is-active { color: #fff; }
-.offer-toggle__thumb {
-	position: absolute;
-	inset: 6px auto 6px 6px; /* sera déplacé en JS */
-	width: calc(33.333% - 6px); /* valeur initiale approximative, ajustée en JS */
-	border-radius: 9999px;
-	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-	box-shadow: 0 6px 16px rgba(103, 126, 234, 0.35);
-	transition: transform .25s ease, width .25s ease;
-}
-
-/* Conteneur des panneaux */
-.offer-panels {
-	display: flex;
-	justify-content: center;
-	margin-top: 1rem;
-}
-.offer-panels stripe-buy-button {
-	display: block;
-	margin: 0 auto;
-}
-
-/* Responsive */
-@media (max-width: 720px) {
-	.offer-toggle { max-width: 36rem; }
-	.offer-toggle button[role="tab"] {
-		font-size: 0.90rem;
-		padding: 0.6rem 0.7rem;
-	}
-}
-@media (max-width: 600px) {
-	.offer-toggle { max-width: 22rem; gap: 0.25rem; }
-	.offer-toggle button[role="tab"] {
-		font-size: 0.85rem;
-		padding: 0.5rem 0.625rem; /* 8px 10px */
-		white-space: normal;       /* autorise les retours à la ligne */
-		text-align: center;
-		line-height: 1.3;
-	}
-}
-
-.text-justify { text-align: justify; }
-
-.pricing-list {
-    font-size: 1rem;
-	margin: 0.75rem 0 1rem;
-	padding: 0;
-	display: grid;
-	gap: 0.5rem 1rem;
-}
-
-.pricing-item {
-	display: grid;
-	grid-template-columns: 1fr auto;
-	align-items: baseline;
-	gap: 0.5rem 1rem;
-	padding: 0.5rem 0;
-	border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-.pricing-item:last-child { border-bottom: 0; }
-
-.pricing-item dt {
-	margin: 0;
-	font-weight: 400 ;
-	color: #2c3e50; /* cohérent avec votre charte */
-}
-
-.pricing-item dd {
-	margin: 0;
-	font-weight: 700;
-	white-space: nowrap;
-}
-
-.h-inline {
-	margin: 0.75rem 0 0.25rem;
-	font-size: 1.05rem;
-}
-
-@media screen and (max-width: 768px) { 
-    .pricing-list { font-size: 0.95rem; }
-}
-
-@media screen and (max-width: 480px) { 
-    .pricing-list { font-size: 0.85rem; }
-}
-
-
-    </style>
+    <link rel="stylesheet" href="/css/annales-achat.css">
 </head>
-
 <body>
+<script src="/js/banner.js"></script>
 
-    <div class="container">
+<div class="container">
+    <main class="achat-wrapper">
 
-        <h2 class="section-title">Corrections d'annales des EVC Anesthésie-Réanimation</h2>
-
-        <div class="links-section">
-
-            <p class="text-justify">
-                Nous proposons les annales 2024, 2023, 2021, 2020, 2019, 2017 (pratique uniquement), 2014, 2013, 2009.
-                Les corrigés sont tous enrichis de rappels de cours, de recommandations à lire et de conseils méthodologiques.
-                Pour acheter le corrigé de l'annale 2025 - Voie interne (QCMs), nous contacter.
-            </p>
-            <br>
-
-            <p class="text-justify">🎯 Objectif&nbsp;: <strong>vous entraîner en autonomie</strong>.</p>
-
-            <p class="text-justify">💻 Les annales vous parviennent par <strong>e‑mail au format PDF</strong>.</p>
-
-            <p>
-                📩 Exemple téléchargeable sur demande:
-                <a href="mailto:contact@khypnos.com" class="contact-email"><strong>contact@khypnos.com</strong></a>
-            </p>
-            <br>
-
-            <p class="text-justify">💳 Tarifs</p>
-
-            <dl class="pricing-list">
-                <div class="pricing-item">
-                    <dt><strong>Une annale</strong> (EVCP + EVCF, année au choix)</dt>
-                    <dd>50€ TTC</dd>
-                </div>
-                <div class="pricing-item">
-                    <dt><strong>Pack 4 annales</strong> (EVCP + EVCF, 4 années au choix)</dt>
-                    <dd>150€ TTC</dd>
-                </div>
-                <div class="pricing-item">
-                    <dt><strong>Pack complet</strong> Pack complet (toutes les annales disponibles)</dt>
-                    <dd>250€ TTC</dd>
-                </div>
-            </dl>
-
-        </div>
-        
-        <!-- Stripe JS (chargé une seule fois) -->
-        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
-
-        <!-- Toggle visuel: 3 options -->
-        <div class="offer-toggle" role="tablist" aria-label="Choix de l’offre">
-            <button type="button" role="tab" aria-selected="true" aria-controls="panel-simple" id="tab-simple" class="is-active">
-                Annale simple • 50€
-            </button>
-            <button type="button" role="tab" aria-selected="false" aria-controls="panel-pack4" id="tab-pack4">
-                Pack 4 annales • 150€
-            </button>
-            <button type="button" role="tab" aria-selected="false" aria-controls="panel-complet" id="tab-complet">
-                Pack complet • 250€
-            </button>
-            <span class="offer-toggle__thumb" aria-hidden="true"></span>
-        </div>
-
-        <!-- Panneaux -->
-        <div class="offer-panels">
-            <!-- Annale simple -->
-            <div id="panel-simple" role="tabpanel" aria-labelledby="tab-simple">
-                <stripe-buy-button
-                    buy-button-id="buy_btn_1SPmTiKkjxDJ53DVhiabSqmj"
-                    publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
-                </stripe-buy-button>
+        <!-- ── HERO ── -->
+        <section class="book-hero" aria-labelledby="book-title">
+            <div class="book-cover-wrap">
+                <img
+                    src="/img/couverture-annales-2020-2025.jpg"
+                    alt="Couverture du livre — Annales EVC Anesthésie-Réanimation 2020–2025"
+                    class="book-cover"
+                    width="220"
+                    loading="eager"
+                >
             </div>
 
-            <!-- Pack 4 annales -->
-            <div id="panel-pack4" role="tabpanel" aria-labelledby="tab-pack4" hidden>
-                <stripe-buy-button
-                    buy-button-id="buy_btn_1SPmPVKkjxDJ53DVPi8Cuuit"
-                    publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
-                </stripe-buy-button>
+            <div class="book-meta">
+                <span class="book-badge">
+                    <!-- Icône livre SVG -->
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    Disponible sur Amazon
+                </span>
+
+                <h1 class="book-title" id="book-title">
+                    Annales EVC Anesthésie-Réanimation
+                </h1>
+                <p class="book-subtitle">Recueil corrigé 2020–2025 · Épreuves fondamentales &amp; pratiques</p>
+
+                <p class="book-pitch">
+                    Préparez le concours des EVC avec les seuls documents qui comptent vraiment&nbsp;: les annales.
+                    Ce recueil de 226 pages rassemble l'intégralité des Épreuves de Vérification des Connaissances
+                    en anesthésie-réanimation sur la période 2020–2025.
+                </p>
+
+                <div class="book-cta-group">
+                    <a href="#amazon" class="btn-amazon" target="_blank" rel="noopener sponsored">
+                        <!-- Icône panier -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        Disponible le 25 juin 2026
+                    </a>
+                    <span class="book-format-hint">Format papier · Impression KDP</span>
+                </div>
+
+                <p class="book-authors">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <strong>Dr Baptiste Duceau &amp; Dr Arnaud Mailloux</strong> — Khypnos
+                </p>
+            </div>
+        </section>
+
+        <!-- ── APERÇU DU LIVRE ── -->
+        <section class="preview-section" aria-label="Aperçu du livre">
+            <h2>Aperçu du livre</h2>
+
+            <div class="book-slider" id="book-slider">
+                <div class="book-slider__track">
+                    <div class="book-slider__slides" id="slider-slides">
+                        <div class="book-slider__slide">
+                            <img src="/img/preview/page1.jpg" alt="Aperçu page 1 — liste des questions" loading="lazy">
+                        </div>
+                        <div class="book-slider__slide">
+                            <img src="/img/preview/page2.jpg" alt="Aperçu page 2" loading="lazy">
+                        </div>
+                        <div class="book-slider__slide">
+                            <img src="/img/preview/page3.jpg" alt="Aperçu page 3 — exemple de correction" loading="lazy">
+                        </div>
+                        <div class="book-slider__slide">
+                            <img src="/img/preview/page4.jpg" alt="Aperçu page 4" loading="lazy">
+                        </div>
+                        <div class="book-slider__slide">
+                            <img src="/img/preview/page5.jpg" alt="Aperçu page 5" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-btn slider-btn--prev" id="slider-prev" aria-label="Page précédente" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="slider-btn slider-btn--next" id="slider-next" aria-label="Page suivante">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
             </div>
 
-            <!-- Pack complet -->
-            <div id="panel-complet" role="tabpanel" aria-labelledby="tab-complet" hidden>
-                <stripe-buy-button
-                    buy-button-id="buy_btn_1SPmEiKkjxDJ53DVZcc2V9gW"
-                    publishable-key="pk_live_51S9w7NKkjxDJ53DVMnwS6a5XAGR45xyKgsZFtE5MhGy59w2elfds9q3qmkgaSiW98j4LMxei930v9dAln5VUTHPh00tG646ofr">
-                </stripe-buy-button>
+            <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Pages de l'aperçu">
+                <button class="slider-dot is-active" role="tab" aria-selected="true"  aria-label="Page 1" data-idx="0"></button>
+                <button class="slider-dot"           role="tab" aria-selected="false" aria-label="Page 2" data-idx="1"></button>
+                <button class="slider-dot"           role="tab" aria-selected="false" aria-label="Page 3" data-idx="2"></button>
+                <button class="slider-dot"           role="tab" aria-selected="false" aria-label="Page 4" data-idx="3"></button>
+                <button class="slider-dot"           role="tab" aria-selected="false" aria-label="Page 5" data-idx="4"></button>
             </div>
+            <p class="slider-counter" id="slider-counter" aria-live="polite">1 / 5</p>
+        </section>
+
+        <!-- Lightbox zoom -->
+        <div class="slider-lightbox" id="slider-lightbox" role="dialog" aria-modal="true" aria-label="Zoom page">
+            <button class="slider-lightbox__close" id="lightbox-close" aria-label="Fermer">✕</button>
+            <img id="lightbox-img" src="" alt="">
         </div>
 
 
-		<!-- Brique liens utiles -->
-			<div id="LiensUtiles" ></div>
-			<script src="/js/module_liensutiles.js"></script>
-        
-		<nav class="back-link" aria-label="Retour">
-				<a href="/index.html">🏠 Retour à l’accueil</a>
-		</nav>
+        <!-- ── CONTENU MARKETING ── -->
+        <div class="book-details">
 
-	</div>
+            <div class="book-detail-block">
+                <h3>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    Ce que vous trouverez dans ce livre
+                </h3>
+                <ul>
+                    <li>La liste complète des questions en ouverture de chaque annale, avec les figures associées — pour vous tester avant de consulter la correction</li>
+                    <li>La réponse corrigée — une correction directe, sans détour, calibrée sur les attentes réelles du jury</li>
+                </ul>
+            </div>
 
-    <script src="/js/header-manager.js" defer></script>    
-    <script src="/js/scroll-to-top.min.js"></script>	
-    <script src="/js/navbar.js"></script>
-	<script src="/js/script.js"></script>
-    <script src="/js/footer-manager.js" defer></script>
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			new FooterManager({
-				anchor: '.container',
-				position: 'beforeend'
-			}).init();
-		});
-	</script>
+            <div class="book-detail-block">
+                <h3>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Pourquoi travailler les annales dès le début de votre préparation&nbsp;?
+                </h3>
+                <p>
+                    Les annales sont le seul miroir fidèle du concours. Elles vous apprennent à cibler vos révisions
+                    sur ce qui tombe réellement, à calibrer votre gestion du temps et à arriver le jour J en territoire
+                    familier. Ce recueil est conçu pour être utilisé dès le premier jour —
+                    pas gardé pour la dernière semaine.
+                </p>
+            </div>
 
-    <script>
-    (function(){
-        const toggle = document.querySelector('.offer-toggle');
-        if (!toggle) return;
+            <div class="book-detail-block">
+                <h3>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    Un support à la hauteur de votre travail
+                </h3>
+                <p>
+                    Mise en page sobre et aérée, marges pour annoter, couleurs choisies pour la lisibilité. Un livre que vous ouvrez avec plaisir,
+                    conçu par des praticiens d'anesthésie-réanimation pour des candidats qui n'ont pas de temps à perdre.
+                </p>
+            </div>
 
-        const thumb = toggle.querySelector('.offer-toggle__thumb');
-        const tabs = [
-            document.getElementById('tab-simple'),
-            document.getElementById('tab-pack4'),
-            document.getElementById('tab-complet')
-        ].filter(Boolean);
+        </div>
 
-        const panels = [
-            document.getElementById('panel-simple'),
-            document.getElementById('panel-pack4'),
-            document.getElementById('panel-complet')
-        ].filter(Boolean);
+        <!-- ── ANNALES ANTÉRIEURES ── -->
+        <div class="older-annales-card">
+            <div class="oac-left">
+                <h3>Vous cherchez des annales antérieures à 2020&nbsp;?</h3>
+                <p>Pour les années plus anciennes, contactez-nous directement — nous vous répondons rapidement.</p>
+            </div>
+            <a href="mailto:contact@khypnos.fr" class="btn-contact">
+                📩 contact@khypnos.fr
+            </a>
+        </div>
 
-        function measureAndMove(idx){
-            if (!tabs[idx]) return;
-            // base = bord gauche du 1er onglet
-            const baseLeft = tabs[0].getBoundingClientRect().left + window.scrollX;
-            const targetRect = tabs[idx].getBoundingClientRect();
-            const dx = (targetRect.left + window.scrollX) - baseLeft;
-            thumb.style.transform = `translateX(${dx}px)`;
-            thumb.style.width = `${targetRect.width}px`;
-        }
+        <!-- ── LIENS UTILES ── -->
+        <div id="LiensUtiles"></div>
+        <script src="/js/module_liensutiles.js"></script>
 
-        function activate(idx){
-            tabs.forEach((t, i) => {
-                const active = i === idx;
-                t.classList.toggle('is-active', active);
-                t.setAttribute('aria-selected', String(active));
-                t.setAttribute('tabindex', active ? '0' : '-1');
-            });
-            panels.forEach((p, i) => { if (p) p.hidden = i !== idx; });
-            requestAnimationFrame(() => measureAndMove(idx));
-        }
+        <nav class="back-link" aria-label="Retour">
+            <a href="/index.html">🏠 Retour à l'accueil</a>
+        </nav>
 
-        // Clic
-        tabs.forEach((btn, idx) => btn.addEventListener('click', () => activate(idx)));
+    </main>
+</div>
 
-        // Clavier (gauche/droite + Entrée/Espace)
-        tabs.forEach((btn, idx) => {
-            btn.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    const next = e.key === 'ArrowRight' ? (idx + 1) % tabs.length : (idx - 1 + tabs.length) % tabs.length;
-                    tabs[next].focus();
-                    activate(next);
-                }
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    activate(idx);
-                }
-            });
+
+<script>
+(function () {
+    const TOTAL = 5;
+    let current = 0;
+
+    const slides  = document.getElementById('slider-slides');
+    const btnPrev = document.getElementById('slider-prev');
+    const btnNext = document.getElementById('slider-next');
+    const counter = document.getElementById('slider-counter');
+    const dots    = document.querySelectorAll('#slider-dots .slider-dot');
+
+    // Lightbox
+    const lightbox     = document.getElementById('slider-lightbox');
+    const lightboxImg  = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    function goTo(idx) {
+        current = Math.max(0, Math.min(idx, TOTAL - 1));
+        slides.style.transform = `translateX(-${current * 100}%)`;
+        btnPrev.disabled = current === 0;
+        btnNext.disabled = current === TOTAL - 1;
+        counter.textContent = `${current + 1} / ${TOTAL}`;
+        dots.forEach((d, i) => {
+            const active = i === current;
+            d.classList.toggle('is-active', active);
+            d.setAttribute('aria-selected', String(active));
         });
+    }
 
-        // Init: si aucun actif, activer le premier
-        window.addEventListener('load', () => {
-            const hasActive = tabs.some(t => t.classList.contains('is-active'));
-            if (!hasActive) {
-                tabs[0].classList.add('is-active');
-                tabs[0].setAttribute('aria-selected', 'true');
-                for (let i = 1; i < panels.length; i++) if (panels[i]) panels[i].hidden = true;
-            }
-            const activeIdx = tabs.findIndex(t => t.classList.contains('is-active')) || 0;
-            measureAndMove(activeIdx);
-        });
+    btnPrev.addEventListener('click', () => goTo(current - 1));
+    btnNext.addEventListener('click', () => goTo(current + 1));
+    dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
 
-        // Recalcule au redimensionnement
-        window.addEventListener('resize', () => {
-            const activeIdx = tabs.findIndex(t => t.classList.contains('is-active'));
-            requestAnimationFrame(() => measureAndMove(activeIdx === -1 ? 0 : activeIdx));
+    // Swipe tactile
+    let touchStartX = 0;
+    const track = document.querySelector('.book-slider__track');
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+    });
+
+    // Clavier (← →) quand le slider a le focus
+    document.getElementById('book-slider').addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+    });
+
+    // Zoom lightbox au clic sur une image
+    document.querySelectorAll('.book-slider__slide img').forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('is-open');
         });
-    })();
-    </script>
-	
+    });
+    function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightboxImg.src = '';
+    }
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Init
+    goTo(0);
+})();
+</script>
+
+
+<script src="/js/header-manager.js" defer></script>
+<script src="/js/scroll-to-top.min.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/footer-manager.js" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new FooterManager({
+            anchor: '.container',
+            position: 'beforeend'
+        }).init();
+    });
+</script>
 </body>
-
 </html>

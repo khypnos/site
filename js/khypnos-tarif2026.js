@@ -184,7 +184,7 @@ function renderKhypnosOffers2026() {
           <p style="text-align: center; margin: 20px;">Une question sur la formule à choisir ?</p>
 
           <div class="back-link" style="margin-top: 30px;">
-            <a href="mailto:contact@khypnos.com">Contactez-nous</a>
+            <a href="mailto:contact@khypnos.fr">Contactez-nous</a>
           </div>
 
     </div>
