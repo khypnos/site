@@ -764,18 +764,28 @@ html {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 .back-link {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     margin: 30px 0;
 }
+
 .back-link a {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  */
     color: white;
     padding: 12px 25px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s;
+
+    /* ✅ Ajouts pour éviter le dépassement mobile */
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    text-align: center;
 }
+
 .back-link a:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -1235,6 +1245,7 @@ a { text-decoration: none; color: inherit; }
     .webinar-banner span { font-size: 0.8rem; }
     .webinar-banner:hover span { font-size: 0.9rem; }
     .back-link { font-size: 0.8rem; white-space: nowrap; }
+    .back-link a { white-space: normal; }
     .annales-link { font-size: 0.9rem; }
     .cta-buttons {
         flex-direction: column;

@@ -421,3 +421,15 @@
     .slider-btn--next { right: 4px; }
     .book-slider__track { aspect-ratio: 3 / 4; } /* portrait sur mobile */
 }
+
+
+@media (max-width: 768px) {
+
+  /* Icônes titres des blocs détail */
+  .book-detail-block h3 svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+}
