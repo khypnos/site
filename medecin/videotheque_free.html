@@ -1,61 +1,336 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khypnos - Vidéothèque</title>
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
-	<link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/css/theme-elegance.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos — Vidéothèque gratuite</title>
+  <meta name="description" content="Vidéos de cours gratuites Khypnos.">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/css/theme-elegance.css">
+  <link rel="stylesheet" href="/css/videotheque.css">
+  <style>
+    .video-card--locked {
+      opacity: 0.55;
+      filter: grayscale(30%);
+    }
+    .video-card--locked .video-card-header h2 {
+      color: #9ca3af;
+    }
+    .locked-badge {
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .btn-watch--locked {
+      background: #e5e7eb;
+      color: #6b7280;
+      cursor: pointer;
+      border: 1px dashed #d1d5db;
+    }
+    .btn-watch--locked:hover {
+      background: #f3f4f6;
+    }
+    .vt-cta-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: .85rem 1.25rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .vt-cta-banner p {
+      margin: 0;
+      color: #166534;
+      font-size: .95rem;
+    }
+  </style>
 </head>
-
 <body>
+<div class="container">
+  <main class="videotheque-wrapper">
 
-    <div class="container">
+    <header class="vt-header">
+      <h1>🎬 Vidéothèque — Aperçu gratuit</h1>
+      <p>Une sélection de vidéos en accès libre. Les vidéos grisées sont disponibles après inscription.</p>
+    </header>
 
-   
+    <nav class="vt-cta-banner">
+      <p>🔒 Accès à toutes les vidéos réservé aux étudiants inscrits.</p>
+      <a href="/login.html" class="btn-primary">Accéder à l'espace complet</a>
+    </nav>
 
-        <h2 class="section-title">Vidéothèque Khypnos</h2>
+    <div class="vt-toolbar">
+      <input id="search-input" class="vt-search" type="search"
+        placeholder="Rechercher une vidéo…" aria-label="Rechercher une vidéo">
+    </div>
 
-        <p>Retrouve ici l’ensemble des <strong>vidéos de cours</strong>, classées par rubrique. Chaque fiche indique le thème, une courte description et la durée pour t’aider à choisir rapidement le bon contenu.
-        Utilise les filtres et le regroupement par rubrique pour naviguer efficacement et <strong>revoir les notions clés à ton rythme</strong>.</p>
-        <br>
-        <p>Pour les étudiants inscrits, l'ensemble des vidéos est disponible ici :</p>
-            <nav class="back-link" aria-label="Retour">
-				<a href="/login.html">🔒 Accès complet (Etudiants inscrits)</a>
-		    </nav>
-       
-        <iframe src="https://khypnos.notion.site/ebd//350f71268efe804a8475c5e876c43632?v=350f71268efe817aa42f000c67629ace" 
-        width="100%" height="600" frameborder="0" allowfullscreen></iframe>  
+    <div id="filters" class="filters" role="group" aria-label="Filtres par rubrique"></div>
+    <div id="video-grid">
+      <div class="loading-state">
+        <div class="vt-spinner" aria-hidden="true"></div>
+        <span>Chargement des vidéos…</span>
+      </div>
+    </div>
 
+  </main>
+</div>
 
-		<!-- Brique liens utiles -->
-			<div id="LiensUtiles" ></div>
-			<script src="/js/module_liensutiles.js"></script>
+<script type="module">
+  const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co'
 
-        
-		<nav class="back-link" aria-label="Retour">
-				<a href="/index.html">🏠 Retour à l’accueil</a>
-		</nav>
+  // ── Modal lecteur vidéo ──
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="video-modal" class="video-modal" role="dialog" aria-modal="true" aria-label="Lecteur vidéo">
+      <div class="video-modal__container">
+        <button id="modal-close" class="video-modal__close" type="button" aria-label="Fermer">✕</button>
+        <video id="modal-video" class="video-modal__video"
+          controls controlsList="nodownload" disablePictureInPicture
+          oncontextmenu="return false"></video>
+      </div>
+    </div>`)
 
-	</div>
+  const $modal      = document.getElementById('video-modal')
+  const $modalVideo = document.getElementById('modal-video')
+  const $modalClose = document.getElementById('modal-close')
 
-    <script src="/js/header-manager.js" defer></script>    
-    <script src="/js/scroll-to-top.min.js"></script>	
-    <script src="/js/navbar.js"></script>
-	<script src="/js/script.js"></script>
-    <script src="/js/footer-manager.js" defer></script>
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			new FooterManager({
-				anchor: '.container',
-				position: 'beforeend'
-			}).init();
-		});
-	</script>
-	
-	</body>
+  function openModal(url) {
+    $modalVideo.src = url
+    $modal.classList.add('is-open')
+    $modalVideo.play().catch(() => {})
+  }
+  function closeModal() {
+    $modal.classList.remove('is-open')
+    $modalVideo.pause()
+    $modalVideo.src = ''
+  }
+  $modalClose.addEventListener('click', closeModal)
+  $modal.addEventListener('click', (e) => { if (e.target === $modal) closeModal() })
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal() })
 
+  // ── Modal inscription ──
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="inscription-modal" class="video-modal" role="dialog" aria-modal="true">
+      <div class="video-modal__container" style="max-width:420px; padding:2rem; text-align:center;">
+        <button id="inscription-modal-close" class="video-modal__close" type="button" aria-label="Fermer">✕</button>
+        <div style="font-size:2.5rem; margin-bottom:1rem;">🔒</div>
+        <h2 style="margin-bottom:.5rem;">Vidéo réservée aux inscrits</h2>
+        <p style="margin-bottom:1.5rem; color:#6b7280;">
+          Cette vidéo fait partie de la formation complète Khypnos.<br>
+          Inscris-toi pour accéder à l'ensemble de la vidéothèque.
+        </p>
+        <a href="/login.html" class="btn-primary" style="display:inline-block;">
+          S'inscrire / Se connecter
+        </a>
+      </div>
+    </div>`)
+
+  const $inscriptionModal = document.getElementById('inscription-modal')
+  document.getElementById('inscription-modal-close')
+    .addEventListener('click', () => $inscriptionModal.classList.remove('is-open'))
+  $inscriptionModal.addEventListener('click', (e) => {
+    if (e.target === $inscriptionModal) $inscriptionModal.classList.remove('is-open')
+  })
+  function openInscriptionModal() {
+    $inscriptionModal.classList.add('is-open')
+  }
+
+  // ── Chargement vidéos ──
+  const res = await fetch(SUPABASE_URL + '/functions/v1/get-free-videos')
+  if (!res.ok) {
+    document.getElementById('video-grid').innerHTML =
+      '<p class="empty-state">Impossible de charger les vidéos.</p>'
+    throw new Error('get-free-videos failed')
+  }
+  const videos = await res.json()
+
+  // ── Recherche ──
+  const $search = document.getElementById('search-input')
+  let searchQuery = ''
+  $search?.addEventListener('input', () => {
+    searchQuery = ($search.value || '').trim().toLowerCase()
+    renderGrid()
+  })
+
+  const allRubriques = [...new Set(videos.flatMap(v => v.rubriques ?? []))].sort()
+
+  const RUBRIQUE_PALETTE = [
+    { bg: '#fef3c7', color: '#92400e' },
+    { bg: '#dbeafe', color: '#1e40af' },
+    { bg: '#dcfce7', color: '#166534' },
+    { bg: '#fce7f3', color: '#9d174d' },
+    { bg: '#ede9fe', color: '#5b21b6' },
+    { bg: '#ffedd5', color: '#9a3412' },
+    { bg: '#e0f2fe', color: '#075985' },
+    { bg: '#f0fdf4', color: '#14532d' },
+    { bg: '#fdf4ff', color: '#86198f' },
+    { bg: '#fff1f2', color: '#9f1239' },
+  ]
+  const rubriqueColor = (r) => RUBRIQUE_PALETTE[
+    [...r].reduce((acc, c) => acc + c.charCodeAt(0), 0) % RUBRIQUE_PALETTE.length
+  ]
+
+  let activeFilter = null
+  const $filters = document.getElementById('filters')
+  const $grid    = document.getElementById('video-grid')
+
+  function renderFilters() {
+    $filters.innerHTML = [
+      { key: null, label: 'Toutes' },
+      ...allRubriques.map(r => ({ key: r, label: r }))
+    ].map(({ key, label }) => {
+      const c = key ? rubriqueColor(key) : null
+      const style = c
+        ? `style="--rc:${c.color}; background:${activeFilter === key ? c.color : c.bg}; color:${activeFilter === key ? '#fff' : c.color}; border-color:${c.color};"`
+        : ''
+      return `<button class="filter-btn ${activeFilter === key ? 'active' : ''}"
+        ${key ? 'data-colored' : ''} data-key="${key ?? ''}" type="button" ${style}>${label}</button>`
+    }).join('')
+    $filters.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.key || null
+        renderFilters()
+        renderGrid()
+      })
+    })
+  }
+
+  function renderGrid() {
+    const filtered = videos.filter(v => {
+      if (!searchQuery) return true
+      return (v.nom + ' ' + (v.description ?? '')).toLowerCase().includes(searchQuery)
+    })
+    if (!filtered.length) {
+      $grid.innerHTML = '<p class="empty-state">Aucune vidéo trouvée.</p>'
+      return
+    }
+
+    const groups = new Map()
+    groups.set('__sans_rubrique__', [])
+    allRubriques.forEach(r => groups.set(r, []))
+    filtered.forEach(v => {
+      if (!v.rubriques || v.rubriques.length === 0) {
+        groups.get('__sans_rubrique__').push(v)
+      } else {
+        v.rubriques.forEach(r => { if (groups.has(r)) groups.get(r).push(v) })
+      }
+    })
+
+    const sectionsToShow = activeFilter
+      ? [[activeFilter, groups.get(activeFilter) ?? []]]
+      : [...groups.entries()].filter(([key, vids]) => key !== '__sans_rubrique__' || vids.length > 0)
+
+    $grid.innerHTML = sectionsToShow.map(([rubrique, vids]) => {
+      if (!vids.length) return ''
+      const label = rubrique === '__sans_rubrique__' ? 'Sans rubrique' : rubrique
+      const c = rubrique !== '__sans_rubrique__'
+        ? rubriqueColor(rubrique)
+        : { bg: '#f6f7fb', color: '#5a6478' }
+
+      const cards = vids.map(v => {
+        const locked = !v.is_free
+        return `
+          <article class="video-card ${locked ? 'video-card--locked' : ''}">
+            <div class="video-card-header">
+              <h2>${v.nom}</h2>
+              ${locked ? '<span class="locked-badge">🔒</span>' : ''}
+            </div>
+            ${v.description ? `<p class="video-description">${v.description}</p>` : ''}
+            <div class="video-meta">
+              ${v.duree_min ? `
+                <span class="duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                  </svg>
+                  ${v.duree_min} min
+                </span>` : ''}
+              ${(v.rubriques ?? []).map(r => {
+                const rc = rubriqueColor(r)
+                return `<span class="rubrique-tag" style="background:${rc.bg};color:${rc.color};">${r}</span>`
+              }).join('')}
+            </div>
+            ${locked
+              ? `<button class="btn-watch btn-watch--locked" type="button" data-locked="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                  Disponible après inscription
+                </button>`
+              : v.video_block_id
+                ? `<button class="btn-watch" type="button" data-block-id="${v.video_block_id}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Regarder
+                  </button>`
+                : '<p class="video-soon">Vidéo bientôt disponible</p>'
+            }
+          </article>`
+      }).join('')
+
+      return `
+        <div class="rubrique-section">
+          <div class="rubrique-section-header">
+            <span class="rubrique-section-badge" style="background:${c.bg};color:${c.color};">${label}</span>
+            <span class="rubrique-section-count">${vids.length} vidéo${vids.length > 1 ? 's' : ''}</span>
+          </div>
+          <div class="rubrique-cards-grid">${cards}</div>
+        </div>`
+    }).join('')
+
+    // ── Handler lecture (vidéos gratuites) ──
+    $grid.querySelectorAll('button.btn-watch:not(.btn-watch--locked)').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const blockId = btn.dataset.blockId
+        const origHTML = btn.innerHTML
+        btn.disabled = true
+        btn.innerHTML = '<span class="btn-spinner"></span>'
+        try {
+          const r = await fetch(SUPABASE_URL + '/functions/v1/get-video-url', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ block_id: blockId }),
+          })
+          if (r.status === 429) {
+            alert('Trop de lectures en peu de temps, réessaie dans une minute.')
+            return
+          }
+          if (!r.ok) throw new Error('URL indisponible')
+          const { url } = await r.json()
+          openModal(url)
+        } catch (e) {
+          alert('Impossible de charger la vidéo. Réessaie.')
+        } finally {
+          btn.disabled = false
+          btn.innerHTML = origHTML
+        }
+      })
+    })
+
+    // ── Handler cartes verrouillées ──
+    $grid.querySelectorAll('button[data-locked="true"]').forEach(btn => {
+      btn.addEventListener('click', () => openInscriptionModal())
+    })
+  }
+
+  renderFilters()
+  renderGrid()
+</script>
+
+<script src="/js/header-manager.js" defer></script>
+<script src="/js/scroll-to-top.min.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/footer-manager.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    new FooterManager({ anchor: '.container', position: 'beforeend' }).init()
+  })
+</script>
+</body>
 </html>

@@ -1079,43 +1079,88 @@ a { text-decoration: none; color: inherit; }
     .hamburger-menu {
         display: block;
     }
-    .nav-menu {
-        position: fixed;
-        top: 75px;
-        right: 0;
+
+    /* ====== Menu mobile — Dropdown card ====== */
+@media screen and (max-width: 1200px) {
+
+        .nav-menu {
+        position: absolute;
+        top: calc(100% + 10px);
         left: 0;
-        width: 100vw;
-        height: calc(100vh - 75px);
-        background: rgba(255, 255, 255, 0.90);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        transition: 0.5s;
-        transform: translateX(100%);
-        padding-top: 10px;
+        right: 0;
+        /* plus de width, plus de translateX */
+        transform: scaleY(0.95);
+        transform-origin: top center;
+
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(102, 126, 234, 0.15);
+        border-radius: 20px;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0,0,0,0.06);
+        padding: 12px 8px;
         margin: 0;
-        box-shadow: var(--overlay-shadow);
-        border-radius: 10px;
-        inline-size: 100svw;
+        height: auto;
+        inline-size: unset;
+
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.22s ease, transform 0.22s ease;
+        z-index: 1000;
     }
+
     .nav-menu.active {
-        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+        transform: scaleY(1);
     }
+
     .nav-menu ul {
         flex-direction: column;
+        gap: 2px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
     }
+
     .nav-menu ul li {
-        margin: 15px 0px;
-        text-align: center;
-        font-size: 1.0rem;
+        margin: 0;
+        text-align: left;
+        font-size: 1rem;
+        border-radius: 12px;
+        overflow: hidden;
     }
+
+    /* Supprimer le séparateur ligne grise existant */
     .nav-menu ul li:not(:last-child)::after {
-        content: '';
-        display: block;
-        width: 65%;
-        height: 1px;
-        background: #e0e0e0;
-        margin: 20px auto 0;
+        display: none;
     }
+
+    .nav-menu ul li a {
+        display: flex;
+        align-items: center;
+        padding: 13px 18px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #2c3e50;
+        transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+        white-space: nowrap;
+    }
+
+    .nav-menu ul li a:hover {
+        background: linear-gradient(135deg, #eef0ff 0%, #f3e8ff 100%);
+        color: #667eea;
+        transform: translateX(4px);
+    }
+
+    /* Séparateur visuel discret entre items */
+    .nav-menu ul li + li {
+        border-top: 1px solid rgba(0,0,0,0.04);
+    }
+}
+
+
     .bar {
         flex-wrap: nowrap;
         gap: 0.5rem;
