@@ -211,6 +211,14 @@ body {
   box-shadow: var(--sh-xs);
 }
 
+/* Désactivation d'une offre (complète) */
+.primary-btn[aria-disabled="true"] {
+  background: #b9bfc6;
+  color: #fff;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* CTA section — gradient navy au lieu de violet */
 .cta-section,
 .back-link a,

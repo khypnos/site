@@ -68,35 +68,42 @@ function renderKhypnosOffers2026() {
 
             <!-- Annales VE -->
             <article class="payment-card">
+              <div class="payment-badge">⭐ Recommandé</div>
               <h3>Formation annales<br>Voie Externe</h3>
-              <div class="payment-price">1300€ TTC</div>
+              <div class="payment-price">900€ TTC</div>
               <ul class="payment-features">
-                <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
+                <li><span style="color: #28a745">✓</span> Accès à toutes les annales corrigées par Khypnos</li>
+                <li><span style="color: #28a745">✓</span> Inscription aux 2 concours blancs Khypnos Automne 2026</li>
                 <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
-                <li><span style="color: #dc3545">✗</span> Pas d'accès aux cours Khypnos</li>
-                <li><span style="color: #dc3545">✗</span> Pas d'accès aux concours blancs</li>
+                <li><span style="color: #28a745">✓</span> Accès immédiat aux <a href="https://khypnos.fr/videotheque_free.html" target="_blank">vidéos de formation Khypnos</a> : 30h de cours couvrant tout le programme</li>
+                <li><span style="color: #dc3545">✗</span> Sessions de correction d'annales en direct</li>
                 <li><span style="color: #dab61a">✓</span> Accès aux formateurs Khypnos par mail</li>
               </ul>
-              <a class="primary-btn" href="https://buy.stripe.com/7sY3cw2vjep53gkfjc4c80l" target="_blank">S’inscrire</a>
+              <a class="primary-btn" href="https://buy.stripe.com/fZu00kgm91Cj4ko8UO4c80q" target="_blank">S’inscrire</a>
             </article>
 
             <!-- Complète VE -->
             <article class="payment-card offer-card offer--full">
-              <div class="payment-badge">⭐ Recommandé</div>
+              <div class="payment-badge">⚠️ Complet</div>
               <h3>Formation complète<br>Voie Externe</h3>
               <div class="payment-price">1800€ TTC</div>
               <ul class="payment-features">
                 <li><strong>Formation la plus complète</strong></li>
                 <li><span style="color: #28a745">✓</span> Sessions de correction d'annales en direct</li>
                 <li><span style="color: #28a745">✓</span> Correction de copie et conseils méthodologiques</li>
-                <li><span style="color: #28a745">✓</span> Accès immédiat aux vidéos de formation Khypnos : 30h de cours couvrant tout le programme</li>
+                <li><span style="color: #28a745">✓</span> Accès immédiat aux <a href="https://khypnos.fr/videotheque_free.html" target="_blank">vidéos de formation Khypnos</a> : 30h de cours couvrant tout le programme</li>
                 <li><span style="color: #28a745">✓</span> Session "nouvelles recommandations"</li>
                 <li><span style="color: #28a745">✓</span> 2 concours blancs inclus</li>
                 <li><span style="color: #28a745">✓</span> Groupe Whatsapp avec les formateurs Khypnos</li>
                 <li><span style="color: #28a745">✓</span> 10 places ouvertes</li>
               </ul>
-              <a class="primary-btn" href="https://buy.stripe.com/dRmaEY6Lzft95os8UO4c80m" target="_blank">S’inscrire</a>
-            </article>
+              <!-- <a class="primary-btn" href="https://buy.stripe.com/dRmaEY6Lzft95os8UO4c80m" target="_blank">S’inscrire</a>  -->
+                <a class="primary-btn" href="#" aria-disabled="true"
+                  onclick="event.preventDefault(); return false;"
+                  tabindex="-1">
+                  Offre complète
+                </a>
+              </article>
 
           </div>
         </section>
@@ -173,7 +180,7 @@ function renderKhypnosOffers2026() {
                 <li><span style="color: #28a745">✓</span> Séances de correction en visioconférence</li>
                 <li><span style="color: #28a745">✓</span> Réponse dans les 48 heures à toutes questions à l'équipe pédagogique Khypnos</li>
                 <li><span style="color: #28a745">✓</span> Groupe Whatsapp avec les formateurs Khypnos</li>
-                <li><span style="color: #28a745">✓</span> Accès immédiat aux vidéos de formation Khypnos : 30h de cours couvrant tout le programme</li>
+                <li><span style="color: #28a745">✓</span> Accès immédiat aux <a href="https://khypnos.fr/videotheque_free.html" target="_blank">vidéos de formation Khypnos</a> : 30h de cours couvrant tout le programme</li>
               </ul>
               <a class="primary-btn" href="https://khypnos-qcm.vercel.app/" target="_blank">Acheter dans l'application</a>
             </article>
