@@ -166,17 +166,30 @@
         const pdf = await pdfjsLib.getDocument({ url, withCredentials: false }).promise
         wrap.innerHTML = ''
 
+        const dpr = window.devicePixelRatio || 1
+        // largeur d'affichage dispo (CSS px) dans le wrap, moins le padding
+        const available = (wrap.clientWidth || window.innerWidth) - 32
+
         for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
           const page = await pdf.getPage(pageNum)
-          const scale = Math.min(1.5, (window.innerWidth - 80) / page.getViewport({ scale: 1 }).width)
-          const viewport = page.getViewport({ scale })
+          const base = page.getViewport({ scale: 1 })
+
+          // échelle d'affichage : remplit la largeur dispo (plafonnée pour le desktop)
+          const cssScale = Math.min(available / base.width, 2)
+          // échelle de rendu : × devicePixelRatio → net sur retina (plafond 3 = garde-fou mémoire)
+          const renderScale = Math.min(cssScale * dpr, 3)
+          const viewport = page.getViewport({ scale: renderScale })
 
           const container = document.createElement('div')
           container.className = 'pdf-canvas-container'
 
           const canvas = document.createElement('canvas')
-          canvas.width = viewport.width
-          canvas.height = viewport.height
+          // résolution INTERNE (pixels réels) → netteté
+          canvas.width  = Math.floor(viewport.width)
+          canvas.height = Math.floor(viewport.height)
+          // taille D'AFFICHAGE (CSS px) = résolution / dpr
+          canvas.style.width  = `${Math.floor(viewport.width / dpr)}px`
+          canvas.style.height = `${Math.floor(viewport.height / dpr)}px`
           container.appendChild(canvas)
 
           // Watermark overlay
@@ -224,7 +237,10 @@
         case 'h1': return `<h1>${renderRichText(b.text)}</h1>`
         case 'h2': return `<h2>${renderRichText(b.text)}</h2>`
         case 'h3': return `<h3>${renderRichText(b.text)}</h3>`
-        case 'p':  return `<p>${renderRichText(b.text)}</p>`
+        case 'p':
+          return b.text?.length
+            ? `<p>${renderRichText(b.text)}</p>`
+            : `<p class="pp-empty">&nbsp;</p>`
         case 'li_bullet': return `<ul><li>${renderRichText(b.text)}</li></ul>`
         case 'li_number': return `<ol><li>${renderRichText(b.text)}</li></ol>`
         case 'quote': return `<blockquote>${renderRichText(b.text)}</blockquote>`
