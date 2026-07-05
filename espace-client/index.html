@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
-
 <div class="container">
     <main class="dashboard-wrapper">
         <div id="app">
@@ -22,7 +21,6 @@
         </div>
     </main>
 </div>
-
 <script type="module">
     import { requireAuth } from '/espace-client/auth.js';
 
@@ -40,7 +38,9 @@
         throw new Error('Accès refusé');
     }
 
-    const { nom, planLabels, hasVideo, sections } = await res.json();
+    // ← plus de `sections`
+    const { nom, planLabels, hasVideo, protectedPages } = await res.json();
+
     const app = document.getElementById('app');
 
     const planTagsHTML = planLabels
@@ -63,6 +63,31 @@
         </section>
     ` : '';
 
+    const protectedPagesHTML = (protectedPages ?? []).length ? `
+        <div class="notion-sections" style="margin-top:2rem">
+            <h2 style="font-size:1.15rem;color:#1a1a2e;margin-bottom:1rem">Espaces privés</h2>
+            ${protectedPages.map(p => `
+                <a class="notion-link-card" href="${p.href}">
+                    <div class="nlc-left">
+                        <div class="nlc-icon" aria-hidden="true">🔒</div>
+                        <div>
+                            <div class="nlc-label">${p.titre}</div>
+                            <div class="nlc-sub">Cours, corrections & documents →</div>
+                        </div>
+                    </div>
+                    <svg class="nlc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            `).join('')}
+        </div>
+    ` : '';
+
+    // État vide si aucune ressource
+    const emptyStateHTML = (!hasVideo && !(protectedPages ?? []).length)
+        ? `<p class="notion-empty-state">Aucune ressource disponible pour le moment.</p>`
+        : '';
+
     app.innerHTML = `
         <header class="dashboard-header">
             <h1>Bonjour ${nom} 👋</h1>
@@ -70,30 +95,10 @@
             <div class="plan-tags">${planTagsHTML}</div>
         </header>
         ${videoCardHTML}
-        <div class="notion-sections" id="infos-sections"></div>
+        ${protectedPagesHTML}
+        ${emptyStateHTML}
     `;
-
-    const infosEl = document.getElementById('infos-sections');
-    if (!sections.length) {
-        infosEl.innerHTML = `<p class="notion-empty-state">Ton abonnement donne accès uniquement à la vidéothèque.</p>`;
-    } else {
-        infosEl.innerHTML = sections.map(section => `
-            <a class="notion-link-card" href="${section.notionUrl}" target="_blank" rel="noopener">
-                <div class="nlc-left">
-                    <div class="nlc-icon" aria-hidden="true">📋</div>
-                    <div>
-                        <div class="nlc-label">${section.label}</div>
-                        <div class="nlc-sub">Ouvrir dans Notion →</div>
-                    </div>
-                </div>
-                <svg class="nlc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
-        `).join('');
-    }
 </script>
-
 <script src="/js/header-manager.js" defer></script>
 <script src="/js/scroll-to-top.min.js"></script>
 <script src="/js/navbar.js"></script>

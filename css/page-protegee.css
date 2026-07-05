@@ -1,0 +1,162 @@
+/* ═════════════════════════════════════════════
+   /css/page-protegee.css
+   Espace client — page Protegee
+   ═════════════════════════════════════════════ */
+
+    .pp-wrapper { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+    .pp-header { margin-bottom: 2rem; }
+    .pp-header h1 { margin: 0 0 .35rem; font-size: 1.7rem; color: #1a1a2e; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: #6b7280; text-decoration: none; font-size: .9rem;
+      margin-bottom: 1.5rem;
+    }
+    .back-link:hover { color: #1a1a2e; }
+
+    /* Blocs Notion rendus */
+    .pp-content h1, .pp-content h2, .pp-content h3 { color: #1a1a2e; margin-top: 2rem; }
+    .pp-content p { line-height: 1.65; color: #374151; }
+    .pp-content blockquote {
+      border-left: 3px solid #1a1a2e; padding: .5rem 1rem;
+      margin: 1rem 0; color: #6b7280; background: #f9fafb;
+    }
+    .pp-content .callout {
+      display: flex; gap: .75rem; padding: 1rem 1.25rem;
+      background: #f4f4f8; border-radius: 10px; margin: 1rem 0;
+    }
+    .pp-content .callout-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .pp-content code {
+      background: #f3f4f6; padding: .1rem .35rem;
+      border-radius: 4px; font-size: .9em;
+    }
+    .pp-content pre {
+      background: #1a1a2e; color: #f4f4f8; padding: 1rem;
+      border-radius: 10px; overflow-x: auto; font-size: .875rem;
+    }
+    .pp-content pre code { background: transparent; color: inherit; padding: 0; }
+    .pp-content details {
+      border: 1px solid #ececf1; border-radius: 10px;
+      padding: .75rem 1rem; margin: .75rem 0;
+    }
+    .pp-content details summary { cursor: pointer; font-weight: 500; }
+
+    /* Vidéo */
+    .video-block {
+      background: #1a1a2e; color: #fff; padding: 1.5rem; border-radius: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .btn-play {
+      background: #fff; color: #1a1a2e; padding: .65rem 1.25rem;
+      border-radius: 8px; border: none; cursor: pointer; font-weight: 600;
+      display: inline-flex; align-items: center; gap: .4rem;
+    }
+
+    /* Section PDF */
+    .pdf-section { margin-top: 3rem; }
+    .pdf-list {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+    }
+    .pdf-card {
+      display: flex; align-items: center; gap: .75rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid #ececf1; border-radius: 12px;
+      background: #fff; cursor: pointer;
+      transition: box-shadow .15s, transform .1s;
+    }
+    .pdf-card:hover { box-shadow: 0 4px 14px rgba(16,24,40,.09); transform: translateY(-1px); }
+    .pdf-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: #fef2f2; color: #991b1b;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .8rem;
+    }
+    .pdf-label { flex: 1; font-weight: 500; color: #1a1a2e; }
+
+    /* Viewer modal — passe AU-DESSUS de la navbar du site */
+    .pdf-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,.85);
+    z-index: 2000;               /* était 1000 → maintenant au-dessus de la navbar */
+    display: none;
+    flex-direction: column; padding: 1rem;
+    }
+    .pdf-modal.active { display: flex; }
+
+    .pdf-modal-header {
+    display: flex; align-items: center; justify-content: center; /* titre centré, plus de bouton ici */
+    color: #fff; padding: .5rem 1rem;
+    }
+
+    /* Bouton fermer flottant en bas à droite */
+    .pdf-modal-close {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    z-index: 2001;               /* au-dessus du contenu du modal ET de la navbar */
+    background: #1a1a2e; color: #fff; border: none;
+    padding: .85rem 1.4rem; border-radius: 999px; cursor: pointer;
+    font-weight: 600; font-size: .95rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,.4);
+    display: inline-flex; align-items: center; gap: .4rem;
+    }
+    .pdf-modal-close:hover { background: #33334d; }
+
+    .pdf-canvas-wrap {
+      flex: 1; overflow: auto; display: flex;
+      flex-direction: column; align-items: center; gap: 1rem;
+      padding: 1rem;
+    }
+    .pdf-canvas-container {
+      position: relative; box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
+    .pdf-canvas-container canvas { display: block; max-width: 100%; height: auto; }
+
+    /* Watermark overlay */
+    .pdf-watermark {
+      position: absolute; inset: 0; pointer-events: none;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .pdf-watermark-text {
+      color: rgba(220, 38, 38, 0.18);
+      font-size: 1.1rem;
+      font-weight: 600;
+      transform: rotate(-30deg);
+      white-space: nowrap;
+      user-select: none;
+      text-align: center;
+      line-height: 2.5;
+    }
+
+    /* Loading */
+    .loading-state {
+      display: flex; flex-direction: column; align-items: center;
+      gap: .75rem; padding: 3rem 1rem; color: #6b7280;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #e5e7eb; border-top-color: #1a1a2e;
+      border-radius: 50%; animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Bandeau doc perso */
+    .doc-notice {
+      background: #fef2f2; border: 1px solid #fecaca;
+      color: #991b1b; padding: .75rem 1rem; border-radius: 8px;
+      font-size: .875rem; text-align: center; margin-bottom: 1rem;
+    }
+
+    /* Bandeau de rafraîchissement de session (après 55 min) */
+    .session-refresh-banner {
+      position: fixed; left: 50%; bottom: 1.25rem; transform: translateX(-50%);
+      z-index: 1100; display: flex; align-items: center; gap: 1rem;
+      background: #1a1a2e; color: #fff; padding: .85rem 1.25rem;
+      border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.3);
+      font-size: .9rem; max-width: 92vw;
+    }
+    .session-refresh-banner button {
+      background: #fff; color: #1a1a2e; border: none;
+      padding: .5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;
+      white-space: nowrap;
+    }
+
+    @media print { body { display: none !important; } }

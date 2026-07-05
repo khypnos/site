@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos — Espace privé</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/css/theme-elegance.css">
+  <link rel="stylesheet" href="/css/page-protegee.css">
+
+
+  <!-- PDF.js pour le viewer maison -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs" type="module"></script>
+
+</head>
+<body>
+  <div class="container">
+    <main class="pp-wrapper">
+      <a href="/espace-client/index.html" class="back-link">← Retour à mon espace</a>
+      <div id="app">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Chargement…</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal viewer PDF -->
+  <div id="pdf-modal" class="pdf-modal">
+    <div class="pdf-modal-header">
+      <span id="pdf-modal-title"></span>
+    </div>
+    <div id="pdf-canvas-wrap" class="pdf-canvas-wrap"></div>
+    <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Fermer le document">✕ Fermer</button>
+  </div>
+
+  <script type="module">
+    import { supabase, requireAuth } from '/espace-client/auth.js'
+    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs'
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs'
+
+    const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co'
+
+    const session = await requireAuth()
+    if (!session) throw new Error('Non authentifié')
+
+    const slug = new URLSearchParams(window.location.search).get('slug')
+    if (!slug) {
+      document.getElementById('app').innerHTML =
+        '<p style="color:#991b1b">Paramètre slug manquant.</p>'
+      throw new Error('slug manquant')
+    }
+
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/get-protected-page?slug=${slug}`, {
+      headers: { Authorization: `Bearer ${session.access_token}` }
+    })
+
+    if (!res.ok) {
+      window.location.href = '/login.html?error=access_denied'
+      throw new Error('Accès refusé')
+    }
+
+    const { titre, student, content } = await res.json()
+    document.title = `Khypnos — ${titre}`
+
+    // ---- Rendu de la page ----
+    const app = document.getElementById('app')
+
+    app.innerHTML = `
+      <div class="pp-header">
+        <h1>${escapeHtml(titre)}</h1>
+      </div>
+      <div class="doc-notice">
+        🔒 Espace personnel de <strong>${escapeHtml(student.email)}</strong> — Document strictement personnel, ne pas partager.
+      </div>
+      <div class="pp-content">${content.map(renderBlock).join('')}</div>
+      ${false /* Obsolète : les PDF sont désormais rendus inline par renderBlock (case 'pdf'). Ce bloc "Documents" n'est plus utilisé — à supprimer manuellement si tu veux. */ ? `
+        <div class="pdf-section">
+          <h2>📎 Documents</h2>
+          <div class="pdf-list">
+            ${pdfs.map(p => `
+              <div class="pdf-card" data-path="${escapeHtml(p.path)}" data-label="${escapeHtml(p.label)}">
+                <div class="pdf-icon">PDF</div>
+                <div class="pdf-label">${escapeHtml(p.label)}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+    `
+
+    // Handlers clic PDF (l'URL Notion est déjà dans le dataset)
+    document.querySelectorAll('.pdf-card').forEach(card => {
+      card.addEventListener('click', () => openPdfViewer(card.dataset.url, card.dataset.label))
+    })
+
+    // Handlers clic vidéo
+    document.querySelectorAll('[data-video-block]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const blockId = btn.dataset.videoBlock
+        btn.disabled = true
+        btn.textContent = 'Chargement…'
+        try {
+          const r = await fetch(`${SUPABASE_URL}/functions/v1/get-video-url`, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${session.access_token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ block_id: blockId }),
+          })
+          if (!r.ok) throw new Error('URL indisponible')
+          const { url } = await r.json()
+          window.open(url, '_blank', 'noopener')
+        } catch (e) {
+          alert('Impossible de charger la vidéo. Réessaie.')
+        } finally {
+          btn.disabled = false
+          btn.innerHTML = '▶ Regarder'
+        }
+      })
+    })
+
+    // ---- Rafraîchissement de session (signed URLs Notion valides ~1h) ----
+    // À 55 min, on affiche un bandeau invitant à recharger pour obtenir
+    // de nouvelles URLs de PDF avant leur expiration.
+    const SESSION_REFRESH_MS = 55 * 60 * 1000
+    setTimeout(() => {
+      if (document.getElementById('session-refresh-banner')) return
+      const banner = document.createElement('div')
+      banner.id = 'session-refresh-banner'
+      banner.className = 'session-refresh-banner'
+      banner.innerHTML = `<br>        <span>⏱️ Ta session va bientôt expirer. Recharge pour continuer à ouvrir les documents.</span><br>        <button id="session-refresh-btn">Rafraîchir la session</button><br>      `
+      document.body.appendChild(banner)
+      document.getElementById('session-refresh-btn')
+        .addEventListener('click', () => window.location.reload())
+    }, SESSION_REFRESH_MS)
+
+    // ---- Anti-print / anti-save (dissuasif) ----
+    window.addEventListener('beforeprint', e => { e.preventDefault(); alert('Impression désactivée.') })
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && ['p', 's'].includes(e.key.toLowerCase())) {
+        e.preventDefault()
+        alert('Fonction désactivée sur cet espace.')
+      }
+    })
+    document.addEventListener('contextmenu', e => e.preventDefault())
+
+    // ---- Viewer PDF avec watermark ----
+    async function openPdfViewer(url, label) {
+      const modal = document.getElementById('pdf-modal')
+      const wrap = document.getElementById('pdf-canvas-wrap')
+      document.getElementById('pdf-modal-title').textContent = label
+      wrap.innerHTML = '<div class="loading-state" style="color:#fff"><div class="spinner"></div><span>Chargement du document…</span></div>'
+      modal.classList.add('active')
+
+      // L'URL Notion (signed, ~1h) est déjà fournie par get-protected-page.
+      // Plus aucun appel à get-signed-pdf.
+
+      // Chargement avec PDF.js
+      try {
+        const pdf = await pdfjsLib.getDocument({ url, withCredentials: false }).promise
+        wrap.innerHTML = ''
+
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+          const page = await pdf.getPage(pageNum)
+          const scale = Math.min(1.5, (window.innerWidth - 80) / page.getViewport({ scale: 1 }).width)
+          const viewport = page.getViewport({ scale })
+
+          const container = document.createElement('div')
+          container.className = 'pdf-canvas-container'
+
+          const canvas = document.createElement('canvas')
+          canvas.width = viewport.width
+          canvas.height = viewport.height
+          container.appendChild(canvas)
+
+          // Watermark overlay
+          const watermark = document.createElement('div')
+          watermark.className = 'pdf-watermark'
+          watermark.innerHTML = `<div class="pdf-watermark-text">${buildWatermarkPattern(student.email)}</div>`
+          container.appendChild(watermark)
+
+          wrap.appendChild(container)
+
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise
+        }
+      } catch (e) {
+        console.error(e)
+        wrap.innerHTML = '<p style="color:#fecaca">Erreur d\'affichage du document.</p>'
+      }
+    }
+
+    document.getElementById('pdf-modal-close').addEventListener('click', () => {
+      document.getElementById('pdf-modal').classList.remove('active')
+      document.getElementById('pdf-canvas-wrap').innerHTML = ''
+    })
+
+    function buildWatermarkPattern(email) {
+      // Répète l'email pour un motif dense en diagonale
+      const line = `${email} • Document strictement personnel • Khypnos`
+      return Array(15).fill(line).join('<br>')
+    }
+
+    // ---- Rendu blocs ----
+    function renderRichText(rt) {
+      return rt.map(r => {
+        let t = escapeHtml(r.text)
+        if (r.bold) t = `<strong>${t}</strong>`
+        if (r.italic) t = `<em>${t}</em>`
+        if (r.strike) t = `<s>${t}</s>`
+        if (r.code) t = `<code>${t}</code>`
+        if (r.href) t = `<a href="${escapeHtml(r.href)}" target="_blank" rel="noopener">${t}</a>`
+        return t
+      }).join('')
+    }
+
+    function renderBlock(b) {
+      switch (b.type) {
+        case 'h1': return `<h1>${renderRichText(b.text)}</h1>`
+        case 'h2': return `<h2>${renderRichText(b.text)}</h2>`
+        case 'h3': return `<h3>${renderRichText(b.text)}</h3>`
+        case 'p':  return `<p>${renderRichText(b.text)}</p>`
+        case 'li_bullet': return `<ul><li>${renderRichText(b.text)}</li></ul>`
+        case 'li_number': return `<ol><li>${renderRichText(b.text)}</li></ol>`
+        case 'quote': return `<blockquote>${renderRichText(b.text)}</blockquote>`
+        case 'hr': return `<hr>`
+        case 'code':
+          return `<pre><code>${renderRichText(b.text)}</code></pre>`
+        case 'callout':
+          return `<div class="callout"><div class="callout-icon">${escapeHtml(b.icon)}</div><div>${renderRichText(b.text)}</div></div>`
+        case 'toggle':
+          return `<details><summary>${renderRichText(b.text)}</summary>${(b.children ?? []).map(renderBlock).join('')}</details>`
+        case 'video':
+          return `
+            <div class="video-block">
+              <div>
+                <div style="font-size:1.4rem">🎬</div>
+                <div style="font-weight:600">${b.caption?.length ? renderRichText(b.caption) : 'Vidéo'}</div>
+              </div>
+              <button class="btn-play" data-video-block="${b.block_id}">▶ Regarder</button>
+            </div>
+          `
+        case 'image':
+          return `<figure><img src="${escapeHtml(b.url)}" alt="" style="max-width:100%;border-radius:10px"/>${b.caption?.length ? `<figcaption style="color:#6b7280;font-size:.85rem;text-align:center">${renderRichText(b.caption)}</figcaption>` : ''}</figure>`
+        case 'pdf': {
+          const plainLabel = b.caption?.length ? b.caption.map(t => t.text).join('') : prettifyName(b.name)
+          const displayLabel = b.caption?.length ? renderRichText(b.caption) : prettifyName(b.name)
+          return `<br>            <div class="pdf-card" data-url="${escapeHtml(b.url)}" data-label="${escapeHtml(plainLabel)}"><br>              <div class="pdf-icon">PDF</div><br>              <div class="pdf-label">${displayLabel}</div><br>            </div><br>          `
+        }
+        default: return ''
+      }
+    }
+
+    function prettifyName(name) {
+      return String(name ?? 'Document')
+        .replace(/\.pdf$/i, '')
+        .replace(/^\d+[-_]?/, '')
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase())
+    }
+
+    function escapeHtml(s) {
+      return String(s ?? '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]))
+    }
+  </script>
+
+  <script src="/js/header-manager.js" defer></script>
+  <script src="/js/scroll-to-top.min.js"></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/footer-manager.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new FooterManager({
+            anchor: '.container',
+            position: 'beforeend'
+        }).init();
+    });
+</script>
+</body>
+</html>
