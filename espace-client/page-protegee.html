@@ -36,6 +36,15 @@
     <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Fermer le document">✕ Fermer</button>
   </div>
 
+  <!-- Modal viewer Vidéo (téléchargement désactivé) -->
+  <div id="video-modal" class="video-modal">
+    <div class="video-modal-header">
+      <span id="video-modal-title"></span>
+    </div>
+    <div id="video-player-wrap" class="video-player-wrap"></div>
+    <button class="video-modal-close" id="video-modal-close" aria-label="Fermer la vidéo">✕ Fermer</button>
+  </div>
+
   <script type="module">
     import { supabase, requireAuth } from '/espace-client/auth.js'
     import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs'
@@ -98,10 +107,11 @@
       card.addEventListener('click', () => openPdfViewer(card.dataset.url, card.dataset.label))
     })
 
-    // Handlers clic vidéo
+    // Handlers clic vidéo — ouverture dans un lecteur maison (téléchargement désactivé)
     document.querySelectorAll('[data-video-block]').forEach(btn => {
       btn.addEventListener('click', async () => {
         const blockId = btn.dataset.videoBlock
+        const label   = btn.dataset.videoLabel || 'Vidéo'
         btn.disabled = true
         btn.textContent = 'Chargement…'
         try {
@@ -115,7 +125,7 @@
           })
           if (!r.ok) throw new Error('URL indisponible')
           const { url } = await r.json()
-          window.open(url, '_blank', 'noopener')
+          openVideoViewer(url, label)
         } catch (e) {
           alert('Impossible de charger la vidéo. Réessaie.')
         } finally {
@@ -123,6 +133,37 @@
           btn.innerHTML = '▶ Regarder'
         }
       })
+    })
+
+    // ---- Viewer vidéo maison : pas de menu "Télécharger", pas de PiP, pas de clic droit ----
+    function openVideoViewer(url, label) {
+      const modal = document.getElementById('video-modal')
+      const wrap  = document.getElementById('video-player-wrap')
+      document.getElementById('video-modal-title').textContent = label
+
+      wrap.innerHTML = ''
+      const video = document.createElement('video')
+      video.src = url
+      video.controls = true
+      video.autoplay = true
+      video.playsInline = true
+      // Désactive le bouton "Télécharger" du menu ⋮ Chrome/Edge + PiP + AirPlay
+      video.setAttribute('controlsList', 'nodownload noremoteplayback noplaybackrate')
+      video.setAttribute('disablePictureInPicture', '')
+      video.setAttribute('disableRemotePlayback', '')
+      video.oncontextmenu = () => false
+      wrap.appendChild(video)
+
+      modal.classList.add('active')
+    }
+
+    document.getElementById('video-modal-close').addEventListener('click', () => {
+      const modal = document.getElementById('video-modal')
+      const wrap  = document.getElementById('video-player-wrap')
+      const video = wrap.querySelector('video')
+      if (video) { video.pause(); video.removeAttribute('src'); video.load() }
+      wrap.innerHTML = ''
+      modal.classList.remove('active')
     })
 
     // ---- Rafraîchissement de session (signed URLs Notion valides ~1h) ----
@@ -258,7 +299,7 @@
                 <div style="font-size:1.4rem">🎬</div>
                 <div style="font-weight:600">${b.caption?.length ? renderRichText(b.caption) : 'Vidéo'}</div>
               </div>
-              <button class="btn-play" data-video-block="${b.block_id}">▶ Regarder</button>
+              <button class="btn-play" data-video-block="${b.block_id}" data-video-label="${escapeHtml(b.caption?.length ? b.caption.map(t => t.text).join('') : 'Vidéo')}">▶ Regarder</button>
             </div>
           `
         case 'image':
