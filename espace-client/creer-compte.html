@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Khypnos — Créer mon compte</title>
+    <meta name="description" content="Création de compte Khypnos — gratuite et sans engagement.">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/theme-elegance.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <style>
+        /* ── Bandeau gratuité ── */
+        .free-note {
+            display: flex; align-items: flex-start; gap: .55rem;
+            background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46;
+            border-radius: 10px; padding: .7rem .9rem;
+            font-size: .875rem; line-height: 1.45;
+            margin: 0 0 1.5rem;
+        }
+
+        /* ── Sélecteur Médecin / IADE ── */
+        .category-group { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+        .category-btn {
+            display: flex; flex-direction: column; align-items: center; gap: .3rem;
+            padding: .85rem .5rem;
+            border: 1px solid #e5e7eb; border-radius: 10px;
+            background: #fff; color: #374151;
+            font-family: inherit; font-size: .9rem; font-weight: 500;
+            cursor: pointer;
+            transition: border-color .15s, background .15s, box-shadow .15s;
+        }
+        .category-btn:hover { background: #f9fafb; }
+        .category-btn .cat-icon { font-size: 1.35rem; line-height: 1; }
+        .category-btn.selected {
+            border-color: #1a1a2e; background: #f4f4f8; color: #1a1a2e;
+            box-shadow: 0 0 0 3px rgba(26,26,46,.10);
+        }
+
+        /* ── Indications sous les champs ── */
+        .field-hint { margin: .4rem 0 0; font-size: .82rem; line-height: 1.4; }
+        .field-hint.ok      { color: #065f46; }
+        .field-hint.ko      { color: #991b1b; }
+        .field-hint.pending { color: #6b7280; }
+        .field-hint a, .field-hint button.link {
+            background: none; border: none; padding: 0;
+            font: inherit; color: #1a1a2e; text-decoration: underline; cursor: pointer;
+        }
+
+        /* ── Critères du mot de passe ── */
+        .pwd-reqs { list-style: none; margin: .55rem 0 0; padding: 0; }
+        .pwd-reqs li {
+            font-size: .82rem; color: #9ca3af;
+            display: flex; align-items: center; gap: .4rem; padding: .1rem 0;
+        }
+        .pwd-reqs li::before { content: '○'; font-size: .7rem; }
+        .pwd-reqs li.valid { color: #065f46; }
+        .pwd-reqs li.valid::before { content: '✓'; font-size: .8rem; }
+
+        .btn-submit:disabled { background: #9ca3af; cursor: not-allowed; }
+
+        @media (max-width: 380px) {
+            .category-group { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <main class="login-wrapper">
+        <section class="login-card" aria-labelledby="signup-title">
+            <div class="lock-badge" aria-hidden="true">✨</div>
+            <h1 id="signup-title">Créer mon compte</h1>
+            <p class="subtitle">Un seul compte pour l'application QCM et l'espace étudiant Khypnos.</p>
+
+            <p class="free-note">
+                <span aria-hidden="true">🎁</span>
+                <span>La création de compte est <strong>100 % gratuite</strong> et sans engagement — aucune carte bancaire n'est demandée.</span>
+            </p>
+
+            <form id="signup-form" novalidate>
+                <!-- ── Email ── -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" placeholder="ton@email.fr"
+                           autocomplete="email" required aria-describedby="email-hint">
+                    <p id="email-hint" class="field-hint" aria-live="polite" hidden></p>
+                </div>
+
+                <!-- ── Catégorie ── -->
+                <div class="form-group">
+                    <label id="category-label">Je suis</label>
+                    <div class="category-group" role="radiogroup" aria-labelledby="category-label">
+                        <button type="button" class="category-btn" data-category="medecin"
+                                role="radio" aria-checked="false">
+                            <span class="cat-icon" aria-hidden="true">🩺</span>
+                            <span>Médecin</span>
+                        </button>
+                        <button type="button" class="category-btn" data-category="iade"
+                                role="radio" aria-checked="false">
+                            <span class="cat-icon" aria-hidden="true">💉</span>
+                            <span>IADE</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ── Mot de passe ── -->
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input id="password" type="password" placeholder="••••••••"
+                           autocomplete="new-password" required aria-describedby="pwd-reqs">
+                    <ul id="pwd-reqs" class="pwd-reqs" hidden>
+                        <li data-rule="length">8 caractères minimum</li>
+                        <li data-rule="uppercase">Une majuscule</li>
+                        <li data-rule="lowercase">Une minuscule</li>
+                        <li data-rule="number">Un chiffre</li>
+                    </ul>
+                </div>
+
+                <!-- ── Confirmation ── -->
+                <div class="form-group">
+                    <label for="password-confirm">Confirmer le mot de passe</label>
+                    <input id="password-confirm" type="password" placeholder="••••••••"
+                           autocomplete="new-password" required aria-describedby="match-hint">
+                    <p id="match-hint" class="field-hint" aria-live="polite" hidden></p>
+                </div>
+
+                <div id="signup-message" class="form-message" role="alert" aria-live="polite"></div>
+
+                <button id="btn-signup" class="btn-submit" type="submit" disabled>
+                    Créer mon compte gratuit
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Tu as déjà un compte ? <a href="/login.html">Se connecter</a></p>
+            </div>
+
+            <p class="login-footnote">
+                En créant un compte, tu acceptes les
+                <a href="/mentions_legales.html">mentions légales et la politique de confidentialité</a>.<br>
+                Besoin d'aide ? <a href="mailto:contact@khypnos.fr">contact@khypnos.fr</a>
+            </p>
+        </section>
+    </main>
+</div>
+
+<script type="module">
+    import { supabase } from '/espace-client/auth.js';
+
+    const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co';
+    const REDIRECT_AFTER_SIGNUP = '/espace-client/compte-cree.html';
+
+    // ── Références DOM ──
+    const $form       = document.getElementById('signup-form');
+    const $email      = document.getElementById('email');
+    const $emailHint  = document.getElementById('email-hint');
+    const $password   = document.getElementById('password');
+    const $pwdReqs    = document.getElementById('pwd-reqs');
+    const $confirm    = document.getElementById('password-confirm');
+    const $matchHint  = document.getElementById('match-hint');
+    const $message    = document.getElementById('signup-message');
+    const $btn        = document.getElementById('btn-signup');
+    const $catBtns    = [...document.querySelectorAll('.category-btn')];
+
+    // ── État ──
+    let category    = null;              // 'medecin' | 'iade'
+    let emailStatus = null;              // null | 'checking' | 'exists' | 'available' | 'invalid'
+
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // ── Règles mot de passe (identiques à l'app QCM) ──
+    const passwordChecks = (pwd) => ({
+        length:    pwd.length >= 8,
+        uppercase: /[A-Z]/.test(pwd),
+        lowercase: /[a-z]/.test(pwd),
+        number:    /[0-9]/.test(pwd),
+    });
+    const isPasswordValid = () => Object.values(passwordChecks($password.value)).every(Boolean);
+    const passwordsMatch  = () => $password.value.length > 0 && $password.value === $confirm.value;
+
+    // ── Affichage ──
+    function setMessage(text, type) {
+        $message.textContent = text || '';
+        $message.className = text ? `form-message ${type}` : 'form-message';
+    }
+
+    function setHint($el, html, cls) {
+        if (!html) { $el.hidden = true; $el.innerHTML = ''; return; }
+        $el.hidden = false;
+        $el.className = `field-hint ${cls}`;
+        $el.innerHTML = html;
+    }
+
+    function renderPasswordReqs() {
+        const checks = passwordChecks($password.value);
+        $pwdReqs.querySelectorAll('li').forEach(li => {
+            li.classList.toggle('valid', !!checks[li.dataset.rule]);
+        });
+    }
+
+    function renderMatch() {
+        if (!$confirm.value) return setHint($matchHint, '', '');
+        passwordsMatch()
+            ? setHint($matchHint, 'Les mots de passe sont identiques.', 'ok')
+            : setHint($matchHint, 'Les mots de passe sont différents.', 'ko');
+    }
+
+    function updateSubmitState() {
+        $btn.disabled = !(
+            EMAIL_RE.test($email.value.trim()) &&
+            emailStatus !== 'exists' &&
+            emailStatus !== 'checking' &&
+            category &&
+            isPasswordValid() &&
+            passwordsMatch()
+        );
+    }
+
+    // ── Sélecteur de catégorie ──
+    $catBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            category = btn.dataset.category;
+            $catBtns.forEach(b => {
+                const on = b === btn;
+                b.classList.toggle('selected', on);
+                b.setAttribute('aria-checked', String(on));
+            });
+            setMessage('', '');
+            updateSubmitState();
+        });
+    });
+
+    // ── Vérification de l'email (Edge Function) ──
+    async function checkEmail() {
+        const email = $email.value.trim().toLowerCase();
+        if (!EMAIL_RE.test(email)) {
+            emailStatus = null;
+            setHint($emailHint, '', '');
+            return updateSubmitState();
+        }
+
+        emailStatus = 'checking';
+        setHint($emailHint, 'Vérification en cours…', 'pending');
+        updateSubmitState();
+
+        try {
+            const res = await fetch(`${SUPABASE_URL}/functions/v1/check-email-exists`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            if (!res.ok) throw new Error('check failed');
+            const { exists } = await res.json();
+
+            if (exists) {
+                emailStatus = 'exists';
+                setHint($emailHint,
+                    'Un compte existe déjà avec cet email. ' +
+                    '<a href="/login.html">Se connecter</a> · ' +
+                    '<button type="button" class="link" id="link-reset">Mot de passe oublié ?</button>',
+                    'ko');
+                document.getElementById('link-reset')?.addEventListener('click', sendReset);
+            } else {
+                emailStatus = 'available';
+                setHint($emailHint, 'Email disponible.', 'ok');
+            }
+        } catch (err) {
+            // Échec silencieux : Supabase refusera de toute façon un doublon au signUp
+            console.warn('[creer-compte] check-email-exists indisponible', err);
+            emailStatus = null;
+            setHint($emailHint, '', '');
+        }
+        updateSubmitState();
+    }
+
+    // ── Mot de passe oublié (depuis le message "compte existant") ──
+    async function sendReset() {
+        const email = $email.value.trim();
+        const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: isLocal
+                ? `${window.location.origin}/reset-password.html`
+                : 'https://khypnos.fr/reset-password.html',
+        });
+        error
+            ? setMessage("Erreur lors de l'envoi du lien. Réessaie.", 'error')
+            : setMessage('✉️ Lien de réinitialisation envoyé ! Vérifie ta boîte mail (et les spams).', 'success');
+    }
+
+    // ── Écouteurs ──
+    $email.addEventListener('input', () => {
+        emailStatus = null;
+        setHint($emailHint, '', '');
+        setMessage('', '');
+        updateSubmitState();
+    });
+    $email.addEventListener('blur', checkEmail);
+
+    $password.addEventListener('focus', () => { $pwdReqs.hidden = false; });
+    $password.addEventListener('input', () => {
+        renderPasswordReqs();
+        renderMatch();
+        updateSubmitState();
+    });
+    $confirm.addEventListener('input', () => {
+        renderMatch();
+        updateSubmitState();
+    });
+
+    // ── Soumission ──
+    $form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        setMessage('', '');
+
+        const email    = $email.value.trim().toLowerCase();
+        const password = $password.value;
+
+        if (!category)          return setMessage('Choisis ta catégorie (Médecin ou IADE).', 'error');
+        if (!isPasswordValid()) return setMessage('Le mot de passe ne respecte pas les critères de sécurité.', 'error');
+        if (!passwordsMatch())  return setMessage('Les mots de passe ne correspondent pas.', 'error');
+
+        $btn.disabled = true;
+        $btn.textContent = 'Création en cours…';
+
+        // `category` est lu par le trigger handle_new_user
+        // (raw_user_meta_data->>'category') pour remplir profiles.category
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { category } },
+        });
+
+        if (error) {
+            console.error('[creer-compte] signUp', error);
+            const msg = (error.message || '').toLowerCase();
+
+            if (msg.includes('already registered') || error.status === 422) {
+                setMessage('Un compte existe déjà avec cet email. Utilise la page de connexion.', 'error');
+            } else if (error.status === 429) {
+                setMessage('Trop de tentatives. Patiente quelques minutes avant de réessayer.', 'error');
+            } else if (msg.includes('password')) {
+                setMessage('Mot de passe refusé par le serveur. Choisis-en un plus robuste.', 'error');
+            } else {
+                setMessage("Erreur lors de la création du compte. Réessaie ou écris à contact@khypnos.fr.", 'error');
+            }
+
+            $btn.disabled = false;
+            $btn.textContent = 'Créer mon compte gratuit';
+            return;
+        }
+
+        // La confirmation d'email est désactivée → une session est ouverte automatiquement.
+        // On la ferme : le compte n'a encore aucun plan, l'espace client renverrait un 403.
+        try { await supabase.auth.signOut(); } catch (_) { /* non bloquant */ }
+
+        window.location.href = `${REDIRECT_AFTER_SIGNUP}?email=${encodeURIComponent(email)}`;
+    });
+
+    // État initial
+    updateSubmitState();
+</script>
+
+<script src="/js/header-manager.js" defer></script>
+<script src="/js/scroll-to-top.min.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/footer-manager.js" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new FooterManager({
+            anchor: '.container',
+            position: 'beforeend'
+        }).init();
+    });
+</script>
+</body>
+</html>

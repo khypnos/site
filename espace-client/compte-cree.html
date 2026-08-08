@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Khypnos — Compte créé</title>
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/theme-elegance.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <style>
+        .success-badge {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: #ecfdf5; color: #065f46;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; margin: 0 auto 1rem;
+        }
+        .account-email {
+            display: block; text-align: center;
+            background: #f4f4f8; border-radius: 10px;
+            padding: .6rem .9rem; margin: 0 0 1.5rem;
+            font-size: .92rem; color: #1a1a2e; word-break: break-all;
+        }
+        .next-steps { margin: 0 0 1.75rem; padding-left: 1.15rem; color: #374151; }
+        .next-steps li { font-size: .92rem; line-height: 1.55; margin-bottom: .5rem; }
+        .btn-secondary {
+            display: block; text-align: center;
+            padding: .8rem 1rem; margin-top: .6rem;
+            border: 1px solid #e5e7eb; border-radius: 10px;
+            color: #1a1a2e; text-decoration: none;
+            font-size: .95rem; font-weight: 500;
+        }
+        .btn-secondary:hover { background: #f9fafb; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <main class="login-wrapper">
+        <section class="login-card" aria-labelledby="done-title">
+            <div class="success-badge" aria-hidden="true">✓</div>
+            <h1 id="done-title">Compte créé !</h1>
+            <p class="subtitle">Ton compte Khypnos est bien enregistré.</p>
+
+            <span class="account-email" id="account-email" hidden></span>
+
+            <ul class="next-steps">
+                <li><strong>Tu as déjà réglé ta formation ?</strong> Ton accès à l'espace étudiant sera activé <strong>sous 24 heures</strong>. Tu recevras un email dès que c'est fait.</li>
+                <li><strong>Tu n'as pas encore acheté de formule ?</strong> Ton accès sera activé automatiquement après ton achat.</li>
+                <li>Ce même compte te permet de te connecter à l'<strong>application QCM</strong>.</li>
+            </ul>
+
+            <a class="btn-submit" href="/login.html" style="display:block;text-align:center;text-decoration:none">
+                Aller à la page de connexion
+            </a>
+            <a class="btn-secondary" href="/index.html">Retour à l'accueil</a>
+
+            <p class="login-footnote">
+                Une question ? <a href="mailto:contact@khypnos.fr">contact@khypnos.fr</a>
+            </p>
+        </section>
+    </main>
+</div>
+
+<script>
+    const email = new URLSearchParams(window.location.search).get('email');
+    if (email) {
+        const el = document.getElementById('account-email');
+        el.textContent = '📧 ' + email;
+        el.hidden = false;
+    }
+</script>
+
+<script src="/js/header-manager.js" defer></script>
+<script src="/js/scroll-to-top.min.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/footer-manager.js" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new FooterManager({
+            anchor: '.container',
+            position: 'beforeend'
+        }).init();
+    });
+</script>
+</body>
+</html>

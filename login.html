@@ -83,6 +83,16 @@
 
     // ── Login email/password ──
     const $loginMsg = document.getElementById('login-message');
+    
+    // ── Message d'erreur transmis par l'espace client ──
+    if (new URLSearchParams(window.location.search).get('error') === 'access_denied') {
+        $loginMsg.innerHTML =
+            "Ton compte n'a pas encore d'accès actif. " +
+            "Il sera activé après ton achat, ou sous 24 h si tu as déjà réglé ta formation. " +
+            'Une question ? <a href="mailto:contact@khypnos.fr">contact@khypnos.fr</a>';
+        $loginMsg.className = 'form-message error';
+    }
+
     const $btnLogin = document.getElementById('btn-login');
 
     document.getElementById('login-form').addEventListener('submit', async (e) => {
