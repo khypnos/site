@@ -32,7 +32,7 @@ function loadNavbar() {
                 <ul>
                     <li><a href="/iade/index_iade.html">Accueil</a></li>
                     <li><a href="/iade/programme_iade.html">Programme</a></li>
-                    <li><a href="#inscription_iade">Inscription</a></li>
+                    <li><a href="/iade/index_iade.html#inscription_iade">Inscription</a></li>
                     <li><a href="/espace-client/index.html">🔒 Espace Privé</a></li>
                 </ul>
             </nav>

@@ -9,6 +9,22 @@
 	<link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/css/faq.css">
 	<link rel="stylesheet" href="/css/theme-elegance.css">
+	<style>
+		        /* ── TARIFS ── */
+        .payment-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; justify-content: center; }
+        .payment-card { position: relative; background: #ffffff; border-radius: 10px; padding: 28px 24px 20px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04); border: 1px solid #e4e4e4; display: flex; flex-direction: column; max-width: 420px; margin: 0 auto; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+        .payment-card h3 { font-size: 20px; margin: 0; text-align: center; }
+        .payment-badge { position: absolute; top: -12px; right: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .payment-price { text-align: center; margin: 18px 0; }
+        .payment-price .old-price { font-size: 20px; color: #999; text-decoration: line-through; margin-right: 10px; }
+        .payment-price .new-price { font-size: 32px; font-weight: bold; color: #667eea; }
+        .payment-features { list-style: none; padding: 0; color: #666666; margin: 16px 0; flex-grow: 1; }
+        .payment-features li { padding: 6px 0; font-size: 15px; }
+        .payment-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06); border-color: #d9dcff; }
+        .primary-btn { display: block; text-align: center; margin-top: 16px; padding: 12px 20px; border-radius: 999px; border: 2px solid #667eea; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600; font-size: 15px; text-decoration: none; transition: all 0.2s ease; }
+        .primary-btn:hover { background: linear-gradient(135deg, #5058d6 0%, #6a3d8a 100%); transform: translateY(-2px); }
+
+	</style>
 </head>
 
 <body>
@@ -90,6 +106,17 @@
 						<div class="trainer-name">Dr Duceau Baptiste</div>
 						<div class="trainer-details">&bull; Anesthésiste-Réanimateur<br>&bull; Classé 288e aux ECN 2012<br>&bull; Ancien Chef de Clinique<br>&bull; Chirurgie Cardiaque &agrave; la Pitié Salp&ecirc;trière</div>
 					</div>
+					
+					<div class="trainer-card">
+						<div class="trainer-image"><img src="/img/MD_round.png" alt="Marina Duprey"></div>
+						<div class="trainer-name">Marina Duprey</div>
+						<div class="trainer-details">
+							• Infirmière Anesthésiste<br>
+							• Diplômée de l'IFITS<br>
+							• Enseignante spécialiste
+						</div>
+                	</div>
+
 					<div class="trainer-card">
 						<div class="trainer-image"><img src="/img/AM_round.png" alt="Dr Mailloux" style="margin: 0 auto 0 0; display: block; "></div>
 						<div class="trainer-name">Dr Arnaud Mailloux</div>
@@ -111,12 +138,35 @@
 
           <!-- Inscription Iade -->
         <h2 class="section-title" id="inscription_iade">Inscription Formation Complète</h2>
-        <p  style="text-align: justify;">
-            Les inscriptions ne sont pas encore ouvertes. Nous vous invitons à revenir prochainement pour découvrir les modalités d'inscription à notre formation complète.
-        </p>
+
+        <section class="offers">
+            <div class="payment-options">
+                <article class="payment-card featured">
+                    <div class="payment-badge">🔥 Offre de lancement</div>
+                    <h3>Préparation complète <br> Concours IADE</h3>
+                    <div class="payment-price">
+                        <span class="old-price">790€ TTC</span>
+                        <span class="new-price">490€ TTC</span>
+                    </div>
+                    <ul class="payment-features">
+                        <li><span style="color: #28a745">✓</span> Questions et exercices quotidiens du lundi au vendredi</li>
+                        <li><span style="color: #28a745">✓</span> Conférences en direct deux samedis par mois</li>
+                        <li><span style="color: #28a745">✓</span> Deux cas cliniques d'entraînement corrigés (février et mars)</li>
+                        <li><span style="color: #28a745">✓</span> Retour personnalisé sur vos copies</li>
+                        <li><span style="color: #28a745">✓</span> Grande conférence de correction en direct</li>
+                        <li><span style="color: #dab61a">✓</span> Satisfait ou remboursé sous 15 jours</li>
+                    </ul>
+                    <a class="primary-btn" href="https://buy.stripe.com/cNicN6c5T0yf4kofjc4c80r" target="_blank">S'inscrire</a>
+                </article>
+            </div>
+            <div style="text-align: center; margin: 30px 0; padding: 18px; background: #f0f8ff; border-radius: 10px;">
+                <p style="font-size: 0.95rem; color: #666;">💳 Moyens de paiement : CB, PayPal, Virement SEPA, Apple Pay, etc.</p>
+            </div>
+        </section>
+
 
         <p  style="text-align: justify;">
-            Le paiement est disponible en 4 mensualités avec le lien suivant. Une réduction est appliquée sur demande en cas de paiement en une fois : <a href="mailto:contact@khypnos.fr" class="contact-email"><strong>📩 contact@khypnos.fr</strong></a>
+            Le paiement est possible en 4 mensualités sur demande : <a href="mailto:contact@khypnos.fr" class="contact-email"><strong>📩 contact@khypnos.fr</strong></a>
         </p>
 
 <!--         

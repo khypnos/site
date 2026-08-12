@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khypnos - programme formation IADE</title>
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
-	<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+    <title>Khypnos - Programme Khypnos 2026 - IADE</title>
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/css/theme-elegance.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: white;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px; }
 
-  <style>
+        /* ── HEADER ── */
+        .headerbis {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 10px 20px 10px;
+            border-radius: 20px;
+            margin-bottom: 0px;
+        }
+        .headerbis h1 .logokhypnos { max-height: 4.0rem; width: auto; vertical-align: middle; image-rendering: -webkit-optimize-contrast; }
+        .headerbis .subtitle { margin-top: 6px; opacity: 0.9; letter-spacing: 0.04em; }
 
         /* ── TABLE DES MATIÈRES ── */
         .toc-card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 24px 32px; margin: 24px 0; }
@@ -32,7 +49,6 @@
         .trainer-name { font-size: 1.2rem; font-weight: 600; color: #2c3e50; margin-bottom: 10px; }
         .trainer-details { font-size: 0.95rem; color: #666; line-height: 1.5; text-align: left; display: inline-block; }
 
-
         /* ── ORGANISATION (feature cards) ── */
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin: 20px 0; }
         .feature-card { background: #f8f9ff; padding: 22px 24px; border-radius: 12px; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08); text-align: left; }
@@ -50,22 +66,53 @@
         .planning-date-item { padding: 10px 14px; background: white; border-radius: 8px; border-left: 3px solid #667eea; margin-bottom: 10px; font-size: 0.92rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
         .planning-date-item .p-date { font-weight: 700; color: #2c3e50; }
         .planning-date-item .p-formateur { color: #666; font-style: italic; }
-  </style>
+
+        /* ── TARIFS ── */
+        .payment-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; justify-content: center; }
+        .payment-card { position: relative; background: #ffffff; border-radius: 10px; padding: 28px 24px 20px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04); border: 1px solid #e4e4e4; display: flex; flex-direction: column; max-width: 420px; margin: 0 auto; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+        .payment-card h3 { font-size: 20px; margin: 0; text-align: center; }
+        .payment-badge { position: absolute; top: -12px; right: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .payment-price { text-align: center; margin: 18px 0; }
+        .payment-price .old-price { font-size: 20px; color: #999; text-decoration: line-through; margin-right: 10px; }
+        .payment-price .new-price { font-size: 32px; font-weight: bold; color: #667eea; }
+        .payment-features { list-style: none; padding: 0; color: #666666; margin: 16px 0; flex-grow: 1; }
+        .payment-features li { padding: 6px 0; font-size: 15px; }
+        .payment-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06); border-color: #d9dcff; }
+        .primary-btn { display: block; text-align: center; margin-top: 16px; padding: 12px 20px; border-radius: 999px; border: 2px solid #667eea; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600; font-size: 15px; text-decoration: none; transition: all 0.2s ease; }
+        .primary-btn:hover { background: linear-gradient(135deg, #5058d6 0%, #6a3d8a 100%); transform: translateY(-2px); }
+
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            a { color: #667eea; text-decoration: underline; }
+            .payment-card { page-break-inside: avoid; }
+        }
+        @media (max-width: 768px) {
+            .trainers-grid { grid-template-columns: 1fr; }
+            .payment-options { grid-template-columns: 1fr; }
+            .toc-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
 <body>
-	<div class="container">
+    <div class="container">
+        <!-- Header -->
+        <header class="headerbis">
+            <h1><img src="/img/KhypnosLogo.png" alt="Khypnos" class="logokhypnos"></h1>
+            <h2>Programme Khypnos 2026</h2>
+            <div class="subtitle">• Préparation concours IADE •</div>
+        </header>
 
         <!-- Table des matières -->
-        <!-- 
         <div class="toc-card">
             <h2>Sommaire</h2>
             <div class="toc-grid">
                 <a href="#formateurs">Nos formateurs experts</a>
                 <a href="#organisation">Organisation de la préparation</a>
                 <a href="#planning">Planning 2026</a>
+                <a href="#tarifs">Tarifs 2026</a>
             </div>
         </div>
-         -->
 
         <!-- Formateurs Experts -->
         <h2 class="section-title" id="formateurs">Nos formateurs experts</h2>
@@ -169,25 +216,54 @@
             <p style="font-size: 1rem"><strong>⚠️ Les dates sont sujettes à modification en fonction de la date du concours</strong></p>
         </div>
 
-	</div>
+        <!-- Tarifs 2026 -->
+        <h2 class="section-title" id="tarifs">Tarifs 2026</h2>
+        <section class="offers">
+            <div class="payment-options">
+                <article class="payment-card featured">
+                    <div class="payment-badge">🔥 Offre de lancement</div>
+                    <h3>Préparation complète <br> Concours IADE</h3>
+                    <div class="payment-price">
+                        <span class="old-price">790€ TTC</span>
+                        <span class="new-price">490€ TTC</span>
+                    </div>
+                    <ul class="payment-features">
+                        <li><span style="color: #28a745">✓</span> Questions et exercices quotidiens du lundi au vendredi</li>
+                        <li><span style="color: #28a745">✓</span> Conférences en direct deux samedis par mois</li>
+                        <li><span style="color: #28a745">✓</span> Deux cas cliniques d'entraînement corrigés (février et mars)</li>
+                        <li><span style="color: #28a745">✓</span> Retour personnalisé sur vos copies</li>
+                        <li><span style="color: #28a745">✓</span> Grande conférence de correction en direct</li>
+                        <li><span style="color: #dab61a">✓</span> Satisfait ou remboursé sous 15 jours</li>
+                    </ul>
+                    <a class="primary-btn" href="#" target="_blank">S'inscrire</a>
+                </article>
+            </div>
+            <div style="text-align: center; margin: 30px 0; padding: 18px; background: #f0f8ff; border-radius: 10px;">
+                <p style="font-size: 0.95rem; color: #666;">💳 Moyens de paiement : CB, PayPal, Virement SEPA, Apple Pay, etc.</p>
+            </div>
+        </section>
 
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 60px; padding-top: 30px; border-top: 3px solid #667eea; color: #666;">
+            <p style="font-size: 1.2rem; font-weight: bold; color: #667eea; margin-bottom: 15px;">Khypnos</p>
+            <p>Préparation au concours IADE</p>
+            <p style="margin-top: 10px;">Contact : <a href="mailto:contact@khypnos.fr" style="color: #667eea; text-decoration: none; font-weight: 600;">contact@khypnos.fr</a></p>
+            <p style="font-size: 1rem; margin-top: 10px; font-weight: 600;"><a href="https://www.khypnos.fr">www.khypnos.fr</a></p>
+        </div>
+    </div>
     <script src="/js/header-manager_iade.js" defer></script>
-	<script src="/js/scroll-to-top.min.js" defer></script>
+    <script src="/js/scroll-to-top.min.js" defer></script>
     <script src="/js/navbar_iade.js" defer></script>
-	<script src="/js/script.js" defer></script>
-	<script src="/js/footer-manager.js" defer></script>
-	<script async src="https://js.stripe.com/v3/buy-button.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        new FooterManager({
-            anchor: '.container',
-            position: 'beforeend'
-        }).init();
-    });
-</script>
-
-
+    <script src="/js/script.js" defer></script>
+    <script src="/js/footer-manager.js" defer></script>
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            new FooterManager({
+                anchor: '.container',
+                position: 'beforeend'
+            }).init();
+        });
+    </script>
 </body>
-
 </html>
