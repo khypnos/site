@@ -19,10 +19,6 @@
         .toc-grid a { color: #667eea; text-decoration: none; font-size: 0.95rem; padding: 4px 0; border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s; display: block; }
         .toc-grid a:hover { color: #764ba2; border-bottom-color: #764ba2; }
 
-        /* ── SECTION TITLES ── */
-        .section-title { color: #2c3e50; margin: 40px 0 20px 0; text-align: center; font-size: 1.8rem; position: relative; scroll-margin-top: 24px; }
-        .section-title::after { content: ''; width: 60px; height: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: block; margin: 10px auto; border-radius: 2px; }
-
         /* ── FORMATEURS ── */
         .trainers-section { background: linear-gradient(135deg, #f8f9ff 0%, #e8f5e8 100%); padding: 40px; border-radius: 15px; margin: 40px 0; }
         .trainers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -50,6 +46,13 @@
         .planning-date-item { padding: 10px 14px; background: white; border-radius: 8px; border-left: 3px solid #667eea; margin-bottom: 10px; font-size: 0.92rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
         .planning-date-item .p-date { font-weight: 700; color: #2c3e50; }
         .planning-date-item .p-formateur { color: #666; font-style: italic; }
+
+        @media (max-width: 768px) {
+            .trainers-grid { grid-template-columns: 1fr; }
+            .payment-options { grid-template-columns: 1fr; }
+            .toc-grid { grid-template-columns: 1fr 1fr; }
+        }
+
   </style>
 </head>
 <body>

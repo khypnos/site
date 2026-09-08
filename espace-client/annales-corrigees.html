@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Khypnos — Annales corrigées</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/css/theme-elegance.css">
+  <link rel="stylesheet" href="/css/annales.css">
+  <link rel="stylesheet" href="/css/annales-corrigees.css">
+  <!-- PDF.js pour le viewer maison (watermark, jamais de lien direct) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs" type="module"></script>
+</head>
+<body>
+<div class="container">
+  <main class="annales-wrapper">
+    <a href="/espace-client/index.html" class="back-link">← Retour à mon espace</a>
+    <h1 class="section-title page-title">📚 Annales corrigées</h1>
+
+    <div class="annales-grid">
+      <div class="annales-column">
+        <ul id="annales-list" class="annales-list">
+          <li><div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal détail d'une année : overlay plein écran, s'affiche instantanément (pas d'effet "en bas de page") -->
+<div id="annale-modal" class="annale-modal">
+  <div class="annale-modal-header"><span id="annale-modal-title"></span></div>
+  <div id="detail-content" class="annale-modal-body"></div>
+  <button id="detail-close" type="button" class="annale-modal-close" aria-label="Fermer">✕ Fermer</button>
+</div>
+
+<!-- Modal viewer PDF maison : watermark nominatif, jamais l'URL Notion brute exposée comme lien -->
+<div id="pdf-modal" class="pdf-modal">
+  <div class="pdf-modal-header"><span id="pdf-modal-title"></span></div>
+  <div id="pdf-canvas-wrap" class="pdf-canvas-wrap"></div>
+  <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Fermer le document">✕ Fermer</button>
+</div>
+
+<script type="module">
+  import { supabase, requireAuth } from '/espace-client/auth.js'
+  import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs'
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs'
+
+  const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co'
+
+  const session = await requireAuth()
+  if (!session) throw new Error('Non authentifié')
+
+  const $list = document.getElementById('annales-list')
+
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/get-annales`, {
+    headers: { Authorization: `Bearer ${session.access_token}` }
+  })
+  if (res.status === 403) {
+    $list.innerHTML = '<li class="empty-state">Ton abonnement ne donne pas accès aux annales.</li>'
+    throw new Error('Accès refusé annales')
+  }
+  const annales = await res.json()
+
+  const STATUT_LABEL = { disponible: 'Disponible', en_cours: 'En cours', non_disponible: 'Non disponible' }
+
+  $list.innerHTML = annales.map(a => `
+    <li>
+      <a href="#" class="annales-link ${a.locked ? 'is-locked' : ''}" data-id="${a.notion_page_id}">
+        <span class="year">${a.titre}</span>
+        <span class="annale-badge annale-badge--${a.statut}">${STATUT_LABEL[a.statut] ?? a.statut}</span>
+        ${a.locked ? '<span class="annale-lock">🔒 Disponible promotion 2027</span>' : ''}
+      </a>
+    </li>
+  `).join('')
+
+  $list.querySelectorAll('.annales-link:not(.is-locked)').forEach(link => {
+    link.addEventListener('click', (e) => { e.preventDefault(); openAnnale(link.dataset.id) })
+  })
+
+  // ---- Modal détail d'une année ----
+  const $modal = document.getElementById('annale-modal')
+  const $modalTitle = document.getElementById('annale-modal-title')
+  const $detailContent = document.getElementById('detail-content')
+  let currentStudentEmail = null
+
+  function openModal() { $modal.classList.add('active'); document.body.style.overflow = 'hidden' }
+  function closeModal() { $modal.classList.remove('active'); document.body.style.overflow = '' }
+  document.getElementById('detail-close').addEventListener('click', closeModal)
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $modal.classList.contains('active')) closeModal() })
+
+  async function openAnnale(notionPageId) {
+    // Le modal s'affiche IMMÉDIATEMENT (overlay plein écran) avec un spinner —
+    // plus d'attente d'un panneau qui apparaît en bas de page avec un délai.
+    $modalTitle.textContent = 'Chargement…'
+    $detailContent.innerHTML = '<div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div>'
+    openModal()
+
+    const r = await fetch(`${SUPABASE_URL}/functions/v1/get-annale-content?notion_page_id=${notionPageId}`, {
+      headers: { Authorization: `Bearer ${session.access_token}` }
+    })
+    if (!r.ok) {
+      $modalTitle.textContent = ''
+      $detailContent.innerHTML = '<p>Accès refusé ou contenu introuvable.</p>'
+      return
+    }
+    const { titre, content, student } = await r.json()
+    currentStudentEmail = student?.email ?? null
+    $modalTitle.textContent = titre
+    $detailContent.innerHTML =
+      `<div class="subject-section"><div class="subject-text">${renderBlocks(content)}</div></div>`
+
+    // Cartes PDF : ouverture dans le viewer maison (watermark), jamais de lien direct
+    $detailContent.querySelectorAll('.pdf-card').forEach(card => {
+      card.addEventListener('click', () => openPdfViewer(card.dataset.url, card.dataset.label))
+    })
+  }
+
+  // ---- Rendu des blocs renvoyés par get-annale-content (même format que page-protegee.html) ----
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]))
+  }
+
+  function renderText(text) {
+    return (text ?? []).map(t => {
+      let s = escapeHtml(t.text)
+      if (t.code) s = `<code>${s}</code>`
+      if (t.bold) s = `<strong>${s}</strong>`
+      if (t.italic) s = `<em>${s}</em>`
+      if (t.strike) s = `<s>${s}</s>`
+      if (t.href) s = `<a href="${escapeHtml(t.href)}" target="_blank" rel="noopener">${s}</a>`
+      return s
+    }).join('')
+  }
+
+  function renderBlocks(blocks) {
+    return (blocks ?? []).map(b => {
+      switch (b.type) {
+        case 'h1': return `<h2 class="question-title">${renderText(b.text)}</h2>`
+        case 'h2': return `<h2 class="question-title">${renderText(b.text)}</h2>`
+        case 'h3': return `<h3>${renderText(b.text)}</h3>`
+        case 'p': return b.text?.length ? `<p>${renderText(b.text)}</p>` : ''
+        case 'li_bullet': return `<ul><li>${renderText(b.text)}</li></ul>`
+        case 'li_number': return `<ol><li>${renderText(b.text)}</li></ol>`
+        case 'quote': return `<blockquote>${renderText(b.text)}</blockquote>`
+        case 'code': return `<pre><code>${renderText(b.text)}</code></pre>`
+        case 'callout': return `<div class="question-section"><div class="question-text">${b.icon ?? '💡'} ${renderText(b.text)}</div></div>`
+        case 'toggle': return `<details class="question-section"><summary class="question-title">${renderText(b.text)}</summary>${renderBlocks(b.children)}</details>`
+        case 'image': return `<div class="image-container"><img class="question-image" src="${escapeHtml(b.url)}" alt=""></div>`
+        case 'pdf': {
+          const label = b.caption?.length ? b.caption.map(t => t.text).join('') : (b.name ?? 'Document PDF')
+          // Carte cliquable (JAMAIS un <a href>) : ouvre le viewer maison, l'URL Notion n'est jamais posée comme lien cliquable/copiable
+          return `<div class="pdf-card" data-url="${escapeHtml(b.url)}" data-label="${escapeHtml(label)}"><div class="pdf-icon">PDF</div><div class="pdf-label">${escapeHtml(label)}</div></div>`
+        }
+        case 'video': return `<p><em>🎬 Vidéo non prise en charge sur cette page pour le moment.</em></p>`
+        case 'hr': return '<hr>'
+        default: return ''
+      }
+    }).join('')
+  }
+
+  // ---- Viewer PDF maison avec watermark (même principe que page-protegee.html) ----
+  document.addEventListener('contextmenu', e => e.preventDefault())
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && ['p', 's'].includes(e.key.toLowerCase())) {
+      e.preventDefault()
+      alert('Fonction désactivée sur cet espace.')
+    }
+  })
+
+  async function openPdfViewer(url, label) {
+    const modal = document.getElementById('pdf-modal')
+    const wrap = document.getElementById('pdf-canvas-wrap')
+    document.getElementById('pdf-modal-title').textContent = label
+    wrap.innerHTML = '<div class="loading-state" style="color:#fff"><div class="spinner"></div><span>Chargement du document…</span></div>'
+    modal.classList.add('active')
+
+    try {
+      const pdf = await pdfjsLib.getDocument({ url, withCredentials: false }).promise
+      wrap.innerHTML = ''
+
+      const dpr = window.devicePixelRatio || 1
+      const available = (wrap.clientWidth || window.innerWidth) - 32
+
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum)
+        const base = page.getViewport({ scale: 1 })
+        const cssScale = Math.min(available / base.width, 2)
+        const renderScale = Math.min(cssScale * dpr, 3)
+        const viewport = page.getViewport({ scale: renderScale })
+
+        const container = document.createElement('div')
+        container.className = 'pdf-canvas-container'
+
+        const canvas = document.createElement('canvas')
+        canvas.width = Math.floor(viewport.width)
+        canvas.height = Math.floor(viewport.height)
+        canvas.style.width = `${Math.floor(viewport.width / dpr)}px`
+        canvas.style.height = `${Math.floor(viewport.height / dpr)}px`
+        container.appendChild(canvas)
+
+        const watermark = document.createElement('div')
+        watermark.className = 'pdf-watermark'
+        watermark.innerHTML = `<div class="pdf-watermark-text">${buildWatermarkPattern(currentStudentEmail ?? session.user.email)}</div>`
+        container.appendChild(watermark)
+
+        wrap.appendChild(container)
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise
+      }
+    } catch (e) {
+      console.error(e)
+      wrap.innerHTML = '<p style="color:#fecaca">Erreur d\'affichage du document.</p>'
+    }
+  }
+
+  function buildWatermarkPattern(email) {
+    const line = `${email} • Document strictement personnel • Khypnos`
+    return Array(15).fill(line).join('<br>')
+  }
+
+  document.getElementById('pdf-modal-close').addEventListener('click', () => {
+    document.getElementById('pdf-modal').classList.remove('active')
+    document.getElementById('pdf-canvas-wrap').innerHTML = ''
+  })
+</script>
+</body>
+</html>
