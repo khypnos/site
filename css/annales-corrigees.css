@@ -1,8 +1,80 @@
-
-
 /* ── Ajouts spécifiques à annales-corrigees.css (statut + verrouillage) ── */
-.annales-link.is-locked {
+
+/* ── Back-link + header : mêmes classes/valeurs que videotheque.css (unité visuelle) ── */
+.ac-back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--c-text-muted, #5a6478);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.12s ease;
+}
+.ac-back-link:hover {
+    color: var(--c-navy, #1a2f4f);
+}
+.ac-header {
+    margin-bottom: 2rem;
+}
+.ac-header h1 {
+    margin: 0 0 0.35rem;
+    font-size: 1.7rem;
+    color: var(--c-navy, #1a2f4f);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.ac-header p {
+    margin: 0;
+    color: var(--c-text-muted, #5a6478);
+    font-size: 0.95rem;
+}
+
+/* ── Grille d'années en cards, même logique que .rubrique-cards-grid / .video-card ── */
+.annales-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+.annale-card {
+    background: var(--c-surface, #ffffff);
+    border: 1px solid var(--c-border, #e8eaef);
+    border-radius: 14px;
+    padding: 1.25rem 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 1px 2px rgba(26, 47, 79, 0.04);
+    text-decoration: none;
+    transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+.annale-card:hover {
+    box-shadow: 0 6px 18px rgba(26, 47, 79, 0.1);
+    transform: translateY(-2px);
+}
+.annale-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+.annale-card h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--c-navy, #1a2f4f);
+    line-height: 1.4;
+    flex: 1;
+    font-weight: 600;
+}
+.annale-cta {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--c-navy, #1a2f4f);
+    font-weight: 600;
+}
+.annale-card.is-locked {
     opacity: 0.55;
+    filter: grayscale(50%);
     cursor: default;
     pointer-events: none;
 }
@@ -44,13 +116,16 @@
 .annale-modal-body {
     flex: 1;
     overflow-y: auto;
-    background: #fff;
+    background: #eef0f4;
     border-radius: 16px;
     padding: 24px 28px;
     max-width: 760px;
     margin: 0 auto;
     width: 100%;
 }
+/* Fond gris porté directement par la modale : plus de .subject-section
+   (encadrement + fond gris) autour du contenu. Les ressources (PDF, liens)
+   ressortent déjà en blanc via .pdf-card / .link-card. */
 .annale-modal-close {
     position: fixed;
     bottom: 1.5rem;
@@ -86,6 +161,74 @@
     font-weight: 700; font-size: .8rem;
 }
 .pdf-label { flex: 1; font-weight: 500; color: var(--c-navy, #1a2f4f); }
+
+/* ── Card "ressource externe" (bookmark/embed Notion) — même famille que .pdf-card, icône 🔗 distincte ── */
+.link-card {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--c-border, #e8eaef);
+    border-radius: 12px;
+    background: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 12px 0;
+    transition: box-shadow .15s, transform .1s;
+}
+.link-card:hover { box-shadow: 0 4px 14px rgba(16,24,40,.09); transform: translateY(-1px); }
+.link-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: #eef2ff; color: #3730a3;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem;
+}
+
+/* ── Liens hypertexte inline (dans un paragraphe, hors card ressource) : icône 🔗
+   devant + soulignement pour bien les identifier comme cliquables ── */
+.inline-link {
+    color: var(--c-navy, #1a2f4f);
+    text-decoration: underline;
+    text-decoration-color: #94a3b8;
+    font-weight: 500;
+}
+.inline-link:hover { text-decoration-color: currentColor; }
+
+/* ── Bandeau "Espace personnel de ..." (même style que page-protegee.css) ── */
+.doc-notice {
+    background: #fef2f2; border: 1px solid #fecaca;
+    color: #991b1b; padding: .75rem 1rem; border-radius: 8px;
+    font-size: .875rem; text-align: center; margin-bottom: 1rem;
+}
+
+/* ── Lisibilité mobile de la grille des années ── */
+@media (max-width: 640px) {
+    .ac-header h1 { font-size: 1.4rem; }
+    .annales-grid {
+        grid-template-columns: 1fr;
+    }
+    .annale-card {
+        padding: 1rem 1rem 0.85rem;
+    }
+    .annale-card h2 {
+        font-size: 0.95rem;
+    }
+    .annale-badge {
+        font-size: 12px;
+        padding: 3px 10px;
+    }
+    .annale-lock {
+        font-size: 12px;
+    }
+    .annale-modal-body {
+        padding: 16px;
+        border-radius: 12px;
+    }
+    .pdf-card, .link-card {
+        padding: .85rem 1rem;
+        margin: 10px 0;
+    }
+}
 
 /* ── Viewer PDF maison avec watermark (même principe que page-protegee.html) ── */
 .pdf-modal {
@@ -136,3 +279,20 @@
     border-radius: 50%; animation: spin .7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Bandeau de rafraîchissement de session (après 55 min), même style que page-protegee.css ── */
+.session-refresh-banner {
+    position: fixed; left: 50%; bottom: 1.25rem; transform: translateX(-50%);
+    z-index: 1100; display: flex; align-items: center; gap: 1rem;
+    background: #1a2f4f; color: #fff; padding: .85rem 1.25rem;
+    border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.3);
+    font-size: .9rem; max-width: 92vw;
+}
+.session-refresh-banner button {
+    background: #fff; color: #1a2f4f; border: none;
+    padding: .5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ── Impression désactivée (dissuasif), même principe que page-protegee.css ── */
+@media print { body { display: none !important; } }
