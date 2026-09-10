@@ -39,7 +39,7 @@
     }
 
     // ← plus de `sections`
-    const { nom, planLabels, hasVideo, protectedPages } = await res.json();
+    const { nom, planLabels, hasVideo, hasAnnales, protectedPages } = await res.json();
 
     const app = document.getElementById('app');
 
@@ -57,6 +57,23 @@
             <a class="btn-videotheque" href="/espace-client/videotheque.html">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                Accéder
+            </a>
+        </section>
+    ` : '';
+
+    const annalesCardHTML = hasAnnales ? `
+        <section class="annales-access-card" aria-labelledby="aac-title">
+            <div class="aac-left">
+                <div class="aac-icon" aria-hidden="true">📚</div>
+                <h2 id="aac-title">Annales corrigées</h2>
+                <p>Retrouve toutes les annales corrigées associées à ta formule.</p>
+            </div>
+            <a class="btn-annales" href="/espace-client/annales-corrigees.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
                 </svg>
                 Accéder
             </a>
@@ -84,7 +101,7 @@
     ` : '';
 
     // État vide si aucune ressource
-    const emptyStateHTML = (!hasVideo && !(protectedPages ?? []).length)
+    const emptyStateHTML = (!hasVideo && !hasAnnales && !(protectedPages ?? []).length)
         ? `<p class="notion-empty-state">Aucune ressource disponible pour le moment.</p>`
         : '';
 
@@ -95,6 +112,7 @@
             <div class="plan-tags">${planTagsHTML}</div>
         </header>
         ${videoCardHTML}
+        ${annalesCardHTML}
         ${protectedPagesHTML}
         ${emptyStateHTML}
     `;

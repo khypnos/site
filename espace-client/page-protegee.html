@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/css/theme-elegance.css">
   <link rel="stylesheet" href="/css/page-protegee.css">
 
+
   <!-- PDF.js pour le viewer maison -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs" type="module"></script>
 
@@ -267,7 +268,7 @@
         if (r.italic) t = `<em>${t}</em>`
         if (r.strike) t = `<s>${t}</s>`
         if (r.code) t = `<code>${t}</code>`
-        if (r.href) t = `<a href="${escapeHtml(r.href)}" target="_blank" rel="noopener">${t}</a>`
+        if (r.href) t = `<a href="${escapeHtml(r.href)}" class="inline-link" target="_blank" rel="noopener">🔗 ${t}</a>`
         return t
       }).join('')
     }

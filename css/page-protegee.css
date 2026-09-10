@@ -79,6 +79,16 @@
     }
     .pdf-label { flex: 1; font-weight: 500; color: #1a1a2e; font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.35; }
 
+    /* Liens hypertexte inline (dans un paragraphe) : icône 🔗 devant + soulignement,
+       même style que css/annales-corrigees.css pour l'unité visuelle entre les pages */
+    .inline-link {
+      color: #1a1a2e;
+      text-decoration: underline;
+      text-decoration-color: #94a3b8;
+      font-weight: 500;
+    }
+    .inline-link:hover { text-decoration-color: currentColor; }
+
     /* Viewer modal — passe AU-DESSUS de la navbar du site */
     .pdf-modal {
     position: fixed; inset: 0; background: rgba(0,0,0,.85);

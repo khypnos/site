@@ -38,6 +38,7 @@
 <!-- Modal détail d'une année : overlay plein écran, s'affiche instantanément (pas d'effet "en bas de page") -->
 <div id="annale-modal" class="annale-modal">
   <div class="annale-modal-header"><span id="annale-modal-title"></span></div>
+  <div id="annale-modal-notice" class="doc-notice doc-notice--modal" hidden></div>
   <div id="detail-content" class="annale-modal-body"></div>
   <button id="detail-close" type="button" class="annale-modal-close" aria-label="Fermer">✕ Fermer</button>
 </div>
@@ -72,18 +73,24 @@
   }
   const { student: listStudent, annales } = await res.json()
 
-  // Bandeau "Espace personnel de ..." dès la liste, comme sur les pages protégées
-  const $docNotice = document.getElementById('doc-notice')
-  if (listStudent?.email) {
-    $docNotice.innerHTML = `🔒 Espace personnel de <strong>${escapeHtml(listStudent.email)}</strong> — Document strictement personnel, ne pas partager.`
-    $docNotice.hidden = false
-  }
-
   const STATUT_LABEL = { disponible: 'Disponible', en_cours: 'En cours', non_disponible: 'Non disponible' }
 
-  // Tri explicite côté front par année décroissante : indépendant de l'ordre renvoyé
-  // par get-annales / annales_cache, évite tout désordre visuel dans la liste.
-  const sortedAnnales = [...annales].sort((a, b) => (b.annee ?? 0) - (a.annee ?? 0))
+  // Tri explicite côté front par année extraite du TITRE (ex. "Session 2021" → 2021),
+  // décroissant. On ne trie plus sur un champ "annee" : dans annales_cache, ce champ
+  // (renommé annee_acces_min) désigne la promotion minimale qui débloque l'annale, pas
+  // l'année/session du contenu — trier dessus donnait un ordre qui semblait aléatoire.
+  function extractYearFromTitle(titre) {
+    const match = String(titre ?? '').match(/(\d{4})/)
+    return match ? Number(match[1]) : null
+  }
+  const sortedAnnales = [...annales].sort((a, b) => {
+    const yearA = extractYearFromTitle(a.titre)
+    const yearB = extractYearFromTitle(b.titre)
+    if (yearA != null && yearB != null) return yearB - yearA
+    if (yearA != null) return -1
+    if (yearB != null) return 1
+    return String(a.titre ?? '').localeCompare(String(b.titre ?? ''))
+  })
 
   $grid.innerHTML = sortedAnnales.map(a => `
     <a href="#" class="annale-card ${a.locked ? 'is-locked' : ''}" data-id="${a.notion_page_id}">
@@ -102,11 +109,23 @@
   // ---- Modal détail d'une année ----
   const $modal = document.getElementById('annale-modal')
   const $modalTitle = document.getElementById('annale-modal-title')
+  const $modalNotice = document.getElementById('annale-modal-notice')
   const $detailContent = document.getElementById('detail-content')
   let currentStudentEmail = null
 
-  function openModal() { $modal.classList.add('active'); document.body.style.overflow = 'hidden' }
-  function closeModal() { $modal.classList.remove('active'); document.body.style.overflow = '' }
+  // Fix Firefox : bloquer overflow uniquement sur <body> ne suffit pas, Firefox fait
+  // scroller <html> par défaut (contrairement à Chrome/Safari qui suivent <body>).
+  // On verrouille les deux éléments pour bloquer le scroll d'arrière-plan partout.
+  function openModal() {
+    $modal.classList.add('active')
+    document.documentElement.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden'
+  }
+  function closeModal() {
+    $modal.classList.remove('active')
+    document.documentElement.style.overflow = ''
+    document.body.style.overflow = ''
+  }
   document.getElementById('detail-close').addEventListener('click', closeModal)
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && $modal.classList.contains('active')) closeModal() })
 
@@ -114,6 +133,7 @@
     // Le modal s'affiche IMMÉDIATEMENT (overlay plein écran) avec un spinner —
     // plus d'attente d'un panneau qui apparaît en bas de page avec un délai.
     $modalTitle.textContent = 'Chargement…'
+    $modalNotice.hidden = true
     $detailContent.innerHTML = '<div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div>'
     openModal()
 
@@ -128,6 +148,13 @@
     const { titre, content, student } = await r.json()
     currentStudentEmail = student?.email ?? null
     $modalTitle.textContent = titre
+    // Bandeau "Espace personnel de ..." repris en haut de la modale, en plus
+    // (ou à défaut) de celui de la liste : couvre le cas où get-annales n'est
+    // pas encore redéployé mais get-annale-content l'est déjà.
+    if (student?.email) {
+      $modalNotice.innerHTML = `🔒 Espace personnel de <strong>${escapeHtml(student.email)}</strong> — Document strictement personnel, ne pas partager.`
+      $modalNotice.hidden = false
+    }
     // Plus de div .subject-section (encadrement + fond gris) : la modale est
     // déjà en fond gris, seules les ressources (cards PDF/lien) ressortent en blanc.
     $detailContent.innerHTML = renderBlocks(content)

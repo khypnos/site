@@ -98,7 +98,11 @@
 /* ── Modal détail d'une année (plein écran, pas de scroll ni de délai visuel) ── */
 .annale-modal {
     position: fixed;
-    inset: 0;
+    /* décalée sous la navbar fixe du site (à ajuster si sa hauteur réelle diffère) */
+    top: 76px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(26, 47, 79, 0.92);
     z-index: 2000;
     display: none;
@@ -200,6 +204,12 @@
     color: #991b1b; padding: .75rem 1rem; border-radius: 8px;
     font-size: .875rem; text-align: center; margin-bottom: 1rem;
 }
+/* Variante affichée en haut de la modale détail (repli tant que get-annales
+   n'est pas redéployé, et rappel utile même quand la liste l'affiche déjà) */
+.doc-notice--modal {
+    max-width: 760px;
+    margin: 0 auto 1rem;
+}
 
 /* ── Lisibilité mobile de la grille des années ── */
 @media (max-width: 640px) {
@@ -232,7 +242,8 @@
 
 /* ── Viewer PDF maison avec watermark (même principe que page-protegee.html) ── */
 .pdf-modal {
-    position: fixed; inset: 0; background: rgba(0,0,0,.85);
+    /* décalée sous la navbar fixe du site, comme .annale-modal */
+    position: fixed; top: 76px; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.85);
     z-index: 2100; display: none;
     flex-direction: column; padding: 1rem;
 }

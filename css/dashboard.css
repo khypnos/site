@@ -13,6 +13,7 @@
 .dashboard-header {
     margin-bottom: 2rem;
 }
+
 .dashboard-header h1 {
     margin: 0 0 0.35rem;
     font-size: 1.7rem;
@@ -20,6 +21,7 @@
     font-weight: 700;
     letter-spacing: -0.01em;
 }
+
 .dashboard-header p {
     margin: 0;
     color: var(--c-text-muted, #5a6478);
@@ -33,6 +35,7 @@
     gap: 0.5rem;
     margin: 0.75rem 0 0;
 }
+
 .plan-tag {
     padding: 0.3rem 0.85rem;
     background: var(--c-surface-2, #f6f7fb);
@@ -43,44 +46,55 @@
     border: 1px solid var(--c-border, #e8eaef);
 }
 
-/* ── Carte accès vidéothèque (CTA navy) ── */
-.video-access-card {
+/* ── Cartes d'accès (vidéothèque / annales) ──
+   Même structure/rythme pour les deux — seule la couleur d'accent
+   change (navy pour la vidéothèque, or/bronze pour les annales),
+   pour rester dans le thème élégant sans les confondre visuellement. ── */
+.video-access-card,
+.annales-access-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    background: var(--c-navy, #1a2f4f);
     border-radius: 16px;
     padding: 1.5rem 1.75rem;
-    margin: 2rem 0;
+    margin: 1.25rem 0;
     color: white;
-    box-shadow: 0 8px 24px rgba(26, 47, 79, 0.18);
 }
-.video-access-card .vac-left {
+
+.video-access-card .vac-left,
+.annales-access-card .aac-left {
     flex: 1;
 }
-.video-access-card .vac-icon {
+
+.video-access-card .vac-icon,
+.annales-access-card .aac-icon {
     font-size: 1.6rem;
     margin-bottom: 0.4rem;
 }
-.video-access-card h2 {
+
+.video-access-card h2,
+.annales-access-card h2 {
     margin: 0 0 0.25rem;
     font-size: 1.15rem;
     font-weight: 600;
     color: white;
 }
-.video-access-card p {
+
+.video-access-card p,
+.annales-access-card p {
     margin: 0;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.75);
 }
-.btn-videotheque {
+
+.btn-videotheque,
+.btn-annales {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
     padding: 0.7rem 1.25rem;
     background: white;
-    color: var(--c-navy, #1a2f4f);
     border-radius: 10px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -88,21 +102,53 @@
     white-space: nowrap;
     transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
 }
-.btn-videotheque:hover {
-    background: var(--c-surface-2, #f6f7fb);
+
+.btn-videotheque:hover,
+.btn-annales:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
-.btn-videotheque svg {
+
+.btn-videotheque svg,
+.btn-annales svg {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
+}
+
+/* Vidéothèque — accent navy */
+.video-access-card {
+    background: var(--c-navy, #1a2f4f);
+    box-shadow: 0 8px 24px rgba(26, 47, 79, 0.18);
+}
+
+.btn-videotheque {
+    color: var(--c-navy, #1a2f4f);
+}
+
+.btn-videotheque:hover {
+    background: var(--c-surface-2, #f6f7fb);
+}
+
+/* Annales corrigées — accent or/bronze (thème élégant) */
+.annales-access-card {
+    background: var(--c-gold, #8a6d3b);
+    box-shadow: 0 8px 24px rgba(138, 109, 59, 0.22);
+}
+
+.btn-annales {
+    color: var(--c-gold, #8a6d3b);
+}
+
+.btn-annales:hover {
+    background: var(--c-surface-2, #f6f7fb);
 }
 
 /* ── Sections Notion ── */
 .notion-sections {
     margin-top: 2rem;
 }
+
 .notion-empty-state {
     color: var(--c-text-muted, #5a6478);
     font-size: 0.95rem;
@@ -125,16 +171,19 @@
     transition: box-shadow 0.15s, transform 0.1s, border-color 0.15s;
     margin-bottom: 0.75rem;
 }
+
 .notion-link-card:hover {
     box-shadow: 0 6px 18px rgba(26, 47, 79, 0.1);
     transform: translateY(-1px);
     border-color: #d4d8e0;
 }
+
 .notion-link-card .nlc-left {
     display: flex;
     align-items: center;
     gap: 0.75rem;
 }
+
 .notion-link-card .nlc-icon {
     width: 38px;
     height: 38px;
@@ -146,15 +195,18 @@
     font-size: 1.1rem;
     flex-shrink: 0;
 }
+
 .notion-link-card .nlc-label {
     font-size: 0.95rem;
     font-weight: 600;
 }
+
 .notion-link-card .nlc-sub {
     font-size: 0.8rem;
     color: var(--c-text-muted, #5a6478);
     margin-top: 0.1rem;
 }
+
 .nlc-arrow {
     width: 20px;
     height: 20px;
@@ -162,6 +214,7 @@
     flex-shrink: 0;
     transition: color 0.12s, transform 0.12s;
 }
+
 .notion-link-card:hover .nlc-arrow {
     color: var(--c-navy, #1a2f4f);
     transform: translateX(2px);
@@ -177,6 +230,7 @@
     color: var(--c-text-muted, #5a6478);
     gap: 0.75rem;
 }
+
 .spinner {
     width: 32px;
     height: 32px;
@@ -185,6 +239,7 @@
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
 }
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
@@ -194,16 +249,21 @@
     .dashboard-wrapper {
         padding: 1.75rem 1rem 2rem;
     }
+
     .dashboard-header h1 {
         font-size: 1.45rem;
     }
-    .video-access-card {
+
+    .video-access-card,
+    .annales-access-card {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
         padding: 1.4rem;
     }
-    .btn-videotheque {
+
+    .btn-videotheque,
+    .btn-annales {
         width: 100%;
         justify-content: center;
     }
