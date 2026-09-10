@@ -121,7 +121,10 @@
               Authorization: `Bearer ${session.access_token}`,
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ block_id: blockId }),
+            // 11/09/2026 : on envoie aussi le slug de la page protégée pour que
+            // get-video-url puisse vérifier l'accès via protected_pages.allowed_plans
+            // quand la vidéo n'est pas cataloguée dans videos_cache.
+            body: JSON.stringify({ block_id: blockId, slug }),
           })
           if (!r.ok) throw new Error('URL indisponible')
           const { url } = await r.json()
