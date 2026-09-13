@@ -163,9 +163,9 @@
       const closeAllDropdowns = () => dropdownItems.forEach(item => {
         item.classList.remove('open')
         item.querySelector('.pp-nav-toggle')?.setAttribute('aria-expanded', 'false')
+        item._ppDropdown?.classList.remove('open')
       })
-      const positionDropdown = (item, toggle) => {
-        const dropdown = item.querySelector('.pp-nav-dropdown')
+      const positionDropdown = (toggle, dropdown) => {
         const rect = toggle.getBoundingClientRect()
         const maxWidth = 280
         const left = Math.max(12, Math.min(rect.left, window.innerWidth - maxWidth - 12))
@@ -174,18 +174,32 @@
       }
       dropdownItems.forEach(item => {
         const toggle = item.querySelector('.pp-nav-toggle')
+        const dropdown = item.querySelector('.pp-nav-dropdown')
+        if (!toggle || !dropdown) return
+        // Détache le menu du conteneur scrollable (.pp-nav-scroll) et le rattache au <body> :
+        // sur iOS (Safari et Chrome, tous deux basés sur WebKit), un élément "position: fixed"
+        // resté descendant d'un conteneur à défilement tactile (-webkit-overflow-scrolling: touch)
+        // est mal positionné/rogné par ce conteneur au lieu de rester fixe par rapport à l'écran.
+        // En le sortant du conteneur, le menu s'affiche correctement partout, y compris iPhone.
+        document.body.appendChild(dropdown)
+        item._ppDropdown = dropdown
         toggle.addEventListener('click', e => {
           e.preventDefault()
-          const isOpen = item.classList.contains('open')
+          const isOpen = dropdown.classList.contains('open')
           closeAllDropdowns()
           if (!isOpen) {
-            positionDropdown(item, toggle)
+            positionDropdown(toggle, dropdown)
             item.classList.add('open')
+            dropdown.classList.add('open')
             toggle.setAttribute('aria-expanded', 'true')
           }
         })
+        document.addEventListener('click', e => {
+          if (dropdown.classList.contains('open') && !dropdown.contains(e.target) && !toggle.contains(e.target)) {
+            closeAllDropdowns()
+          }
+        })
       })
-      document.addEventListener('click', e => { if (!e.target.closest('.pp-nav-item')) closeAllDropdowns() })
       window.addEventListener('scroll', closeAllDropdowns, { passive: true })
       window.addEventListener('resize', closeAllDropdowns)
 
