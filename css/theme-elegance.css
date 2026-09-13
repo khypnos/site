@@ -133,11 +133,21 @@ body {
 .trainer-card,
 .annales-column,
 .payment-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: var(--c-surface);
   border: 1px solid var(--c-border);
   box-shadow: var(--sh-xs);
   border-radius: var(--r-md);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.payment-card h3 {
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
 }
 
 .feature-card:hover,
