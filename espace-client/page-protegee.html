@@ -79,6 +79,45 @@
     // ---- Rendu de la page ----
     const app = document.getElementById('app')
 
+    // ---- Navigation rapide (une pastille par titre H1 ; sous-menu déroulant listant les
+    // titres H2 pour les sections qui en contiennent plusieurs, ex: Replay) ----
+    const navSections = []
+    {
+      let sectionIndex = 0
+      let subIndex = 0
+      let current = null
+      content.forEach(b => {
+        if (b.type === 'h1') {
+          current = { id: `pp-section-${sectionIndex}`, label: (b.text ?? []).map(t => t.text).join('') || `Section ${sectionIndex + 1}`, children: [] }
+          sectionIndex++
+          navSections.push(current)
+        } else if (b.type === 'h2' && current) {
+          current.children.push({ id: `pp-sub-${subIndex}`, label: (b.text ?? []).map(t => t.text).join('') || `Sous-section ${current.children.length + 1}` })
+          subIndex++
+        }
+      })
+    }
+
+    let h1Cursor = 0
+    let h2Cursor = 0
+    const flatSubSections = navSections.flatMap(s => s.children)
+    const contentHtml = content.map(b => {
+      if (b.type === 'h1') {
+        const sectionId = navSections[h1Cursor]?.id
+        h1Cursor++
+        return renderBlock(b, sectionId)
+      }
+      if (b.type === 'h2') {
+        const subId = flatSubSections[h2Cursor]?.id
+        h2Cursor++
+        return renderBlock(b, subId)
+      }
+      return renderBlock(b)
+    }).join('')
+
+    const navChevron = '<svg class="pp-nav-chevron" viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    const navHtml = navSections.length > 1 ? `<nav class="pp-nav" aria-label="Navigation de la page"><div class="pp-nav-scroll">${navSections.map(s => s.children.length ? `<div class="pp-nav-item"><button type="button" class="pp-nav-link pp-nav-toggle" data-target="#${s.id}" aria-haspopup="true" aria-expanded="false">${escapeHtml(s.label)}${navChevron}</button><div class="pp-nav-dropdown">${s.children.map(c => `<a href="#${c.id}" class="pp-nav-dropdown-link">${escapeHtml(c.label)}</a>`).join('')}</div></div>` : `<a href="#${s.id}" class="pp-nav-link">${escapeHtml(s.label)}</a>`).join('')}</div></nav>` : ''
+
     app.innerHTML = `
       <div class="pp-header">
         <h1>${escapeHtml(titre)}</h1>
@@ -86,7 +125,8 @@
       <div class="doc-notice">
         🔒 Espace personnel de <strong>${escapeHtml(student.email)}</strong> — Document strictement personnel, ne pas partager.
       </div>
-      <div class="pp-content">${content.map(renderBlock).join('')}</div>
+      ${navHtml}
+      <div class="pp-content">${contentHtml}</div>
       ${false /* Obsolète : les PDF sont désormais rendus inline par renderBlock (case 'pdf'). Ce bloc "Documents" n'est plus utilisé — à supprimer manuellement si tu veux. */ ? `
         <div class="pdf-section">
           <h2>📎 Documents</h2>
@@ -101,6 +141,63 @@
         </div>
       ` : ''}
     `
+
+    // Navigation rapide : mise en surbrillance du lien actif au scroll, clic avec smooth-scroll,
+    // et menus déroulants (position fixe pour rester visibles même dans la barre qui défile)
+    // pour les sections à plusieurs sous-titres (ex: Replay → accès direct au dernier replay)
+    if (navSections.length > 1) {
+      const navLinks = Array.from(document.querySelectorAll('.pp-nav-link'))
+      const sectionEls = navSections.map(s => document.getElementById(s.id)).filter(Boolean)
+      const setActiveLink = id => {
+        navLinks.forEach(a => a.classList.toggle('active', (a.getAttribute('href') || a.dataset.target) === `#${id}`))
+      }
+      if (sectionEls.length) {
+        const sectionObserver = new IntersectionObserver(entries => {
+          const visible = entries.filter(e => e.isIntersecting)
+          if (visible.length) setActiveLink(visible[0].target.id)
+        }, { rootMargin: '-10% 0px -70% 0px' })
+        sectionEls.forEach(el => sectionObserver.observe(el))
+      }
+
+      const dropdownItems = Array.from(document.querySelectorAll('.pp-nav-item'))
+      const closeAllDropdowns = () => dropdownItems.forEach(item => {
+        item.classList.remove('open')
+        item.querySelector('.pp-nav-toggle')?.setAttribute('aria-expanded', 'false')
+      })
+      const positionDropdown = (item, toggle) => {
+        const dropdown = item.querySelector('.pp-nav-dropdown')
+        const rect = toggle.getBoundingClientRect()
+        const maxWidth = 280
+        const left = Math.max(12, Math.min(rect.left, window.innerWidth - maxWidth - 12))
+        dropdown.style.left = `${left}px`
+        dropdown.style.top = `${rect.bottom + 8}px`
+      }
+      dropdownItems.forEach(item => {
+        const toggle = item.querySelector('.pp-nav-toggle')
+        toggle.addEventListener('click', e => {
+          e.preventDefault()
+          const isOpen = item.classList.contains('open')
+          closeAllDropdowns()
+          if (!isOpen) {
+            positionDropdown(item, toggle)
+            item.classList.add('open')
+            toggle.setAttribute('aria-expanded', 'true')
+          }
+        })
+      })
+      document.addEventListener('click', e => { if (!e.target.closest('.pp-nav-item')) closeAllDropdowns() })
+      window.addEventListener('scroll', closeAllDropdowns, { passive: true })
+      window.addEventListener('resize', closeAllDropdowns)
+
+      document.querySelectorAll('.pp-nav-link[href], .pp-nav-dropdown-link').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault()
+          const target = document.getElementById(a.getAttribute('href').slice(1))
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          closeAllDropdowns()
+        })
+      })
+    }
 
     // Handlers clic PDF (l'URL Notion est déjà dans le dataset)
     document.querySelectorAll('.pdf-card').forEach(card => {
@@ -178,7 +275,7 @@
       const banner = document.createElement('div')
       banner.id = 'session-refresh-banner'
       banner.className = 'session-refresh-banner'
-      banner.innerHTML = `<br>        <span>⏱️ Ta session va bientôt expirer. Recharge pour continuer à ouvrir les documents.</span><br>        <button id="session-refresh-btn">Rafraîchir la session</button><br>      `
+      banner.innerHTML = `<span>⏱️ Ta session va bientôt expirer. Recharge pour continuer à ouvrir les documents.</span><button id="session-refresh-btn">Rafraîchir la session</button>`
       document.body.appendChild(banner)
       document.getElementById('session-refresh-btn')
         .addEventListener('click', () => window.location.reload())
@@ -276,10 +373,10 @@
       }).join('')
     }
 
-    function renderBlock(b) {
+    function renderBlock(b, sectionId) {
       switch (b.type) {
-        case 'h1': return `<h1>${renderRichText(b.text)}</h1>`
-        case 'h2': return `<h2>${renderRichText(b.text)}</h2>`
+        case 'h1': return `<h1${sectionId ? ` id="${escapeHtml(sectionId)}"` : ''}>${renderRichText(b.text)}</h1>`
+        case 'h2': return `<h2${sectionId ? ` id="${escapeHtml(sectionId)}"` : ''}>${renderRichText(b.text)}</h2>`
         case 'h3': return `<h3>${renderRichText(b.text)}</h3>`
         case 'p':
           return b.text?.length
@@ -310,7 +407,7 @@
         case 'pdf': {
           const plainLabel = b.caption?.length ? b.caption.map(t => t.text).join('') : prettifyName(b.name)
           const displayLabel = b.caption?.length ? renderRichText(b.caption) : prettifyName(b.name)
-          return `<br>            <div class="pdf-card" data-url="${escapeHtml(b.url)}" data-label="${escapeHtml(plainLabel)}"><br>              <div class="pdf-icon">PDF</div><br>              <div class="pdf-label">${displayLabel}</div><br>            </div><br>          `
+          return `<div class="pdf-card" data-url="${escapeHtml(b.url)}" data-label="${escapeHtml(plainLabel)}"><div class="pdf-icon">PDF</div><div class="pdf-label">${displayLabel}</div></div>`
         }
         default: return ''
       }
