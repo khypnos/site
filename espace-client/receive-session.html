@@ -23,6 +23,13 @@
 <script type="module">
     import { supabase } from '/espace-client/auth.js';
 
+    // Où rediriger une fois la session Supabase établie sur ce domaine.
+    // Fichier HTML statique (pas de build Vite ici comme pour l'app QCM,
+    // donc pas de vraie variable d'environnement possible) → on centralise
+    // le réglage dans cette seule constante, en haut du script, pour que ce
+    // soit un changement d'une ligne le jour où la destination doit changer.
+    const REDIRECT_AFTER_LOGIN = '/espace-client/index.html';
+
     const hashParams = new URLSearchParams(window.location.hash.slice(1));
     const access_token = hashParams.get('access_token');
     const refresh_token = hashParams.get('refresh_token');
@@ -37,7 +44,7 @@
         const { error } = await supabase.auth.setSession({ access_token, refresh_token });
         window.location.href = error
             ? '/login.html?error=session_invalid'
-            : '/espace-client/videotheque.html';
+            : REDIRECT_AFTER_LOGIN;
     }
 </script>
 </body>
