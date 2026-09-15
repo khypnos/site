@@ -46,12 +46,13 @@
     border: 1px solid var(--c-border, #e8eaef);
 }
 
-/* ── Cartes d'accès (vidéothèque / annales) ──
-   Même structure/rythme pour les deux — seule la couleur d'accent
-   change (navy pour la vidéothèque, or/bronze pour les annales),
-   pour rester dans le thème élégant sans les confondre visuellement. ── */
+/* ── Cartes d'accès (vidéothèque / annales / QCMs) ──
+   Même structure/rythme pour les trois — seule la couleur d'accent
+   change (navy pour la vidéothèque, or/bronze pour les annales, bleu pour
+   les QCMs), pour rester dans le thème élégant sans les confondre visuellement. ── */
 .video-access-card,
-.annales-access-card {
+.annales-access-card,
+.qcm-access-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,18 +64,21 @@
 }
 
 .video-access-card .vac-left,
-.annales-access-card .aac-left {
+.annales-access-card .aac-left,
+.qcm-access-card .qac-left {
     flex: 1;
 }
 
 .video-access-card .vac-icon,
-.annales-access-card .aac-icon {
+.annales-access-card .aac-icon,
+.qcm-access-card .qac-icon {
     font-size: 1.6rem;
     margin-bottom: 0.4rem;
 }
 
 .video-access-card h2,
-.annales-access-card h2 {
+.annales-access-card h2,
+.qcm-access-card h2 {
     margin: 0 0 0.25rem;
     font-size: 1.15rem;
     font-weight: 600;
@@ -82,14 +86,16 @@
 }
 
 .video-access-card p,
-.annales-access-card p {
+.annales-access-card p,
+.qcm-access-card p {
     margin: 0;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.75);
 }
 
 .btn-videotheque,
-.btn-annales {
+.btn-annales,
+.btn-qcm {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
@@ -104,13 +110,15 @@
 }
 
 .btn-videotheque:hover,
-.btn-annales:hover {
+.btn-annales:hover,
+.btn-qcm:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .btn-videotheque svg,
-.btn-annales svg {
+.btn-annales svg,
+.btn-qcm svg {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
@@ -141,6 +149,20 @@
 }
 
 .btn-annales:hover {
+    background: var(--c-surface-2, #f6f7fb);
+}
+
+/* QCMs — accent bleu (ouverture connectée de l'appli Khypnos QCM) */
+.qcm-access-card {
+    background: var(--c-blue, #2f6690);
+    box-shadow: 0 8px 24px rgba(47, 102, 144, 0.2);
+}
+
+.btn-qcm {
+    color: var(--c-blue, #2f6690);
+}
+
+.btn-qcm:hover {
     background: var(--c-surface-2, #f6f7fb);
 }
 
@@ -255,7 +277,8 @@
     }
 
     .video-access-card,
-    .annales-access-card {
+    .annales-access-card,
+    .qcm-access-card {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
@@ -263,7 +286,8 @@
     }
 
     .btn-videotheque,
-    .btn-annales {
+    .btn-annales,
+    .btn-qcm {
         width: 100%;
         justify-content: center;
     }

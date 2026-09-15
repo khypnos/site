@@ -1,9 +1,5 @@
-
 function loadNavbar() {
-	
     const navbarHTML = `
-
-
     <div class="overlay-nav" aria-label="Navigation fixe en surimpression">
         <div class="bar">
             <div class="brand"><img src="/img/KhypnosLogo.png" alt="Khypnos" height="42"></div>
@@ -11,8 +7,7 @@ function loadNavbar() {
             <label for="menu-toggle" class="hamburger">
             <span></span><span></span><span></span>
             </label>
-        
-        
+
             <div class="toggle-container">
                         <span class="external-text left">Médecin</span>
                         <input type="checkbox" id="page-toggle" class="toggle-checkbox">
@@ -21,8 +16,7 @@ function loadNavbar() {
                         </label>
                         <span class="external-text right">IADE</span>
                 </div>
-        
-        
+
             <div class="hamburger-menu">
                     <div class="bar1"></div>
                     <div class="bar2"></div>
@@ -33,7 +27,7 @@ function loadNavbar() {
                     <li><a href="/index.html">Accueil</a></li>
                     <li><a href="/login.html">🔒 Espace Privé</a></li>
                     <li><a href="/medecin/annales/annales.html">Annales</a></li>
-                    <li><a href="https://khypnos-qcm.vercel.app/">QCMs</a></li>
+                    <li><a href="https://khypnos-qcm.vercel.app/" id="qcm-link">QCMs</a></li>
                     <li><a href="/medecin/videotheque_free.html">Vidéothèque</a></li>
                     <li><a href="/medecin/demande_inscription.html">Inscription</a></li>
                     <!-- <li><a href="/medecin/demande_concours.html">Concours Blanc</a></li> -->
@@ -41,13 +35,9 @@ function loadNavbar() {
                 </ul>
             </nav>
         </div>
-
     </div>
-
     `;
-    
-
-const body = document.querySelector('.body');
+    const body = document.querySelector('.body');
   if (body) {
     body.insertAdjacentHTML('afterbegin', navbarHTML);
     initNavbarFunctions();
@@ -57,9 +47,9 @@ const body = document.querySelector('.body');
     initNavbarFunctions();
   }
 }
+
+// Charger la navbar quand le DOM est prêt
 document.addEventListener('DOMContentLoaded', loadNavbar);
-
-
 
 function initNavbarFunctions() {
     const hamburger = document.querySelector('.hamburger-menu');
@@ -85,12 +75,37 @@ function initNavbarFunctions() {
             navMenu.classList.remove('active');
         }
     });
+
+    // 🔄 Lien QCMs : on intercepte le clic (plutôt que de précalculer le href
+    // au chargement) car mettre à jour le href de façon asynchrone créait une
+    // course : si l'utilisateur cliquait avant la fin du import()/getSession(),
+    // le lien gardait son href par défaut (sans tokens) → login de l'appli QCM.
+    const qcmLink = document.getElementById('qcm-link');
+    if (qcmLink) {
+        qcmLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            const defaultHref = qcmLink.href;
+
+            import('/espace-client/auth.js')
+                .then(({ supabase }) => supabase.auth.getSession())
+                .then(({ data: { session } }) => {
+                    if (session) {
+                        const params = new URLSearchParams({
+                            access_token: session.access_token,
+                            refresh_token: session.refresh_token,
+                        });
+                        window.location.href = 'https://khypnos-qcm.vercel.app/receive-session#' + params.toString();
+                    } else {
+                        window.location.href = defaultHref;
+                    }
+                })
+                .catch(() => {
+                    // auth.js indisponible sur cette page → lien par défaut conservé
+                    window.location.href = defaultHref;
+                });
+        });
+    }
 }
-
-// Charger la navbar quand le DOM est prêt
-document.addEventListener('DOMContentLoaded', loadNavbar);
-
-
 
 // Configuration simplifiée - URLs des pages d'index uniquement
 const indexUrls = {
@@ -101,24 +116,24 @@ const indexUrls = {
 // Fonction pour gérer le changement de version (version simplifiée)
 function handleVersionToggleSimple() {
     const toggle = document.getElementById('page-toggle');
-    
+
     // Détecter la version actuelle au chargement de la page
     const currentPath = window.location.pathname;
     const isCurrentlyV2 = currentPath.includes('/iade/');
     toggle.checked = isCurrentlyV2;
-    
+
     // Gérer le changement de version
     toggle.addEventListener('change', function() {
         const isVersion2 = this.checked;
         const targetUrl = isVersion2 ? indexUrls.version2 : indexUrls.version1;
-        
+
         // Sauvegarder la préférence
         localStorage.setItem('preferredVersion', isVersion2 ? 'version2' : 'version1');
-        
+
         // Animation de transition (optionnelle)
         document.body.style.opacity = '0.8';
         document.body.style.transform = 'scale(0.98)';
-        
+
         // Redirection après une courte animation
         setTimeout(() => {
             window.location.href = targetUrl;
@@ -133,7 +148,7 @@ document.addEventListener('DOMContentLoaded', handleVersionToggleSimple);
 function applyPreferredVersion() {
     const preferred = localStorage.getItem('preferredVersion');
     const currentPath = window.location.pathname;
-    
+
     if (preferred === 'version2' && !currentPath.includes('/iade/')) {
         window.location.href = indexUrls.version2;
     } else {

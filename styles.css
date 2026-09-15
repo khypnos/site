@@ -1413,6 +1413,13 @@ a { text-decoration: none; color: inherit; }
 .offer--full {
     border-color: #ffe6bf;
 }
+
+.payment-card {
+    padding: 24px 16px 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 @media (max-width: 480px) {
     .payment-options {
         grid-template-columns: 1fr;

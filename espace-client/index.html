@@ -43,6 +43,14 @@
 
     const app = document.getElementById('app');
 
+    // URL de l'appli QCM avec transfert de session Supabase (même projet que le
+    // site) — les tokens passent par le fragment (#), jamais envoyés au serveur.
+    const qcmParams = new URLSearchParams({
+        access_token: session.access_token,
+        refresh_token: session.refresh_token,
+    });
+    const qcmHref = `https://khypnos-qcm.vercel.app/receive-session#${qcmParams.toString()}`;
+
     const planTagsHTML = planLabels
         .map(label => `<span class="plan-tag">${label}</span>`)
         .join('');
@@ -80,6 +88,8 @@
         </section>
     ` : '';
 
+    const qcmCardHTML = '<section class="qcm-access-card" aria-labelledby="qac-title"><div class="qac-left"><div class="qac-icon" aria-hidden="true">📝</div><h2 id="qac-title">QCMs</h2><p>Lance l\'application KhypnosQCM.</p></div><a class="btn-qcm" href="' + qcmHref + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>M\'entraîner</a></section>';
+
     const protectedPagesHTML = (protectedPages ?? []).length ? `
         <div class="notion-sections" style="margin-top:2rem">
             <h2 style="font-size:1.15rem;color:#1a1a2e;margin-bottom:1rem">Espaces privés</h2>
@@ -113,6 +123,7 @@
         </header>
         ${videoCardHTML}
         ${annalesCardHTML}
+        ${qcmCardHTML}
         ${protectedPagesHTML}
         ${emptyStateHTML}
     `;
