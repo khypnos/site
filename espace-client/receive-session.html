@@ -1,0 +1,44 @@
+<!-- espace-client/receive-session.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khypnos — Connexion…</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/theme-elegance.css">
+</head>
+<body>
+<div class="container">
+    <main class="login-wrapper">
+        <section class="login-card">
+            <div class="lock-badge" aria-hidden="true">🔄</div>
+            <h1>Connexion en cours…</h1>
+            <p class="subtitle">Merci de patienter, transfert de ta session depuis l'application Khypnos QCM.</p>
+        </section>
+    </main>
+</div>
+<script type="module">
+    import { supabase } from '/espace-client/auth.js';
+
+    const hashParams = new URLSearchParams(window.location.hash.slice(1));
+    const access_token = hashParams.get('access_token');
+    const refresh_token = hashParams.get('refresh_token');
+
+    // Nettoie l'URL tout de suite : les tokens ne doivent pas rester visibles
+    // dans la barre d'adresse ni dans l'historique du navigateur.
+    history.replaceState(null, '', window.location.pathname);
+
+    if (!access_token || !refresh_token) {
+        window.location.href = '/login.html?error=missing_tokens';
+    } else {
+        const { error } = await supabase.auth.setSession({ access_token, refresh_token });
+        window.location.href = error
+            ? '/login.html?error=session_invalid'
+            : '/espace-client/videotheque.html';
+    }
+</script>
+</body>
+</html>
