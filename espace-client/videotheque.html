@@ -120,6 +120,7 @@
     ];
 
     let activeFilter = null;
+    let showUnwatchedOnly = false; // 17/09/2026 — filtre "Non vues", indépendant de la rubrique active
     const $filters = document.getElementById('filters');
     const $grid    = document.getElementById('video-grid');
 
@@ -144,33 +145,42 @@
     }
 
     function renderFilters() {
-        $filters.innerHTML = [
-            { key: null, label: 'Toutes' },
-            ...allRubriques.map(r => ({ key: r, label: r }))
-        ].map(({ key, label }) => {
-            const c = key ? rubriqueColor(key) : null;
-            const style = c
-                ? `style="--rc:${c.color}; background:${activeFilter === key ? c.color : c.bg}; color:${activeFilter === key ? '#fff' : c.color}; border-color:${c.color};"`
-                : '';
-            return `
-                <button class="filter-btn ${activeFilter === key ? 'active' : ''}"
-                    ${key ? 'data-colored' : ''}
-                    data-key="${key ?? ''}" type="button" ${style}>${label}</button>
-            `;
+        const toutesBtnHtml =
+            `<button class="filter-btn ${activeFilter === null ? 'active' : ''}" data-key="" type="button">Toutes</button>`;
+
+        // Bouton "Non vues" — toggle indépendant de la rubrique active (17/09/2026).
+        const unwatchedBtnHtml = `
+            <button class="filter-btn filter-btn-unwatched ${showUnwatchedOnly ? 'active' : ''}"
+                type="button" data-unwatched="true">Non vues</button>
+        `;
+
+        const rubriqueBtnsHtml = allRubriques.map(r => {
+            const c = rubriqueColor(r);
+            const style = `style="--rc:${c.color}; background:${activeFilter === r ? c.color : c.bg}; color:${activeFilter === r ? '#fff' : c.color}; border-color:${c.color};"`;
+            return `<button class="filter-btn" data-colored data-key="${r}" type="button" ${style}>${r}</button>`;
         }).join('');
 
-        $filters.querySelectorAll('.filter-btn').forEach(btn => {
+        $filters.innerHTML = toutesBtnHtml + unwatchedBtnHtml + rubriqueBtnsHtml;
+
+        $filters.querySelectorAll('.filter-btn:not(.filter-btn-unwatched)').forEach(btn => {
             btn.addEventListener('click', () => {
                 activeFilter = btn.dataset.key || null;
                 renderFilters();
                 renderGrid();
             });
         });
+
+        $filters.querySelector('.filter-btn-unwatched').addEventListener('click', () => {
+            showUnwatchedOnly = !showUnwatchedOnly;
+            renderFilters();
+            renderGrid();
+        });
     }
 
     function renderGrid() {
-        // Filtrage texte
+        // Filtrage texte + filtre "Non vues"
         const filtered = videos.filter(v => {
+            if (showUnwatchedOnly && v.watched) return false;
             if (!searchQuery) return true;
             return (v.nom + ' ' + (v.description ?? '')).toLowerCase().includes(searchQuery);
         });

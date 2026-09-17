@@ -139,7 +139,7 @@
   }
 
   // ── Chargement vidéos ──
-  const res = await fetch(SUPABASE_URL + '/functions/v1/get-free-videos')
+  const res = await fetch(SUPABASE_URL + '/functions/v1/get-free-videos?category=medecin')
   if (!res.ok) {
     document.getElementById('video-grid').innerHTML =
       '<p class="empty-state">Impossible de charger les vidéos.</p>'

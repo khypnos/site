@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Khypnos — Vidéothèque gratuite</title>
-  <meta name="description" content="Vidéos de cours gratuites Khypnos.">
+  <title>Khypnos — Vidéothèque IADE gratuite</title>
+  <meta name="description" content="Vidéos de cours gratuites Khypnos — préparation concours IADE.">
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/css/theme-elegance.css">
@@ -55,17 +55,14 @@
 
     <header class="vt-header">
       <h1>🎬 Vidéothèque IADE — Aperçu gratuit</h1>
-      <p>Une sélection de vidéos en accès libre. Les vidéos grisées sont disponibles après inscription.</p>
+      <p>Une sélection de vidéos en accès libre pour la préparation au concours IADE. Les vidéos grisées sont disponibles après inscription.</p>
     </header>
 
     <nav class="vt-cta-banner">
-      <p>Pour le moment, aucune vidéo iade n'est en accès libre. Accès à toutes les vidéos réservé aux étudiants inscrits.</p>
+      <p>Accès à toutes les vidéos réservé aux étudiants inscrits.</p>
       <a href="/login.html" class="back-link">🔒 Se connecter</a>
     </nav>
 
-		<img src="/img/assets/under-construction.gif" alt="Page en construction" style="display: block; margin: 40px auto; max-width: 100%; height: auto;">
-
-<!--
     <div class="vt-toolbar">
       <input id="search-input" class="vt-search" type="search"
         placeholder="Rechercher une vidéo…" aria-label="Rechercher une vidéo">
@@ -81,7 +78,6 @@
 
   </main>
 </div>
-
 
 <script type="module">
   const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co'
@@ -123,7 +119,7 @@
         <div style="font-size:2.5rem; margin-bottom:1rem;">🔒</div>
         <h2 style="margin-bottom:.5rem;">Vidéo réservée aux inscrits</h2>
         <p style="margin-bottom:1.5rem; color:#6b7280;">
-          Cette vidéo fait partie de la formation complète Khypnos.<br>
+          Cette vidéo fait partie de la formation IADE complète Khypnos.<br>
           Inscris-toi pour accéder à l'ensemble de la vidéothèque.
         </p>
         <a href="/login.html" class="btn-primary" style="display:inline-block;">
@@ -142,8 +138,8 @@
     $inscriptionModal.classList.add('is-open')
   }
 
-  // ── Chargement vidéos ──
-  const res = await fetch(SUPABASE_URL + '/functions/v1/get-free-videos')
+  // ── Chargement vidéos (catégorie IADE uniquement) ──
+  const res = await fetch(SUPABASE_URL + '/functions/v1/get-free-videos?category=iade')
   if (!res.ok) {
     document.getElementById('video-grid').innerHTML =
       '<p class="empty-state">Impossible de charger les vidéos.</p>'
@@ -326,11 +322,10 @@
   renderFilters()
   renderGrid()
 </script>
--->
 
 <script src="/js/header-manager.js" defer></script>
 <script src="/js/scroll-to-top.min.js"></script>
-<script src="/js/navbar.js"></script>
+<script src="/js/navbar_iade.js"></script>
 <script src="/js/footer-manager.js" defer></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
