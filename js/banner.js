@@ -6,13 +6,14 @@
 (function () {
   // --- Configuration centralisée ---------------------------------
   const CONFIG = {
-    text: "OFFICIEL - Inscriptions EVC à partir du 17/06. Voie externe 64 places, Voie interne 201 places",
-    cta: "Journal Officiel",
-    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054245644?fbclid=IwZnRzaASaKHRleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEenHgQ5YLw8XcIXZeHimxgtOvVSP2Z8jCcQeHkLHZxi_XGSgoWdOOZAwWx4qU_aem_kBCBbDfG5Gw_06849siMqg",
-    icon: "bell",          // "sparkles" | "rocket" | "bell" | "none"
+    text: "Dernière ligne droite - Inscrivez-vous à un concours blanc voie interne ou externe !", // texte du bandeau
+    cta: "Réserver ma place",  // texte du bouton CTA
+    url: "/index.html#khypnos-offers-2026", // lien du bouton CTA
+    icon: "rocket",          // "sparkles" | "rocket" | "bell" | "none"
     variant: "minimal",           // "dark" | "gradient" | "minimal" | "elegance"
     dismissible: true,         // affiche une croix de fermeture
-    storageKey: "khypnos_banner_joEVC" // change la clé à chaque nouvelle campagne
+    openInNewTab: false,       // true = ouvre le lien dans un nouvel onglet, false = même onglet
+    storageKey: "khypnos_banner_CB" // change la clé à chaque nouvelle campagne
   };
 
   // --- Ne ré-affiche pas si déjà fermée --------------------------
@@ -27,7 +28,7 @@
     close:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`
   };
 
-  // --- Styles (3 variantes) --------------------------------------
+  // --- Styles (4 variantes) --------------------------------------
   const STYLES = `
   .khy-banner{position:relative;width:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;font-size:.92rem;line-height:1.4;z-index:50}
   .khy-banner__inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.75rem;padding:.7rem 3rem .7rem 1.25rem;text-align:center;flex-wrap:wrap}
@@ -40,28 +41,24 @@
   .khy-banner__close{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:transparent;border:0;cursor:pointer;padding:.35rem;border-radius:6px;display:inline-flex;color:inherit;opacity:.6;transition:opacity .2s,background .2s}
   .khy-banner__close:hover{opacity:1;background:rgba(255,255,255,.1)}
   .khy-banner__close svg{width:16px;height:16px}
-
   /* Variante 1 — DARK (sobre, premium) */
   .khy-banner--dark{background:#0b0b0f;color:#f5f5f7;border-bottom:1px solid rgba(255,255,255,.08)}
   .khy-banner--dark .khy-banner__icon{color:#ffb86b}
   .khy-banner--dark .khy-banner__cta{background:#fff;color:#0b0b0f}
   .khy-banner--dark .khy-banner__cta:hover{background:#ffb86b;color:#0b0b0f}
-
   /* Variante 2 — GRADIENT (dynamique, marketing) */
   .khy-banner--gradient{background:linear-gradient(90deg,#0f0f1e 0%,#1a1f3a 50%,#0f0f1e 100%);color:#fff;border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden}
   .khy-banner--gradient::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,168,107,.15),transparent 50%),radial-gradient(circle at 80% 50%,rgba(120,180,255,.12),transparent 50%);pointer-events:none}
   .khy-banner--gradient .khy-banner__icon{color:#ffb86b}
   .khy-banner--gradient .khy-banner__cta{background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2)}
   .khy-banner--gradient .khy-banner__cta:hover{background:#fff;color:#0f0f1e}
-
   /* Variante 3 — MINIMAL (très Apple/Linear) */
   .khy-banner--minimal{background:#fafafa;color:#111;border-bottom:1px solid #e5e5e5}
   .khy-banner--minimal .khy-banner__icon{color:#ff6b35}
   .khy-banner--minimal .khy-banner__cta{background:#111;color:#fff}
   .khy-banner--minimal .khy-banner__cta:hover{background:#ff6b35}
   .khy-banner--minimal .khy-banner__close:hover{background:rgba(0,0,0,.06)}
-
-    /* Variante 4 — ELEGANCE (harmonisée thème navy médical) */
+  /* Variante 4 — ELEGANCE (harmonisée thème navy médical) */
   .khy-banner--elegance{
     background:linear-gradient(180deg,#fefdfb 0%,#f9f6f0 100%);
     color:#1a2f4f;
@@ -80,7 +77,6 @@
     box-shadow:0 4px 14px rgba(26,47,79,.3)
   }
   .khy-banner--elegance .khy-banner__close:hover{background:rgba(26,47,79,.06)}
-
   @media (max-width:640px){
     .khy-banner__inner{font-size:.85rem;padding:.6rem 2.5rem .6rem 1rem;gap:.5rem}
     .khy-banner__cta{font-size:.78rem;padding:.25rem .6rem}
@@ -103,11 +99,16 @@
     ? `<span class="khy-banner__icon" aria-hidden="true">${ICONS[CONFIG.icon] || ""}</span>`
     : "";
 
+  // Attributs du lien CTA selon l'option openInNewTab
+  const linkAttrs = CONFIG.openInNewTab
+    ? `target="_blank" rel="noopener"`
+    : "";
+
   banner.innerHTML = `
     <div class="khy-banner__inner">
       ${iconHtml}
       <span class="khy-banner__text">${CONFIG.text}</span>
-      <a class="khy-banner__cta" href="${CONFIG.url}" target="_blank" rel="noopener">
+      <a class="khy-banner__cta" href="${CONFIG.url}" ${linkAttrs}>
         ${CONFIG.cta}${ICONS.arrow}
       </a>
     </div>

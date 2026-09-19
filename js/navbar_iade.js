@@ -27,6 +27,7 @@ function loadNavbar() {
                     <li><a href="/iade/index_iade.html">Accueil</a></li>
                     <li><a href="/iade/programme_iade.html">Programme</a></li>
                     <li><a href="/iade/index_iade.html#inscription_iade">Inscription</a></li>
+                    <li><a href="/iade/videotheque_iade_free.html">Vidéothèque</a></li>
                     <li><a href="https://khypnos-qcm.vercel.app/" id="qcm-link">QCMs</a></li>
                     <li><a href="/espace-client/index.html">🔒 Espace Privé</a></li>
                 </ul>
