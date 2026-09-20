@@ -8,7 +8,7 @@
   const CONFIG = {
     text: "Dernière ligne droite - Inscrivez-vous à un concours blanc voie interne ou externe !", // texte du bandeau
     cta: "Réserver ma place",  // texte du bouton CTA
-    url: "/index.html#khypnos-offers-2026", // lien du bouton CTA
+    url: "/medecin/concoursblancs2026.html", // lien du bouton CTA
     icon: "rocket",          // "sparkles" | "rocket" | "bell" | "none"
     variant: "minimal",           // "dark" | "gradient" | "minimal" | "elegance"
     dismissible: true,         // affiche une croix de fermeture
