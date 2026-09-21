@@ -15,153 +15,122 @@
 	<div class="container">
 
 
-				<!-- ============ SECTION CONCOURS BLANC #1 ============ -->
-		<style>
-		.cb-hero {
-			text-align: center;
-			max-width: 700px;
-			margin: 0 auto 24px;
-		}
-		.cb-hero p {
-			color: var(--c-text-muted);
-			font-size: 16px;
-			line-height: 1.6;
-		}
-		.cb-date-strip {
-			display: flex;
-			justify-content: center;
-			gap: 16px;
-			flex-wrap: wrap;
-			margin: 0 auto 36px;
-		}
-		.cb-date-strip .topic-tag {
-			padding: 8px 16px;
-			border-radius: 20px;
-			display: inline-block;
-			background: var(--c-surface-2);
-			box-shadow: var(--sh-xs);
-			}
-		.cb-card-header {
-		text-align: center;
-		}
-		.cb-grid {
-			display: grid;
-			grid-template-columns: repeat(2, minmax(280px, 1fr));
-			gap: 24px;
-			max-width: 900px;
-			margin: 0 auto 30px;
-		}
-		@media (max-width: 700px) {
-			.cb-grid { grid-template-columns: 1fr; }
-		}
-		.cb-card-icon { font-size: 32px; margin-bottom: 8px; }
-		.cb-card-inner {
-			padding: 30px 26px;
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-		}
-		.cb-card-inner .cb-tag {
-			font-size: 13px;
-			color: var(--c-text-muted);
-			margin-bottom: 16px;
-		}
-		.cb-card-inner ul {
-			list-style: none;
-			padding: 0;
-			margin: 0 0 20px;
-			flex-grow: 1;
-		}
-		.cb-card-inner ul li {
-			padding: 7px 0;
-			border-bottom: 1px solid var(--c-border-soft);
-			font-size: 15px;
-			color: var(--c-text);
-		}
-		.cb-card-inner ul li:last-child { border-bottom: none; }
-		.cb-card-inner .btn {
-			text-align: center;
-			text-decoration: none;
-			padding: 13px 20px;
-			display: inline-block;
-		}
-		.cb-note {
-			text-align: center;
-			max-width: 700px;
-			margin: 0 auto;
-			font-size: 14px;
-			color: var(--c-text-muted);
-		}
-		</style>
+	<!-- ============ SECTION CONCOURS BLANC #1 ============ -->
+<style>
+  .cb-hero {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 24px;
+  }
+  .cb-hero p {
+    color: var(--c-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .cb-date-strip {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0 auto 36px;
+  }
+  .cb-date-strip .topic-tag {
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    background: var(--c-surface-2);
+    box-shadow: var(--sh-xs);
+    font-size: 0.9rem;
+  }
+  .cb-card-header { text-align: center; }
+  .cb-card-icon { font-size: 32px; margin-bottom: 8px; }
+  .cb-tag {
+    font-size: 0.85rem;
+    color: var(--c-text-muted);
+    margin-bottom: 16px;
+  }
+  .cb-note {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    color: var(--c-text-muted);
+  }
 
-		<h2 class="section-title">🎯 Concours Blanc Khypnos #1</h2>
+  /* Mêmes breakpoints que le reste du site */
+  @media screen and (max-width: 768px) {
+    .cb-card-icon { font-size: 28px; }
+    .cb-date-strip .topic-tag { font-size: 0.85rem; padding: 7px 14px; }
+  }
+  @media screen and (max-width: 480px) {
+    .cb-date-strip { gap: 8px; }
+    .cb-date-strip .topic-tag { font-size: 0.8rem; padding: 6px 12px; }
+    .cb-card-icon { font-size: 26px; }
+  }
+</style>
 
-		<div class="cb-hero">
-		<p>
-			Mettez-vous en conditions réelles avant le jour J. Choisissez le format QCM ou
-			le format rédactionnel selon votre voie d'accès (interne ou externe). Chaque concours blanc est accompagné d'une correction collective en visioconférence, avec replay disponible.
-		</p>
-		</div>
+<h2 class="section-title">🎯 Concours Blanc Khypnos #1</h2>
 
-		<div class="cb-date-strip">
-		<span class="topic-tag">📅 Sujets disponibles le 10/10/2026</span>
-		<span class="topic-tag">🎥 Correction QCM : 17/10/2026, 18h–20h</span>
-		<span class="topic-tag">🎥 Correction Rédactionnel : 20/10/2026, 18h–22h</span>
-		</div>
+<p style="text-align: justify; padding-bottom: 24px;">
+	Mettez-vous en conditions réelles avant le jour J. Choisissez le format QCM ou
+	le format rédactionnel selon votre voie d'accès (interne ou externe). Chaque concours blanc est accompagné d'une correction collective en visioconférence, avec replay disponible.
+</p>
 
-		<div class="cb-grid">
+<div class="cb-date-strip">
+  <span class="topic-tag">📅 Sujets disponibles le 10/10/2026</span>
+  <span class="topic-tag">🎥 Correction QCM : 17/10/2026, 18h–20h</span>
+  <span class="topic-tag">🎥 Correction Rédactionnel : 20/10/2026, 18h–22h</span>
+</div>
 
-		<!-- Carte QCM -->
-		<div class="payment-card">
-			<div class="cb-card-inner">
-				<div class="cb-card-header">
-					<div class="cb-card-icon">📱</div>
-					<h3>Concours Blanc QCM</h3>
-					<div class="cb-tag">Format voie interne</div>
-			</div>
-			<ul>
-				<li>60 QCM volontairement exigeants</li>
-				<li>Épreuve de 2 heures, que vous devez faire chronométrée</li>
-				<li>Accessible sur l'application KhypnosQCM, depuis tout appareil</li>
-				<li>Correction collective en visioconférence le 17/10/2026 (18h–20h)</li>
-				<li>Replay disponible après la correction</li>
-			</ul>
-			<div class="payment-price">120€ <span style="font-size:14px;font-weight:400;color:var(--c-text-muted);">TTC</span></div>
-			<a href="https://khypnos-qcm.vercel.app/" class="primary-btn" target="_blank" rel="noopener">
-				S'inscrire au format QCM
-			</a>
-			</div>
-		</div>
+<div class="payment-options">
 
-		<!-- Carte Rédactionnel -->
-		<div class="payment-card">
-			<div class="cb-card-inner">
-				<div class="cb-card-header">
-					<div class="cb-card-icon">✍️</div>
-					<h3>Concours Blanc Rédactionnel</h3>
-					<div class="cb-tag">Format voie externe</div>
-			</div>
-			<ul>
-				<li>Une épreuve fondamentale + une épreuve pratique (format EVC)</li>
-				<li>2 heures par épreuve, à rédiger à la main dans les conditions du concours</li>
-				<li>Copie à renvoyer par mail pour une correction personnalisée</li>
-				<li>Correction collective en visioconférence le 20/10/2026 (18h–22h)</li>
-				<li>Replay disponible après la correction</li>
-			</ul>
-			<div class="payment-price">120€ <span style="font-size:14px;font-weight:400;color:var(--c-text-muted);">TTC</span></div>
-			<a href="https://buy.stripe.com/4gMfZi6Lz80HeZ26MG4c80k" class="primary-btn" target="_blank" rel="noopener">
-				S'inscrire au format Rédactionnel
-			</a>
-			</div>
-		</div>
+  <!-- Carte QCM -->
+  <div class="payment-card">
+    <div class="cb-card-header">
+      <div class="cb-card-icon">📱</div>
+      <h3>Concours Blanc QCM</h3>
+      <div class="cb-tag">Format voie interne</div>
+    </div>
+    <ul class="payment-features">
+      <li>60 QCM volontairement exigeants</li>
+      <li>Épreuve chronométrée de 2 heures</li>
+      <li>Accessible sur l'application KhypnosQCM, depuis tout appareil</li>
+      <li>Correction collective en visioconférence le 17/10/2026 (18h–20h)</li>
+      <li>Replay disponible après la correction</li>
+    </ul>
+    <div class="payment-price">120€</div>
+    <a href="https://khypnos-qcm.vercel.app/" class="primary-btn" target="_blank" rel="noopener">
+      S'inscrire au format QCM
+    </a>
+  </div>
 
-		</div>
+  <!-- Carte Rédactionnel -->
+  <div class="payment-card">
+    <div class="cb-card-header">
+      <div class="cb-card-icon">✍️</div>
+      <h3>Concours Blanc Rédactionnel</h3>
+      <div class="cb-tag">Format voie externe</div>
+    </div>
+    <ul class="payment-features">
+      <li>Une épreuve fondamentale + une épreuve pratique (format EVC)</li>
+      <li>2 heures par épreuve, à rédiger à la main dans les conditions du concours</li>
+      <li>Copie à renvoyer par mail pour une correction personnalisée</li>
+      <li>Correction collective en visioconférence le 20/10/2026 (18h–22h)</li>
+      <li>Replay disponible après la correction</li>
+    </ul>
+    <div class="payment-price">120€</div>
+    <a href="https://buy.stripe.com/4gMfZi6Lz80HeZ26MG4c80k" class="primary-btn" target="_blank" rel="noopener">
+      S'inscrire au format Rédactionnel
+    </a>
+  </div>
 
-		<p class="cb-note">
-		Pas d'horaire imposé : réalisez l'épreuve quand vous le souhaitez, idéalement avant la séance de correction.
-		Les liens de visioconférence sont envoyés environ 48h avant chaque session.
-		</p>
-		<!-- ============ FIN SECTION CONCOURS BLANC #1 ============ -->
+</div>
+
+<p class="cb-note">
+  Pas d'horaire imposé : réalisez l'épreuve quand vous le souhaitez, idéalement avant la séance de correction.
+  Les liens de visioconférence sont envoyés environ 48h avant chaque session.
+</p>
+<!-- ============ FIN SECTION CONCOURS BLANC #1 ============ -->
 
 
 		<!-- Stagger sur les témoignages -->
