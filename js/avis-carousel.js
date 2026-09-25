@@ -49,6 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
       date: "2026-08-28",
       text: "Top , ça m’aide beaucoup dans ma préparation"
     }
+    	{
+      author: "Chourouk G.",
+      rating: 5,
+      date: "2026-09-25",
+      text: "Note 5/5"
+    }
     // ➕ Ajoute ici de nouveaux avis quand tu en auras
   ];
 
