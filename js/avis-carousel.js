@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       rating: 5,
       date: "2026-08-28",
       text: "Top , ça m’aide beaucoup dans ma préparation"
-    }
+    },
     	{
       author: "Chourouk G.",
       rating: 5,

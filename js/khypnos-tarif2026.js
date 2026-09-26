@@ -55,7 +55,7 @@ function renderKhypnosOffers2026() {
           <div class="payment-options">
 
             <!-- Concours blanc voie externe -->
-            <article class="payment-card featured">
+            <article class="payment-card">
               <h3>Concours blanc<br>Voie Externe</h3>
               <div class="payment-price">120€ TTC</div>
               <ul class="payment-features">
@@ -141,7 +141,7 @@ function renderKhypnosOffers2026() {
           <div class="payment-options">
 
             <!-- Concours blanc voie interne -->
-            <article class="payment-card featured">
+            <article class="payment-card">
               <h3>Concours blanc<br>Voie Interne</h3>
               <div class="payment-price">120€ TTC</div>
               <ul class="payment-features">
