@@ -242,10 +242,107 @@ function initOffersToggle() {
   });
 }
 
+function initFloatingOffersToggle() {
+  const section = document.getElementById('khypnos-offers-2026');
+  const toggle = section?.querySelector('.offers-toggle');
+
+  if (!section || !toggle) return;
+
+  const thumb = toggle.querySelector('.offers-toggle__thumb');
+  const tabs = [...toggle.querySelectorAll('[role="tab"]')];
+
+  // Conserve la place du toggle lorsqu’il passe en position fixed
+  const anchor = document.createElement('div');
+  anchor.className = 'offers-toggle-anchor';
+  toggle.before(anchor);
+
+  let frameRequested = false;
+
+  function refreshThumb() {
+    const firstTab = tabs[0];
+    const activeTab = toggle.querySelector('[role="tab"].is-active');
+
+    if (!firstTab || !activeTab || !thumb) return;
+
+    const firstRect = firstTab.getBoundingClientRect();
+    const activeRect = activeTab.getBoundingClientRect();
+
+    thumb.style.transform =
+      `translateX(${activeRect.left - firstRect.left}px)`;
+
+    thumb.style.width = `${activeRect.width}px`;
+  }
+
+  function updateFloatingToggle() {
+    frameRequested = false;
+
+    const gap = 12;
+    const toggleHeight = toggle.offsetHeight;
+    const anchorRect = anchor.getBoundingClientRect();
+    const sectionRect = section.getBoundingClientRect();
+
+    const navbar = document.querySelector('.overlay-nav');
+
+    const navbarBottom = navbar
+      ? navbar.getBoundingClientRect().bottom
+      : 0;
+
+    const floatingTop = navbarBottom + 8;
+
+    document.documentElement.style.setProperty(
+      '--offers-toggle-top',
+      `${floatingTop}px`
+    );
+
+    const hasReachedTop =
+      anchorRect.top <= floatingTop;
+
+    const sectionIsStillVisible =
+      sectionRect.bottom > floatingTop + toggleHeight + gap;
+
+    const shouldFloat =
+      hasReachedTop && sectionIsStillVisible;
+
+    const hasChanged =
+      toggle.classList.contains('is-floating') !== shouldFloat;
+
+    toggle.classList.toggle('is-floating', shouldFloat);
+
+    // 12 px de marge haute + 8 px de marge basse
+    anchor.style.height = shouldFloat
+      ? `${toggleHeight + 20}px`
+      : '0px';
+
+    if (hasChanged) {
+      requestAnimationFrame(refreshThumb);
+    }
+  }
+
+  function requestUpdate() {
+    if (frameRequested) return;
+
+    frameRequested = true;
+    requestAnimationFrame(updateFloatingToggle);
+  }
+
+  window.addEventListener('scroll', requestUpdate, {
+    passive: true
+  });
+
+  window.addEventListener('resize', () => {
+    requestUpdate();
+    requestAnimationFrame(refreshThumb);
+  });
+
+  updateFloatingToggle();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('khypnos-offers-2026');
   if (!container) return;
 
   container.innerHTML = renderKhypnosOffers2026();
-  initOffersToggle();
+
+    initOffersToggle();
+    initFloatingOffersToggle()
 });

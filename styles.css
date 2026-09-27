@@ -1035,22 +1035,27 @@ a { text-decoration: none; color: inherit; }
             margin-top: 1rem;
         }
 
-        .offers-toggle--sticky{
-        position: sticky;
-        top: 86px;              /* ajuste selon ta barre nav */
-        z-index: 50;
-        /* look “propre” quand ça colle */
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
+
+        .offers-toggle.is-floating {
+            position: fixed;
+            top: var(--offers-toggle-top, 96px);
+            bottom: auto;
+            left: 50%;
+
+            width: min(calc(100% - 32px), 720px);
+            margin: 0;
+            transform: translateX(-50%);
+
+            z-index: 9998;
+            background: rgba(238, 242, 255, 0.94);
+            box-shadow: 0 10px 30px rgba(26, 47, 79, 0.22);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        /* Optionnel: donne un petit fond pour éviter que ça se mélange au contenu */
-        .offers-toggle--sticky {
-        background: rgba(238, 242, 255, 0.92); /* proche de --bg */
-        }
-
-        .offers-toggle-sticky-wrap{
-        position: relative;
+        .offers-toggle-anchor {
+            height: 0;
         }
 
         /* Mobile */
