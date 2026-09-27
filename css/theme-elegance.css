@@ -144,6 +144,13 @@ body {
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
+.payment-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+  justify-self: center;
+}
+
 .payment-card h3 {
     font-size: 18px;
     margin: 0;
@@ -158,6 +165,12 @@ body {
   box-shadow: var(--sh-md);
   border-color: rgba(102, 126, 234, 0.25);
 }
+
+.feature-card p {
+  margin: 0;
+  text-align: left;
+}
+
 
 /* ============================================================
    7. Sections "fond doux" — neutre chaud au lieu de bleu pâle
