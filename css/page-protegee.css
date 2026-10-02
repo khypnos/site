@@ -103,6 +103,50 @@
       display: inline-flex; align-items: center; gap: .4rem;
     }
 
+    /* Pièces jointes téléchargeables (XLS/XLSX, CSV, ZIP, etc.) */
+    .download-card {
+      display: flex; align-items: center; gap: .85rem;
+      padding: 1rem 1.25rem; margin: 1rem 0;
+      border: 1px solid #d1e7d6; border-radius: 12px;
+      background: #fff; color: #1a1a2e; text-decoration: none;
+      transition: box-shadow .15s, transform .1s;
+    }
+    .download-card:hover { box-shadow: 0 4px 14px rgba(16,24,40,.09); transform: translateY(-1px); }
+    .download-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: #e8f5ec; color: #217346;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; flex-shrink: 0;
+    }
+    .download-info { flex: 1; min-width: 0; }
+    .download-label { font-weight: 600; overflow-wrap: anywhere; }
+    .download-action { margin-top: .15rem; color: #6b7280; font-size: .8rem; }
+    .download-btn {
+      flex-shrink: 0; padding: .35rem .85rem; border-radius: 999px;
+      background: #e8f5ec; color: #217346;
+      font-size: .8rem; font-weight: 600; white-space: nowrap;
+      transition: background .15s, color .15s;
+    }
+    .download-card:hover .download-btn { background: #217346; color: #fff; }
+
+    /* Mobile : textes fluides + bouton qui passe à la ligne (vidéo, téléchargement, PDF) */
+    .video-block { flex-wrap: wrap; }
+    .video-block > div:first-child { flex: 1 1 200px; min-width: 0; font-size: clamp(.95rem, 3.5vw, 1.1rem); overflow-wrap: anywhere; }
+    .btn-play { font-size: clamp(.85rem, 3vw, 1rem); }
+    .download-card { flex-wrap: wrap; }
+    .download-label { font-size: clamp(.9rem, 3.2vw, 1.05rem); line-height: 1.35; }
+    .download-btn { font-size: clamp(.75rem, 2.8vw, .85rem); }
+    @media (max-width: 560px) {
+      .video-block { padding: 1.1rem; }
+      .video-block > div:first-child { flex-basis: 100%; }
+      .btn-play { width: 100%; justify-content: center; }
+      .download-card { padding: .9rem 1rem; }
+      .download-info { flex: 1 1 calc(100% - 60px); }
+      .download-btn { width: 100%; text-align: center; padding: .55rem .85rem; }
+      .pp-content .pdf-card { padding: .85rem 1rem; }
+      .pp-content .pdf-label { overflow-wrap: anywhere; }
+    }
+
     /* Section PDF */
     .pdf-section { margin-top: 3rem; }
     .pdf-list {

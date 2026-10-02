@@ -46,7 +46,7 @@
   </div>
 
   <script type="module">
-    import { supabase, requireAuth } from '/espace-client/auth.js'
+    import { requireAuth } from '/espace-client/auth.js'
     import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs'
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -64,7 +64,7 @@
       throw new Error('slug manquant')
     }
 
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/get-protected-page?slug=${slug}`, {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/get-protected-page?slug=${encodeURIComponent(slug)}`, {
       headers: { Authorization: `Bearer ${session.access_token}` }
     })
 
@@ -127,19 +127,6 @@
       </div>
       ${navHtml}
       <div class="pp-content">${contentHtml}</div>
-      ${false /* Obsolète : les PDF sont désormais rendus inline par renderBlock (case 'pdf'). Ce bloc "Documents" n'est plus utilisé — à supprimer manuellement si tu veux. */ ? `
-        <div class="pdf-section">
-          <h2>📎 Documents</h2>
-          <div class="pdf-list">
-            ${pdfs.map(p => `
-              <div class="pdf-card" data-path="${escapeHtml(p.path)}" data-label="${escapeHtml(p.label)}">
-                <div class="pdf-icon">PDF</div>
-                <div class="pdf-label">${escapeHtml(p.label)}</div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      ` : ''}
     `
 
     // Navigation rapide : mise en surbrillance du lien actif au scroll, clic avec smooth-scroll,
@@ -282,7 +269,7 @@
 
     // ---- Rafraîchissement de session (signed URLs Notion valides ~1h) ----
     // À 55 min, on affiche un bandeau invitant à recharger pour obtenir
-    // de nouvelles URLs de PDF avant leur expiration.
+    // de nouvelles URLs de PDF et de pièces jointes avant leur expiration.
     const SESSION_REFRESH_MS = 55 * 60 * 1000
     setTimeout(() => {
       if (document.getElementById('session-refresh-banner')) return
@@ -405,7 +392,7 @@
         case 'callout':
           return `<div class="callout"><div class="callout-icon">${escapeHtml(b.icon)}</div><div>${renderRichText(b.text)}</div></div>`
         case 'toggle':
-          return `<details><summary>${renderRichText(b.text)}</summary>${(b.children ?? []).map(renderBlock).join('')}</details>`
+          return `<details><summary>${renderRichText(b.text)}</summary>${(b.children ?? []).map(child => renderBlock(child)).join('')}</details>`
         case 'video':
           return `
             <div class="video-block">
@@ -418,9 +405,33 @@
           `
         case 'image':
           return `<figure><img src="${escapeHtml(b.url)}" alt="" style="max-width:100%;border-radius:10px"/>${b.caption?.length ? `<figcaption style="color:#6b7280;font-size:.85rem;text-align:center">${renderRichText(b.caption)}</figcaption>` : ''}</figure>`
+        case 'download': {
+          const plainLabel = b.caption?.length
+            ? b.caption.map(t => t.text).join('')
+            : prettifyName(b.name)
+          const displayLabel = b.caption?.length
+            ? renderRichText(b.caption)
+            : escapeHtml(prettifyName(b.name))
+          return `
+            <a
+              class="download-card"
+              href="${escapeHtml(b.url)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              aria-label="Télécharger ${escapeHtml(plainLabel)}"
+            >
+              <div class="download-icon">XLS</div>
+              <div class="download-info">
+                <div class="download-label">${displayLabel}</div>
+              </div>
+              <span class="download-btn">Télécharger</span>
+            </a>
+          `
+        }
         case 'pdf': {
           const plainLabel = b.caption?.length ? b.caption.map(t => t.text).join('') : prettifyName(b.name)
-          const displayLabel = b.caption?.length ? renderRichText(b.caption) : prettifyName(b.name)
+          const displayLabel = b.caption?.length ? renderRichText(b.caption) : escapeHtml(prettifyName(b.name))
           return `<div class="pdf-card" data-url="${escapeHtml(b.url)}" data-label="${escapeHtml(plainLabel)}"><div class="pdf-icon">PDF</div><div class="pdf-label">${displayLabel}</div></div>`
         }
         default: return ''
