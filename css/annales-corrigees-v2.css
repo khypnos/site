@@ -1,0 +1,40 @@
+/* V2 additions only. No change to the production stylesheets. */
+.v2-preview { background:linear-gradient(120deg,#edf3fb,#f7faff); border:1px solid #c8d7ea; border-radius:12px; padding:1rem 1.2rem; margin-bottom:1.2rem; color:#244767; }
+.v2-preview p { margin:.5rem 0 .8rem; }
+.v2-preview button,.v2-retry { border:1px solid #aebacc; border-radius:8px; background:#fff; color:#1a2f4f; padding:.65rem .9rem; cursor:pointer; font:inherit; }
+.v2-preview button:disabled { opacity:.55; cursor:wait; }
+#refresh-result { display:block; margin-top:.6rem; font-size:.9rem; }
+button.annale-card { width:100%; text-align:left; cursor:pointer; font:inherit; color:inherit; }
+button.annale-card:disabled { cursor:default; }
+.annale-meta,.v2-date { color:#526078; font-size:.85rem; margin:.3rem 0; }
+.v2-pdf-state { display:flex; flex-wrap:wrap; gap:.4rem; font-size:.78rem; margin:.4rem 0; }
+.v2-pdf-state span { background:#f0f3f7; color:#45546d; padding:.25rem .45rem; border-radius:5px; }
+.v2-section { margin:1.3rem 0; }
+.v2-section h2 { font-size:1.2rem; color:#1a2f4f; }
+.v2-muted,.v2-empty { color:#59677b; }
+.v2-warning { background:#fff1cf; color:#705000; padding:.8rem; border-radius:8px; }
+.v2-error { padding:1rem; border-radius:10px; background:#fff0f0; color:#8f2727; grid-column:1/-1; }
+button.pdf-card { width:100%; text-align:left; font:inherit; color:inherit; }
+.annale-modal-body { box-sizing:border-box; padding-bottom:100px; }
+.pdf-canvas-wrap { padding-bottom:90px; }
+.annale-card:focus-visible,.pdf-card:focus-visible,.v2-preview button:focus-visible,.v2-retry:focus-visible { outline:3px solid #5486c7; outline-offset:3px; }
+@media(max-width:640px){ .v2-preview{padding:.9rem} .annale-modal{padding:.5rem} .annale-modal-body{padding:16px 14px 95px} }
+@media print { body {display:none !important;} }
+
+/* Student-facing polish: metadata badges and genuinely full-screen overlays. */
+.v2-admin-link { color:#244767; font-weight:600; text-underline-offset:3px; }
+.v2-publication-badge { display:inline-flex; align-items:center; flex-wrap:wrap; gap:.3rem; width:fit-content; padding:.4rem .7rem; border:1px solid #b9cee9; border-radius:999px; background:#e5effc; color:#173d6c; font-size:.79rem; font-weight:600; line-height:1.5; }
+.v2-publication-badge time { font-weight:700; }
+.v2-detail-meta { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; margin:0 0 1rem; }
+.annale-modal { inset:0; z-index:100000; padding-top:max(1rem,env(safe-area-inset-top)); padding-bottom:max(1rem,env(safe-area-inset-bottom)); }
+.pdf-modal { inset:0; z-index:100100; padding-top:max(1rem,env(safe-area-inset-top)); padding-bottom:max(1rem,env(safe-area-inset-bottom)); }
+.annale-modal-close,.pdf-modal-close { bottom:max(1rem,env(safe-area-inset-bottom)); }
+.v2-admin-card { background:#fff; border:1px solid #dce3ed; border-radius:14px; padding:1.3rem; margin:1rem 0; }
+.v2-admin-card h2 { margin:.1rem 0 .7rem; font-size:1.2rem; }
+.v2-admin-card p { line-height:1.6; }
+.v2-admin-card button { font:inherit; padding:.7rem 1rem; border-radius:8px; border:0; background:#1a2f4f; color:#fff; cursor:pointer; }
+.v2-admin-card button:disabled { opacity:.5; cursor:default; }
+@media(max-width:640px){.v2-publication-badge {font-size:.74rem;border-radius:12px;} .annale-modal,.pdf-modal {padding:.6rem;padding-top:max(.6rem,env(safe-area-inset-top));} }
+
+#admin-tools[hidden],#admin-annales[hidden] { display:none !important; }
+.v2-publication-text { display:block; font-size:.8rem; color:#657184; line-height:1.5; margin:.2rem 0; }

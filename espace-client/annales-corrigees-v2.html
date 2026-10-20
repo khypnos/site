@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos — Annales corrigées</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/css/theme-elegance.css">
+  <link rel="stylesheet" href="/css/annales.css">
+  <link rel="stylesheet" href="/css/annales-corrigees.css">
+  <link rel="stylesheet" href="/css/annales-corrigees-v2.css">
+</head>
+<body>
+<div class="container">
+  <main class="annales-wrapper" id="annales-main">
+    <a href="/espace-client/index.html" class="ac-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Retour à mon espace
+    </a>
+    
+    <div id="doc-notice" class="doc-notice" hidden></div>
+
+    <header class="ac-header">
+      <h1>📚 Annales corrigées</h1>
+      <p>Corrigés enrichis et ressources complémentaires.</p>
+    </header>
+
+    <div id="annales-grid" class="annales-grid" aria-live="polite">
+      <div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal détail d'une année : overlay plein écran, s'affiche instantanément (pas d'effet "en bas de page") -->
+<div id="annale-modal" class="annale-modal" role="dialog" aria-modal="true" aria-labelledby="annale-modal-title" aria-hidden="true" tabindex="-1">
+  <div class="annale-modal-header"><span id="annale-modal-title"></span></div>
+  <div id="annale-modal-notice" class="doc-notice doc-notice--modal" hidden></div>
+  <div id="detail-content" class="annale-modal-body"></div>
+  <button id="detail-close" type="button" class="annale-modal-close" aria-label="Fermer">✕ Fermer</button>
+</div>
+
+<!-- Modal viewer PDF maison : watermark nominatif, jamais l'URL Notion brute exposée comme lien -->
+<div id="pdf-modal" class="pdf-modal" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title" aria-hidden="true" tabindex="-1">
+  <div class="pdf-modal-header"><span id="pdf-modal-title"></span></div>
+  <div id="pdf-canvas-wrap" class="pdf-canvas-wrap"></div>
+  <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Fermer le document">✕ Fermer</button>
+</div>
+
+<script type="module" src="/js/annales-corrigees-v2.js"></script>
+
+<script src="/js/header-manager.js" defer></script>
+<script src="/js/scroll-to-top.min.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/footer-manager.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      new FooterManager({
+          anchor: '.container',
+          position: 'beforeend'
+      }).init();
+  });
+</script>
+</body>
+</html>

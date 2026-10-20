@@ -1,0 +1,13 @@
+/* Admin entry: hidden until the server confirms the authenticated UUID. */
+.v2-admin-banner[hidden] { display:none !important; }
+.v2-admin-banner { margin:0 0 1.4rem; border-radius:16px; overflow:hidden; box-shadow:0 8px 24px rgba(23,49,80,.12); }
+.v2-admin-banner-link { display:flex; align-items:center; gap:1rem; padding:1.15rem 1.3rem; text-decoration:none; background:linear-gradient(115deg,#182e4f,#2b567a); color:#fff; }
+.v2-admin-banner-link:hover { background:linear-gradient(115deg,#203b60,#35688e); color:#fff; }
+.v2-admin-banner-link:focus-visible { outline:3px solid #83b4ee; outline-offset:-4px; }
+.v2-admin-banner-icon { display:grid; place-items:center; flex:0 0 46px; height:46px; font-size:1.8rem; border-radius:12px; background:rgba(255,255,255,.12); color:#dceaff; }
+.v2-admin-banner-copy { display:grid; gap:.2rem; flex:1; }
+.v2-admin-banner-copy strong { color:#fff; font-size:1.05rem; }
+.v2-admin-banner-copy>span { font-size:.83rem; color:#d3e3f3; }
+.v2-admin-banner-tag { border:1px solid rgba(255,255,255,.35); border-radius:99px; padding:.3rem .6rem; font-size:.75rem; color:#eef5ff; }
+.v2-admin-banner-arrow { font-size:1.8rem; color:#d6e6fa; }
+@media(max-width:600px){.v2-admin-banner-link{gap:.7rem;padding:1rem}.v2-admin-banner-icon{flex-basis:38px;height:38px;font-size:1.5rem}.v2-admin-banner-tag{display:none}.v2-admin-banner-copy strong{font-size:.95rem}}
