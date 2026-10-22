@@ -13,33 +13,38 @@
  <link rel="stylesheet" href="/css/admin-pipeline-v2.css">
  <link rel="stylesheet" href="/css/admin-layout-v2.css?v=lot1">
  <link rel="stylesheet" href="/css/admin-activity-v2.css?v=lot2-clarifie">
- <link rel="stylesheet" href="/css/admin-video-v2.css?v=video1">
+ <link rel="stylesheet" href="/css/admin-video-v2.css?v=video-bilan1">
+ <link rel="stylesheet" href="/css/ui-feedback-v2.css?v=ux1">
+ <link rel="stylesheet" href="/css/admin-cleanup-v2.css?v=cleanup1">
 </head>
 <body>
  <div class="container"><main class="annales-wrapper">
   <a href="/espace-client/index.html" class="ac-back-link">← Retour à mon espace</a>
   <header class="ac-header"><h1>Administration — V2</h1><p>Outils réservés aux comptes administrateurs autorisés.</p></header>
-  <aside class="v2-preview"><strong>Deux périmètres distincts</strong><p><b>Annales :</b> génération et publication dans la sandbox Notion et le cache V2, sans modifier les annales en production.<br><b>Vidéothèque :</b> actualisation du catalogue vidéo en production, uniquement après confirmation.</p></aside>
+  <aside class="v2-preview"><strong>À savoir avant de commencer</strong><p><b>Annales :</b> les aperçus sont générés à partir des documents Word de Drive. Après relecture, les PDF sont publiés dans la base de données Notion de test (V2). Les annales actuellement utilisées par les étudiants restent inchangées.<br><b>Vidéothèque :</b> actualisation du catalogue vidéo en production, uniquement après confirmation.</p></aside>
   <div id="admin-state" role="status" aria-live="polite">Vérification des droits administrateur…</div>
   <div id="admin-tools" hidden>
   <nav class="admin-lot1-nav" aria-label="Sections d’administration"><a href="#admin-video-domain">🎬 Vidéothèque</a><a href="#admin-annales-domain">📚 Annales</a></nav>
   <section class="admin-lot1-domain" id="admin-video-domain">
    <header class="admin-lot1-heading"><div><span class="admin-lot1-eyebrow">CATALOGUE EN PRODUCTION</span><h2>🎬 Vidéothèque</h2></div><span class="admin-lot1-tag">Médecin + IADE</span></header>
    <section class="v2-admin-card" id="video-admin-card" aria-busy="false">
-    <h3>Actualiser le catalogue vidéo</h3>
-    <p>Relire les deux vidéothèques Notion et actualiser les métadonnées utilisées par le site. Les vidéos absentes de Notion sont conservées dans le cache. Les règles d’accès existantes sont conservées ; les promotions minimales sont relues depuis Notion.</p>
-    <div class="admin-video-actions"><button type="button" id="refresh-video-catalogue" disabled>Actualiser le catalogue vidéo</button><button type="button" id="check-video-status" class="admin-video-secondary" disabled>Actualiser le suivi vidéo</button></div>
-    <div id="video-activity" class="admin-activity" data-tone="idle"><header><strong>Catalogue vidéo</strong><span id="video-spinner" class="admin-activity-spinner" aria-hidden="true" hidden></span></header><p id="video-message" role="status" aria-live="polite">Vérification du suivi vidéo… Aucun refresh lancé.</p><small id="video-checked-at"></small><ol id="video-log" class="admin-activity-log" role="log" aria-live="polite" aria-label="Journal du catalogue vidéo"></ol></div>
+    <h3>Mettre à jour la vidéothèque du site</h3>
+    <p>Met à jour les informations affichées sur le site à partir des deux bases de données Notion : titres, rubriques, descriptions, durées et promotions autorisées. Les vidéos absentes de Notion ne sont pas retirées du site. Les fichiers vidéo ne sont pas modifiés.</p>
+    <div class="admin-video-actions">
+     <div class="admin-video-action"><button type="button" id="refresh-video-catalogue" aria-describedby="video-update-help" disabled>Mettre à jour depuis Notion</button><p id="video-update-help">Après un ajout ou une modification dans Notion. Met à jour le catalogue visible par les étudiants, après confirmation.</p></div>
+     <div class="admin-video-action"><button type="button" id="check-video-status" class="admin-video-secondary" aria-describedby="video-check-help" disabled>Vérifier l’avancement</button><p id="video-check-help">Consulte la dernière opération. Ne lance aucune nouvelle mise à jour.</p></div>
+    </div>
     <div id="video-refresh-result" hidden></div>
+    <div id="video-activity" class="admin-activity" data-tone="idle"><header><strong>Catalogue vidéo</strong><span id="video-spinner" class="admin-activity-spinner" aria-hidden="true" hidden></span></header><p id="video-message" role="status" aria-live="polite">Vérification du suivi vidéo… Aucune mise à jour lancée.</p><small id="video-checked-at"></small><ol id="video-log" class="admin-activity-log" role="log" aria-live="polite" aria-label="Journal du catalogue vidéo"></ol></div>
    </section>
   </section>
   <section class="admin-lot1-domain" id="admin-annales-domain">
-   <header class="admin-lot1-heading"><div><span class="admin-lot1-eyebrow">PILOTE ISOLÉ · SANDBOX NOTION</span><h2>📚 Annales</h2></div><a href="/espace-client/annales-corrigees-v2.html" class="admin-lot1-link">Ouvrir le catalogue V2 ↗</a></header>
+   <header class="admin-lot1-heading"><div><span class="admin-lot1-eyebrow">VERSION DE TEST · BASE DE DONNÉES NOTION V2</span><h2>📚 Annales</h2></div><a href="/espace-client/annales-corrigees-v2.html" class="admin-lot1-link">Ouvrir le catalogue V2 ↗</a></header>
   <section class="v2-admin-card" id="admin-annales" hidden>
    <h3><span class="admin-lot1-number">1</span> Catalogue des annales</h3>
    <p id="admin-catalogue-count"></p>
-   <p>Relire les métadonnées de la sandbox Notion : titres, statuts, dates et présence des PDF. Cette action ne génère ni ne publie de PDF et ne modifie pas le cache de production.</p>
-   <button id="refresh-v2" type="button" disabled>Actualiser le catalogue V2</button>
+   <p>Met à jour la liste des annales V2 à partir de la base de données Notion de test : années, titres, disponibilité et dates de publication. À utiliser après avoir modifié une ligne dans Notion. Ce bouton ne génère ni ne publie de PDF et ne modifie pas le catalogue actuellement utilisé par les étudiants.</p>
+   <button id="refresh-v2" type="button" disabled>Actualiser le catalogue des annales V2</button>
    <div id="catalogue-activity" class="admin-activity" data-tone="idle"><header><strong>Actualisation du catalogue</strong><span id="catalogue-spinner" class="admin-activity-spinner" aria-hidden="true" hidden></span></header><p id="refresh-result" role="status" aria-live="polite">En attente d’une action.</p><ol id="catalogue-log" class="admin-activity-log" role="log" aria-live="polite" aria-label="Journal : actualisation du catalogue"></ol></div>
   </section>
   <section class="v2-admin-card"><h3><span class="admin-lot1-number">2</span> Générer les aperçus</h3>
@@ -48,12 +53,14 @@
    <button id="generate-previews" type="button" disabled>Générer les aperçus</button>
    <div id="generation-activity" class="admin-activity" data-tone="idle"><header><strong>Génération · suivi GitHub</strong><span id="generation-spinner" class="admin-activity-spinner" aria-hidden="true" hidden></span></header><p id="generation-feedback" role="status" aria-live="polite">En attente d’une action.</p><ol id="generation-log" class="admin-activity-log" role="log" aria-live="polite" aria-label="Journal : demande de génération"></ol></div>
    <a id="generation-actions-link" href="https://github.com/khypnos/publi_khypnos/actions" target="_blank" rel="noopener noreferrer" hidden>Voir dans GitHub Actions ↗</a>
- <button type="button" id="cancel-pending-generation" hidden>Abandonner cette demande sans run confirmé</button>
+ <button type="button" id="cancel-pending-generation" hidden>Abandonner cette demande au démarrage non confirmé</button>
    <p>Aucune publication à cette étape. La promotion minimale et le statut ne changent pas.</p>
   </section>
   <section class="v2-admin-card"><h3><span class="admin-lot1-number">3</span> Suivre, relire et publier</h3>
    <p>Les tuiles en cours de génération sont verrouillées. Une fois ✅ les aperçus prêts, clique sur la tuile pour ouvrir sa relecture directement dessous. Les aperçus sont conservés 7 jours ; la publication reste une action distincte et explicite.</p>
    <button type="button" id="refresh-jobs">Actualiser le suivi</button>
+   <button type="button" id="open-cleanup" class="cleanup-launch" disabled>Nettoyer les anciennes générations…</button>
+   <p class="admin-help">« Actualiser le suivi » vérifie l’avancement et les résultats des demandes existantes. Ce bouton ne génère ni ne publie de PDF.</p>
    <div id="jobs-list" class="v2-jobs"></div>
    <div id="review-parking" hidden><div id="review-panel" hidden>
    <div id="follow-activity" class="admin-activity" data-tone="idle"><header><strong>Relecture et publication de cette génération</strong><span id="follow-spinner" class="admin-activity-spinner" aria-hidden="true" hidden></span></header><p id="pipeline-result" role="status" aria-live="polite">En attente d’une action.</p><ol id="follow-log" class="admin-activity-log" role="log" aria-live="polite" aria-label="Journal : suivi du traitement"></ol></div>
@@ -62,9 +69,17 @@
   </section>
   </div>
  </main></div>
- <dialog id="admin-pdf-dialog" class="v2-pdf-review"><header><strong id="admin-pdf-label"></strong><button type="button" id="close-admin-pdf">Fermer la relecture</button></header><p>Administration : lecteur PDF natif. Après relecture, ferme cette fenêtre et coche la validation de l’enrichi.</p><iframe id="admin-pdf-frame" title="Relecture du PDF généré" src="about:blank"></iframe></dialog>
- <script type="module" src="/js/admin-v2.js?v=tech1"></script>
- <script type="module" src="/js/admin-video-v2.js?v=video1"></script>
+ <dialog id="admin-pdf-dialog" class="v2-pdf-review"><header><strong id="admin-pdf-label"></strong><button type="button" id="close-admin-pdf">Fermer la relecture</button></header><p>Relis ce PDF, puis ferme cette fenêtre. Pour le publier dans la base de données Notion, coche ensuite sa case de validation et clique sur le bouton de publication.</p><div id="admin-pdf-loading" hidden></div><iframe id="admin-pdf-frame" title="Relecture du PDF généré" src="about:blank"></iframe></dialog>
+ <dialog id="cleanup-dialog" class="cleanup-dialog" aria-labelledby="cleanup-title">
+  <header><h2 id="cleanup-title">Nettoyer les anciennes générations</h2><button type="button" id="cleanup-close">Fermer</button></header>
+  <p>Supprime les aperçus temporaires GitHub et retire les générations sélectionnées du suivi. Ce nettoyage est irréversible : les aperçus retirés ne pourront plus être publiés.</p>
+  <p class="cleanup-preserved">✓ Les PDF publiés dans la base de données Notion, les documents Word dans Drive et les historiques des traitements GitHub sont conservés.</p>
+  <div class="cleanup-toolbar"><button type="button" id="cleanup-reload">Recharger la liste</button><button type="button" id="cleanup-select-safe">Sélectionner les publiées et échouées sans aperçu à perdre</button></div>
+  <div id="cleanup-list" class="cleanup-list"></div><p id="cleanup-note"></p>
+  <button type="button" id="cleanup-confirm" disabled>Nettoyer 0 génération(s)</button>
+ </dialog>
+ <script type="module" src="/js/admin-v2.js?v=labels2"></script>
+ <script type="module" src="/js/admin-video-v2.js?v=video-bilan1"></script>
  <script src="/js/header-manager.js" defer></script>
  <script src="/js/navbar.js"></script>
  <script src="/js/footer-manager.js" defer></script>

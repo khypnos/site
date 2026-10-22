@@ -1,3 +1,4 @@
+import {loadingFeedback} from '/js/ui-feedback-v2.js?v=ux1';
 import { recentPublication } from '/js/annales-publication-v2.js';
 import { supabase, requireAuth } from '/espace-client/auth.js';
 import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs';
@@ -67,8 +68,8 @@ async function loadList(){
 }
 function lockScroll(){const open=$('annale-modal').classList.contains('active')||$('pdf-modal').classList.contains('active');document.documentElement.style.overflow=open?'hidden':'';document.body.style.overflow=open?'hidden':'';}
 function setModal(id,open){$(id).classList.toggle('active',open);$(id).setAttribute('aria-hidden',String(!open));$('annales-main').inert=$('annale-modal').classList.contains('active')||$('pdf-modal').classList.contains('active');$('annale-modal').inert=$('pdf-modal').classList.contains('active');lockScroll();}
-function closeDetail(){detailVersion++;closePdf(false);setModal('annale-modal',false);documents.clear();$('detail-content').replaceChildren();currentId=null;returnToList?.focus();}
-function closePdf(focus=true){pdfVersion++;const task=pdfTask;pdfTask=null;if(task)Promise.resolve(task.destroy()).catch(()=>{});setModal('pdf-modal',false);$('pdf-canvas-wrap').replaceChildren();if(focus)returnToDetail?.focus();}
+function closeDetail(){$('detail-content').setAttribute('aria-busy','false');detailVersion++;closePdf(false);setModal('annale-modal',false);documents.clear();$('detail-content').replaceChildren();currentId=null;returnToList?.focus();}
+function closePdf(focus=true){$('pdf-canvas-wrap').setAttribute('aria-busy','false');pdfVersion++;const task=pdfTask;pdfTask=null;if(task)Promise.resolve(task.destroy()).catch(()=>{});setModal('pdf-modal',false);$('pdf-canvas-wrap').replaceChildren();if(focus)returnToDetail?.focus();}
 function rich(text){return (Array.isArray(text)?text:[]).map(t=>{let s=esc(t.text);if(t.code)s=`<code>${s}</code>`;if(t.bold)s=`<strong>${s}</strong>`;if(t.italic)s=`<em>${s}</em>`;if(t.strike)s=`<s>${s}</s>`;const u=t.href?safeUrl(t.href,['https:','http:','mailto:','tel:']):'';return u?`<a class="inline-link" href="${esc(u)}" target="_blank" rel="noopener noreferrer">🔗 ${s}</a>`:s;}).join('');}
 function pdfCard(b,label){
  const url=safeUrl(b?.url);if(!url)return '<p class="v2-warning">PDF indisponible : URL non prise en charge.</p>';
@@ -112,22 +113,23 @@ function renderDetail(data){
 }
 async function openAnnale(id,source){
  const version=++detailVersion;currentId=id;returnToList=source??returnToList;
- $('annale-modal-title').textContent='Chargement…';$('annale-modal-notice').hidden=true;$('detail-content').innerHTML=loading();setModal('annale-modal',true);$('detail-close').focus();
+ $('annale-modal-title').textContent='Chargement…';$('annale-modal-notice').hidden=true;const stopDetailLoading=loadingFeedback($('detail-content'),{title:'Ouverture de l’annale…',hint:'Lecture des corrigés et des ressources. Généralement une dizaine de secondes.'});setModal('annale-modal',true);$('detail-close').focus();
  try{
   const data=await api(ROUTES.detail,{query:'?notion_page_id='+encodeURIComponent(id)});
   if(version!==detailVersion)return;requirePreview(data);currentEmail=data.student?.email??session.user?.email;
   $('annale-modal-title').textContent=data.titre??'Annale';notice($('annale-modal-notice'),currentEmail);renderDetail(data);
  }catch(e){if(version===detailVersion){$('annale-modal-title').textContent='Annale V2';showError($('detail-content'),e,()=>openAnnale(id));}}
+ finally{if(version===detailVersion)stopDetailLoading();}
 }
 async function openPdf(doc,source){
  if(!doc)return;
  // Refresh the detail before displaying an expired signed URL. Never silently select a different file.
  if(doc.expires_at&&Date.parse(doc.expires_at)<Date.now()+30000){await openAnnale(currentId);const p=document.createElement('p');p.className='v2-warning';p.textContent='Les liens PDF ont été actualisés. Ouvre à nouveau le document souhaité.';$('detail-content').prepend(p);return;}
  closePdf(false);const version=++pdfVersion;returnToDetail=source;
- $('pdf-modal-title').textContent=doc.label;$('pdf-canvas-wrap').innerHTML=loading();setModal('pdf-modal',true);$('pdf-modal-close').focus();
+ $('pdf-modal-title').textContent=doc.label;const stopPdfLoading=loadingFeedback($('pdf-canvas-wrap'),{title:'Ouverture du PDF…',hint:'Téléchargement et préparation du document.'});setModal('pdf-modal',true);$('pdf-modal-close').focus();
  try{
   const task=pdfjsLib.getDocument({url:doc.url,withCredentials:false});pdfTask=task;
-  const pdf=await task.promise;if(version!==pdfVersion)return;$('pdf-canvas-wrap').replaceChildren();
+  const pdf=await task.promise;if(version!==pdfVersion)return;const loadingCard=$('pdf-canvas-wrap').querySelector('.ux-loading');
   const dpr=Math.min(window.devicePixelRatio||1,2);const available=Math.max(120,Math.min($('pdf-canvas-wrap').clientWidth-40,window.innerWidth-48));
   for(let pageNum=1;pageNum<=pdf.numPages;pageNum++){
    if(version!==pdfVersion)return;const page=await pdf.getPage(pageNum);if(version!==pdfVersion)return;
@@ -137,9 +139,10 @@ async function openPdf(doc,source){
    const watermark=document.createElement('div');watermark.className='pdf-watermark';const text=document.createElement('div');text.className='pdf-watermark-text';
    for(let i=0;i<15;i++){text.append(document.createTextNode((currentEmail??session.user?.email??'Administrateur')+' • Document strictement personnel • Khypnos'),document.createElement('br'));}
    watermark.append(text);box.append(watermark);$('pdf-canvas-wrap').append(box);
-   await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;page.cleanup?.();
+   await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;if(version!==pdfVersion)return;if(pageNum===1)loadingCard?.remove();page.cleanup?.();
   }
  }catch{if(version===pdfVersion){$('pdf-canvas-wrap').innerHTML='<div class="v2-error" role="alert">Impossible d’afficher ce PDF. Ferme le viewer puis recharge l’annale pour obtenir un lien frais.</div>';}}
+ finally{if(version===pdfVersion)stopPdfLoading();}
 }
 $('detail-close').addEventListener('click',closeDetail);$('pdf-modal-close').addEventListener('click',()=>closePdf());
 document.addEventListener('keydown',e=>{

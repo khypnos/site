@@ -21,3 +21,15 @@
 .admin-video-retained{background:#f0f5f1;border-radius:6px;padding:10px}
 #video-message{overflow-wrap:anywhere}
 @media(max-width:600px){.admin-video-actions{align-items:stretch;flex-direction:column}.admin-video-actions button{width:100%;white-space:normal}#video-refresh-result{padding:14px}.admin-video-metrics{gap:7px}.admin-video-metric{padding:11px 8px}.admin-video-metric strong{font-size:1.4rem}.admin-video-metric span{font-size:.72rem}.admin-video-result-heading{align-items:flex-start;flex-direction:column}}
+
+/* Lot vidéo 3 : une action, son explication et son retour au même endroit. */
+#admin-video-domain .admin-video-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.admin-video-action{min-width:0}
+#admin-video-domain .admin-video-action>p{font-size:.8rem;line-height:1.6;color:#61768c;margin:10px 0}
+#admin-video-domain .ux-action-row{align-items:flex-start;flex-direction:column;gap:10px}
+#admin-video-domain .ux-action-feedback{flex:0 1 auto;min-width:0;min-height:0;width:100%}
+#video-refresh-result[data-previous="true"]:before{content:"Dernier résultat connu — la dernière vérification a échoué.";display:block;color:#825b21;font-size:.8rem;margin-bottom:12px}
+@media(max-width:600px){#admin-video-domain .admin-video-actions{grid-template-columns:minmax(0,1fr);gap:12px}}
+
+#video-refresh-result{margin:16px 0 18px}
+#admin-video-domain .admin-video-details[open]>summary{margin-bottom:8px}
