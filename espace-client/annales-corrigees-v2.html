@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="/css/theme-elegance.css">
   <link rel="stylesheet" href="/css/annales.css">
   <link rel="stylesheet" href="/css/annales-corrigees.css">
-  <link rel="stylesheet" href="/css/annales-corrigees-v2.css">
+  <link rel="stylesheet" href="/css/annales-corrigees-v2.css?v=library-a1">
 </head>
 <body>
 <div class="container">
-  <main class="annales-wrapper" id="annales-main">
+  <main class="annales-wrapper annales-library-v2" id="annales-main">
     <a href="/espace-client/index.html" class="ac-back-link">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M19 12H5M12 5l-7 7 7 7"/>
@@ -24,9 +24,9 @@
     
     <div id="doc-notice" class="doc-notice" hidden></div>
 
-    <header class="ac-header">
-      <h1>📚 Annales corrigées</h1>
-      <p>Corrigés enrichis et ressources complémentaires.</p>
+    <header class="ac-header ac-library-header">
+      <span class="ac-library-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 4h6a4 4 0 0 1 3 1.5A4 4 0 0 1 15 4h6v15h-6a4 4 0 0 0-3 1.5A4 4 0 0 0 9 19H3z"/><path d="M12 5.5v15M6 8h3M6 11h3M15 8h3M15 11h3"/></svg></span>
+      <div><h1>Annales corrigées</h1><p>Corrigés enrichis et ressources complémentaires.</p></div>
     </header>
 
     <div id="annales-grid" class="annales-grid" aria-live="polite">
@@ -50,7 +50,7 @@
   <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Fermer le document">✕ Fermer</button>
 </div>
 
-<script type="module" src="/js/annales-corrigees-v2.js"></script>
+<script type="module" src="/js/annales-corrigees-v2.js?v=library-a1"></script>
 
 <script src="/js/header-manager.js" defer></script>
 <script src="/js/scroll-to-top.min.js"></script>

@@ -38,3 +38,65 @@ button.pdf-card { width:100%; text-align:left; font:inherit; color:inherit; }
 
 #admin-tools[hidden],#admin-annales[hidden] { display:none !important; }
 .v2-publication-text { display:block; font-size:.8rem; color:#657184; line-height:1.5; margin:.2rem 0; }
+
+/* Library A — catalogue only; no production stylesheet, API or access change. */
+.annales-library-v2 { --ac-ink:#1c385b; --ac-muted:#61738a; }
+.annales-library-v2 .ac-library-header { display:flex; align-items:center; gap:15px; margin:28px 0 26px; }
+.annales-library-v2 .ac-library-icon { flex:0 0 48px; width:48px; height:48px; display:grid; place-items:center; border:1px solid #dfE8f3; border-radius:13px; background:#eef4fa; }
+.annales-library-v2 .ac-library-icon svg { width:26px; height:26px; stroke:#315d8c; fill:none; stroke-width:1.7; }
+.annales-library-v2 .ac-header h1 { color:var(--ac-ink); font-size:1.75rem; font-weight:700; line-height:1.2; letter-spacing:-.045em; margin:0 0 7px; }
+.annales-library-v2 .ac-header p { color:var(--ac-muted); font-size:.9rem; line-height:1.5; margin:0; }
+.annales-library-v2 .doc-notice { font-size:.78rem; line-height:1.55; overflow-wrap:anywhere; border-color:#f0d6db; background:#fff8f8; border-radius:10px; }
+.annales-library-v2 .annales-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; align-items:stretch; }
+.annales-library-v2 button.annale-card { appearance:none; min-width:0; width:100%; min-height:150px; height:100%; display:flex; flex-direction:column; align-items:stretch; gap:14px; padding:20px; margin:0; text-align:left; border:1px solid #e0e7f0; border-radius:14px; background:#fff; color:var(--ac-ink); box-shadow:0 2px 5px rgb(28 56 91 / 3%); font:inherit; cursor:pointer; transition:border-color .18s,box-shadow .18s,transform .18s; }
+.annales-library-v2 .annale-card-header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 8px; min-width:0; }
+.annales-library-v2 .ac-session { display:flex; min-width:0; flex-direction:column; gap:5px; }
+.annales-library-v2 .ac-session-label { color:#61758e; font-size:.64rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; line-height:1.25; }
+.annales-library-v2 .ac-session-year { color:inherit; font-size:2rem; font-weight:700; letter-spacing:-.045em; line-height:1; overflow-wrap:anywhere; }
+.annales-library-v2 .ac-card-status { display:inline-flex; align-items:center; gap:6px; color:#267553; font-size:.72rem; font-weight:600; line-height:1.35; }
+.annales-library-v2 .ac-status-dot { flex:0 0 5px; width:5px; height:5px; border-radius:50%; background:#42a27a; }
+.annales-library-v2 .annale-card[data-status="en_cours"] { background:#fffefa; }
+.annales-library-v2 .annale-card[data-status="en_cours"] .ac-card-status { color:#936614; }
+.annales-library-v2 .annale-card[data-status="en_cours"] .ac-status-dot { background:#ce9f43; }
+.annales-library-v2 .annale-card[data-status="non_disponible"] { color:#718096; background:#fafbfd; border-color:#e8edf4; box-shadow:none; }
+.annales-library-v2 .annale-card[data-status="non_disponible"] .ac-card-status { color:#617185; font-weight:400; }
+.annales-library-v2 .annale-card[data-status="non_disponible"] .ac-status-dot { background:#a8b3c2; }
+.annales-library-v2 .annale-card.is-locked { opacity:1; filter:none; color:#718096; background:#fafbfd; cursor:default; }
+.annales-library-v2 .annale-lock { font-size:.75rem; line-height:1.4; margin:0; color:#617185; }
+.annales-library-v2 .ac-card-publication { display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin-top:auto; max-width:100%; }
+.annales-library-v2 .ac-recent-label { display:inline-flex; align-items:center; gap:5px; max-width:100%; padding:4px 7px; border-radius:5px; background:#eaf2fc; color:#355e8d; font-size:.65rem; line-height:1.4; font-weight:600; }
+.annales-library-v2 .ac-recent-dot { width:4px; height:4px; flex:0 0 4px; background:#5e8fc2; border-radius:50%; }
+.annales-library-v2 .ac-publication-date { font-size:.67rem; line-height:1.55; color:#61738a; overflow-wrap:anywhere; }
+.annales-library-v2 .annale-card:focus-visible { outline:3px solid #467db5; outline-offset:3px; }
+@media(hover:hover) and (pointer:fine) {
+ .annales-library-v2 button.annale-card:not(:disabled):not([data-status="non_disponible"]):hover { border-color:#aac4df; box-shadow:0 5px 16px rgb(28 56 91 / 8%); transform:translateY(-2px); }
+}
+/* Override inherited hover transforms on touch devices / muted cards. */
+.annales-library-v2 button.annale-card:disabled:hover,
+.annales-library-v2 button.annale-card[data-status="non_disponible"]:hover { transform:none; box-shadow:none; }
+@media(max-width:1023px) { .annales-library-v2 .annales-grid {grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media(max-width:600px) {
+ .annales-library-v2 .annales-grid {grid-template-columns:minmax(0,1fr); gap:12px;}
+ .annales-library-v2 button.annale-card { min-height:140px; padding:16px 18px; gap:12px; border-radius:12px; }
+ .annales-library-v2 .ac-session-year {font-size:1.85rem;}
+ .annales-library-v2 .ac-session-label {font-size:.64rem;}
+ .annales-library-v2 .ac-card-status {font-size:.75rem;}
+ .annales-library-v2 .ac-card-publication {gap:5px;}
+ .annales-library-v2 .ac-publication-date {font-size:.72rem;}
+ .annales-library-v2 .ac-recent-label {font-size:.68rem;}
+ .annales-library-v2 .ac-library-header {gap:12px;margin:22px 0;align-items:flex-start;}
+ .annales-library-v2 .ac-library-icon {width:42px;height:42px;flex-basis:42px;border-radius:11px;}
+ .annales-library-v2 .ac-header h1 {font-size:1.4rem;}
+ .annales-library-v2 .ac-header p {font-size:.82rem;}
+ .annales-library-v2 .ac-back-link {min-height:44px;}
+ .annales-library-v2 .doc-notice {font-size:.72rem;padding:10px 12px;}
+ /* Viewer and detail remain full-screen, with touch-friendly close controls. */
+ .annale-modal-close,.pdf-modal-close {min-height:44px;min-width:44px;right:max(.75rem,env(safe-area-inset-right));}
+ .annale-modal-header,.pdf-modal-header {overflow-wrap:anywhere;}
+ .doc-notice--modal {overflow-wrap:anywhere;}
+ .annale-modal-body {min-height:0;min-width:0;max-width:100%;}
+ .annale-modal-body pre {max-width:100%;overflow:auto;}
+ .annale-modal-body .pdf-label {min-width:0;overflow-wrap:anywhere;}
+}
+@media(hover:none), (pointer:coarse) { .annales-library-v2 button.annale-card:hover {transform:none;box-shadow:0 2px 5px rgb(28 56 91 / 3%);} }
+@media(prefers-reduced-motion:reduce) { .annales-library-v2 button.annale-card {transition:none;} }

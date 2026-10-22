@@ -13,10 +13,11 @@ let pdfTask=null, returnToList=null, returnToDetail=null;
 const documents=new Map();
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function safeUrl(value,protocols=['https:']){try{const u=new URL(String(value));return protocols.includes(u.protocol)?u.href:'';}catch{return '';}}
-function publicationBadge(value){
+function publicationBadge(value,card=false){
  if(!value)return '';const d=new Date(value);if(!Number.isFinite(d.getTime()))return '';
  const label=new Intl.DateTimeFormat('fr-FR',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Paris'}).format(d);
  const recent=recentPublication(value);const css=recent?'v2-publication-badge':'v2-publication-text';
+ if(card)return `<span class="ac-card-publication">${recent?'<span class="ac-recent-label"><span class="ac-recent-dot" aria-hidden="true"></span>Mis à jour récemment</span>':''}<span class="ac-publication-date">Dernière publication · <time datetime="${esc(value)}">${esc(label)}</time></span></span>`;
  return `<span class="${css}">${recent?'<span aria-hidden="true">🗓</span> ':''}Dernière publication : <time datetime="${esc(value)}">${esc(label)}</time></span>`;
 }
 const loading=()=>'<div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div>';
@@ -54,9 +55,11 @@ async function loadList(){
   if(!rows.length){$('annales-grid').innerHTML='<p class="v2-empty">Aucune annale à afficher pour le moment.</p>';return;}
   $('annales-grid').innerHTML=rows.map(a=>{
    const status=Object.hasOwn(labels,a.statut)?a.statut:'non_disponible';
-   return `<button type="button" class="annale-card ${a.locked?'is-locked':''}" data-id="${esc(a.notion_page_id)}" ${a.locked?'disabled':''}>
-    <span class="annale-card-header"><h2>${esc(a.titre)}</h2><span class="annale-badge annale-badge--${status}">${labels[status]}</span></span>
-    ${publicationBadge(a.derniere_mise_a_jour)}
+   const year=Number(a.annee_session),validYear=Number.isInteger(year)&&year>=1900&&year<=2200;
+   const heading=validYear?year:a.titre;
+   return `<button type="button" class="annale-card ${a.locked?'is-locked':''}" data-status="${status}" data-id="${esc(a.notion_page_id)}" aria-label="${esc(a.titre)} — ${labels[status]}${a.locked?' — Accès verrouillé':''}" ${a.locked?'disabled':''}>
+    <span class="annale-card-header"><span class="ac-session"><span class="ac-session-label">${validYear?'Session':'Annale'}</span><span class="ac-session-year">${esc(heading)}</span></span><span class="ac-card-status"><span class="ac-status-dot" aria-hidden="true"></span>${labels[status]}</span></span>
+    ${publicationBadge(a.derniere_mise_a_jour,true)}
     ${a.locked?'<span class="annale-lock">🔒 Accès verrouillé</span>':''}</button>`;
   }).join('');
   $('annales-grid').querySelectorAll('button[data-id]:not(:disabled)').forEach(b=>b.addEventListener('click',()=>openAnnale(b.dataset.id,b)));
