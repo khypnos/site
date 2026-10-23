@@ -1,10 +1,10 @@
-import {loadingFeedback} from '/js/ui-feedback-v2.js?v=private-512fdc885acff734';
-import { recentPublication } from '/js/annales-publication-v2.js?v=private-512fdc885acff734';
-import { supabase, requireAuth } from '/espace-client/auth.js?v=private-512fdc885acff734';
+import {loadingFeedback} from '/js/ui-feedback-v2.js?v=private-ca2dcf52bea4152e';
+import { recentPublication } from '/js/annales-publication-v2.js?v=private-ca2dcf52bea4152e';
+import { supabase, requireAuth } from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
 import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs';
 pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
 
-// Hardwired V2 routes: no URL parameter can redirect this pilot to production.
+// Fixed V2 routes. Student permissions are enforced by the server.
 const API='https://fbxiynomlxrjasbbcipp.supabase.co/functions/v1/';
 const ROUTES=Object.freeze({list:'get-annales-v2',detail:'get-annale-content-v2'});
 const $=id=>document.getElementById(id);
@@ -24,11 +24,12 @@ function publicationBadge(value,card=false){
 const loading=()=>'<div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div>';
 function errorText(e){
  const c=e.code??'';
- if(e.status===401)return 'Session expirée ou invalide. Reconnecte-toi sur ce même site local, puis recharge la page.';
- if(c==='APERCU_V2_RESERVE_ADMIN'||e.status===403)return 'Cet aperçu V2 est réservé aux administrateurs autorisés dans Supabase.';
+ if(e.status===401)return 'Session expirée ou invalide. Reconnecte-toi, puis recharge la page.';
+ if(c==='PROMOTION_NON_AUTORISEE')return 'Ta promotion ne donne pas accès à cette annale.';
+ if(e.status===403)return 'Ton compte ou ton abonnement ne donne pas accès aux annales.';
  if(c.startsWith('CONFIGURATION_MANQUANTE_'))return 'Configuration Supabase V2 incomplète : '+c.replace('CONFIGURATION_MANQUANTE_','')+'.';
- if(c==='ANNALE_V2_ABSENTE_DU_CACHE')return 'Cette annale est absente du cache V2. Actualise le catalogue, puis réessaie.';
- if(c.startsWith('NOTION_V2_'))return 'Lecture de la sandbox Notion impossible. Vérifie le partage et le token Supabase, puis réessaie. ('+c+')';
+ if(c==='ANNALE_V2_ABSENTE_DU_CACHE')return 'Cette annale n’est plus disponible dans le catalogue. Recharge la liste, puis réessaie.';
+ if(c.startsWith('NOTION_V2_'))return 'Lecture de l’annale impossible pour le moment. Réessaie dans un instant. ('+c+')';
  if(c==='REPONSE_V2_INATTENDUE')return 'La réponse du backend V2 ne correspond pas au format attendu. Aucun contenu V1 n’a été utilisé.';
  if(e.name==='TimeoutError'||e.name==='AbortError')return 'Le serveur met trop de temps à répondre. Réessaie dans un instant.';
  return 'Chargement impossible. '+(c?'Code : '+c+'.':'Vérifie la connexion réseau, puis réessaie.');
@@ -44,8 +45,8 @@ async function api(route,{query='',method='GET'}={}){
  if(!payload||typeof payload!=='object'){const e=new Error();e.code='REPONSE_V2_INATTENDUE';throw e;}
  return payload;
 }
-function requirePreview(data){if(data.mode!=='apercu_admin'){const e=new Error();e.code='REPONSE_V2_INATTENDUE';throw e;}}
-function notice(target,email){target.textContent='🔒 Espace personnel de '+(email??'l’administrateur')+' — Document strictement personnel, ne pas partager.';target.hidden=false;}
+function requirePreview(data){if(!['apercu_admin','etudiant'].includes(data.mode)){const e=new Error();e.code='REPONSE_V2_INATTENDUE';throw e;}}
+function notice(target,email){target.textContent='🔒 Espace personnel de '+(email??'cet utilisateur')+' — Document strictement personnel, ne pas partager.';target.hidden=false;}
 async function loadList(){
  const version=++listVersion;$('annales-grid').innerHTML=loading();
  try{
@@ -92,7 +93,7 @@ function blocks(content,depth=0){if(depth>12)return '<p class="v2-warning">Conte
   case 'link':{const u=safeUrl(b.url,['https:','http:']);return u?`<a class="link-card" href="${esc(u)}" target="_blank" rel="noopener noreferrer"><span class="link-icon">🔗</span><span class="pdf-label">${esc(b.title||u)}</span></a>`:'<p class="v2-warning">Lien non pris en charge.</p>';}
   case 'video':return '<p class="v2-muted">🎬 Vidéo non prise en charge dans cette page pour le moment.</p>';
   case 'hr':return '<hr>';
-  default:return '<p class="v2-warning">Un bloc de ressource n’est pas encore pris en charge dans cet aperçu.</p>';
+  default:return '<p class="v2-warning">Une ressource ne peut pas être affichée pour le moment.</p>';
  }
  }).join('');}
 function renderDetail(data){
@@ -106,7 +107,7 @@ function renderDetail(data){
  const status=Object.hasOwn(labels,data.statut)?labels[data.statut]:'Non disponible';
  const body=blocks(data.content.slice(offset));
  $('detail-content').innerHTML=`<div class="v2-detail-meta"><span class="annale-badge annale-badge--${esc(Object.hasOwn(labels,data.statut)?data.statut:'non_disponible')}">${esc(status)}</span>${publicationBadge(data.derniere_mise_a_jour)}</div>
-  ${data.warnings?.length?'<p class="v2-warning">Certains blocs Notion ne sont pas pris en charge. Vérifier les ressources avant la bascule.</p>':''}
+  ${data.warnings?.length?'<p class="v2-warning">Certaines ressources ne peuvent pas être affichées pour le moment.</p>':''}
   <section class="v2-section"><h2>Corrigés enrichis</h2>${corrections}</section>
   <section class="v2-section"><h2>💡 Ressources complémentaires</h2>${body||'<p class="v2-muted">Aucune ressource complémentaire.</p>'}</section>`;
  $('detail-content').querySelectorAll('button[data-pdf]').forEach(b=>b.addEventListener('click',()=>openPdf(documents.get(b.dataset.pdf),b)));
@@ -118,7 +119,7 @@ async function openAnnale(id,source){
   const data=await api(ROUTES.detail,{query:'?notion_page_id='+encodeURIComponent(id)});
   if(version!==detailVersion)return;requirePreview(data);currentEmail=data.student?.email??session.user?.email;
   $('annale-modal-title').textContent=data.titre??'Annale';notice($('annale-modal-notice'),currentEmail);renderDetail(data);
- }catch(e){if(version===detailVersion){$('annale-modal-title').textContent='Annale V2';showError($('detail-content'),e,()=>openAnnale(id));}}
+ }catch(e){if(version===detailVersion){$('annale-modal-title').textContent='Annale';showError($('detail-content'),e,()=>openAnnale(id));}}
  finally{if(version===detailVersion)stopDetailLoading();}
 }
 async function openPdf(doc,source){

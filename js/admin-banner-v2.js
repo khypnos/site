@@ -1,5 +1,5 @@
-import {supabase} from '/espace-client/auth.js?v=private-512fdc885acff734';
-import {checkAdminAccess} from '/js/admin-access-v2.js?v=private-512fdc885acff734';
+import {supabase} from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
+import {checkAdminAccess} from '/js/admin-access-v2.js?v=private-ca2dcf52bea4152e';
 const mount=document.getElementById('admin-access-v2');
 let version=0;
 function hide(){if(mount){mount.hidden=true;mount.replaceChildren();}}

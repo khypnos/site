@@ -6,9 +6,9 @@
     <title>Khypnos — Connexion</title>
     <meta name="description" content="Connecte-toi à ton espace étudiant Khypnos pour accéder à ta formation EVC Anesthésie-Réanimation.">
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
-    <link rel="stylesheet" href="/styles.css?v=private-512fdc885acff734">
-    <link rel="stylesheet" href="/css/theme-elegance.css?v=private-512fdc885acff734">
-    <link rel="stylesheet" href="/css/login.css?v=private-512fdc885acff734">
+    <link rel="stylesheet" href="/styles.css?v=private-ca2dcf52bea4152e">
+    <link rel="stylesheet" href="/css/theme-elegance.css?v=private-ca2dcf52bea4152e">
+    <link rel="stylesheet" href="/css/login.css?v=private-ca2dcf52bea4152e">
 </head>
 <body>
 
@@ -61,7 +61,7 @@
 </div>
 
 <script type="module">
-    import { supabase } from '/espace-client/auth.js?v=private-512fdc885acff734';
+    import { supabase } from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
 
     const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
     const redirectTo = isLocal
@@ -73,6 +73,10 @@
         e.preventDefault();
         document.getElementById('view-login').classList.remove('active');
         document.getElementById('view-reset').classList.add('active');
+        const $resetEmail = document.getElementById('reset-email');
+        const loginEmail = document.getElementById('email').value.trim();
+        if (loginEmail) $resetEmail.value = loginEmail;
+        $resetEmail.focus();
     });
 
     document.getElementById('link-back-login').addEventListener('click', (e) => {
@@ -147,10 +151,10 @@
     });
 </script>
 
-<script src="/js/header-manager.js?v=private-512fdc885acff734" defer></script>
-<script src="/js/scroll-to-top.min.js?v=private-512fdc885acff734"></script>
-<script src="/js/navbar.js?v=private-512fdc885acff734"></script>
-<script src="/js/footer-manager.js?v=private-512fdc885acff734" defer></script>
+<script src="/js/header-manager.js?v=private-ca2dcf52bea4152e" defer></script>
+<script src="/js/scroll-to-top.min.js?v=private-ca2dcf52bea4152e"></script>
+<script src="/js/navbar.js?v=private-ca2dcf52bea4152e"></script>
+<script src="/js/footer-manager.js?v=private-ca2dcf52bea4152e" defer></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         new FooterManager({

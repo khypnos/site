@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "private-512fdc885acff734",
+  "version": "private-ca2dcf52bea4152e",
   "pages": [
     "espace-client/admin-v2.html",
     "espace-client/annales-corrigees-v2.html",
@@ -46,12 +46,104 @@
     "styles.css"
   ],
   "dependencies": {
+    "reset-password.html": [
+      "css/login.css",
+      "css/theme-elegance.css",
+      "js/footer-manager.js",
+      "js/header-manager.js",
+      "js/navbar.js",
+      "js/scroll-to-top.min.js",
+      "styles.css"
+    ],
     "espace-client/index.html": [
       "css/admin-banner-v2.css",
       "css/dashboard.css",
       "css/theme-elegance.css",
       "espace-client/auth.js",
       "js/admin-banner-v2.js",
+      "js/footer-manager.js",
+      "js/header-manager.js",
+      "js/navbar.js",
+      "js/scroll-to-top.min.js",
+      "styles.css"
+    ],
+    "css/admin-banner-v2.css": [],
+    "css/login.css": [],
+    "js/header-manager.js": [],
+    "js/scroll-to-top.min.js": [],
+    "styles.css": [],
+    "espace-client/compte-cree.html": [
+      "css/login.css",
+      "css/theme-elegance.css",
+      "js/footer-manager.js",
+      "js/header-manager.js",
+      "js/navbar.js",
+      "js/scroll-to-top.min.js",
+      "styles.css"
+    ],
+    "css/theme-elegance.css": [],
+    "js/footer-manager.js": [],
+    "espace-client/annales-corrigees.html": [
+      "css/annales-corrigees-v2.css",
+      "css/annales-corrigees.css",
+      "css/annales.css",
+      "css/theme-elegance.css",
+      "css/ui-feedback-v2.css",
+      "js/annales-corrigees-v2.js",
+      "js/footer-manager.js",
+      "js/header-manager.js",
+      "js/navbar.js",
+      "js/scroll-to-top.min.js",
+      "styles.css"
+    ],
+    "css/annales-corrigees.css": [],
+    "login.html": [
+      "css/login.css",
+      "css/theme-elegance.css",
+      "espace-client/auth.js",
+      "js/footer-manager.js",
+      "js/header-manager.js",
+      "js/navbar.js",
+      "js/scroll-to-top.min.js",
+      "styles.css"
+    ],
+    "js/navbar.js": [
+      "espace-client/auth.js"
+    ],
+    "espace-client/admin-v2.html": [
+      "css/admin-activity-v2.css",
+      "css/admin-cleanup-v2.css",
+      "css/admin-layout-v2.css",
+      "css/admin-pipeline-v2.css",
+      "css/admin-video-v2.css",
+      "css/annales-corrigees-v2.css",
+      "css/annales-corrigees.css",
+      "css/theme-elegance.css",
+      "css/ui-feedback-v2.css",
+      "js/admin-v2.js",
+      "js/admin-video-v2.js",
+      "js/footer-manager.js",
+      "js/header-manager.js",
+      "js/navbar.js",
+      "styles.css"
+    ],
+    "espace-client/creer-compte.html": [
+      "css/login.css",
+      "css/theme-elegance.css",
+      "espace-client/auth.js",
+      "js/footer-manager.js",
+      "js/header-manager.js",
+      "js/navbar.js",
+      "js/scroll-to-top.min.js",
+      "styles.css"
+    ],
+    "css/annales.css": [],
+    "espace-client/auth.js": [],
+    "css/dashboard.css": [],
+    "espace-client/videotheque.html": [
+      "css/theme-elegance.css",
+      "css/videotheque.css",
+      "espace-client/auth.js",
       "js/footer-manager.js",
       "js/header-manager.js",
       "js/navbar.js",
@@ -71,65 +163,16 @@
       "js/scroll-to-top.min.js",
       "styles.css"
     ],
-    "espace-client/annales-corrigees.html": [
-      "css/annales-corrigees.css",
-      "css/annales.css",
+    "espace-client/receive-session.html": [
       "css/theme-elegance.css",
       "espace-client/auth.js",
-      "js/footer-manager.js",
-      "js/header-manager.js",
-      "js/navbar.js",
-      "js/scroll-to-top.min.js",
       "styles.css"
     ],
-    "js/navbar.js": [
-      "espace-client/auth.js"
-    ],
-    "styles.css": [],
-    "css/annales.css": [],
-    "espace-client/videotheque.html": [
-      "css/theme-elegance.css",
-      "css/videotheque.css",
+    "js/admin-banner-v2.js": [
       "espace-client/auth.js",
-      "js/footer-manager.js",
-      "js/header-manager.js",
-      "js/navbar.js",
-      "js/scroll-to-top.min.js",
-      "styles.css"
+      "js/admin-access-v2.js"
     ],
-    "css/dashboard.css": [],
-    "espace-client/auth.js": [],
-    "login.html": [
-      "css/login.css",
-      "css/theme-elegance.css",
-      "espace-client/auth.js",
-      "js/footer-manager.js",
-      "js/header-manager.js",
-      "js/navbar.js",
-      "js/scroll-to-top.min.js",
-      "styles.css"
-    ],
-    "css/annales-corrigees.css": [],
-    "espace-client/creer-compte.html": [
-      "css/login.css",
-      "css/theme-elegance.css",
-      "espace-client/auth.js",
-      "js/footer-manager.js",
-      "js/header-manager.js",
-      "js/navbar.js",
-      "js/scroll-to-top.min.js",
-      "styles.css"
-    ],
-    "css/ui-feedback-v2.css": [],
-    "reset-password.html": [
-      "css/login.css",
-      "css/theme-elegance.css",
-      "js/footer-manager.js",
-      "js/header-manager.js",
-      "js/navbar.js",
-      "js/scroll-to-top.min.js",
-      "styles.css"
-    ],
+    "css/videotheque.css": [],
     "espace-client/page-protegee.html": [
       "css/page-protegee.css",
       "css/theme-elegance.css",
@@ -140,77 +183,36 @@
       "js/scroll-to-top.min.js",
       "styles.css"
     ],
-    "js/header-manager.js": [],
-    "js/scroll-to-top.min.js": [],
-    "espace-client/admin-v2.html": [
-      "css/admin-activity-v2.css",
-      "css/admin-cleanup-v2.css",
-      "css/admin-layout-v2.css",
-      "css/admin-pipeline-v2.css",
-      "css/admin-video-v2.css",
-      "css/annales-corrigees-v2.css",
-      "css/annales-corrigees.css",
-      "css/theme-elegance.css",
-      "css/ui-feedback-v2.css",
-      "js/admin-v2.js",
-      "js/admin-video-v2.js",
-      "js/footer-manager.js",
-      "js/header-manager.js",
-      "js/navbar.js",
-      "styles.css"
-    ],
-    "js/annales-corrigees-v2.js": [
-      "espace-client/auth.js",
-      "js/annales-publication-v2.js",
-      "js/ui-feedback-v2.js"
-    ],
-    "css/admin-banner-v2.css": [],
-    "js/footer-manager.js": [],
-    "espace-client/compte-cree.html": [
-      "css/login.css",
-      "css/theme-elegance.css",
-      "js/footer-manager.js",
-      "js/header-manager.js",
-      "js/navbar.js",
-      "js/scroll-to-top.min.js",
-      "styles.css"
-    ],
-    "js/admin-banner-v2.js": [
-      "espace-client/auth.js",
-      "js/admin-access-v2.js"
-    ],
-    "espace-client/receive-session.html": [
-      "css/theme-elegance.css",
-      "espace-client/auth.js",
-      "styles.css"
-    ],
-    "css/annales-corrigees-v2.css": [],
-    "css/theme-elegance.css": [],
-    "css/videotheque.css": [],
     "css/admin-activity-v2.css": [],
-    "css/login.css": [],
-    "css/admin-video-v2.css": [],
-    "js/admin-video-v2.js": [
-      "espace-client/auth.js",
-      "js/ui-feedback-v2.js"
-    ],
-    "css/admin-layout-v2.css": [],
-    "js/ui-feedback-v2.js": [],
-    "css/admin-pipeline-v2.css": [],
-    "css/admin-cleanup-v2.css": [],
-    "js/annales-publication-v2.js": [],
-    "css/page-protegee.css": [],
-    "js/admin-access-v2.js": [
-      "espace-client/auth.js"
-    ],
     "js/admin-v2.js": [
       "espace-client/auth.js",
       "js/admin-access-v2.js",
       "js/admin-cleanup-v2.js",
       "js/ui-feedback-v2.js"
     ],
+    "css/annales-corrigees-v2.css": [],
+    "css/ui-feedback-v2.css": [],
+    "js/annales-corrigees-v2.js": [
+      "espace-client/auth.js",
+      "js/annales-publication-v2.js",
+      "js/ui-feedback-v2.js"
+    ],
+    "css/admin-video-v2.css": [],
+    "css/page-protegee.css": [],
+    "js/admin-access-v2.js": [
+      "espace-client/auth.js"
+    ],
+    "js/admin-video-v2.js": [
+      "espace-client/auth.js",
+      "js/ui-feedback-v2.js"
+    ],
+    "js/ui-feedback-v2.js": [],
+    "css/admin-layout-v2.css": [],
+    "css/admin-cleanup-v2.css": [],
+    "css/admin-pipeline-v2.css": [],
     "js/admin-cleanup-v2.js": [
       "js/ui-feedback-v2.js"
-    ]
+    ],
+    "js/annales-publication-v2.js": []
   }
 }
