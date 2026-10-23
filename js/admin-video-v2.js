@@ -1,6 +1,6 @@
 // Video refresh only. Does not import or mutate the annales generation state.
-import {supabase} from '/espace-client/auth.js';
-import {actionFeedback,startClock} from '/js/ui-feedback-v2.js?v=labels2';
+import {supabase} from '/espace-client/auth.js?v=private-512fdc885acff734';
+import {actionFeedback,startClock} from '/js/ui-feedback-v2.js?v=private-512fdc885acff734';
 const ENDPOINT='https://fbxiynomlxrjasbbcipp.supabase.co/functions/v1/admin-video-cache-v2';
 const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);

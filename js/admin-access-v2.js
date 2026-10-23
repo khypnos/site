@@ -1,4 +1,4 @@
-import {supabase} from '/espace-client/auth.js';
+import {supabase} from '/espace-client/auth.js?v=private-512fdc885acff734';
 export async function checkAdminAccess(){
  const {data,error}=await supabase.auth.getSession();
  if(error||!data?.session)throw Object.assign(new Error(),{status:401});

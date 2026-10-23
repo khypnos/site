@@ -1,4 +1,4 @@
-import {actionFeedback,loadingFeedback} from '/js/ui-feedback-v2.js?v=labels2';
+import {actionFeedback,loadingFeedback} from '/js/ui-feedback-v2.js?v=private-512fdc885acff734';
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const labels={awaiting_review:'Aperçus non publiés',partially_published:'Publication partielle',published:'Publication confirmée',generation_failed:'Génération échouée',cleanup_pending:'Nettoyage à reprendre',generation_cancelled:'Demande abandonnée — protégée',publication_attention:'Publication incertaine — protégée',published_cache_pending:'Catalogue du site à mettre à jour — nettoyage bloqué',submission_unknown:'Soumission incertaine — protégée',dispatching:'Lancement en cours',generation_queued:'Génération en attente',generating:'Génération en cours',publication_queued:'Publication en attente',publishing:'Publication en cours'};
 export function initCleanup({call,canUse,setBusy,onCleaned,explain,onAuthError,onClose}){

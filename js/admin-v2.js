@@ -1,7 +1,7 @@
-import {initCleanup} from '/js/admin-cleanup-v2.js?v=labels2';
-import {actionFeedback,loadingFeedback,startClock} from '/js/ui-feedback-v2.js?v=labels2';
-import {supabase,requireAuth} from '/espace-client/auth.js';
-import {checkAdminAccess} from '/js/admin-access-v2.js';
+import {initCleanup} from '/js/admin-cleanup-v2.js?v=private-512fdc885acff734';
+import {actionFeedback,loadingFeedback,startClock} from '/js/ui-feedback-v2.js?v=private-512fdc885acff734';
+import {supabase,requireAuth} from '/espace-client/auth.js?v=private-512fdc885acff734';
+import {checkAdminAccess} from '/js/admin-access-v2.js?v=private-512fdc885acff734';
 const API='https://fbxiynomlxrjasbbcipp.supabase.co/functions/v1/';
 const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const active=new Set(['dispatching','submission_unknown','generation_queued','generating','publication_queued','publishing']);

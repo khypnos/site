@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Khypnos — Espace privé</title>
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/css/theme-elegance.css">
-  <link rel="stylesheet" href="/css/page-protegee.css">
+  <link rel="stylesheet" href="/styles.css?v=private-512fdc885acff734">
+  <link rel="stylesheet" href="/css/theme-elegance.css?v=private-512fdc885acff734">
+  <link rel="stylesheet" href="/css/page-protegee.css?v=private-512fdc885acff734">
 
 
   <!-- PDF.js pour le viewer maison -->
@@ -46,7 +46,7 @@
   </div>
 
   <script type="module">
-    import { requireAuth } from '/espace-client/auth.js'
+    import { requireAuth } from '/espace-client/auth.js?v=private-512fdc885acff734'
     import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs'
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -453,10 +453,10 @@
     }
   </script>
 
-  <script src="/js/header-manager.js" defer></script>
-  <script src="/js/scroll-to-top.min.js"></script>
-  <script src="/js/navbar.js"></script>
-  <script src="/js/footer-manager.js" defer></script>
+  <script src="/js/header-manager.js?v=private-512fdc885acff734" defer></script>
+  <script src="/js/scroll-to-top.min.js?v=private-512fdc885acff734"></script>
+  <script src="/js/navbar.js?v=private-512fdc885acff734"></script>
+  <script src="/js/footer-manager.js?v=private-512fdc885acff734" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         new FooterManager({

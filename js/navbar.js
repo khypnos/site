@@ -86,7 +86,7 @@ function initNavbarFunctions() {
             event.preventDefault();
             const defaultHref = qcmLink.href;
 
-            import('/espace-client/auth.js')
+            import('/espace-client/auth.js?v=private-512fdc885acff734')
                 .then(({ supabase }) => supabase.auth.getSession())
                 .then(({ data: { session } }) => {
                     if (session) {

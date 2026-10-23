@@ -6,9 +6,9 @@
     <title>Khypnos — Vidéothèque</title>
     <meta name="description" content="Toutes les vidéos de cours associées à ta formule Khypnos.">
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/css/theme-elegance.css">
-    <link rel="stylesheet" href="/css/videotheque.css">
+    <link rel="stylesheet" href="/styles.css?v=private-512fdc885acff734">
+    <link rel="stylesheet" href="/css/theme-elegance.css?v=private-512fdc885acff734">
+    <link rel="stylesheet" href="/css/videotheque.css?v=private-512fdc885acff734">
 </head>
 <body>
 
@@ -44,7 +44,7 @@
 <!-- Modal vidéo (injecté en JS dans <body> à la fin) -->
 
 <script type="module">
-    import { supabase, requireAuth } from '/espace-client/auth.js';
+    import { supabase, requireAuth } from '/espace-client/auth.js?v=private-512fdc885acff734';
 
     const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co';
 
@@ -316,11 +316,11 @@
     renderGrid();
 </script>
 
-<script src="/js/header-manager.js" defer></script>
-<script src="/js/scroll-to-top.min.js"></script>
-<script src="/js/navbar.js"></script>
+<script src="/js/header-manager.js?v=private-512fdc885acff734" defer></script>
+<script src="/js/scroll-to-top.min.js?v=private-512fdc885acff734"></script>
+<script src="/js/navbar.js?v=private-512fdc885acff734"></script>
 <!-- script.js retiré (conflit const indexUrls) -->
-<script src="/js/footer-manager.js" defer></script>
+<script src="/js/footer-manager.js?v=private-512fdc885acff734" defer></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         new FooterManager({

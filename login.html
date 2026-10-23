@@ -6,9 +6,9 @@
     <title>Khypnos — Connexion</title>
     <meta name="description" content="Connecte-toi à ton espace étudiant Khypnos pour accéder à ta formation EVC Anesthésie-Réanimation.">
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/css/theme-elegance.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/styles.css?v=private-512fdc885acff734">
+    <link rel="stylesheet" href="/css/theme-elegance.css?v=private-512fdc885acff734">
+    <link rel="stylesheet" href="/css/login.css?v=private-512fdc885acff734">
 </head>
 <body>
 
@@ -61,7 +61,7 @@
 </div>
 
 <script type="module">
-    import { supabase } from '/espace-client/auth.js';
+    import { supabase } from '/espace-client/auth.js?v=private-512fdc885acff734';
 
     const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
     const redirectTo = isLocal
@@ -147,10 +147,10 @@
     });
 </script>
 
-<script src="/js/header-manager.js" defer></script>
-<script src="/js/scroll-to-top.min.js"></script>
-<script src="/js/navbar.js"></script>
-<script src="/js/footer-manager.js" defer></script>
+<script src="/js/header-manager.js?v=private-512fdc885acff734" defer></script>
+<script src="/js/scroll-to-top.min.js?v=private-512fdc885acff734"></script>
+<script src="/js/navbar.js?v=private-512fdc885acff734"></script>
+<script src="/js/footer-manager.js?v=private-512fdc885acff734" defer></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         new FooterManager({
