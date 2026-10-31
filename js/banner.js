@@ -6,14 +6,14 @@
 (function () {
   // --- Configuration centralisée ---------------------------------
   const CONFIG = {
-    text: "Dernière ligne droite - Inscrivez-vous à un concours blanc voie interne ou externe !", // texte du bandeau
-    cta: "Réserver ma place",  // texte du bouton CTA
-    url: "/medecin/concoursblancs2026.html", // lien du bouton CTA
-    icon: "rocket",          // "sparkles" | "rocket" | "bell" | "none"
+    text: "-50% sur les formations voie interne : Code PROMO \"EVC2026\" !", // texte du bandeau
+    cta: "Profiter de l'offre",  // texte du bouton CTA
+    url: "https://khypnos-qcm.vercel.app/", // lien du bouton CTA
+    icon: "bell",          // "sparkles" | "rocket" | "bell" | "none"
     variant: "minimal",           // "dark" | "gradient" | "minimal" | "elegance"
     dismissible: true,         // affiche une croix de fermeture
     openInNewTab: false,       // true = ouvre le lien dans un nouvel onglet, false = même onglet
-    storageKey: "khypnos_banner_CB" // change la clé à chaque nouvelle campagne
+    storageKey: "khypnos_banner_promo" // change la clé à chaque nouvelle campagne
   };
 
   // --- Ne ré-affiche pas si déjà fermée --------------------------
