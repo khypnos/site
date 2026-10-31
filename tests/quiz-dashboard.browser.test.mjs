@@ -7,6 +7,7 @@ import http from 'node:http'
 import {chromium} from 'playwright'
 const bin=process.env.KHYPNOS_CHROMIUM
 const html=await fs.readFile(new URL('../espace-client/index.html',import.meta.url),'utf8')
+const installCss=await fs.readFile(new URL('../css/qcm-access.css',import.meta.url),'utf8')
 const module=await fs.readFile(new URL('../espace-client/qcm-access.js',import.meta.url),'utf8')
 const auth=`
 const fixture=window.__fixture;
@@ -30,7 +31,7 @@ test('dashboard complet sans déploiement distant',{skip:!bin&&'Set KHYPNOS_CHRO
   }
   if(pathname==='/espace-client/auth.js'){res.setHeader('Content-Type','text/javascript');return res.end(auth)}
   if(pathname==='/espace-client/qcm-access.js'){res.setHeader('Content-Type','text/javascript');return res.end(module)}
-  if(pathname.endsWith('.css')){res.setHeader('Content-Type','text/css');return res.end(pathname==='/css/dashboard.css'?css:'')}
+  if(pathname.endsWith('.css')){res.setHeader('Content-Type','text/css');return res.end(pathname==='/css/dashboard.css'?css:pathname==='/css/qcm-access.css'?installCss:'')}
   res.setHeader('Content-Type','text/javascript');res.end('')
  })
  await new Promise(r=>server.listen(0,'127.0.0.1',r))
@@ -45,6 +46,9 @@ test('dashboard complet sans déploiement distant',{skip:!bin&&'Set KHYPNOS_CHRO
    state=fresh();await open();assert.equal(await page.locator('.plan-tag').innerText(),'Quiz fondamental')
    assert.match(await page.locator('.qcm-access-card').innerText(),/Valable jusqu’au/)
    assert.equal(await page.locator('.video-access-card,.annales-access-card,.notion-link-card,.notion-empty-state').count(),0)
+   assert.equal(await page.locator('h2 + .qac-install').innerText(),'Installer l’application')
+   assert.equal(await page.locator('.qac-install').getAttribute('href'),'https://khypnos-qcm.vercel.app/installer-app')
+   if(process.env.KHYPNOS_SCREENSHOTS)await page.screenshot({path:process.env.KHYPNOS_SCREENSHOTS+'/qcm-install-desktop.png',fullPage:true})
    assert.deepEqual(await page.evaluate(()=>window.__fixture.tables.sort()),['profiles','user_purchases'])
    assert((await page.evaluate(()=>window.__fixture.filters)).some(([table,k,v])=>table==='user_purchases'&&k==='user_id'&&v==='fixture-uid'))
   })
@@ -76,7 +80,15 @@ test('dashboard complet sans déploiement distant',{skip:!bin&&'Set KHYPNOS_CHRO
   })
   await t.test('mobile : les deux produits et leurs actions restent accessibles',async()=>{
    state=fresh();state.edge.planLabels=['quiz_med','quiz_rfe'];state.fixture.purchases=[...state.fixture.purchases,{batch_id:'Quiz Recommandations SFAR',category:'medecin',is_active:true,expires_at:'2000-01-01T00:00:00Z'}]
-   await page.setViewportSize({width:390,height:844});await open();assert(await page.getByText('Renouveler',{exact:true}).isVisible());assert(await page.getByText('Ouvrir l’application QCM',{exact:true}).isVisible())
+   await page.setViewportSize({width:390,height:844});await open();
+   assert(await page.getByRole('link',{name:'Installer l’application (nouvel onglet)'}).isVisible())
+   const installBox=await page.locator('.qac-install').boundingBox();assert(installBox.height>=44)
+   const cardBox=await page.locator('.qcm-access-card').boundingBox()
+   for(const link of await page.locator('.qcm-access-card a').all()) {
+    const box=await link.boundingBox();assert(box.x>=cardBox.x && box.x+box.width<=cardBox.x+cardBox.width)
+   }
+   if(process.env.KHYPNOS_SCREENSHOTS)await page.screenshot({path:process.env.KHYPNOS_SCREENSHOTS+'/qcm-install-mobile.png',fullPage:true})
+   assert(await page.getByText('Renouveler',{exact:true}).isVisible());assert(await page.getByText('Ouvrir l’application QCM',{exact:true}).isVisible())
   })
   await t.test('clic renouveler : session fraîche en fragment, pas de tokens dans le DOM ni reconnexion',async()=>{
    state=fresh();state.fixture.purchases[0].expires_at='2000-01-01T00:00:00Z';await open()

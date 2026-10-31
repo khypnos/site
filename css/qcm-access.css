@@ -1,0 +1,43 @@
+/* Secondary installation action, shared by every Accès QCM card. */
+.qcm-access-card .qac-install {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 44px;
+    max-width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0 12px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-decoration: none;
+    text-align: center;
+}
+.qcm-access-card .qac-install:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: underline;
+}
+.qcm-access-card .qac-install:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+/* Keep both primary and renewal buttons inside the card on narrow screens. */
+.qcm-access-card .qac-left {
+    min-width: 0;
+}
+.qcm-access-card .btn-qcm {
+    box-sizing: border-box;
+    max-width: 100%;
+    white-space: normal;
+}
+@media (max-width: 560px) {
+    .qcm-access-card .qac-left {
+        width: 100%;
+    }
+}

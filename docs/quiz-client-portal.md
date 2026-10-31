@@ -62,3 +62,9 @@ KHYPNOS_CHROMIUM=/chemin/chromium node --test tests/quiz-client-portal.browser.t
 Les tests navigateur nécessitent Playwright en environnement QA ; le module n'est pas ajouté aux dépendances du site. Le test complet peut recevoir `KHYPNOS_DASHBOARD_CSS=/chemin/css/dashboard.css` pour utiliser la feuille de style existante. Les tests ont été exécutés avec cette feuille et Chromium isolé.
 
 Auth, get-dashboard et SELECT sont simulés avec des identités fictives. Aucun test ne se connecte à un vrai compte ou à Stripe. Les vérifications locales ne remplacent pas la recette de preview avec le schéma et les RLS réels. Les scripts existants d'en-tête/pied de page ne sont pas refondus dans cette livraison.
+
+## Installation de l'application
+
+Chaque carte Accès QCM, quel que soit le profil, comporte un bouton secondaire « Installer l’application » immédiatement sous le titre. Il ouvre https://khypnos-qcm.vercel.app/installer-app dans un nouvel onglet (noopener/noreferrer), sans transfert de tokens. Le bouton principal reste visuellement prioritaire. La feuille css/qcm-access.css est limitée aux cartes QCM ; elle maintient aussi les boutons dans la carte sur mobile.
+
+Vérifications locales : 24 tests, contrôle visuel desktop/mobile avec la feuille dashboard existante ; le lien d'installation ne modifie ni les achats ni la session.

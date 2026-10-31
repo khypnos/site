@@ -27,7 +27,14 @@ export function mountQcmAccess(target, payload, { readSession, navigate = url =>
   const icon = document.createElement('div'); icon.className = 'qac-icon'; icon.setAttribute('aria-hidden','true'); icon.textContent = '📝'
   const title = document.createElement('h2'); title.id = 'qac-title'; title.textContent = 'Accès QCM'
   const intro = document.createElement('p'); intro.textContent = 'Retrouve tes quiz et les formules disponibles dans l’application.'
-  body.append(icon,title,intro)
+  const install = document.createElement('a')
+  install.className = 'qac-install'
+  install.href = 'https://khypnos-qcm.vercel.app/installer-app'
+  install.target = '_blank'
+  install.rel = 'noopener noreferrer'
+  install.setAttribute('aria-label', 'Installer l’application (nouvel onglet)')
+  install.textContent = 'Installer l’application'
+  body.append(icon,title,install,intro)
   const serverNow = Number.isFinite(Date.parse(payload.referenceTime)) ? Date.parse(payload.referenceTime) : now()
   const subscription = !!payload.qcmSubscriptionActive
   const entitlements = Array.isArray(payload.quizEntitlements) ? payload.quizEntitlements : []
