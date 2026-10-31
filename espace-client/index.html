@@ -24,37 +24,44 @@
     </main>
 </div>
 <script type="module">
-    import { requireAuth } from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
+    import { requireAuth, supabase } from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
+
+    import { mountQcmAccess, escapeHTML, readQuizPortalStatus, planLabel } from '/espace-client/qcm-access.js?v=quiz-portal-20261031';
 
     const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co';
 
     const session = await requireAuth();
     if (!session) throw new Error('Non authentifié');
 
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/get-dashboard`, {
-        headers: { Authorization: `Bearer ${session.access_token}` }
-    });
-
-    if (!res.ok) {
-        window.location.href = '/login.html?error=access_denied';
-        throw new Error('Accès refusé');
-    }
-
-    // ← plus de `sections`
-    const { nom, planLabels, hasVideo, hasAnnales, protectedPages } = await res.json();
-
     const app = document.getElementById('app');
-
-    // URL de l'appli QCM avec transfert de session Supabase (même projet que le
-    // site) — les tokens passent par le fragment (#), jamais envoyés au serveur.
-    const qcmParams = new URLSearchParams({
-        access_token: session.access_token,
-        refresh_token: session.refresh_token,
-    });
-    const qcmHref = `https://khypnos-qcm.vercel.app/receive-session#${qcmParams.toString()}`;
+    let lastLoaded = 0;
+    let loading = false;
+    async function loadDashboard(force = false) {
+      if (loading || (!force && (document.visibilityState !== 'visible' || !navigator.onLine || Date.now() - lastLoaded < 60000))) return;
+      loading = true;
+      lastLoaded = Date.now();
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        if (!data.session) { window.location.href = '/login.html'; return; }
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/get-dashboard`, {
+          cache: 'no-store',
+          ...(typeof AbortSignal.timeout === 'function' ? { signal: AbortSignal.timeout(10000) } : {}),
+          headers: { Authorization: `Bearer ${data.session.access_token}` }
+        });
+        if (res.status === 401 || res.status === 403) {
+          window.location.href = '/login.html?error=access_denied'; return;
+        }
+        if (!res.ok) throw new Error('Dashboard indisponible');
+        const payload = await res.json();
+        // Existing get-dashboard remains unchanged. These SELECTs use the
+        // current user's RLS and only inform the display, never grant rights.
+        try { Object.assign(payload, await readQuizPortalStatus(supabase, data.session.user.id)); }
+        catch { payload.quizStatusUnavailable = true; }
+        const { nom, planLabels = [], hasVideo, hasAnnales, protectedPages } = payload;
 
     const planTagsHTML = planLabels
-        .map(label => `<span class="plan-tag">${label}</span>`)
+        .map(label => `<span class="plan-tag">${escapeHTML(planLabel(label))}</span>`)
         .join('');
 
     const videoCardHTML = hasVideo ? `
@@ -90,17 +97,17 @@
         </section>
     ` : '';
 
-    const qcmCardHTML = '<section class="qcm-access-card" aria-labelledby="qac-title"><div class="qac-left"><div class="qac-icon" aria-hidden="true">📝</div><h2 id="qac-title">QCMs</h2><p>Lance l\'application KhypnosQCM.</p></div><a class="btn-qcm" href="' + qcmHref + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>M\'entraîner</a></section>';
+    const qcmCardHTML = '<div id="qcm-card-slot"></div>';
 
     const protectedPagesHTML = (protectedPages ?? []).length ? `
         <div class="notion-sections" style="margin-top:2rem">
             <h2 style="font-size:1.15rem;color:#1a1a2e;margin-bottom:1rem">Espaces privés</h2>
             ${protectedPages.map(p => `
-                <a class="notion-link-card" href="${p.href}">
+                <a class="notion-link-card" href="${escapeHTML(p.href)}">
                     <div class="nlc-left">
                         <div class="nlc-icon" aria-hidden="true">🔒</div>
                         <div>
-                            <div class="nlc-label">${p.titre}</div>
+                            <div class="nlc-label">${escapeHTML(p.titre)}</div>
                             <div class="nlc-sub">Cours, corrections & documents →</div>
                         </div>
                     </div>
@@ -113,14 +120,14 @@
     ` : '';
 
     // État vide si aucune ressource
-    const emptyStateHTML = (!hasVideo && !hasAnnales && !(protectedPages ?? []).length)
+    const emptyStateHTML = (!payload.quizStatusUnavailable && !planLabels.some(label => ['quiz_med', 'quiz_rfe'].includes(label)) && !hasVideo && !hasAnnales && !(protectedPages ?? []).length && !payload.quizEntitlements?.length && !payload.qcmSubscriptionActive)
         ? `<p class="notion-empty-state">Aucune ressource disponible pour le moment.</p>`
         : '';
 
     app.innerHTML = `
         <header class="dashboard-header">
-            <h1>Bonjour ${nom} 👋</h1>
-            <p>Voici les ressources privées liées à ton abonnement.</p>
+            <h1>Bonjour ${escapeHTML(nom)} 👋</h1>
+            <p>Voici tes accès et les ressources liées à tes formules.</p>
             <div class="plan-tags">${planTagsHTML}</div>
         </header>
         ${videoCardHTML}
@@ -129,6 +136,39 @@
         ${protectedPagesHTML}
         ${emptyStateHTML}
     `;
+        const qcmCard = mountQcmAccess(document.getElementById('qcm-card-slot'), payload, {
+          readSession: async () => {
+            const { data, error } = await supabase.auth.getSession();
+            if (error) throw error;
+            return data.session;
+          }
+        });
+        if (payload.quizStatusUnavailable) {
+          const notice = document.createElement('p');
+          notice.setAttribute('role','status');
+          notice.textContent = 'Les dates de validité sont temporairement indisponibles. Tu peux toujours ouvrir l’application QCM.';
+          qcmCard.append(notice);
+        }
+      } catch {
+        app.querySelector('.loading-state')?.remove();
+        let notice = document.getElementById('dashboard-retry');
+        if (!notice) {
+          notice = document.createElement('p');
+          notice.id = 'dashboard-retry'; notice.setAttribute('role','alert');
+          app.append(notice);
+        }
+        notice.textContent = 'Chargement indisponible. Vérifie ta connexion puis réessaie.';
+        const retry = document.createElement('button');
+        retry.type = 'button'; retry.textContent = 'Réessayer';
+        retry.addEventListener('click', () => { void loadDashboard(true); });
+        notice.append(' ', retry);
+      } finally { loading = false; }
+    }
+    await loadDashboard(true);
+    window.addEventListener('focus', () => { void loadDashboard(); });
+    window.addEventListener('online', () => { void loadDashboard(); });
+    document.addEventListener('visibilitychange', () => { void loadDashboard(); });
+    setInterval(() => { void loadDashboard(); }, 60000);
 </script>
 <script type="module" src="/js/admin-banner-v2.js?v=private-ca2dcf52bea4152e"></script>
 <script src="/js/header-manager.js?v=private-ca2dcf52bea4152e" defer></script>
