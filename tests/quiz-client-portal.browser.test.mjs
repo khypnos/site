@@ -22,14 +22,14 @@ test('espace client dans Chromium isolé',{skip:!bin&&'Set KHYPNOS_CHROMIUM'},as
    assert.equal(await page.getByText('Renouveler',{exact:true}).count(),0)
    assert.equal(await page.locator('a').count(),2);assert(!(await page.content()).includes('access_token='))
   })
-  await t.test('installation : action secondaire sous le titre, même lien pour tous les profils',async()=>{
+  await t.test('installation : action secondaire sous le bouton principal, même lien pour tous les profils',async()=>{
    for(const extra of [{},{qcmSubscriptionActive:true},{quizEntitlements:[]}]){
     await page.evaluate(p=>window.mount(p),{...payload,...extra})
     const install=page.getByRole('link',{name:'Installer l’application (nouvel onglet)'})
     assert.equal(await install.getAttribute('href'),'https://khypnos-qcm.vercel.app/installer-app')
     assert.equal(await install.getAttribute('target'),'_blank')
     assert.match(await install.getAttribute('rel'),/noopener/)
-    assert.equal(await page.locator('h2 + a.qac-install').count(),1)
+    assert.equal(await page.locator('.qac-actions > .btn-qcm + .qac-install').count(),1)
    }
   })
   await t.test('expiré : renouvellement avec session lue au clic, sans reconnexion',async()=>{

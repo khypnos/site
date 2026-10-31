@@ -1,33 +1,50 @@
-/* Secondary installation action, shared by every Accès QCM card. */
-.qcm-access-card .qac-install {
-    display: inline-flex;
+/* The two app actions share one column and identical dimensions. */
+.qcm-access-card .qac-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 8px;
+    flex: 0 0 232px;
+    width: 232px;
+    max-width: 100%;
+}
+.qcm-access-card .qac-actions > a {
+    display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    width: 100%;
     min-height: 44px;
-    max-width: 100%;
-    padding: 8px 12px;
-    margin: 8px 0 12px;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+}
+.qcm-access-card .qac-actions > a:hover {
+    text-decoration: none;
+}
+/* Installation stays visually secondary without changing its size. */
+.qcm-access-card .qac-actions > .qac-install {
+    border-color: rgba(255, 255, 255, 0.55);
     background: transparent;
     color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.4;
-    text-decoration: none;
-    text-align: center;
 }
-.qcm-access-card .qac-install:hover {
+.qcm-access-card .qac-actions > .qac-install:hover {
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    text-decoration: underline;
+    text-decoration: none;
 }
-.qcm-access-card .qac-install:focus-visible {
+.qcm-access-card .qac-actions > a:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 3px;
 }
-/* Keep both primary and renewal buttons inside the card on narrow screens. */
+/* Keep primary and renewal buttons inside the card on narrow screens. */
 .qcm-access-card .qac-left {
     min-width: 0;
 }
@@ -37,7 +54,11 @@
     white-space: normal;
 }
 @media (max-width: 560px) {
-    .qcm-access-card .qac-left {
+    .qcm-access-card .qac-left,
+    .qcm-access-card .qac-actions {
         width: 100%;
+    }
+    .qcm-access-card .qac-actions {
+        flex: 0 0 auto;
     }
 }

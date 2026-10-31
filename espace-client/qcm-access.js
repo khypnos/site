@@ -34,7 +34,7 @@ export function mountQcmAccess(target, payload, { readSession, navigate = url =>
   install.rel = 'noopener noreferrer'
   install.setAttribute('aria-label', 'Installer l’application (nouvel onglet)')
   install.textContent = 'Installer l’application'
-  body.append(icon,title,install,intro)
+  body.append(icon,title,intro)
   const serverNow = Number.isFinite(Date.parse(payload.referenceTime)) ? Date.parse(payload.referenceTime) : now()
   const subscription = !!payload.qcmSubscriptionActive
   const entitlements = Array.isArray(payload.quizEntitlements) ? payload.quizEntitlements : []
@@ -75,7 +75,12 @@ export function mountQcmAccess(target, payload, { readSession, navigate = url =>
     body.append(list)
   }
   body.append(errors)
-  card.append(body,action('Ouvrir l’application QCM'))
+  const actions = document.createElement('div')
+  actions.className = 'qac-actions'
+  actions.setAttribute('role', 'group')
+  actions.setAttribute('aria-label', 'Application QCM')
+  actions.append(action('Ouvrir l’application QCM'), install)
+  card.append(body,actions)
   target.replaceChildren(card)
   return card
 }
