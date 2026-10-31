@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos — Annales corrigées</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css?v=private-512fdc885acff734">
+  <link rel="stylesheet" href="/css/theme-elegance.css?v=private-512fdc885acff734">
+  <link rel="stylesheet" href="/css/annales.css?v=private-512fdc885acff734">
+  <link rel="stylesheet" href="/css/annales-corrigees.css?v=private-512fdc885acff734">
+  <!-- PDF.js pour le viewer maison (watermark, jamais de lien direct) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs" type="module"></script>
+</head>
+<body>
+<div class="container">
+  <main class="annales-wrapper">
+    <a href="/espace-client/index.html" class="ac-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Retour à mon espace
+    </a>
+    
+    <div id="doc-notice" class="doc-notice" hidden></div>
+
+    <header class="ac-header">
+      <h1>📚 Annales corrigées</h1>
+      <p>Toutes les années disponibles selon ta promotion.</p>
+    </header>
+
+    <div id="annales-grid" class="annales-grid">
+      <div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal détail d'une année : overlay plein écran, s'affiche instantanément (pas d'effet "en bas de page") -->
+<div id="annale-modal" class="annale-modal">
+  <div class="annale-modal-header"><span id="annale-modal-title"></span></div>
+  <div id="annale-modal-notice" class="doc-notice doc-notice--modal" hidden></div>
+  <div id="detail-content" class="annale-modal-body"></div>
+  <button id="detail-close" type="button" class="annale-modal-close" aria-label="Fermer">✕ Fermer</button>
+</div>
+
+<!-- Modal viewer PDF maison : watermark nominatif, jamais l'URL Notion brute exposée comme lien -->
+<div id="pdf-modal" class="pdf-modal">
+  <div class="pdf-modal-header"><span id="pdf-modal-title"></span></div>
+  <div id="pdf-canvas-wrap" class="pdf-canvas-wrap"></div>
+  <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Fermer le document">✕ Fermer</button>
+</div>
+
+<script type="module">
+  import { supabase, requireAuth } from '/espace-client/auth.js?v=private-512fdc885acff734'
+  import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs'
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs'
+
+  const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co'
+
+  const session = await requireAuth()
+  if (!session) throw new Error('Non authentifié')
+
+  const $grid = document.getElementById('annales-grid')
+
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/get-annales`, {
+    headers: { Authorization: `Bearer ${session.access_token}` }
+  })
+  if (res.status === 403) {
+    $grid.innerHTML = '<p class="empty-state">Ton abonnement ne donne pas accès aux annales.</p>'
+    throw new Error('Accès refusé annales')
+  }
+  const { student: listStudent, annales } = await res.json()
+
+  const STATUT_LABEL = { disponible: 'Disponible', en_cours: 'En cours', non_disponible: 'Non disponible' }
+
+  // Tri explicite côté front par année extraite du TITRE (ex. "Session 2021" → 2021),
+  // décroissant. On ne trie plus sur un champ "annee" : dans annales_cache, ce champ
+  // (renommé annee_acces_min) désigne la promotion minimale qui débloque l'annale, pas
+  // l'année/session du contenu — trier dessus donnait un ordre qui semblait aléatoire.
+  function extractYearFromTitle(titre) {
+    const match = String(titre ?? '').match(/(\d{4})/)
+    return match ? Number(match[1]) : null
+  }
+  const sortedAnnales = [...annales].sort((a, b) => {
+    const yearA = extractYearFromTitle(a.titre)
+    const yearB = extractYearFromTitle(b.titre)
+    if (yearA != null && yearB != null) return yearB - yearA
+    if (yearA != null) return -1
+    if (yearB != null) return 1
+    return String(a.titre ?? '').localeCompare(String(b.titre ?? ''))
+  })
+
+  $grid.innerHTML = sortedAnnales.map(a => `
+    <a href="#" class="annale-card ${a.locked ? 'is-locked' : ''}" data-id="${a.notion_page_id}">
+      <div class="annale-card-header">
+        <h2>${a.titre}</h2>
+        <span class="annale-badge annale-badge--${a.statut}">${STATUT_LABEL[a.statut] ?? a.statut}</span>
+      </div>
+      ${a.locked ? '<p class="annale-lock">🔒 Disponible pour la nouvelle promotion</p>' : '<p class="annale-cta">Voir le corrigé →</p>'}
+    </a>
+  `).join('')
+
+  $grid.querySelectorAll('.annale-card:not(.is-locked)').forEach(link => {
+    link.addEventListener('click', (e) => { e.preventDefault(); openAnnale(link.dataset.id) })
+  })
+
+  // ---- Modal détail d'une année ----
+  const $modal = document.getElementById('annale-modal')
+  const $modalTitle = document.getElementById('annale-modal-title')
+  const $modalNotice = document.getElementById('annale-modal-notice')
+  const $detailContent = document.getElementById('detail-content')
+  let currentStudentEmail = null
+
+  // Fix Firefox : bloquer overflow uniquement sur <body> ne suffit pas, Firefox fait
+  // scroller <html> par défaut (contrairement à Chrome/Safari qui suivent <body>).
+  // On verrouille les deux éléments pour bloquer le scroll d'arrière-plan partout.
+  function openModal() {
+    $modal.classList.add('active')
+    document.documentElement.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden'
+  }
+  function closeModal() {
+    $modal.classList.remove('active')
+    document.documentElement.style.overflow = ''
+    document.body.style.overflow = ''
+  }
+  document.getElementById('detail-close').addEventListener('click', closeModal)
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $modal.classList.contains('active')) closeModal() })
+
+  async function openAnnale(notionPageId) {
+    // Le modal s'affiche IMMÉDIATEMENT (overlay plein écran) avec un spinner —
+    // plus d'attente d'un panneau qui apparaît en bas de page avec un délai.
+    $modalTitle.textContent = 'Chargement…'
+    $modalNotice.hidden = true
+    $detailContent.innerHTML = '<div class="loading-state"><div class="spinner"></div><span>Chargement…</span></div>'
+    openModal()
+
+    const r = await fetch(`${SUPABASE_URL}/functions/v1/get-annale-content?notion_page_id=${notionPageId}`, {
+      headers: { Authorization: `Bearer ${session.access_token}` }
+    })
+    if (!r.ok) {
+      $modalTitle.textContent = ''
+      $detailContent.innerHTML = '<p>Accès refusé ou contenu introuvable.</p>'
+      return
+    }
+    const { titre, content, student } = await r.json()
+    currentStudentEmail = student?.email ?? null
+    $modalTitle.textContent = titre
+    // Bandeau "Espace personnel de ..." repris en haut de la modale, en plus
+    // (ou à défaut) de celui de la liste : couvre le cas où get-annales n'est
+    // pas encore redéployé mais get-annale-content l'est déjà.
+    if (student?.email) {
+      $modalNotice.innerHTML = `🔒 Espace personnel de <strong>${escapeHtml(student.email)}</strong> — Document strictement personnel, ne pas partager.`
+      $modalNotice.hidden = false
+    }
+    // Plus de div .subject-section (encadrement + fond gris) : la modale est
+    // déjà en fond gris, seules les ressources (cards PDF/lien) ressortent en blanc.
+    $detailContent.innerHTML = renderBlocks(content)
+
+    // Cartes PDF : ouverture dans le viewer maison (watermark), jamais de lien direct
+    $detailContent.querySelectorAll('.pdf-card').forEach(card => {
+      card.addEventListener('click', () => openPdfViewer(card.dataset.url, card.dataset.label))
+    })
+  }
+
+  // ---- Rendu des blocs renvoyés par get-annale-content (même format que page-protegee.html) ----
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]))
+  }
+
+  function renderText(text) {
+    return (text ?? []).map(t => {
+      let s = escapeHtml(t.text)
+      if (t.code) s = `<code>${s}</code>`
+      if (t.bold) s = `<strong>${s}</strong>`
+      if (t.italic) s = `<em>${s}</em>`
+      if (t.strike) s = `<s>${s}</s>`
+      if (t.href) s = `<a href="${escapeHtml(t.href)}" class="inline-link" target="_blank" rel="noopener">🔗 ${s}</a>`
+      return s
+    }).join('')
+  }
+
+  function renderBlocks(blocks) {
+    return (blocks ?? []).map(b => {
+      switch (b.type) {
+        case 'h1': return `<h2 class="question-title">${renderText(b.text)}</h2>`
+        case 'h2': return `<h2 class="question-title">${renderText(b.text)}</h2>`
+        case 'h3': return `<h3>${renderText(b.text)}</h3>`
+        case 'p': return b.text?.length ? `<p>${renderText(b.text)}</p>` : ''
+        case 'li_bullet': return `<ul><li>${renderText(b.text)}</li></ul>`
+        case 'li_number': return `<ol><li>${renderText(b.text)}</li></ol>`
+        case 'quote': return `<blockquote>${renderText(b.text)}</blockquote>`
+        case 'code': return `<pre><code>${renderText(b.text)}</code></pre>`
+        case 'callout': return `<div class="question-section"><div class="question-text">${b.icon ?? '💡'} ${renderText(b.text)}</div></div>`
+        case 'toggle': return `<details class="question-section"><summary class="question-title">${renderText(b.text)}</summary>${renderBlocks(b.children)}</details>`
+        case 'image': return `<div class="image-container"><img class="question-image" src="${escapeHtml(b.url)}" alt=""></div>`
+        case 'pdf': {
+          const label = b.caption?.length ? b.caption.map(t => t.text).join('') : (b.name ?? 'Document PDF')
+          // Carte cliquable (JAMAIS un <a href>) : ouvre le viewer maison, l'URL Notion n'est jamais posée comme lien cliquable/copiable
+          return `<div class="pdf-card" data-url="${escapeHtml(b.url)}" data-label="${escapeHtml(label)}"><div class="pdf-icon">PDF</div><div class="pdf-label">${escapeHtml(label)}</div></div>`
+        }
+        case 'link': {
+          // Ressource externe (bookmark/embed Notion, ex. "Ressources supplémentaires") : card distincte de la card PDF, icône 🔗
+          const label = b.title || b.url
+          return `<a class="link-card" href="${escapeHtml(b.url)}" target="_blank" rel="noopener"><div class="link-icon">🔗</div><div class="pdf-label">${escapeHtml(label)}</div></a>`
+        }
+        case 'video': return `<p><em>🎬 Vidéo non prise en charge sur cette page pour le moment.</em></p>`
+        case 'hr': return '<hr>'
+        default: return ''
+      }
+    }).join('')
+  }
+
+  // ---- Rafraîchissement de session (signed URLs Notion valides ~1h), même principe que page-protegee.html ----
+  const SESSION_REFRESH_MS = 55 * 60 * 1000
+  setTimeout(() => {
+    if (document.getElementById('session-refresh-banner')) return
+    const banner = document.createElement('div')
+    banner.id = 'session-refresh-banner'
+    banner.className = 'session-refresh-banner'
+    banner.innerHTML = `<br>      <span>⏱️ Ta session va bientôt expirer. Recharge pour continuer à ouvrir les documents.</span><br>      <button id="session-refresh-btn">Rafraîchir la session</button><br>    `
+    document.body.appendChild(banner)
+    document.getElementById('session-refresh-btn')
+      .addEventListener('click', () => window.location.reload())
+  }, SESSION_REFRESH_MS)
+
+  // ---- Anti-print / anti-save (dissuasif), même principe que page-protegee.html ----
+  window.addEventListener('beforeprint', e => { e.preventDefault(); alert('Impression désactivée.') })
+  document.addEventListener('contextmenu', e => e.preventDefault())
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && ['p', 's'].includes(e.key.toLowerCase())) {
+      e.preventDefault()
+      alert('Fonction désactivée sur cet espace.')
+    }
+  })
+
+  async function openPdfViewer(url, label) {
+    const modal = document.getElementById('pdf-modal')
+    const wrap = document.getElementById('pdf-canvas-wrap')
+    document.getElementById('pdf-modal-title').textContent = label
+    wrap.innerHTML = '<div class="loading-state" style="color:#fff"><div class="spinner"></div><span>Chargement du document…</span></div>'
+    modal.classList.add('active')
+
+    try {
+      const pdf = await pdfjsLib.getDocument({ url, withCredentials: false }).promise
+      wrap.innerHTML = ''
+
+      const dpr = window.devicePixelRatio || 1
+      const available = (wrap.clientWidth || window.innerWidth) - 32
+
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum)
+        const base = page.getViewport({ scale: 1 })
+        const cssScale = Math.min(available / base.width, 2)
+        const renderScale = Math.min(cssScale * dpr, 3)
+        const viewport = page.getViewport({ scale: renderScale })
+
+        const container = document.createElement('div')
+        container.className = 'pdf-canvas-container'
+
+        const canvas = document.createElement('canvas')
+        canvas.width = Math.floor(viewport.width)
+        canvas.height = Math.floor(viewport.height)
+        canvas.style.width = `${Math.floor(viewport.width / dpr)}px`
+        canvas.style.height = `${Math.floor(viewport.height / dpr)}px`
+        container.appendChild(canvas)
+
+        const watermark = document.createElement('div')
+        watermark.className = 'pdf-watermark'
+        watermark.innerHTML = `<div class="pdf-watermark-text">${buildWatermarkPattern(currentStudentEmail ?? session.user.email)}</div>`
+        container.appendChild(watermark)
+
+        wrap.appendChild(container)
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise
+      }
+    } catch (e) {
+      console.error(e)
+      wrap.innerHTML = '<p style="color:#fecaca">Erreur d\'affichage du document.</p>'
+    }
+  }
+
+  function buildWatermarkPattern(email) {
+    const line = `${email} • Document strictement personnel • Khypnos`
+    return Array(15).fill(line).join('<br>')
+  }
+
+  document.getElementById('pdf-modal-close').addEventListener('click', () => {
+    document.getElementById('pdf-modal').classList.remove('active')
+    document.getElementById('pdf-canvas-wrap').innerHTML = ''
+  })
+</script>
+
+<script src="/js/header-manager.js?v=private-512fdc885acff734" defer></script>
+<script src="/js/scroll-to-top.min.js?v=private-512fdc885acff734"></script>
+<script src="/js/navbar.js?v=private-512fdc885acff734"></script>
+<script src="/js/footer-manager.js?v=private-512fdc885acff734" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      new FooterManager({
+          anchor: '.container',
+          position: 'beforeend'
+      }).init();
+  });
+</script>
+</body>
+</html>

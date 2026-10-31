@@ -9,3 +9,6 @@ medecin/annales/_old/
 # package node_modules
 package.json
 package-lock.json
+
+#tools
+tools/version-private-assets.py
