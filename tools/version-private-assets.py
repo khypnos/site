@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#! Ce code permet de versionner de manière cohérente les références JS/CSS locales de l'espace privé. Il n'utilise que la bibliothèque standard.
+#! Force la mise à jour au niveux des clients/user du site
 #! py -3 tools/version-private-assets.py
 """Version the private area's local JS/CSS references consistently. Standard library only."""
 import argparse,hashlib,json,posixpath,re,sys
