@@ -74,8 +74,8 @@
     --kh-muted:        #5a6478;
     --kh-border:       #e8eaef;
     --kh-surface2:     #f6f7fb;
-    --kh-accent-from:  #667eea;
-    --kh-accent-to:    #764ba2;
+    --kh-accent-from:  #1a2f4f;
+    --kh-accent-to:    #2c4a6e;
     --kh-shadow:       0 4px 12px rgba(26,47,79,.08), 0 16px 40px rgba(26,47,79,.12);
     --kh-radius:       14px;
 }
