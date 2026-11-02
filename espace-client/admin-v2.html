@@ -16,7 +16,7 @@
  <link rel="stylesheet" href="/css/admin-video-v2.css?v=private-ca2dcf52bea4152e">
  <link rel="stylesheet" href="/css/ui-feedback-v2.css?v=private-ca2dcf52bea4152e">
  <link rel="stylesheet" href="/css/admin-cleanup-v2.css?v=private-ca2dcf52bea4152e">
- <link rel="stylesheet" href="/css/admin-drive-v2.css?v=drive-20261102">
+ <link rel="stylesheet" href="/css/admin-drive-v2.css?v=drive-20261102b">
 </head>
 <body>
  <div class="container"><main class="annales-wrapper">
@@ -50,7 +50,8 @@
   </section>
   <section class="v2-admin-card"><h3><span class="admin-lot1-number">2</span> Générer les aperçus</h3>
    <p>Sélectionne les épreuves à préparer. Les fichiers doivent être enregistrés dans Drive et porter le nom <code>YEAR_epreuve_edition.docx</code>, dans le dossier <code>YEAR</code>. Maximum 6 épreuves par lancement.</p>
-   <button type="button" id="check-drive-files" disabled>Vérifier les fichiers Drive</button>
+   <button type="button" id="check-drive-files" disabled>Vérifier les modifications sur Drive</button>
+   <p class="admin-drive-help">Compare les documents Word de Drive aux versions publiées ou générées. Aucun PDF n’est généré ni publié.</p>
    <p id="drive-status-message" role="status" aria-live="polite">Vérifie les fichiers Drive pour afficher les signalements.</p>
    <div id="annales-selection" class="v2-selection"></div><p id="selection-count"></p>
    <div class="admin-drive-actions"><button type="button" id="select-drive-changed" disabled>Sélectionner les annales à générer</button></div>
@@ -82,7 +83,7 @@
   <div id="cleanup-list" class="cleanup-list"></div><p id="cleanup-note"></p>
   <button type="button" id="cleanup-confirm" disabled>Nettoyer 0 génération(s)</button>
  </dialog>
- <script type="module" src="/js/admin-v2.js?v=drive-20261102"></script>
+ <script type="module" src="/js/admin-v2.js?v=drive-20261102b"></script>
  <script type="module" src="/js/admin-video-v2.js?v=private-ca2dcf52bea4152e"></script>
  <script src="/js/header-manager.js?v=private-ca2dcf52bea4152e" defer></script>
  <script src="/js/navbar.js?v=private-ca2dcf52bea4152e"></script>
