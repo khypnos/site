@@ -1,0 +1,9 @@
+.admin-drive-actions { display:flex; flex-wrap:wrap; align-items:center; gap:.65rem; margin:1rem 0; }
+.admin-drive-actions button { margin:0; }
+.drive-badge { display:inline-block; font-size:.78rem; font-weight:700; line-height:1.35; padding:.2rem .5rem; border-radius:999px; margin:.25rem 0; }
+.drive-badge--changed { color:#7a3900; background:#fff0d7; border:1px solid #f2c88c; }
+.drive-badge--current { color:#165c37; background:#e2f5e8; border:1px solid #b4dfc2; }
+.drive-badge--ready { color:#144e89; background:#e5f1ff; border:1px solid #b6d3f6; }
+.drive-badge--unknown { color:#4c5260; background:#edf0f3; border:1px solid #cfd5dc; }
+.drive-year-date { display:block; font-size:.78rem; font-weight:400; color:#555; }
+#drive-status-message { margin:.5rem 0; }

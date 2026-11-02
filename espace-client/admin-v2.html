@@ -16,6 +16,7 @@
  <link rel="stylesheet" href="/css/admin-video-v2.css?v=private-ca2dcf52bea4152e">
  <link rel="stylesheet" href="/css/ui-feedback-v2.css?v=private-ca2dcf52bea4152e">
  <link rel="stylesheet" href="/css/admin-cleanup-v2.css?v=private-ca2dcf52bea4152e">
+ <link rel="stylesheet" href="/css/admin-drive-v2.css?v=drive-20261102">
 </head>
 <body>
  <div class="container"><main class="annales-wrapper">
@@ -49,7 +50,10 @@
   </section>
   <section class="v2-admin-card"><h3><span class="admin-lot1-number">2</span> Générer les aperçus</h3>
    <p>Sélectionne les épreuves à préparer. Les fichiers doivent être enregistrés dans Drive et porter le nom <code>YEAR_epreuve_edition.docx</code>, dans le dossier <code>YEAR</code>. Maximum 6 épreuves par lancement.</p>
+   <button type="button" id="check-drive-files" disabled>Vérifier les fichiers Drive</button>
+   <p id="drive-status-message" role="status" aria-live="polite">Vérifie les fichiers Drive pour afficher les signalements.</p>
    <div id="annales-selection" class="v2-selection"></div><p id="selection-count"></p>
+   <div class="admin-drive-actions"><button type="button" id="select-drive-changed" disabled>Sélectionner les annales à générer</button></div>
    <button id="generate-previews" type="button" disabled>Générer les aperçus</button>
    <div id="generation-activity" class="admin-activity" data-tone="idle"><header><strong>Génération · suivi GitHub</strong><span id="generation-spinner" class="admin-activity-spinner" aria-hidden="true" hidden></span></header><p id="generation-feedback" role="status" aria-live="polite">En attente d’une action.</p><ol id="generation-log" class="admin-activity-log" role="log" aria-live="polite" aria-label="Journal : demande de génération"></ol></div>
    <a id="generation-actions-link" href="https://github.com/khypnos/publi_khypnos/actions" target="_blank" rel="noopener noreferrer" hidden>Voir dans GitHub Actions ↗</a>
@@ -78,7 +82,7 @@
   <div id="cleanup-list" class="cleanup-list"></div><p id="cleanup-note"></p>
   <button type="button" id="cleanup-confirm" disabled>Nettoyer 0 génération(s)</button>
  </dialog>
- <script type="module" src="/js/admin-v2.js?v=private-ca2dcf52bea4152e"></script>
+ <script type="module" src="/js/admin-v2.js?v=drive-20261102"></script>
  <script type="module" src="/js/admin-video-v2.js?v=private-ca2dcf52bea4152e"></script>
  <script src="/js/header-manager.js?v=private-ca2dcf52bea4152e" defer></script>
  <script src="/js/navbar.js?v=private-ca2dcf52bea4152e"></script>
