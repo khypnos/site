@@ -1,0 +1,33 @@
+name: Test isolé du navigateur Vids
+on:
+  push:
+    branches: [test-vids-pdf-actions]
+    paths: [.github/workflows/test-vids-runner.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Vérifier Chromium et l'accès anonyme à Google Vids
+        shell: bash
+        run: |
+          set -euo pipefail
+          start=$(date +%s)
+          echo "Début du diagnostic du navigateur"
+          browser=$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)
+          if [ -z "$browser" ]; then echo "Aucun navigateur Chromium installé"; exit 1; fi
+          "$browser" --version
+          echo "Test de réponse Google Vids sans compte ni données privées"
+          curl -sSL --max-time 30 -o /dev/null -w 'HTTP final: %{http_code}; durée réseau: %{time_total}s\n' 'https://docs.google.com/videos/u/0/'
+          echo "Chargement anonyme dans Chromium"
+          set +e
+          timeout 45 "$browser" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --dump-dom --virtual-time-budget=8000 'https://docs.google.com/videos/u/0/' > /tmp/vids-diagnostic.html 2>/tmp/browser-errors.log
+          result=$?
+          set -e
+          echo "Code navigateur: $result"
+          if grep -qiE 'accounts.google.com|sign in|connexion|identifier' /tmp/vids-diagnostic.html; then echo 'Page de connexion détectée (accès anonyme).'; else echo 'Page de connexion non déterminée automatiquement.'; fi
+          echo "Durée des étapes du diagnostic: $(($(date +%s)-start)) secondes"
+          exit "$result"
