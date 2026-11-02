@@ -2,18 +2,24 @@
 .admin-drive-actions button { margin:0; }
 .v2-selection { grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr)); }
 .v2-selection fieldset { min-width:0; }
-.v2-selection label { flex-wrap:wrap; }
+.v2-selection label { flex-wrap:nowrap; }
 .v2-selection label input { flex:0 0 18px; }
 .drive-track-name { white-space:nowrap; }
 .drive-badge { display:inline-block; flex:0 0 auto; max-width:100%; white-space:nowrap; font-size:.875rem; font-weight:700; line-height:1.35; padding:.2rem .55rem; border-radius:999px; }
 .drive-badge:focus-visible { outline:3px solid #67a1dc; outline-offset:3px; }
-.drive-badge--changed { white-space:normal; overflow-wrap:anywhere; border-radius:12px; color:#7a3900; background:#fff0d7; border:1px solid #f2c88c; }
+.drive-badge--changed { color:#7a3900; background:#fff0d7; border:1px solid #f2c88c; }
 .drive-badge--current { color:#165c37; background:#e2f5e8; border:1px solid #b4dfc2; }
 .drive-badge--ready { color:#144e89; background:#e5f1ff; border:1px solid #b6d3f6; }
 .drive-badge--unknown { color:#4c5260; background:#edf0f3; border:1px solid #cfd5dc; }
 @media (max-width:440px) {
- .v2-selection label { display:grid; grid-template-columns:18px minmax(0,1fr); }
- .v2-selection label .drive-badge { grid-column:2; justify-self:start; }
+ .v2-selection label { gap:6px; font-size:1rem; }
+ .drive-badge { font-size:.8125rem; padding:.18rem .45rem; }
+}
+@media (max-width:360px) {
+ .v2-selection fieldset { padding:7px; }
+ .v2-selection label { gap:4px; }
+ .drive-track-name { font-size:.875rem; }
+ .drive-badge { font-size:.75rem; padding:.14rem .25rem; }
 }
 #drive-status-message { margin:.5rem 0; }
 .admin-drive-help { margin:.5rem 0; color:#52687e; font-size:.9rem; }

@@ -1,4 +1,4 @@
-import {initDriveScanner} from '/js/admin-drive-v2.js?v=drive-20261102b';
+import {initDriveScanner} from '/js/admin-drive-v2.js?v=drive-20261102c';
 import {initCleanup} from '/js/admin-cleanup-v2.js?v=private-ca2dcf52bea4152e';
 import {actionFeedback,loadingFeedback,startClock} from '/js/ui-feedback-v2.js?v=private-ca2dcf52bea4152e';
 import {supabase,requireAuth} from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
