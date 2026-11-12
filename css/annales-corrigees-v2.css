@@ -39,6 +39,87 @@ button.pdf-card { width:100%; text-align:left; font:inherit; color:inherit; }
 #admin-tools[hidden],#admin-annales[hidden] { display:none !important; }
 .v2-publication-text { display:block; font-size:.8rem; color:#657184; line-height:1.5; margin:.2rem 0; }
 
+
+/* ── Onglets 1 / 2 / 3 (annales) ───────────────────────────────── */
+.v2-lot-tabs {
+  display: flex;
+  gap: 0;
+  margin: 1rem 0 0;
+  border-bottom: 2px solid #e0e7f0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.v2-lot-tabs::-webkit-scrollbar { display: none; }
+
+.v2-lot-tab {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  padding: .75rem .6rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  font: inherit;
+  font-size: .875rem;
+  color: #6b7c93;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.v2-lot-tab:hover { color: #1a2f4f; }
+
+.v2-tab-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #edf1f7;
+  color: #526078;
+  font-size: .78rem;
+  font-weight: 700;
+  transition: background .15s, color .15s;
+}
+
+.v2-lot-tab[aria-selected="true"] {
+  color: #1a2f4f;
+  border-color: #1a2f4f;
+  font-weight: 600;
+}
+.v2-lot-tab[aria-selected="true"] .v2-tab-num {
+  background: #1a2f4f;
+  color: #fff;
+}
+
+.v2-lot-tab:focus-visible {
+  outline: 3px solid #5486c7;
+  outline-offset: 2px;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Les panneaux : le hidden natif suffit */
+#v2-tab-panel-1,
+#v2-tab-panel-2,
+#v2-tab-panel-3 { display: block; }
+#v2-tab-panel-1[hidden],
+#v2-tab-panel-2[hidden],
+#v2-tab-panel-3[hidden] { display: none !important; }
+
+/* Mobile ≤ 480 px : libellés raccourcis via font-size */
+@media (max-width: 480px) {
+  .v2-lot-tab { font-size: .78rem; padding: .65rem .4rem; gap: .35rem; }
+  .v2-tab-num { width: 22px; height: 22px; font-size: .74rem; }
+  .v2-tab-label { overflow: hidden; text-overflow: ellipsis; max-width: 6rem; }
+}
+
 /* Library A — catalogue only; no production stylesheet, API or access change. */
 .annales-library-v2 { --ac-ink:#1c385b; --ac-muted:#61738a; }
 .annales-library-v2 .ac-library-header { display:flex; align-items:center; gap:15px; margin:28px 0 26px; }
