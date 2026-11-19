@@ -17,13 +17,12 @@
   <link rel="stylesheet" href="/css/ui-feedback-v2.css?v=private-ca2dcf52bea4152e">
   <link rel="stylesheet" href="/css/admin-cleanup-v2.css?v=private-ca2dcf52bea4152e">
   <link rel="stylesheet" href="/css/admin-drive-v2.css?v=drive-20261102c">
+  <link rel="stylesheet" href="/css/admin-qcm-sync-v2.css?v=qcm-20261119">
 </head>
 <body>
   <div class="container">
     <main class="annales-wrapper">
-
       <a href="/espace-client/index.html" class="ac-back-link">← Retour à mon espace</a>
-
       <header class="ac-header">
         <h1>Administration</h1>
         <p>Outils réservés aux comptes administrateurs autorisés.</p>
@@ -31,18 +30,63 @@
 
       <aside class="v2-preview">
         <strong>À savoir avant de commencer</strong>
-        <p><b>Annales :</b> les aperçus sont générés à partir des documents Word de Drive. Après relecture, les PDF enrichis sont publiés dans la base de données Notion des annales et deviennent accessibles aux étudiants autorisés, après mise à jour automatique du catalogue.<br>
+        <p><b>Synchronisation QCM :</b> copie les questions de la base de données QCM Khypnos vers l'application QCM. Les onglets de QCM_inAPP concernés sont entièrement réécrits.<br>
+        <b>Annales :</b> les aperçus sont générés à partir des documents Word de Drive. Après relecture, les PDF enrichis sont publiés dans la base de données Notion des annales et deviennent accessibles aux étudiants autorisés, après mise à jour automatique du catalogue.<br>
         <b>Vidéothèque :</b> actualisation du catalogue vidéo en production, uniquement après confirmation.</p>
       </aside>
 
       <div id="admin-state" role="status" aria-live="polite">Vérification des droits administrateur…</div>
 
       <div id="admin-tools" hidden>
-
         <nav class="admin-lot1-nav" aria-label="Sections d'administration">
+          <a href="#admin-qcm-domain">🔄 Synchronisation QCM</a>
           <a href="#admin-video-domain">🎬 Vidéothèque</a>
           <a href="#admin-annales-domain">📚 Annales</a>
         </nav>
+
+        <!-- SECTION SYNCHRONISATION QCM -->
+        <section class="admin-lot1-domain" id="admin-qcm-domain">
+          <header class="admin-lot1-heading">
+            <div>
+              <span class="admin-lot1-eyebrow">APPLICATION QCM</span>
+              <h2>🔄 Synchronisation QCM</h2>
+            </div>
+            <span class="admin-lot1-tag">Google Sheets → Application</span>
+          </header>
+
+          <section class="v2-admin-card" id="qcm-sync-card">
+            <h3>Synchroniser la base de données QCM</h3>
+            <p>Outil de synchronisation de QCM depuis la base de données QCM Khypnos vers l'application QCM. Les onglets synchronisés sont détaillés dans l'onglet «&nbsp;<b>_Mapping_Config</b>&nbsp;» du fichier <b>Base de données QCM</b>. Le fichier cible est <b>QCM_inAPP</b>.</p>
+
+            <div class="qcm-sync-actions">
+              <a class="qcm-btn qcm-secondary" href="https://docs.google.com/spreadsheets/d/1AW9t7WGpHLtuFtInQg0awktgbPmZ3Zp8JUuLpM-7h2o/edit" target="_blank" rel="noopener noreferrer">📗 Accès Base de données QCM ↗</a>
+              <a class="qcm-btn qcm-secondary" href="https://docs.google.com/spreadsheets/d/1kImp0KiZe98Fk3nQjBT2bdgr41s3EjFdsVkA6_YWxT8/edit" target="_blank" rel="noopener noreferrer">📱 Accès QCM_inAPP ↗</a>
+              <button type="button" id="sync-btn" class="qcm-btn" aria-describedby="qcm-sync-help">Synchroniser QCM_inAPP</button>
+            </div>
+            <p class="qcm-sync-help" id="qcm-sync-help">Lit les règles actives de _Mapping_Config, réécrit les onglets correspondants dans QCM_inAPP puis déclenche la mise à jour Supabase si elle est configurée. Demande une confirmation avant l'envoi.</p>
+
+            <label class="qcm-secret" for="qcm-secret">
+              <span>Clé de la WebApp (WEBAPP_SECRET)</span>
+              <input type="password" id="qcm-secret" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Saisie nécessaire une fois par session">
+              <small>Conservée uniquement dans l'onglet du navigateur, jamais dans le code de la page.</small>
+            </label>
+
+            <div id="qcm-console" class="qcm-console" data-tone="idle" aria-busy="false">
+              <header>
+                <strong><span class="qcm-dot" aria-hidden="true"></span>Console de synchronisation · <span id="qcm-state">En attente</span></strong>
+                <div class="qcm-console-tools">
+                  <button type="button" id="qcm-copy">Copier</button>
+                  <button type="button" id="qcm-clear">Effacer</button>
+                </div>
+              </header>
+              <ol id="qcm-log" role="log" aria-live="polite" aria-label="Journal de la synchronisation QCM"></ol>
+            </div>
+            <div class="qcm-meta">
+              <span>Durée : <strong id="qcm-elapsed">–</strong></span>
+              <span id="qcm-last"></span>
+            </div>
+          </section>
+        </section>
 
         <!-- SECTION VIDÉOTHÈQUE -->
         <section class="admin-lot1-domain" id="admin-video-domain">
@@ -53,7 +97,6 @@
             </div>
             <span class="admin-lot1-tag">Médecin + IADE</span>
           </header>
-
           <section class="v2-admin-card" id="video-admin-card" aria-busy="false">
             <h3>Mettre à jour la vidéothèque du site</h3>
             <p>Met à jour les informations affichées sur le site à partir des deux bases de données Notion : titres, rubriques, descriptions, durées et promotions autorisées. Les vidéos absentes de Notion ne sont pas retirées du site. Les fichiers vidéo ne sont pas modifiés.</p>
@@ -176,9 +219,7 @@
               </div>
             </section>
           </div>
-
         </section><!-- /admin-annales-domain -->
-
       </div><!-- /admin-tools -->
     </main>
   </div>
@@ -211,6 +252,7 @@
 
   <script type="module" src="/js/admin-v2.js?v=drive-20261102c"></script>
   <script type="module" src="/js/admin-video-v2.js?v=private-ca2dcf52bea4152e"></script>
+  <script src="/js/admin-qcm-sync-v2.js?v=qcm-20261119" defer></script>
   <script src="/js/header-manager.js?v=private-ca2dcf52bea4152e" defer></script>
   <script src="/js/navbar.js?v=private-ca2dcf52bea4152e"></script>
   <script src="/js/footer-manager.js?v=private-ca2dcf52bea4152e" defer></script>

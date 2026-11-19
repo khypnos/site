@@ -1,0 +1,47 @@
+/* Module Synchronisation QCM : s'appuie sur admin-layout-v2 / admin-activity-v2, mobile first. */
+.qcm-sync-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0 8px}
+.qcm-sync-actions .qcm-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 18px;border:1px solid #234f78;border-radius:10px;background:#234f78;color:#fff;font:inherit;font-size:.9rem;font-weight:650;line-height:1.3;text-align:center;text-decoration:none;cursor:pointer;box-shadow:0 2px 5px #183d6620;-webkit-tap-highlight-color:transparent}
+.qcm-sync-actions .qcm-btn:hover{background:#193e61}
+.qcm-sync-actions .qcm-btn.qcm-secondary{background:#fff;color:#244a70;border-color:#d0dce8;box-shadow:none}
+.qcm-sync-actions .qcm-btn.qcm-secondary:hover{background:#f1f6fb}
+.qcm-sync-actions .qcm-btn:disabled{opacity:.6;cursor:not-allowed}
+.qcm-sync-actions .qcm-btn:focus-visible,.qcm-console-tools button:focus-visible,#qcm-secret:focus-visible{outline:3px solid #67a1dc;outline-offset:2px}
+.qcm-sync-actions .qcm-btn[aria-busy=true]::before{content:'';width:13px;height:13px;border:2px solid #ffffff70;border-top-color:#fff;border-radius:50%;animation:admin-activity-spin .85s linear infinite}
+.qcm-sync-help{font-size:.8rem;color:#61788e;margin:6px 0 0}
+.qcm-secret{display:flex;flex-direction:column;gap:6px;margin:18px 0 0;font-size:.85rem;color:#2d4962}
+.qcm-secret input{width:100%;max-width:420px;box-sizing:border-box;padding:11px 13px;border:1px solid #cdd9e5;border-radius:9px;font:inherit;font-size:16px;background:#fff}
+.qcm-secret small{color:#7a8c9b}
+.qcm-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 0;font-size:.78rem;color:#61788e;font-variant-numeric:tabular-nums}
+.qcm-meta strong{color:#2d4962}
+.qcm-console{margin:16px 0 0;border:1px solid #1d2b3a;border-radius:12px;background:#0f1b27;color:#d7e3ee;overflow:hidden}
+.qcm-console>header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 12px;padding:11px 14px;background:#162636;border-bottom:1px solid #243649;font-size:.82rem}
+.qcm-console>header strong{display:inline-flex;align-items:center;gap:9px;color:#fff}
+.qcm-dot{width:9px;height:9px;border-radius:50%;background:#7890a5}
+.qcm-console[data-tone=working] .qcm-dot{background:#4aa3df;animation:qcm-pulse 1.1s ease-in-out infinite}
+.qcm-console[data-tone=success] .qcm-dot{background:#4fb08a}
+.qcm-console[data-tone=error] .qcm-dot{background:#e0737c}
+.qcm-console[data-tone=warning] .qcm-dot{background:#d9a94f}
+.qcm-console-tools{display:flex;gap:8px}
+.qcm-console-tools button{padding:6px 11px;border:1px solid #33495f;border-radius:7px;background:transparent;color:#c5d5e3;font:inherit;font-size:.76rem;cursor:pointer}
+.qcm-console-tools button:hover{background:#1f3347}
+#qcm-log{list-style:none;margin:0;padding:6px 0;height:300px;max-height:55vh;overflow:auto;font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;-webkit-overflow-scrolling:touch}
+#qcm-log li{display:grid;grid-template-columns:68px 1fr;gap:12px;padding:3px 14px}
+#qcm-log li:hover{background:#142333}
+#qcm-log time{color:#6f879d;font-variant-numeric:tabular-nums}
+#qcm-log span{white-space:pre-wrap;overflow-wrap:anywhere}
+#qcm-log li[data-level=ok] span{color:#7fd1ae}
+#qcm-log li[data-level=warn] span{color:#e8c07a}
+#qcm-log li[data-level=error] span{color:#f2959c}
+#qcm-log li[data-level=info] span{color:#d7e3ee}
+#qcm-log li[data-level=sys] span{color:#8fa6ba}
+#qcm-log li.qcm-empty{display:block;color:#6f879d;padding:12px 14px}
+@keyframes qcm-pulse{50%{opacity:.35}}
+@media(max-width:650px){
+.qcm-sync-actions{grid-template-columns:1fr}
+.qcm-sync-actions .qcm-btn{width:100%;min-height:52px}
+.qcm-secret input{max-width:none}
+#qcm-log{height:260px;font-size:12px}
+#qcm-log li{grid-template-columns:54px 1fr;gap:8px;padding:3px 10px}
+.qcm-console-tools{width:100%}.qcm-console-tools button{flex:1;padding:9px}
+}
+@media(prefers-reduced-motion:reduce){.qcm-console[data-tone=working] .qcm-dot{animation:none}}
