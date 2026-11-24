@@ -1,6 +1,6 @@
-import {loadingFeedback} from '/js/ui-feedback-v2.js?v=private-ca2dcf52bea4152e';
-import { recentPublication } from '/js/annales-publication-v2.js?v=private-ca2dcf52bea4152e';
-import { supabase, requireAuth } from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
+import {loadingFeedback} from '/js/ui-feedback-v2.js?v=private-2cdea7db7f164af2';
+import { recentPublication } from '/js/annales-publication-v2.js?v=private-2cdea7db7f164af2';
+import { supabase, requireAuth } from '/espace-client/auth.js?v=private-2cdea7db7f164af2';
 import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs';
 pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
 

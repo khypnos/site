@@ -1,8 +1,8 @@
-import {initDriveScanner} from '/js/admin-drive-v2.js?v=drive-20261102c';
-import {initCleanup} from '/js/admin-cleanup-v2.js?v=private-ca2dcf52bea4152e';
-import {actionFeedback,loadingFeedback,startClock} from '/js/ui-feedback-v2.js?v=private-ca2dcf52bea4152e';
-import {supabase,requireAuth} from '/espace-client/auth.js?v=private-ca2dcf52bea4152e';
-import {checkAdminAccess} from '/js/admin-access-v2.js?v=private-ca2dcf52bea4152e';
+import {initDriveScanner} from '/js/admin-drive-v2.js?v=private-2cdea7db7f164af2';
+import {initCleanup} from '/js/admin-cleanup-v2.js?v=private-2cdea7db7f164af2';
+import {actionFeedback,loadingFeedback,startClock} from '/js/ui-feedback-v2.js?v=private-2cdea7db7f164af2';
+import {supabase,requireAuth} from '/espace-client/auth.js?v=private-2cdea7db7f164af2';
+import {checkAdminAccess} from '/js/admin-access-v2.js?v=private-2cdea7db7f164af2';
 const API='https://fbxiynomlxrjasbbcipp.supabase.co/functions/v1/';
 const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const active=new Set(['dispatching','submission_unknown','generation_queued','generating','publication_queued','publishing']);

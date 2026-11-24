@@ -1,4 +1,4 @@
-import {driveStatus} from '/js/annales-drive-status.mjs?v=drive-20261102c';
+import {driveStatus} from '/js/annales-drive-status.mjs?v=private-2cdea7db7f164af2';
 const $=id=>document.getElementById(id);
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
 export function initDriveScanner({call,actionFeedback,onSelectionChange,onAuthError}){

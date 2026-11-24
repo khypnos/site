@@ -6,18 +6,18 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Khypnos — Administration</title>
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/theme-elegance.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/annales-corrigees.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/annales-corrigees-v2.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/admin-pipeline-v2.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/admin-layout-v2.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/admin-activity-v2.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/admin-video-v2.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/ui-feedback-v2.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/admin-cleanup-v2.css?v=private-ca2dcf52bea4152e">
-  <link rel="stylesheet" href="/css/admin-drive-v2.css?v=drive-20261102c">
-  <link rel="stylesheet" href="/css/admin-qcm-sync-v2.css?v=qcm-20261119">
+  <link rel="stylesheet" href="/styles.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/theme-elegance.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/annales-corrigees.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/annales-corrigees-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/admin-pipeline-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/admin-layout-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/admin-activity-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/admin-video-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/ui-feedback-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/admin-cleanup-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/admin-drive-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/admin-qcm-sync-v2.css?v=private-2cdea7db7f164af2">
 </head>
 <body>
   <div class="container">
@@ -87,6 +87,33 @@
             </div>
           </section>
         </section>
+
+        <!-- CARTE DIAPOS DE CORRECTION QCM -->
+          <section class="v2-admin-card" id="slides-sync-card">
+            <h3>Synchroniser les diapos de correction QCM</h3>
+            <p>Déclenche la synchronisation des diapositives de correction depuis le dossier Google Drive (présentations nommées <code>ID_XXX</code> ou <code>ID_iade_XXX</code>) vers le bucket <code>correction-slides</code> et la table <code>correction_slides</code> de Supabase (conversion en WebP). Seules les présentations ajoutées, modifiées ou supprimées sur Drive sont traitées, sans modifier les questions ni les scores.</p>
+
+            <div class="qcm-sync-actions">
+              <button type="button" id="slides-sync-btn" class="qcm-btn" aria-describedby="slides-sync-help">Synchroniser les diapos</button>
+              <a class="qcm-btn qcm-secondary" href="https://github.com/khypnos/publi_khypnos/actions" target="_blank" rel="noopener noreferrer">Voir GitHub Actions ↗</a>
+            </div>
+            <p class="qcm-sync-help" id="slides-sync-help">Demande confirmation puis déclenche le workflow GitHub Actions sur la branche <code>pipeline/correction_slides</code>. Le traitement incrémental tourne ensuite dans GitHub Actions.</p>
+
+            <div id="slides-console" class="qcm-console" data-tone="idle" aria-busy="false">
+              <header>
+                <strong><span class="qcm-dot" aria-hidden="true"></span>Journal des diapos · <span id="slides-state">En attente</span></strong>
+                <div class="qcm-console-tools">
+                  <button type="button" id="slides-copy">Copier</button>
+                  <button type="button" id="slides-clear">Effacer</button>
+                </div>
+              </header>
+              <ol id="slides-log" role="log" aria-live="polite" aria-label="Journal de la synchronisation des diapos"></ol>
+            </div>
+            <div class="qcm-meta">
+              <span>Durée : <strong id="slides-elapsed">–</strong></span>
+              <span id="slides-last"></span>
+            </div>
+          </section>
 
         <!-- SECTION VIDÉOTHÈQUE -->
         <section class="admin-lot1-domain" id="admin-video-domain">
@@ -250,12 +277,13 @@
     <button type="button" id="cleanup-confirm" disabled>Nettoyer 0 génération(s)</button>
   </dialog>
 
-  <script type="module" src="/js/admin-v2.js?v=drive-20261102c"></script>
-  <script type="module" src="/js/admin-video-v2.js?v=private-ca2dcf52bea4152e"></script>
-  <script src="/js/admin-qcm-sync-v2.js?v=qcm-20261119" defer></script>
-  <script src="/js/header-manager.js?v=private-ca2dcf52bea4152e" defer></script>
-  <script src="/js/navbar.js?v=private-ca2dcf52bea4152e"></script>
-  <script src="/js/footer-manager.js?v=private-ca2dcf52bea4152e" defer></script>
+  <script type="module" src="/js/admin-v2.js?v=private-2cdea7db7f164af2"></script>
+  <script type="module" src="/js/admin-video-v2.js?v=private-2cdea7db7f164af2"></script>
+  <script type="module" src="/js/admin-slides-sync-v2.js?v=private-2cdea7db7f164af2"></script>
+  <script src="/js/admin-qcm-sync-v2.js?v=private-2cdea7db7f164af2" defer></script>
+  <script src="/js/header-manager.js?v=private-2cdea7db7f164af2" defer></script>
+  <script src="/js/navbar.js?v=private-2cdea7db7f164af2"></script>
+  <script src="/js/footer-manager.js?v=private-2cdea7db7f164af2" defer></script>
   <script>document.addEventListener('DOMContentLoaded',()=>{new FooterManager({anchor:'.container',position:'beforeend'}).init();});</script>
 
   <!-- Gestion des onglets 1/2/3 -->
