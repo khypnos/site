@@ -1,7 +1,7 @@
 /* Module Synchronisation QCM : appelle la WebApp Google Apps Script et affiche un journal. */
 (function () {
   'use strict';
-  var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxSWguJeCBnVjFC7Wz9pWdo9UfQ7GLF0hR5Z3aoaWcZjHaQQ1uyGbxliGKkP8kY2Sjv/exec';
+  var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzdvo_5cbQhM4s4IjvhoowDMpzi1-FLB4s9S2cG6EbMiCTHHtitzdckCyJ0SllzOc_rig/exec';
   var TIMEOUT_MS = 6 * 60 * 1000; // Apps Script s'arrête à 6 min
   var KEY_SECRET = 'khypnos-qcm-sync-secret';
   var KEY_LOG = 'khypnos-qcm-sync-log';
