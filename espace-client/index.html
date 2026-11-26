@@ -98,6 +98,22 @@
         </section>
     ` : '';
 
+    const annalesVEQuizCardHTML = hasAnnales ? `
+        <section class="annales-access-card annales-ve-quiz-card" aria-labelledby="aveq-title">
+            <div class="aac-left">
+                <div class="aac-icon" aria-hidden="true">🎯</div>
+                <h2 id="aveq-title">Entraînement Annales par domaine</h2>
+                <p>Choisis un domaine, lance une question, marque-la comme vue et consulte la correction détaillée.</p>
+            </div>
+            <a class="btn-annales" href="/espace-client/quiz-annales-ve.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                Lancer
+            </a>
+        </section>
+    ` : '';
+
     const qcmCardHTML = '<div id="qcm-card-slot"></div>';
 
     const protectedPagesHTML = (protectedPages ?? []).length ? `
@@ -133,6 +149,7 @@
         </header>
         ${videoCardHTML}
         ${annalesCardHTML}
+        ${annalesVEQuizCardHTML}
         ${qcmCardHTML}
         ${protectedPagesHTML}
         ${emptyStateHTML}
