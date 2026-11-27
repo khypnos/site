@@ -88,8 +88,6 @@ $('annales-selection').addEventListener('change',controls);
 $('annales-selection').addEventListener('click',e=>{const b=e.target.closest('[data-both]');if(!b||busy)return;const xs=[...b.closest('fieldset').querySelectorAll('input')],yes=!xs.every(x=>x.checked);xs.forEach(x=>x.checked=yes);controls();});
 function summary(j){return j.selection.map(x=>x.year+' '+x.track).join(' · ');}
 function renderJobs(){
- // Keep the same detail and console nodes (and their listeners) while moving them
- // under the selected card. The detail never appears below the whole list.
  reviewPanel.remove();
  $('jobs-list').innerHTML=jobs.length?jobs.map(j=>{const stalled=startUnconfirmed(j),locked=['cleanup_pending','cleaned'].includes(j.status)||active.has(j.status)||j.status==='generation_cancelled',ready=['awaiting_review','partially_published'].includes(j.status),opened=j.id===selectedId;return `<article class="admin-job-card ${opened?'is-open':''} ${ready?'is-ready':''} ${locked?'is-locked':''}" data-card="${esc(j.id)}"><button type="button" class="v2-job ${opened?'is-current':''}" data-job="${esc(j.id)}" ${locked?'disabled':''} aria-expanded="${opened}" aria-controls="job-detail"><strong>${esc(summary(j))}</strong><span class="admin-job-badge">${ready?'✅ ':''}${esc(stalled?'Démarrage GitHub non confirmé':statuses[j.status]??j.status)}</span><small>${esc(identity(j))}</small><span class="admin-job-hint">${['cleanup_pending','cleaned'].includes(j.status)?'🔒 Nettoyage engagé : utiliser « Nettoyer les anciennes générations » pour reprendre.':j.status==='generation_cancelled'?'Demande abandonnée : aucun aperçu ne peut être publié.':stalled?'🔒 Aucun run retrouvé : vérifier ou abandonner dans « Générer les aperçus ».':locked?(generationStates.has(j.status)?'🔒 Génération en cours : voir le suivi dans « Générer les aperçus ».':'🔒 Publication en cours : attendre la confirmation.'):(opened?'Refermer cette génération ▴':'Ouvrir cette génération ▾')}</span></button><div data-slot="${esc(j.id)}"></div></article>`;}).join(''):'<p>Aucun traitement pour le moment.</p>';
  const slot=[...document.querySelectorAll('[data-slot]')].find(x=>x.dataset.slot===selectedId);
@@ -100,6 +98,7 @@ function reviewKey(j,k){return j.id+':'+k;}
 function renderCurrent(){
  const j=current;if(j&&['cleanup_pending','cleaned'].includes(j.status)){$('job-detail').innerHTML='<p>Nettoyage engagé : aucun aperçu ne peut être publié. Utilise « Nettoyer les anciennes générations » pour reprendre si nécessaire.</p>';controls();return;}if(!j){$('job-detail').innerHTML='';return;}
  const canPublish=['awaiting_review','partially_published'].includes(j.status);
+ const generatedItems=(j.manifest?.items??[]).filter(i=>i.status==='generated');
  let html=`<div class="admin-open-identity"><strong>Génération ouverte : ${esc(summary(j))}</strong><small>${esc(identity(j))}</small></div><p class="v2-job-status">${esc(statuses[j.status]??j.status)}</p>`;
  if(j.error_code)html+=`<p class="v2-warning">${esc(j.error_code)}</p>`;
  if(j.generation_run_id)html+=`<a href="https://github.com/khypnos/publi_khypnos/actions/runs/${Number(j.generation_run_id)}" target="_blank" rel="noopener">Journal technique de génération ↗</a>`;
@@ -114,9 +113,14 @@ function renderCurrent(){
   }html+='</article>';
  }
  if(canPublish||j.publication_id||['publication_queued','publishing','published','published_cache_pending','publication_attention'].includes(j.status))html+='<button type="button" id="publish-reviewed">Publier les PDF relus dans la base de données Notion</button><p>Ajoute les PDF cochés à la base de données Notion, ou remplace ceux qui y sont déjà publiés pour ces épreuves. Les fichiers relus sont utilisés tels quels, sans les générer à nouveau. Le catalogue des annales est ensuite mis à jour automatiquement.</p>';
- if(j.status==='published_cache_pending')html+='<button type="button" id="retry-refresh">Réessayer la mise à jour du catalogue du site</button><p>Les PDF sont déjà publiés dans la base de données Notion. Ce bouton met seulement à jour leur affichage dans le catalogue du site, sans les publier à nouveau.</p>';
+ if(generatedItems.length){
+  html+='<section class="v2-quiz-publish"><h4>Quiz (images site + questions/corrections Supabase)</h4>';
+  html+=generatedItems.map(i=>`<label class="v2-reviewed"><input type="checkbox" data-quiz-key="${esc(i.key)}" checked> ${esc(i.year)} — ${esc(i.track)}</label>`).join('');
+  html+='<button type="button" id="publish-quiz">Publier le quiz</button><p>Action distincte de la publication PDF Notion : synchronise les images vers le dépôt du site et met à jour les questions et corrections du quiz dans Supabase.</p></section>';
+ }
+ if(j.status==='published_cache_pending')html+='<button type="button" id="retry-refresh">Réessayer la mise à jour du catalogue du site</button><p>Les PDF sont déjà publiés dans la base de données Notion. Ce bouton met seulement à jour leur affichage dans la base du site, sans les publier à nouveau.</p>';
  if(j.status==='publication_attention')html+='<p class="v2-warning">Le résultat de la publication est incertain. Vérifie les PDF dans la base de données Notion et demande une vérification technique avant de réessayer. Aucune nouvelle publication ne sera lancée automatiquement.</p>';
- $('job-detail').innerHTML=html;$('publish-reviewed')?.toggleAttribute('disabled',busy||loading);controls();
+ $('job-detail').innerHTML=html;$('publish-reviewed')?.toggleAttribute('disabled',busy||loading);$('publish-quiz')?.toggleAttribute('disabled',!allowed||busy||loading||refreshing);controls();
 }
 async function listJobs(){const d=await api('list');jobs=d.jobs;renderJobs();}
 async function loadJob(id){
@@ -134,7 +138,6 @@ async function refreshFollow(){
  refreshing=true;followUi={key:'follow',message:'Actualisation du suivi…',busy:true,tone:'working',start:Date.now()};const seq=loadSequence;controls();let scope='generation';
  try{
   const d=await api('list');if(seq!==loadSequence)return;jobs=d.jobs;
-  // Poll the running job even when a different, older preview is open.
   const running=jobs.filter(j=>active.has(j.status));
   for(const snapshot of running){scope=generationStates.has(snapshot.status)&&!snapshot.publication_id?'generation':'follow';const d=await call('annales-admin-v2?action=job&id='+encodeURIComponent(snapshot.id));if(seq!==loadSequence)return;upsertJob(d.job);unconfirmedPublications.delete(d.job.id);if(publicationSubmit?.id===d.job.id)publicationSubmit=null;if(scope==='generation')generationState(d.job);else if(selectedId===d.job.id){current=d.job;jobState(current);}}
   if(selectedId&&!running.some(j=>j.id===selectedId)){const d=await call('annales-admin-v2?action=job&id='+encodeURIComponent(selectedId));if(seq!==loadSequence)return;upsertJob(d.job);unconfirmedPublications.delete(d.job.id);if(publicationSubmit?.id===d.job.id)publicationSubmit=null;}
@@ -184,6 +187,16 @@ $('job-detail').addEventListener('click',async e=>{
   if(!confirm('Publier les PDF enrichis dans la base de données Notion pour cette génération : '+identity(j)+'\n\nÉpreuves :\n'+items.map(i=>i.year+' — '+i.track).join('\n')+(replace?'\n\nAttention : les PDF déjà publiés dans la base de données Notion pour ces épreuves seront remplacés.':'')+'\n\nLes conditions d’accès, le statut de disponibilité et les ressources complémentaires restent inchangés. Aucun PDF imprimé ne sera publié.'))return;
   busy=true;publicationSubmit={id:j.id,key:j.id,message:'Envoi de la demande de publication dans Notion… résultat pas encore confirmé.',busy:true,tone:'working',start:startClock(j.id+':publish',Date.now(),true),estimate:1};renderCurrent();controls();activity('follow','Envoi de la demande de publication… résultat non encore confirmé.','working',true);
   try{const hashes=Object.fromEntries(items.map(i=>[i.key,i.pdfs.find(p=>p.kind==='enrichi').sha256]));const d=await api('publish',{id:j.id,keys:items.map(i=>i.key),reviewed_hashes:hashes,review_confirmed:true,confirm_replace:replace});current=d.job;publicationSubmit=null;upsertJob(current);await listJobs();renderCurrent();activity('follow',current.status==='submission_unknown'?'Soumission à vérifier : actualise le suivi avant toute nouvelle tentative.':'Publication demandée. Les PDF relus seront utilisés tels quels.',current.status==='submission_unknown'?'warning':'working',current.status!=='submission_unknown');}catch(e){unconfirmedPublications.add(j.id);publicationSubmit={id:j.id,key:j.id,message:explain(e),tone:'warning'};showError(e);}finally{busy=false;renderCurrent();controls();}return;
+ }
+ if(e.target.closest('#publish-quiz')){
+  const j=current;
+  const keys=[...document.querySelectorAll('#job-detail [data-quiz-key]:checked')].map(el=>el.dataset.quizKey);
+  if(!keys.length){activity('follow','Coche au moins une épreuve générée pour publier son quiz.','warning');return;}
+  if(!confirm('Publier le quiz pour :\n'+keys.join('\n')+'\n\nCela synchronisera les images vers le dépôt du site et mettra à jour les questions et corrections dans Supabase.'))return;
+  busy=true;renderCurrent();controls();activity('follow','Envoi de la demande de publication quiz…','working',true);
+  try{const d=await api('publish-quiz',{id:j.id,keys});activity('follow','Publication quiz déclenchée ('+(d.quiz_publication_id??'ok')+'). Vérifie le workflow GitHub Actions dédié.','success');}
+  catch(e){showError(e,'follow');}
+  finally{busy=false;renderCurrent();controls();}return;
  }
  if(e.target.closest('#retry-refresh')){busy=true;renderCurrent();controls();activity('follow','Actualisation du cache des annales uniquement… aucun nouvel envoi de PDF.','working',true);try{const d=await api('retry-refresh',{id:current.id});current=d.job;upsertJob(current);await listJobs();activity('follow','Cache des annales actualisé, sans réenvoyer les PDF.','success');}catch(e){showError(e);}finally{busy=false;renderCurrent();controls();}}
 });
