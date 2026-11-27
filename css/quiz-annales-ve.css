@@ -1,0 +1,331 @@
+/* ═════════════════════════════════════════════
+   /css/quiz-annales-ve.css
+   Espace client — Entraînement par domaine
+   ═════════════════════════════════════════════ */
+
+.qve-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 3rem;
+}
+
+.qve-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--c-text-muted, #5a6478);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.12s ease;
+}
+.qve-back-link:hover {
+    color: var(--c-navy, #1a2f4f);
+}
+
+.qve-header {
+    margin-bottom: 1.75rem;
+}
+.qve-header h1 {
+    margin: 0 0 0.35rem;
+    font-size: 1.7rem;
+    color: var(--c-navy, #1a2f4f);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.qve-header p {
+    margin: 0;
+    color: var(--c-text-muted, #5a6478);
+    font-size: 0.95rem;
+}
+
+/* ── Toolbar / recherche (calqué sur .vt-toolbar / .vt-search) ── */
+.qve-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin: 0 0 1.5rem;
+}
+.qve-search {
+    flex: 1;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--c-border, #e8eaef);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: var(--c-surface, #ffffff);
+    color: var(--c-text, #1a2332);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.qve-search::placeholder {
+    color: #a8b0bd;
+}
+.qve-search:focus {
+    outline: none;
+    border-color: var(--c-navy, #1a2f4f);
+    box-shadow: 0 0 0 3px rgba(26, 47, 79, 0.12);
+}
+
+/* ── Grille des domaines ── */
+.qve-domains-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.15rem;
+}
+.qve-domain-card {
+    background: var(--c-surface, #ffffff);
+    border: 1px solid var(--c-border, #e8eaef);
+    border-radius: 14px;
+    padding: 1.15rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 1px 2px rgba(26, 47, 79, 0.04);
+    transition: box-shadow 0.15s ease, transform 0.1s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.qve-domain-card:hover {
+    box-shadow: 0 6px 18px rgba(26, 47, 79, 0.1);
+    transform: translateY(-2px);
+}
+.qve-domain-card.is-active {
+    border-color: var(--c-navy, #1a2f4f);
+    background: var(--c-surface-2, #f6f7fb);
+    box-shadow: 0 0 0 2px rgba(26, 47, 79, 0.12);
+}
+.qve-domain-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--c-navy, #1a2f4f);
+    text-transform: capitalize;
+}
+.qve-domain-meta {
+    font-size: 0.84rem;
+    color: var(--c-text-muted, #5a6478);
+}
+.qve-progress-track {
+    width: 100%;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--c-border, #e8eaef);
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+.qve-progress-fill {
+    height: 100%;
+    background: var(--c-navy, #1a2f4f);
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+/* ── Zone de travail question / correction ── */
+.qve-workspace {
+    margin-top: 2.25rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--c-border, #e8eaef);
+}
+.qve-workspace-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+}
+.qve-workspace-head h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--c-navy, #1a2f4f);
+    text-transform: capitalize;
+}
+.qve-counter {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--c-text-muted, #5a6478);
+}
+
+/* ── Badges année & détail au-dessus de la question ── */
+.qve-q-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.15rem;
+}
+.qve-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+.qve-badge--year {
+    background: var(--c-navy, #1a2f4f);
+    color: #ffffff;
+}
+.qve-badge--detail {
+    background: var(--c-surface-2, #f6f7fb);
+    color: var(--c-navy, #1a2f4f);
+    border: 1px solid var(--c-border, #e8eaef);
+}
+
+/* ── Cadres Question & Correction (étiquette incrustée sur le bord haut gauche) ── */
+.qve-frame {
+    position: relative;
+    margin-top: 0.6rem;
+    padding: 1.4rem 1.35rem 1.25rem;
+    border-radius: 14px;
+    border: 1px solid var(--c-border, #e8eaef);
+    background: var(--c-surface, #ffffff);
+    box-shadow: 0 1px 2px rgba(26, 47, 79, 0.04);
+}
+.qve-frame--correction {
+    margin-top: 1.65rem;
+    border-color: rgba(26, 47, 79, 0.2);
+}
+.qve-frame-label {
+    position: absolute;
+    top: -0.68rem;
+    left: 1.1rem;
+    padding: 0 0.5rem;
+    background: var(--c-surface, #ffffff);
+    color: var(--c-navy, #1a2f4f);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.qve-frame-body {
+    color: var(--c-text, #1a2332);
+    font-size: 0.96rem;
+    line-height: 1.55;
+}
+.qve-frame-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+}
+
+/* ── Sections distinctes de la correction ── */
+.qve-reponse {
+    color: var(--c-text, #1a2332);
+}
+.qve-methodologie {
+    margin-top: 1.25rem;
+    padding: 1rem 1.15rem;
+    border-radius: 10px;
+    background: #fdf8ee;
+    border: 1px solid #f2dfb3;
+    border-left: 3.5px solid #b47b2b;
+}
+.qve-methodologie h3 {
+    margin: 0 0 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #8c5a14;
+}
+.qve-cours {
+    margin-top: 1.25rem;
+    padding: 1rem 1.15rem;
+    border-radius: 10px;
+    background: var(--c-surface-2, #f6f7fb);
+    border: 1px solid var(--c-border, #e8eaef);
+    border-left: 3.5px solid var(--c-navy-soft, #2c4a6e);
+}
+.qve-cours h3 {
+    margin: 0 0 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--c-navy, #1a2f4f);
+}
+
+/* ── Actions & navigation ── */
+.qve-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.15rem;
+}
+.qve-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+.qve-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--c-border, #e8eaef);
+    background: var(--c-surface, #ffffff);
+    color: var(--c-navy, #1a2f4f);
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.qve-btn:hover:not(:disabled) {
+    background: var(--c-surface-2, #f6f7fb);
+    border-color: rgba(26, 47, 79, 0.25);
+}
+.qve-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.qve-btn--primary {
+    background: var(--c-navy, #1a2f4f);
+    color: #ffffff;
+    border-color: var(--c-navy, #1a2f4f);
+}
+.qve-btn--primary:hover:not(:disabled) {
+    background: var(--c-navy-soft, #2c4a6e);
+    border-color: var(--c-navy-soft, #2c4a6e);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(26, 47, 79, 0.18);
+}
+
+.qve-empty {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: var(--c-text-muted, #5a6478);
+    font-size: 0.95rem;
+}
+.qve-error {
+    margin-top: 1rem;
+    padding: 0.95rem 1.1rem;
+    border-radius: 12px;
+    background: #fff5f5;
+    border: 1px solid #feb2b2;
+    color: #9b2c2c;
+    font-size: 0.92rem;
+}
+
+@media (max-width: 640px) {
+    .qve-wrapper {
+        padding: 1.5rem 1rem 2.25rem;
+    }
+    .qve-header h1 {
+        font-size: 1.4rem;
+    }
+    .qve-domains-grid {
+        grid-template-columns: 1fr;
+    }
+    .qve-frame {
+        padding: 1.25rem 1rem 1.1rem;
+    }
+}

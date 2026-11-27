@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khypnos — Entraînement par domaine</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/theme-elegance.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/annales.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/annales-corrigees.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/annales-corrigees-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/ui-feedback-v2.css?v=private-2cdea7db7f164af2">
+  <link rel="stylesheet" href="/css/quiz-annales-ve.css?v=private-2cdea7db7f164af2">
+</head>
+<body>
+<div class="container">
+  <main class="qve-wrapper" id="qve-main">
+    <a href="/espace-client/index.html" class="qve-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Retour à mon espace
+    </a>
+
+    <header class="qve-header">
+      <h1>Entraînement par domaine</h1>
+      <p>Choisis un domaine, lance une question et consulte la correction détaillée.</p>
+    </header>
+
+    <div id="qve-app" aria-live="polite">
+      <div class="loading-state">
+        <div class="spinner" aria-hidden="true"></div>
+        <span>Chargement…</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import { requireAuth, supabase } from '/espace-client/auth.js?v=private-2cdea7db7f164af2';
+  import { escapeHTML } from '/espace-client/qcm-access.js?v=private-2cdea7db7f164af2';
+
+  const SUPABASE_URL = 'https://fbxiynomlxrjasbbcipp.supabase.co';
+  const PUBLISHABLE_KEY = supabase.supabaseKey ?? 'sb_publishable_1R_hEWSnFLiy-wpPdvrahw_AxMIg8bJ';
+  const FUNCTION_URL = `${SUPABASE_URL}/functions/v1/quiz-annales-ve`;
+
+  const session = await requireAuth();
+  if (!session) throw new Error('Non authentifié');
+
+  const appEl = document.getElementById('qve-app');
+
+  const state = {
+    domaines: [],
+    searchQuery: '',
+    selectedDomaine: '',
+    questions: [],
+    questionIndex: 0,
+    correction: null,
+    seenSentFor: new Set(),
+    errorMessage: '',
+  };
+
+  function forceExternalLinksNewTab(html) {
+    if (!html) return '';
+    const tpl = document.createElement('template');
+    tpl.innerHTML = html;
+
+    tpl.content.querySelectorAll('a[href]').forEach((link) => {
+      const href = (link.getAttribute('href') || '').trim();
+      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+
+      link.setAttribute('target', '_blank');
+      const existingRel = (link.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+      if (!existingRel.includes('noopener')) existingRel.push('noopener');
+      if (!existingRel.includes('noreferrer')) existingRel.push('noreferrer');
+      link.setAttribute('rel', existingRel.join(' '));
+    });
+
+    return tpl.innerHTML;
+  }
+
+  function splitQuestionBadges(question) {
+    const rawRef = String(question?.reference ?? '').trim();
+    const match = rawRef.match(/^(\d{4})\s*[–—-]\s*(.+)$/);
+    if (match) {
+      return {
+        year: match[1].trim(),
+        detail: match[2].trim(),
+      };
+    }
+
+    const year = question?.annee ? String(question.annee) : '';
+    const track = question?.track ? String(question.track) : '';
+    const num = question?.numero ? `Question ${question.numero}` : '';
+    const detail = [track, num].filter(Boolean).join(' – ') || rawRef || String(question?.id ?? '');
+    return { year, detail };
+  }
+
+  async function getAccessToken() {
+    const { data, error } = await supabase.auth.getSession();
+    if (error || !data.session?.access_token) {
+      window.location.href = '/login.html';
+      throw new Error('Session absente');
+    }
+    return data.session.access_token;
+  }
+
+  async function callEdgeFunction({ method = 'GET', query = {}, body = null }) {
+    const token = await getAccessToken();
+    const url = new URL(FUNCTION_URL);
+    for (const [k, v] of Object.entries(query)) {
+      if (v !== undefined && v !== null && String(v) !== '') {
+        url.searchParams.set(k, String(v));
+      }
+    }
+
+    const headers = {
+      apikey: PUBLISHABLE_KEY.trim(),
+      Authorization: `Bearer ${token}`,
+    };
+    const init = { method, headers };
+    if (body && method !== 'GET') {
+      headers['Content-Type'] = 'application/json';
+      init.body = JSON.stringify(body);
+    }
+
+    const res = await fetch(url.toString(), init);
+    if (res.status === 401) {
+      window.location.href = '/login.html';
+      throw new Error('401');
+    }
+    if (res.status === 403) {
+      throw new Error('ACCES_REFUSE');
+    }
+    if (!res.ok) {
+      const text = await res.text().catch(() => '');
+      throw new Error(text || `Erreur HTTP ${res.status}`);
+    }
+    return await res.json();
+  }
+
+  async function loadDomains(domaine = '') {
+    state.errorMessage = '';
+    const cleanDomaine = domaine.trim().replace(/^#/, '').toLowerCase();
+    const payload = await callEdgeFunction({
+      method: 'GET',
+      query: { action: 'domains', domaine: cleanDomaine || undefined },
+    });
+
+    state.domaines = Array.isArray(payload.domaines) ? payload.domaines : [];
+    state.selectedDomaine = payload.selected_domaine ?? cleanDomaine;
+    state.questions = Array.isArray(payload.questions) ? payload.questions : [];
+    state.questionIndex = 0;
+    state.correction = null;
+
+    render();
+  }
+
+  async function markQuestionSeen(questionId, domaine) {
+    const key = `${questionId}::${domaine}`;
+    if (state.seenSentFor.has(key)) return;
+    await callEdgeFunction({
+      method: 'POST',
+      body: { action: 'seen', question_id: questionId, domaine },
+    });
+    state.seenSentFor.add(key);
+    const domItem = state.domaines.find((d) => d.domaine === domaine);
+    if (domItem && domItem.seen_questions < domItem.total_questions) {
+      domItem.seen_questions += 1;
+    }
+  }
+
+  async function showCorrection() {
+    const q = state.questions[state.questionIndex];
+    if (!q || !state.selectedDomaine) return;
+    state.errorMessage = '';
+
+    try {
+      await markQuestionSeen(q.id, state.selectedDomaine);
+      const corrPayload = await callEdgeFunction({
+        method: 'GET',
+        query: { action: 'correction', question_id: q.id },
+      });
+      state.correction = corrPayload.correction ?? null;
+    } catch (err) {
+      state.errorMessage = err instanceof Error ? err.message : 'Erreur lors du chargement';
+    }
+    render();
+  }
+
+  function goToQuestion(nextIndex) {
+    if (nextIndex < 0 || nextIndex >= state.questions.length) return;
+    state.questionIndex = nextIndex;
+    state.correction = null;
+    state.errorMessage = '';
+    render();
+  }
+
+  function renderNavButtons() {
+    const hasPrev = state.questionIndex > 0;
+    const hasNext = state.questionIndex < state.questions.length - 1;
+    return `
+      <div class="qve-nav">
+        <button type="button" class="qve-btn" id="qve-prev" ${hasPrev ? '' : 'disabled'}>← Précédente</button>
+        <button type="button" class="qve-btn" id="qve-next" ${hasNext ? '' : 'disabled'}>Suivante →</button>
+      </div>
+    `;
+  }
+
+  function render() {
+    if (state.errorMessage === 'ACCES_REFUSE') {
+      appEl.innerHTML = `
+        <div class="qve-error" role="alert">
+          Accès réservé aux étudiants actifs disposant d'une formule éligible sur la promotion active.
+        </div>
+      `;
+      return;
+    }
+
+    const queryNorm = state.searchQuery.trim().toLowerCase();
+    const filteredDomaines = queryNorm
+      ? state.domaines.filter((d) => String(d.domaine).toLowerCase().includes(queryNorm))
+      : state.domaines;
+
+    const domainsCardsHTML = filteredDomaines.length
+      ? filteredDomaines.map((d) => {
+          const total = Math.max(Number(d.total_questions) || 0, 1);
+          const seen = Math.min(Number(d.seen_questions) || 0, total);
+          const pct = Math.round((seen / total) * 100);
+          const active = d.domaine === state.selectedDomaine;
+          return `
+            <button
+              type="button"
+              class="qve-domain-card ${active ? 'is-active' : ''}"
+              data-domaine="${escapeHTML(d.domaine)}"
+            >
+              <span class="qve-domain-name">${escapeHTML(d.domaine)}</span>
+              <span class="qve-domain-meta">${escapeHTML(String(d.seen_questions))} / ${escapeHTML(String(d.total_questions))} vue(s)</span>
+              <span class="qve-progress-track" aria-hidden="true">
+                <span class="qve-progress-fill" style="width:${pct}%"></span>
+              </span>
+            </button>
+          `;
+        }).join('')
+      : '<p class="qve-empty">Aucun domaine ne correspond à cette recherche.</p>';
+
+    const currentQ = state.questions[state.questionIndex] ?? null;
+    const badges = currentQ ? splitQuestionBadges(currentQ) : { year: '', detail: '' };
+    const isCorrectionVisible = Boolean(state.correction);
+
+    const workspaceHTML = state.selectedDomaine ? `
+      <section class="qve-workspace" aria-label="Question et correction">
+        <div class="qve-workspace-head">
+          <h2>${escapeHTML(state.selectedDomaine)}</h2>
+          ${currentQ ? `<span class="qve-counter">Question ${state.questionIndex + 1} / ${state.questions.length}</span>` : ''}
+        </div>
+
+        ${currentQ ? `
+          <div class="qve-q-meta">
+            ${badges.year ? `<span class="qve-badge qve-badge--year">${escapeHTML(badges.year)}</span>` : ''}
+            ${badges.detail ? `<span class="qve-badge qve-badge--detail">${escapeHTML(badges.detail)}</span>` : ''}
+          </div>
+
+          <div class="qve-frame">
+            <span class="qve-frame-label">Question</span>
+            <div class="qve-frame-body">${forceExternalLinksNewTab(currentQ.enonce_html ?? '')}</div>
+          </div>
+
+          ${!isCorrectionVisible ? `
+            <div class="qve-actions">
+              <button type="button" class="qve-btn qve-btn--primary" id="qve-show-correction">Voir la correction Khypnos</button>
+              ${renderNavButtons()}
+            </div>
+          ` : `
+            <div class="qve-frame qve-frame--correction">
+              <span class="qve-frame-label">Correction</span>
+              <div class="qve-frame-body">
+                <div class="qve-reponse">${forceExternalLinksNewTab(state.correction.reponse_html ?? '')}</div>
+                ${state.correction.methodologie_html ? `
+                  <div class="qve-methodologie">
+                    <h3>Point de méthodologie</h3>
+                    <div>${forceExternalLinksNewTab(state.correction.methodologie_html)}</div>
+                  </div>
+                ` : ''}
+                ${state.correction.cours_html ? `
+                  <div class="qve-cours">
+                    <h3>Point de cours</h3>
+                    <div>${forceExternalLinksNewTab(state.correction.cours_html)}</div>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            <div class="qve-actions">
+              ${renderNavButtons()}
+            </div>
+          `}
+        ` : '<p class="qve-empty">Aucune question dans ce domaine.</p>'}
+      </section>
+    ` : '';
+
+    appEl.innerHTML = `
+      ${state.errorMessage ? `<div class="qve-error" role="alert">${escapeHTML(state.errorMessage)}</div>` : ''}
+      <div class="qve-toolbar">
+        <input
+          id="qve-domain-search"
+          type="search"
+          class="qve-search"
+          placeholder="Rechercher un domaine…"
+          value="${escapeHTML(state.searchQuery)}"
+        >
+      </div>
+      <div class="qve-domains-grid">${domainsCardsHTML}</div>
+      ${workspaceHTML}
+    `;
+
+    const searchInput = document.getElementById('qve-domain-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        const cursorPos = searchInput.selectionStart;
+        render();
+        const refreshedInput = document.getElementById('qve-domain-search');
+        if (refreshedInput) {
+          refreshedInput.focus();
+          if (typeof cursorPos === 'number') {
+            refreshedInput.setSelectionRange(cursorPos, cursorPos);
+          }
+        }
+      });
+    }
+
+    appEl.querySelectorAll('.qve-domain-card').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const dom = btn.getAttribute('data-domaine') || '';
+        try {
+          await loadDomains(dom);
+        } catch (err) {
+          state.errorMessage = err instanceof Error ? err.message : 'Erreur chargement domaine';
+          render();
+        }
+      });
+    });
+
+    document.getElementById('qve-show-correction')?.addEventListener('click', () => {
+      void showCorrection();
+    });
+
+    document.getElementById('qve-prev')?.addEventListener('click', () => {
+      goToQuestion(state.questionIndex - 1);
+    });
+
+    document.getElementById('qve-next')?.addEventListener('click', () => {
+      goToQuestion(state.questionIndex + 1);
+    });
+  }
+
+  try {
+    await loadDomains();
+  } catch (err) {
+    state.errorMessage = err instanceof Error ? err.message : 'Erreur initiale';
+    render();
+  }
+</script>
+
+<script src="/js/header-manager.js?v=private-2cdea7db7f164af2" defer></script>
+<script src="/js/scroll-to-top.min.js?v=private-2cdea7db7f164af2"></script>
+<script src="/js/navbar.js?v=private-2cdea7db7f164af2"></script>
+<script src="/js/footer-manager.js?v=private-2cdea7db7f164af2" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    new FooterManager({
+      anchor: '.container',
+      position: 'beforeend'
+    }).init();
+  });
+</script>
+</body>
+</html>
